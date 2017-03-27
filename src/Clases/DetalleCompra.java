@@ -10,6 +10,7 @@ package Clases;
  * @author oscar
  */
 public class DetalleCompra {
+    
    public Producto PRODUCTO;
    public int Cantidad;
    public double CostoUnitario;

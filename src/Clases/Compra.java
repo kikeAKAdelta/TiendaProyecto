@@ -12,7 +12,8 @@ import java.util.Date;
  * @author dell
  */
 public class Compra {
-public Integer IdCompra;
+    
+public int IdCompra;
 public Date Fecha;
 public Proveedor PROVEEDOR;
 public double Total;

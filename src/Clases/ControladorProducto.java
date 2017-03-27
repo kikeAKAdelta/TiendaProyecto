@@ -11,15 +11,15 @@ import java.util.ArrayList;
  *
  * @author oscar
  */
-public class ProductoControlador {
+public class ControladorProducto {
     
     
     public static void Agregar(Producto pr){}
     public static void Modificar(Producto pr){}
     public static void Eliminar(Producto pr){}
     
-    public static ArrayList<Producto[]> Buscar(String pr){
-    ArrayList<Producto[]> producto = new ArrayList<Producto[]>();
+    public static ArrayList<Producto> Buscar(String buscar){
+    ArrayList<Producto> producto = new ArrayList<Producto>();
     return producto;
     }
     public static Producto Obtener(String CodBarra){
