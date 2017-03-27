@@ -14,14 +14,14 @@ import javax.swing.JOptionPane;
  *
  * @author José Lopez
  */
-public class conexion {
+public class Conexion {
      public Connection conexion;
    public  Statement st;
     
         
             
    
-    public  conexion(){
+    public  Conexion(){
         try {
             Class.forName("com.mysql.jdbc.Driver");
             conexion = DriverManager.getConnection("jdbc:mysql://localhost/tienda", "root", ""); 

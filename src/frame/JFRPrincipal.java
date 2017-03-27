@@ -1,6 +1,7 @@
 
 package frame;
 
+import Clases.Conexion;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.ImageIcon;
@@ -1046,11 +1047,16 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         btnAgregarProductoVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/agregar2.png"))); // NOI18N
         btnAgregarProductoVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAgregarProductoVenta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAgregarProductoVentaMouseExited(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnAgregarProductoVentaMouseEntered(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnAgregarProductoVentaMouseExited(evt);
+        });
+        btnAgregarProductoVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarProductoVentaActionPerformed(evt);
             }
         });
         jpnVentas.add(btnAgregarProductoVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 175, 110, 30));
@@ -1103,8 +1109,6 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         jLabel35.setText("Total");
         jpnVentas.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 450, -1, -1));
         jpnVentas.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(617, 465, 40, 20));
-
-        txtCodigoBarraVender.setEditable(false);
         jpnVentas.add(txtCodigoBarraVender, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 140, 40));
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -1601,6 +1605,8 @@ public final class JFRPrincipal extends javax.swing.JFrame {
 
         getContentPane().add(jpnDetalleCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 730, 600));
 
+        getAccessibleContext().setAccessibleName("iShop");
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -1947,6 +1953,10 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         jpnProveedores.setVisible(false);
         jpnModificarProveedor.setVisible(true);
     }//GEN-LAST:event_btnModificarProveedorMouseClicked
+
+    private void btnAgregarProductoVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProductoVentaActionPerformed
+       
+    }//GEN-LAST:event_btnAgregarProductoVentaActionPerformed
                                                                                                                                                                                                                               
     /**
      * @param args the command line arguments
