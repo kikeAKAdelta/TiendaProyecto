@@ -11,13 +11,14 @@ import java.util.ArrayList;
  *
  * @author oscar
  */
-public class CompraControlador {
+public class ControladorCompra {
+    
     public static void Agregar(Compra cm){}
     public static void ActualizarInventario(Compra cm) {
     }
-    public static ArrayList<DetalleCompra[]> ActualizarPrecioPromedioProducto() {
-        ArrayList<DetalleCompra[]> detallecompra = new ArrayList<DetalleCompra[]>();
-        return detallecompra;
+    public static void ActualizarPrecioPromedioProducto(ArrayList<DetalleCompra> detalleCompra) {
+
+        
     }
     public static int ObtenerIdCompra() {
         int IdCompra=0;

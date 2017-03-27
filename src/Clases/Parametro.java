@@ -11,18 +11,18 @@ import java.util.ArrayList;
  *
  * @author oscar
  */
-public class Parametros {
+public class Parametro {
     
 public String IdParametro;
 public String Nombre;
 public String Valor;
 
-public static ArrayList<Parametros[]> Obtener(){
-ArrayList<Parametros[]> parametro = new ArrayList<Parametros[]>();
+public static ArrayList<Parametro> Obtener(){
+ArrayList<Parametro> parametro = new ArrayList<Parametro>();
 return parametro;
 }
-public static Parametros ObtenerUtilidad(){
-return new Parametros();
+public static Parametro ObtenerUtilidad(){
+return new Parametro();
 }
 
 }

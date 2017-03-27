@@ -5,6 +5,7 @@
  */
 package Clases;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -17,10 +18,13 @@ public class Venta {
     public Date Fecha;
     public String Cliente;
     public double Total;
+    public ArrayList<DetalleVenta> ARTICULO;
     
    
+    public void AgregarItem(DetalleVenta detalleVenta){   
+        
+    }
     
-            public void CalcularTotal(){}
-            public void AgregarItem(){          
-            }
+    public void CalcularTotal(){}
+            
 }

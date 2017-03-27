@@ -9,10 +9,11 @@ package Clases;
  *
  * @author dell
  */
-public class Errorr extends Exception {
-    public Errorr(){};
+public class ErrorTienda extends Exception {
     
-    public Errorr(String mensajeError){
+    public ErrorTienda(){}
+    
+    public ErrorTienda(String mensajeError){
         System.out.println("Ha ocurrido un error en el programa");
     }
 }

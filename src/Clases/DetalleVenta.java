@@ -11,11 +11,11 @@ package Clases;
  */
 public class DetalleVenta {
     
-    public Producto PRODUCTO;
+public Producto PRODUCTO;
 public String Cantidad;
 public double PrecioUnitario;
     
-public void New(String CodBarra, int Cantidad){}
+public DetalleVenta(String codBarra, int cantidad){}
 public void CalcularPrecio(double x){}
 
 }

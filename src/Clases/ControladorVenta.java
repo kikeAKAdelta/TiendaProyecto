@@ -11,13 +11,17 @@ import java.util.ArrayList;
  *
  * @author oscar
  */
-public class VentaControlador {
+public class ControladorVenta {
     
     public static void Agregar(Venta vn){}
     
     public static int ObtenerIdVenta(){
         int IdVenta=0;    
         return IdVenta;
+    }
+    
+    public static void ActualizarInevntario(ArrayList<DetalleVenta> detalleVenta){
+        
     }
     
 }

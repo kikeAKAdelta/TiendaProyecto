@@ -11,18 +11,15 @@ import java.util.ArrayList;
  *
  * @author oscar
  */
-public class ProveedorControlador {
-
+public class ControladorProveedor {
     public static void Agregar(Proveedor pv){}
     public static void Eliminar(Proveedor pv){}
     public static void Modificar(Proveedor pv){}
     
-     public static ArrayList<Proveedor[]> Buscar(String pv){
-    ArrayList<Proveedor[]> proveedor = new ArrayList<Proveedor[]>();
+     public static ArrayList<Proveedor> Buscar(String pv){
+    ArrayList<Proveedor> proveedor = new ArrayList<Proveedor>();
     return proveedor;
     }
-    
-             
     public static ArrayList<Proveedor> Obtener(){
         ArrayList<Proveedor> proveedor = new ArrayList<Proveedor>();
         return proveedor;
