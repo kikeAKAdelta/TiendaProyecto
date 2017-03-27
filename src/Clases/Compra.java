@@ -5,6 +5,7 @@
  */
 package Clases;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -17,7 +18,7 @@ public int IdCompra;
 public Date Fecha;
 public Proveedor PROVEEDOR;
 public double Total;
-public DetalleCompra[] ARTICULOS;
+public ArrayList<DetalleCompra> ARTICULOS;
         
         public void CalcularTotal() {}
         public void AgregarItem(DetalleCompra dc){}        
