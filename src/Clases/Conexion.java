@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
  */
 public class Conexion {
      public Connection conexion;
+     
    public  Statement st;
     
         
