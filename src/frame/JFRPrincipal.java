@@ -1473,8 +1473,6 @@ public final class JFRPrincipal extends javax.swing.JFrame {
             }
         });
         jpnNuevoProducto.add(btnSalirProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 500, 110, 30));
-
-        txtCodBarraProductos.setEditable(false);
         jpnNuevoProducto.add(txtCodBarraProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 180, 220, 30));
         jpnNuevoProducto.add(txtNombreProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, 270, 30));
         jpnNuevoProducto.add(txtPrecioProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 360, 80, 30));

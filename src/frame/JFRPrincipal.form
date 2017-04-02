@@ -3007,9 +3007,6 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JTextField" name="txtCodBarraProductos">
-          <Properties>
-            <Property name="editable" type="boolean" value="false"/>
-          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="290" y="180" width="220" height="30"/>
