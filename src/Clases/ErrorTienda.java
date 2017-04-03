@@ -5,15 +5,15 @@
  */
 package Clases;
 
+import java.sql.SQLException;
+
 /**
  *
  * @author dell
  */
 public class ErrorTienda extends Exception {
     
-    public ErrorTienda(){}
-    
     public void New(String mensajeError){
-        System.out.println("Ha ocurrido un error en el programa");
+        System.out.println(mensajeError);
     }
 }

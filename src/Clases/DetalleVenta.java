@@ -14,8 +14,18 @@ public class DetalleVenta {
 public Producto PRODUCTO;
 public String Cantidad;
 public double PrecioUnitario;
+public Conexion cn;
     
-public DetalleVenta(String codBarra, int cantidad){}
-public void CalcularPrecio(double x){}
+    public void New(String codBarra, int cantidad){
+        PRODUCTO.CodBarra=codBarra;
+        
+        //Resulset
+        
+    }
+
+
+    public void CalcularPrecio(double x){
+    
+    }
 
 }

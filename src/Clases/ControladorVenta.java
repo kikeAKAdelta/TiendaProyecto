@@ -5,7 +5,11 @@
  */
 package Clases;
 
+import static Clases.ControladorProducto.cn;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -13,14 +17,16 @@ import java.util.ArrayList;
  */
 public class ControladorVenta {
     
-    public static void Agregar(Venta vn){}
+    public static void Agregar(Venta vn){
+        
+    }
     
     public static int ObtenerIdVenta(){
         int IdVenta=0;    
         return IdVenta;
     }
     
-    public static void ActualizarInevntario(ArrayList<DetalleVenta> detalleVenta){
+    public static void ActualizarInventario(ArrayList<DetalleVenta> detalleVenta){
         
     }
     
