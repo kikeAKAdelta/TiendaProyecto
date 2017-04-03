@@ -13,7 +13,7 @@ public class ErrorTienda extends Exception {
     
     public ErrorTienda(){}
     
-    public ErrorTienda(String mensajeError){
+    public void New(String mensajeError){
         System.out.println("Ha ocurrido un error en el programa");
     }
 }
