@@ -7,7 +7,7 @@ package Clases;
 
 /**
  *
- * @author oscar
+ * @author pedro
  */
 public class DetalleCompra {
     
