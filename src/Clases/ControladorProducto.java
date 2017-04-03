@@ -19,12 +19,14 @@ public class ControladorProducto {
     static Conexion cn=new Conexion();
     
     public static void Agregar(Producto pr){
+        
         try {
             cn.st.executeUpdate("INSERT INTO productos(CodBarra,Inventario,Costo,Nombre) VALUES('"+pr.CodBarra+"','"+pr.Inventario+"','"+pr.Costo+"','"+pr.Nombre+"')");
-            cn.conexion.close();
         } catch (SQLException ex) {
             Logger.getLogger(ControladorProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
+            
+       
     
     }
     public static void Modificar(Producto pr){

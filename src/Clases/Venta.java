@@ -23,8 +23,13 @@ public class Venta {
    
     public void AgregarItem(DetalleVenta detalleVenta){   
         
+        ARTICULO=new ArrayList<DetalleVenta>();
+        
+        ARTICULO.add(detalleVenta);
     }
     
-    public void CalcularTotal(){}
+    public void CalcularTotal(){
+    
+    }
             
 }
