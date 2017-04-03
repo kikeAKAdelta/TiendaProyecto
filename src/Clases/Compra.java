@@ -24,13 +24,22 @@ public Proveedor PROVEEDOR;
 public double Total;
 public ArrayList<DetalleCompra> ARTICULOS;
         
-        public void CalcularTotal() {}
+        public void CalcularTotal() throws ErrorTienda {
+          double total=0;
+          try{
+              for(DetalleCompra dc: this.ARTICULOS){
+                  total=total+(dc.Cantidad*dc.CostoUnitario);
+              }
+              this.Total = Math.round(total*100.0)/100.0;
+          }catch(ArithmeticException ex){
+             
+          }
         
-        public void AgregarItem(DetalleCompra dc){
-           try {
-            cn.st.executeUpdate("INSERT INTO detallecompra(CodBarra,IdCompra,Cantidad,CostoUnitario) VALUES('"+dc.PRODUCTO.CodBarra+"','"+IdCompra+"','"+dc.Cantidad+"','"+dc.CostoUnitario+"')");
-        } catch (SQLException ex) {
-            Logger.getLogger(ControladorProducto.class.getName()).log(Level.SEVERE, null, ex);
+        
         }
+        
+        public void AgregarItem(DetalleCompra dc) throws ErrorTienda{
+            this.ARTICULOS.add(dc);
+            this.CalcularTotal();
         }        
 }
