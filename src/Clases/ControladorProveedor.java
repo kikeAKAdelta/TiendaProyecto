@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 public class ControladorProveedor {
     static Conexion cn;
     
+    
     public static void Agregar(Proveedor pv)throws ErrorTienda{
         try {
             cn=new Conexion();
