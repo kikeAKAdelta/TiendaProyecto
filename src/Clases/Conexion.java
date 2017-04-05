@@ -22,15 +22,14 @@ public class Conexion {
         
             
    
-    public  Conexion(){
+    public  Conexion() throws ErrorTienda{
         try {
             Class.forName("com.mysql.jdbc.Driver");
             conexion = DriverManager.getConnection("jdbc:mysql://localhost/tienda", "root", ""); 
             st = conexion.createStatement();
             
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Algo impido que se realizara la conexion a la DB asegurece de tener los servicios activados: ","Error DB",JOptionPane.ERROR_MESSAGE);
-            System.exit(0);
+        } catch (Exception e) {
+            throw new ErrorTienda("Algo impidio la conexion a la base de datos");
         }
     }
     

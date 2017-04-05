@@ -16,14 +16,15 @@ import java.util.logging.Logger;
  * @author oscar
  */
 public class ControladorProveedor {
-    static Conexion cn = new Conexion();
+    static Conexion cn;
     
-    public static void Agregar(Proveedor pv){
+    public static void Agregar(Proveedor pv)throws ErrorTienda{
         try {
+            cn=new Conexion();
             cn.st.executeUpdate("INSERT INTO proveedor(IdProveedor,Nombre,Telefono,Direccion, NIT) VALUES('"+pv.IdProveedor+"','"+pv.Nombre+"','"+pv.Telefono+"','"+pv.Direccion+"','"+pv.NIT+"')");
-            cn.conexion.close();
+            
         } catch (SQLException ex) {
-            Logger.getLogger(ControladorProducto.class.getName()).log(Level.SEVERE, null, ex);
+            throw new ErrorTienda("Ha escrito mal el comando DML hacia la BD");
         }
     }
     public static void Eliminar(Proveedor pv){
