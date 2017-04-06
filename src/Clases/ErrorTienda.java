@@ -16,7 +16,7 @@ public class ErrorTienda extends Exception {
     
 
     public ErrorTienda(String ClaseMetodo,String mensajeError){
-        super(ClaseMetodo + "," + mensajeError);
+        super(ClaseMetodo + " , " + mensajeError);
     }
     
 
