@@ -31,7 +31,11 @@ DecimalFormat decimal = new DecimalFormat("0.00");
         
     }
     
-  
+  public void New(String CodBarra, String Cantidad){
+        this.Cantidad = Cantidad;
+        Producto p=new Producto();
+        p.setCodBarra(CodBarra);
+    }
 
 
 
