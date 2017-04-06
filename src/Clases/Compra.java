@@ -32,10 +32,8 @@ public ArrayList<DetalleCompra> ARTICULOS;
               }
               this.Total = Math.round(total*100.0)/100.0;
           }catch(ArithmeticException ex){
-             
+           throw new ErrorTienda("Class Compra/CalcularTotal", ex.getMessage());  
           }
-        
-        
         }
         
         public void AgregarItem(DetalleCompra dc) throws ErrorTienda{
