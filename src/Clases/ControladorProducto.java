@@ -27,7 +27,7 @@ public class ControladorProducto {
             cn=new Conexion();
             cn.st.executeUpdate("INSERT INTO productos(CodBarra,Inventario,Costo,Nombre) VALUES('"+pr.CodBarra+"','"+pr.Inventario+"','"+pr.Costo+"','"+pr.Nombre+"')");
         } catch (SQLException e) {
-            throw new ErrorTienda("Ha escrito mal el comando DML hacia la BD");
+            throw new ErrorTienda("",e.getMessage());
         }
            
     }
@@ -37,7 +37,7 @@ public class ControladorProducto {
             cn=new Conexion();
             cn.st.executeUpdate("UPDATE productos SET Inventario='"+pr.Inventario+"',Costo='"+pr.Costo+"',Nombre='"+pr.Nombre+"' WHERE CodBarra='"+pr.CodBarra+"'");
         } catch (SQLException e) {
-            throw new ErrorTienda("Ha escrito mal el comando DML hacia la BD");
+            throw new ErrorTienda("",e.getMessage());
         }
     }
     public static void Eliminar(Producto pr) throws ErrorTienda{
@@ -45,7 +45,7 @@ public class ControladorProducto {
             cn=new Conexion();
             cn.st.executeUpdate("DELETE FROM productos WHERE CodBarra='"+pr.CodBarra+"'");
         } catch (Exception e) {
-            throw new ErrorTienda("Ha escrito mal el comando DML hacia la BD");
+            throw new ErrorTienda("","");
         }
     }
     
@@ -56,7 +56,7 @@ public class ControladorProducto {
         try {
             rs=cn.st.executeQuery("SELECT CodBarra,nombre,Inevntario,Costo FROM productos WHERE nombre='"+buscar+"'");
         } catch (SQLException ex) {
-            throw new ErrorTienda("Ha escrito mal el comando DML hacia la BD");
+            throw new ErrorTienda("","");
         }
         
         return producto;
@@ -67,7 +67,7 @@ public class ControladorProducto {
         try {
             rs=cn.st.executeQuery("SELECT CodBarra,nombre,Inevntario,Costo FROM productos WHERE CodBara='"+CodBarra+"'");
         } catch (SQLException ex) {
-            throw new ErrorTienda("Ha escrito mal el comando DML hacia la BD");
+            throw new ErrorTienda("","Ha escrito mal el comando DML hacia la BD");
         }
         return new Producto();
     }

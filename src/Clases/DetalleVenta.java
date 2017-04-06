@@ -19,13 +19,11 @@ public Conexion cn;
     public void New(String codBarra, int cantidad){
         PRODUCTO.CodBarra=codBarra;
         
-        //Resulset
-        
     }
 
 
-    public void CalcularPrecio(double x){
-    
+    public double CalcularPrecio(){
+        return 34.5;    
     }
 
 }

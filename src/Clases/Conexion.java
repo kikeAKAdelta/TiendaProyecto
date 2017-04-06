@@ -29,7 +29,7 @@ public class Conexion {
             st = conexion.createStatement();
             
         } catch (Exception e) {
-            throw new ErrorTienda("Algo impidio la conexion a la base de datos");
+            throw new ErrorTienda("Conexion.conexion()",e.getMessage());
         }
     }
     

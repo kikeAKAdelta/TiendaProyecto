@@ -13,7 +13,7 @@ import java.sql.SQLException;
  */
 public class ErrorTienda extends Exception {
     
-    public ErrorTienda(String mensajeError){
-        super(mensajeError);
+    public ErrorTienda(String ClaseMetodo,String mensajeError){
+        super(ClaseMetodo + "," + mensajeError);
     }
 }

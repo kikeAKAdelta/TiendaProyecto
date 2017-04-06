@@ -25,7 +25,7 @@ public class ControladorProveedor {
             cn.st.executeUpdate("INSERT INTO proveedor(IdProveedor,Nombre,Telefono,Direccion, NIT) VALUES('"+pv.IdProveedor+"','"+pv.Nombre+"','"+pv.Telefono+"','"+pv.Direccion+"','"+pv.NIT+"')");
             
         } catch (SQLException ex) {
-            throw new ErrorTienda("Ha escrito mal el comando DML hacia la BD");
+            throw new ErrorTienda("","Ha escrito mal el comando DML hacia la BD");
         }
     }
     public static void Eliminar(Proveedor pv){
