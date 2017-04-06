@@ -25,21 +25,21 @@ public class ControladorProveedor {
             cn.st.executeUpdate("INSERT INTO proveedor(IdProveedor,Nombre,Telefono,Direccion, NIT) VALUES('"+pv.IdProveedor+"','"+pv.Nombre+"','"+pv.Telefono+"','"+pv.Direccion+"','"+pv.NIT+"')");
             
         } catch (SQLException ex) {
-            throw new ErrorTienda("","Ha escrito mal el comando DML hacia la BD");
+            throw new ErrorTienda("Class ControladorProveedor/Agregar", ex.getMessage());
         }
     }
-    public static void Eliminar(Proveedor pv){
+    public static void Eliminar(Proveedor pv)throws ErrorTienda{
         try {
             cn.st.executeUpdate("DELETE FROM proveedor WHERE IdProveedor='"+pv.IdProveedor+"'");
         } catch (Exception e) {
-            Logger.getLogger(ControladorProducto.class.getName()).log(Level.SEVERE, null, e);
+            throw new ErrorTienda("Class ControladorProveedor/Eliminar", e.getMessage());
         }
     }
-    public static void Modificar(Proveedor pv){
+    public static void Modificar(Proveedor pv)throws ErrorTienda{
         try {
             cn.st.executeUpdate("UPDATE proveedor SET Nombre='"+pv.Nombre+"',Telefono='"+pv.Telefono+"',Direccion='"+pv.Direccion+"',NIT='"+pv.NIT+"' WHERE IdProveedor='"+pv.IdProveedor+"'");
         } catch (Exception e) {
-            Logger.getLogger(ControladorProducto.class.getName()).log(Level.SEVERE, null, e);
+            throw new ErrorTienda("Class ControladorProveedor/Modificar", e.getMessage());
         }
     }
     
