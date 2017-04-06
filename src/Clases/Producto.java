@@ -15,5 +15,40 @@ public class Producto {
     public String Nombre;
     public int Inventario;
     public double Costo;
+
+    public Producto() {
+    }
+
+    public String getCodBarra() {
+        return CodBarra;
+    }
+
+    public void setCodBarra(String CodBarra) {
+        this.CodBarra = CodBarra;
+    }
+
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public void setNombre(String Nombre) {
+        this.Nombre = Nombre;
+    }
+
+    public int getInventario() {
+        return Inventario;
+    }
+
+    public void setInventario(int Inventario) {
+        this.Inventario = Inventario;
+    }
+
+    public double getCosto() {
+        return Costo;
+    }
+
+    public void setCosto(double Costo) {
+        this.Costo = Costo;
+    }
     
 }
