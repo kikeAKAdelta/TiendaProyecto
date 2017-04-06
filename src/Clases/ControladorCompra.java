@@ -25,7 +25,7 @@ public class ControladorCompra {
      try {
             cn.st.executeUpdate("INSERT INTO compra(IdCompra,Fecha,IdProveedor,Total) VALUES('"+cm.IdCompra+"','"+cm.Fecha+"','"+cm.PROVEEDOR.IdProveedor+"','"+cm.Total+"')");
         } catch (SQLException ex) {
-            throw new ErrorTienda("", ex.getMessage());
+            throw new ErrorTienda("Class ControladorCompra/Agregar", ex.getMessage());
         }
     
     }
@@ -40,14 +40,14 @@ public class ControladorCompra {
             CantidadActual = rsCantidad.getInt("Cantidad");
         }
         }catch (Exception ex){
-            throw new ErrorTienda("", ex.getMessage());
+            throw new ErrorTienda("Class ControladorCompra/ActualizarInventario", ex.getMessage());
         }
         
         //Actualizamos el inventario 
                 try {
             cn.st.executeUpdate("UPDATE productos SET Inventario='"+(CantidadActual+cm.ARTICULOS.get(0).Cantidad)+"' WHERE CodBarra='"+cm.ARTICULOS.get(0).PRODUCTO.CodBarra+"'");
         } catch (Exception ex) {
-            throw new ErrorTienda("", ex.getMessage());
+            throw new ErrorTienda("Class ControladorCompra/ActualizarInventario", ex.getMessage());
         }
          
     }
@@ -62,7 +62,7 @@ public class ControladorCompra {
             CantidadActual = rsCantidad.getInt("Cantidad");
         }
         }catch (Exception ex){
-            throw new ErrorTienda("", ex.getMessage());
+            throw new ErrorTienda("Class ControladorCompra/ActualizarPrecioPromedioProducto", ex.getMessage());
         }
        
         //Obtener el precio actual
@@ -75,20 +75,30 @@ public class ControladorCompra {
             PrecioActual = rsPrecio.getDouble("Costo");
         }
         }catch (Exception ex){
-            throw new ErrorTienda("", ex.getMessage());
+            throw new ErrorTienda("Class ControladorCompra/ActualizarPrecioPromedioProducto", ex.getMessage());
         }
         
         //Actualizamos el precio promedio
          try {
             cn.st.executeUpdate("UPDATE productos SET Costo='"+((CantidadActual*PrecioActual)+((detalleCompra.get(0).Cantidad)*(detalleCompra.get(0).CostoUnitario)))+"'");
         } catch (Exception ex) {
-            throw new ErrorTienda("", ex.getMessage());
+            throw new ErrorTienda("Class ControladorCompra/ActualizarPrecioPromedioProducto", ex.getMessage());
         }
         
 //        cantidadactual*precioactual(25*0.30) + cantidadnuevacomprada*precionuevo(10*0.36)/CantidadTotal = precio ponderado del producto.
     }
-    public static int ObtenerIdCompra() {
+    public static int ObtenerIdCompra() throws ErrorTienda {
         int IdCompra=0;
+        try {
+        ResultSet rsIdCompra = null;
+        rsIdCompra = cn.st.executeQuery("SELECT MAX(IdCompra) FROM detallecompra");
+        
+        while(rsIdCompra.next()){
+            IdCompra = rsIdCompra.getInt("IdCompra");
+        }
+        }catch (Exception ex){
+            throw new ErrorTienda("Class ControladorCompra/ObtenerIdCompra", ex.getMessage());
+        } 
         return IdCompra;
     }
     
