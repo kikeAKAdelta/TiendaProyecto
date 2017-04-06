@@ -25,5 +25,31 @@ public static Parametro ObtenerUtilidad(){
 return new Parametro();
 }
 
+    public String getIdParametro() {
+        return IdParametro;
+    }
+
+    public void setIdParametro(String IdParametro) {
+        this.IdParametro = IdParametro;
+    }
+
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public void setNombre(String Nombre) {
+        this.Nombre = Nombre;
+    }
+
+    public String getValor() {
+        return Valor;
+    }
+
+    public void setValor(String Valor) {
+        this.Valor = Valor;
+    }
+
+    
+
 }
  

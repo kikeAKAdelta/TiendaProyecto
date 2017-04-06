@@ -6,6 +6,7 @@
 package Clases;
 
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,7 +14,11 @@ import java.sql.SQLException;
  */
 public class ErrorTienda extends Exception {
     
+
     public ErrorTienda(String ClaseMetodo,String mensajeError){
         super(ClaseMetodo + "," + mensajeError);
     }
+    
+
+    
 }

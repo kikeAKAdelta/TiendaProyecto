@@ -8,7 +8,6 @@ package Clases;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,8 +15,7 @@ import javax.swing.JOptionPane;
  */
 public class Conexion {
      public Connection conexion;
-     
-   public  Statement st;
+     public  Statement st;
     
         
             
@@ -30,6 +28,7 @@ public class Conexion {
             
         } catch (Exception e) {
             throw new ErrorTienda("Conexion.conexion()",e.getMessage());
+
         }
     }
     

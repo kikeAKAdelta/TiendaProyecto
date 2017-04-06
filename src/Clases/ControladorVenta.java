@@ -13,16 +13,24 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author oscar
+ * @author Jose Lopez
  */
 public class ControladorVenta {
+    
+    
+    Conexion cn;
     
     public static void Agregar(Venta vn){
         
     }
     
     public static int ObtenerIdVenta(){
-        int IdVenta=0;    
+        int IdVenta=0; 
+        try {
+            
+        } catch (Exception e) {
+            
+        }
         return IdVenta;
     }
     
