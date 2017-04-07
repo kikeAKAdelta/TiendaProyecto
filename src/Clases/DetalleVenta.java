@@ -45,7 +45,7 @@ DecimalFormat decimal = new DecimalFormat("0.00");
            decimal.setRoundingMode(RoundingMode.CEILING); 
         return Double.parseDouble(decimal.format(Producto.getCosto()/(1-(Double.parseDouble(p.ObtenerUtilidad().getValor())/100))));
         }catch(ArithmeticException ex){
-            throw new ErrorTienda("Error de Calculo", ex.getMessage());
+            throw new ErrorTienda("class DetalleVenta/CalcularPrecio", ex.getMessage());
         }
 
     }
