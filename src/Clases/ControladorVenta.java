@@ -60,7 +60,7 @@ public class ControladorVenta {
         try {
             
             int descontar = Integer.parseInt(detalleVenta.get(1).toString());
-            cn.st.executeUpdate("UPDATE productos SET Inventario='"+(CantidadActual-descontar)+"' WHERE CodBarra='"+detalleVenta.get(0)+"'");
+            cn.st.executeUpdate("UPDATE productos SET Inventario='"+(CantidadActual-descontar)+"' WHERE CodBarra='"+detalleVenta.get(0).toString()+"'");
         } catch (Exception ex) {
             throw new ErrorTienda("Class ControladorVenta/ActualizarInventario", ex.getMessage());
         }
