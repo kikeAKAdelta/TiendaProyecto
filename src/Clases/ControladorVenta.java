@@ -39,7 +39,7 @@ public class ControladorVenta {
             IdVenta = rsVenta.getInt("IdVenta");
         }
         }catch (Exception ex){
-            throw new ErrorTienda("Class ControladorCompra/ObtenerIdVenta", ex.getMessage());
+            throw new ErrorTienda("Class ControladorVenta/ObtenerIdVenta", ex.getMessage());
         } 
         return IdVenta;
     }
