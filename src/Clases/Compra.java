@@ -37,7 +37,12 @@ public ArrayList<DetalleCompra> ARTICULOS;
         }
         
         public void AgregarItem(DetalleCompra dc) throws ErrorTienda{
-            this.ARTICULOS.add(dc);
-            this.CalcularTotal();
+            try{
+                this.ARTICULOS.add(dc);
+                this.CalcularTotal();
+            }catch(Exception ex) {
+                throw new ErrorTienda("Class Compra/AgregarItem", ex.getMessage());
+            }
+           
         }        
 }
