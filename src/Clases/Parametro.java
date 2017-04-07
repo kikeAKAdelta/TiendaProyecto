@@ -5,6 +5,7 @@
  */
 package Clases;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 /**
@@ -13,24 +14,55 @@ import java.util.ArrayList;
  */
 public class Parametro {
     
-public String IdParametro;
+public String direccion;
 public String Nombre;
-public String Valor;
+public String utilidad;
+static Conexion cn;
+static ResultSet rs;
 
-public static ArrayList<Parametro> Obtener(){
-ArrayList<Parametro> parametro = new ArrayList<Parametro>();
-return parametro;
-}
-public static Parametro ObtenerUtilidad(){
-return new Parametro();
-}
+    public static ArrayList<Parametro> Obtener() throws ErrorTienda{
+        ArrayList<Object> parametro=new ArrayList<Object>();
+        
+        
+        
+        cn=new Conexion();
+        try {
+            rs=cn.st.executeQuery("SELECT direccion,Nombre,utilidad FROM parametro");
+            while (rs.next()) {
+                parametro.add(rs.getString(0));
+                parametro.add(rs.getString(1));
+                parametro.add(rs.getString(3));
+            }
+        } catch (Exception e) {
+            throw new ErrorTienda("Class Parametro/Obtener",e.getMessage());
+        }
+        
+        ArrayList<Parametro> parametros =(ArrayList) parametro;
+        return parametros;
+    }
+    
+    public static Parametro ObtenerUtilidad() throws ErrorTienda{
 
-    public String getIdParametro() {
-        return IdParametro;
+        Parametro mipara=new Parametro();
+        cn=new Conexion();
+        try {
+            rs=cn.st.executeQuery("SELECT Valor FROM parametros");
+            while (rs.next()) {
+                mipara.setUtilidad(rs.getString(1));
+            }
+        } catch (Exception e) {
+            throw new ErrorTienda("Class Parametro/ObtenerUtilidad",e.getMessage());
+        }
+
+        return mipara;
     }
 
-    public void setIdParametro(String IdParametro) {
-        this.IdParametro = IdParametro;
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
     public String getNombre() {
@@ -41,13 +73,15 @@ return new Parametro();
         this.Nombre = Nombre;
     }
 
-    public String getValor() {
-        return Valor;
+    public String getUtilidad() {
+        return utilidad;
     }
 
-    public void setValor(String Valor) {
-        this.Valor = Valor;
+    public void setUtilidad(String utilidad) {
+        this.utilidad = utilidad;
     }
+
+    
 
     
 
