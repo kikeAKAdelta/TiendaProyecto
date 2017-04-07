@@ -6,6 +6,7 @@
 package Clases;
 
 import static Clases.ControladorProducto.cn;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -19,23 +20,22 @@ public class ControladorVenta {
     
     
     Conexion cn;
+    ResultSet rs;
     
     public static void Agregar(Venta vn){
         
     }
     
-    public static int ObtenerIdVenta(){
+    public static int ObtenerIdVenta() throws ErrorTienda{
         int IdVenta=0; 
-        try {
-            
-        } catch (Exception e) {
-            
-        }
+        
         return IdVenta;
     }
     
     public static void ActualizarInventario(ArrayList<DetalleVenta> detalleVenta){
         
     }
+
+    
     
 }
