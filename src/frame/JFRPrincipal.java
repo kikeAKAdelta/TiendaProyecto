@@ -2,10 +2,20 @@
 package frame;
 
 import Clases.Conexion;
+import Clases.ControladorProducto;
+import Clases.ErrorTienda;
+import Clases.Producto;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.KeyEvent;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 /**
@@ -40,6 +50,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         Ventas(false);
         Productos(false);
         Proveedores(false);
+        //disableBotonesProducto(false);
     }
     
     /*  ---- Color a las cabeceras de las tablas ----  */
@@ -117,6 +128,23 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         jpnCompras.setVisible(false);
         jpnDetalleCompra.setVisible(false);
     }
+    
+    //------------------botones desactivados producto-------------
+    public void disableBotonesProducto(boolean cambio){
+        btnEliminarProducto.setEnabled(cambio);
+        btnModificarProducto.setEnabled(cambio);
+    }
+    
+    //-----------------limpiando cajas de texto-------------------------
+    public void limpiandoTxtProducto(){
+        txtCodBarraProductos.setText("");
+        txtNombreProductos.setText("");
+        txtInventarioProducto.setText("");
+        txtCostoProductos.setText("");
+        txtCodBarraProductos.requestFocus();
+    }
+    
+   
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -319,7 +347,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         btnSalirProductos = new javax.swing.JButton();
         txtCodBarraProductos = new javax.swing.JTextField();
         txtNombreProductos = new javax.swing.JTextField();
-        txtPrecioProductos = new javax.swing.JTextField();
+        txtCostoProductos = new javax.swing.JTextField();
         jPanel46 = new javax.swing.JPanel();
         jLabel34 = new javax.swing.JLabel();
         jSeparator11 = new javax.swing.JSeparator();
@@ -330,7 +358,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         jSeparator26 = new javax.swing.JSeparator();
         jSeparator34 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        txtProductoInventario = new javax.swing.JTextField();
+        txtInventarioProducto = new javax.swing.JTextField();
         jSeparator39 = new javax.swing.JSeparator();
         jpnDetalleCompra = new javax.swing.JPanel();
         txtCodBarraProductos1 = new javax.swing.JTextField();
@@ -1322,32 +1350,16 @@ public final class JFRPrincipal extends javax.swing.JFrame {
 
         jpnProductos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jtblProductos =new javax.swing.JTable(){
-            public boolean isCellEditable(int rowIndex, int colIndex){
-                return false;
-            }
-        };
         jtblProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Código de Barra", "Nombre", "Costo", "Inventario"
+                "Código de Barra", "Nombre", "Inventario", "Costo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, false, true
+                false, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -1355,6 +1367,16 @@ public final class JFRPrincipal extends javax.swing.JFrame {
             }
         });
         jtblProductos.getTableHeader().setReorderingAllowed(false);
+        jtblProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtblProductosMouseClicked(evt);
+            }
+        });
+        jtblProductos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtblProductosKeyTyped(evt);
+            }
+        });
         jScrollPane3.setViewportView(jtblProductos);
 
         jpnProductos.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 650, 260));
@@ -1390,6 +1412,11 @@ public final class JFRPrincipal extends javax.swing.JFrame {
                 btnBuscarProductoMouseExited(evt);
             }
         });
+        btnBuscarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarProductoActionPerformed(evt);
+            }
+        });
         jpnProductos.add(btnBuscarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 110, 30));
 
         btnModificarProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/modificar.png"))); // NOI18N
@@ -1402,6 +1429,11 @@ public final class JFRPrincipal extends javax.swing.JFrame {
                 btnModificarProductoMouseExited(evt);
             }
         });
+        btnModificarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarProductoActionPerformed(evt);
+            }
+        });
         jpnProductos.add(btnModificarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 510, 110, 30));
 
         btnEliminarProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/eliminar.png"))); // NOI18N
@@ -1412,6 +1444,11 @@ public final class JFRPrincipal extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnEliminarProductoMouseExited(evt);
+            }
+        });
+        btnEliminarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarProductoActionPerformed(evt);
             }
         });
         jpnProductos.add(btnEliminarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 510, 110, 30));
@@ -1434,6 +1471,12 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel15.setText("Listado de los Productos:");
         jpnProductos.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, -1));
+
+        txtProductosBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtProductosBuscarKeyTyped(evt);
+            }
+        });
         jpnProductos.add(txtProductosBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 430, 30));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -1455,6 +1498,11 @@ public final class JFRPrincipal extends javax.swing.JFrame {
                 btnAgregarNuevoProductoMouseExited(evt);
             }
         });
+        btnAgregarNuevoProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarNuevoProductoActionPerformed(evt);
+            }
+        });
         jpnNuevoProducto.add(btnAgregarNuevoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 500, 110, 30));
 
         btnSalirProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/atras.png"))); // NOI18N
@@ -1473,9 +1521,27 @@ public final class JFRPrincipal extends javax.swing.JFrame {
             }
         });
         jpnNuevoProducto.add(btnSalirProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 500, 110, 30));
+
+        txtCodBarraProductos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodBarraProductosKeyTyped(evt);
+            }
+        });
         jpnNuevoProducto.add(txtCodBarraProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 180, 220, 30));
+
+        txtNombreProductos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreProductosKeyTyped(evt);
+            }
+        });
         jpnNuevoProducto.add(txtNombreProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, 270, 30));
-        jpnNuevoProducto.add(txtPrecioProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 360, 80, 30));
+
+        txtCostoProductos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCostoProductosKeyTyped(evt);
+            }
+        });
+        jpnNuevoProducto.add(txtCostoProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 360, 80, 30));
 
         jPanel46.setBackground(new java.awt.Color(0, 0, 0));
         jPanel46.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1511,7 +1577,13 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Inventario:");
         jpnNuevoProducto.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 300, -1, 10));
-        jpnNuevoProducto.add(txtProductoInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 300, 60, 30));
+
+        txtInventarioProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtInventarioProductoKeyTyped(evt);
+            }
+        });
+        jpnNuevoProducto.add(txtInventarioProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 300, 60, 30));
         jpnNuevoProducto.add(jSeparator39, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 260, 50, 20));
 
         getContentPane().add(jpnNuevoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 730, 600));
@@ -1715,6 +1787,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
     private void btnSalirProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirProductosActionPerformed
             jpnNuevoProducto.setVisible(false);
             jpnProductos.setVisible(true);
+            limpiandoTxtProducto();
     }//GEN-LAST:event_btnSalirProductosActionPerformed
 
     private void btnProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductosMouseClicked
@@ -1955,6 +2028,250 @@ public final class JFRPrincipal extends javax.swing.JFrame {
     private void btnAgregarProductoVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProductoVentaActionPerformed
        
     }//GEN-LAST:event_btnAgregarProductoVentaActionPerformed
+
+    private void txtInventarioProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInventarioProductoKeyTyped
+        int c=(int) evt.getKeyChar();
+        
+        if (c >=48 && c<=57) {
+            //No pasa nada
+        }else{
+            evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+            getToolkit().beep();
+            evt.consume();
+        }
+        
+    }//GEN-LAST:event_txtInventarioProductoKeyTyped
+
+    private void txtNombreProductosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreProductosKeyTyped
+         int c=(int) evt.getKeyChar();
+         char mayu=evt.getKeyChar();
+         
+         if ((c>=65 && c<=90) || (c>=97 && c<=122)  || (c==32)) {
+             if (Character.isLowerCase(mayu)) {
+                 String cadena=(""+mayu).toUpperCase();
+                 mayu=cadena.charAt(0);
+                 evt.setKeyChar(mayu);
+             }
+        }else{
+             evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+            getToolkit().beep();
+            evt.consume();
+         }
+        
+    }//GEN-LAST:event_txtNombreProductosKeyTyped
+
+    private void txtCostoProductosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostoProductosKeyTyped
+        int c=(int) evt.getKeyChar();
+        
+        if ((c >=48 && c<=57)  || (c==46)) {
+            if (c==46) {
+                String cadena=txtCostoProductos.getText();
+            int tamanio=cadena.length();
+            for (int i = 0; i <= tamanio; i++) {
+                if (cadena.contains(".")) {
+                    evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+                    getToolkit().beep();
+                    evt.consume();
+                }
+            }
+            }
+        }else{
+            evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCostoProductosKeyTyped
+
+    private void txtCodBarraProductosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodBarraProductosKeyTyped
+         int c=(int) evt.getKeyChar();
+         
+         if (c >=48 && c<=57) {
+            
+        }else{
+             evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+            getToolkit().beep();
+            evt.consume();
+         }
+    }//GEN-LAST:event_txtCodBarraProductosKeyTyped
+
+    private void btnAgregarNuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarNuevoProductoActionPerformed
+       Producto agregado=new Producto();
+      
+        if (txtCodBarraProductos.equals("") || txtNombreProductos.equals("") || txtInventarioProducto.getText().equals("") || txtCostoProductos.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Rellene todos los campos");
+        
+        }else{
+       agregado.setCodBarra(txtCodBarraProductos.getText());
+       agregado.setNombre(txtNombreProductos.getText());
+       agregado.setInventario(Integer.parseInt(txtInventarioProducto.getText()));
+       agregado.setCosto(Double.parseDouble(txtCostoProductos.getText()));
+       
+        
+     
+       
+        try {
+            ControladorProducto.Agregar(agregado);
+            
+            JOptionPane.showMessageDialog(null, "El producto fue agregado correctamente");
+            limpiandoTxtProducto();
+        } catch (ErrorTienda e) {
+            
+        }
+        }
+       
+    }//GEN-LAST:event_btnAgregarNuevoProductoActionPerformed
+
+    private void btnEliminarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProductoActionPerformed
+        int fila=jtblProductos.getSelectedRow(); 
+        if (jtblProductos.isRowSelected(fila)) {
+            
+            if (fila>=0) {
+                
+            
+            Producto eliminar=new Producto();
+            DefaultTableModel modeloProductos=(DefaultTableModel) jtblProductos.getModel();
+            
+
+            String codBarra=jtblProductos.getValueAt(fila, 0).toString();
+            String nombre=jtblProductos.getValueAt(fila, 1).toString();
+            int inventario=Integer.parseInt(jtblProductos.getValueAt(fila, 2).toString());
+            double costo=Double.parseDouble(jtblProductos.getValueAt(fila, 3).toString());
+
+            eliminar.setCodBarra(codBarra);
+            eliminar.setNombre(nombre);
+            eliminar.setInventario(inventario);
+            eliminar.setCosto(costo);
+
+
+            try {
+                ControladorProducto.Eliminar(eliminar);
+                modeloProductos.removeRow(fila);
+                JOptionPane.showMessageDialog(null, "El registro fue eliminado con exito");
+            } catch (ErrorTienda ex) {
+                
+            }
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "No ha seleccionado una fila o la tabla esta vacia");
+        }
+        
+    }//GEN-LAST:event_btnEliminarProductoActionPerformed
+
+    private void txtProductosBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProductosBuscarKeyTyped
+        char mayu=evt.getKeyChar();      
+         int c=(int) evt.getKeyChar();
+         
+         if ((c >=48 && c<=57) || (c>=65 && c<=90) || (c>=97 && c<=122) || (c==32)) {
+            if (Character.isLowerCase(mayu)) {
+                 String cadena=(""+mayu).toUpperCase();
+                 mayu=cadena.charAt(0);
+                 evt.setKeyChar(mayu);
+             }
+        }else{
+             evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+            getToolkit().beep();
+            evt.consume();
+         }
+    }//GEN-LAST:event_txtProductosBuscarKeyTyped
+
+    private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
+        String codBarra=txtProductosBuscar.getText();
+        
+        if (codBarra.equals("")) {
+            JOptionPane.showMessageDialog(null, "No ha introducido el codigo de barra");
+        }else{
+        DefaultTableModel modeloProductos=(DefaultTableModel) jtblProductos.getModel();
+        
+        ArrayList<Producto> busqueda=new ArrayList<Producto>();
+        Object fila[]=new Object[4];
+        
+        
+        try {
+            busqueda=ControladorProducto.Buscar(codBarra);
+            
+            if (busqueda.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Su busqueda no coincide ni con el codigo de barra y ni el nombre");
+            }else{
+            
+                Iterator<Producto> iterador=busqueda.iterator();
+
+                while(iterador.hasNext()){
+                    fila[0]=iterador.next();
+                    fila[1]=iterador.next();
+                    fila[2]=""+iterador.next();
+                    fila[3]=""+iterador.next();
+
+                    modeloProductos.addRow(fila);
+                }
+
+                txtProductosBuscar.setText("");
+            }
+            
+        } catch (ErrorTienda ex) {
+            
+        }
+        }
+    }//GEN-LAST:event_btnBuscarProductoActionPerformed
+
+    private void jtblProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblProductosMouseClicked
+        int fila=jtblProductos.getSelectedRow();
+        if (jtblProductos.isRowSelected(fila)) {
+            disableBotonesProducto(true);
+        }
+        
+    }//GEN-LAST:event_jtblProductosMouseClicked
+
+    private void btnModificarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarProductoActionPerformed
+         int fila=jtblProductos.getSelectedRow(); 
+        if (jtblProductos.isRowSelected(fila)) {
+            
+            if (fila>=0) {
+                
+            
+            Producto modificar=new Producto();
+            DefaultTableModel modeloProductos=(DefaultTableModel) jtblProductos.getModel();
+            
+
+            String codBarra=jtblProductos.getValueAt(fila, 0).toString();
+            String nombre=jtblProductos.getValueAt(fila, 1).toString();
+            int inventario=Integer.parseInt(jtblProductos.getValueAt(fila, 2).toString());
+            double costo=Double.parseDouble(jtblProductos.getValueAt(fila, 3).toString());
+
+            modificar.setCodBarra(codBarra);
+            modificar.setNombre(nombre);
+            modificar.setInventario(inventario);
+            modificar.setCosto(costo);
+
+
+            try {
+                ControladorProducto.Modificar(modificar);
+                JOptionPane.showMessageDialog(null, "El registro fue modificado con exito");
+            } catch (ErrorTienda ex) {
+                
+            }
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "No ha seleccionado una fila o la tabla esta vacia");
+        }
+    }//GEN-LAST:event_btnModificarProductoActionPerformed
+
+    private void jtblProductosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtblProductosKeyTyped
+        char mayu=evt.getKeyChar();      
+         int c=(int) evt.getKeyChar();
+         
+         if ((c>=65 && c<=90) || (c>=97 && c<=122) || (c==32)) {
+            if (Character.isLowerCase(mayu)) {
+                 String cadena=(""+mayu).toUpperCase();
+                 mayu=cadena.charAt(0);
+                 evt.setKeyChar(mayu);
+             }
+        }else{
+             evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+            getToolkit().beep();
+            evt.consume();
+         }
+        
+    }//GEN-LAST:event_jtblProductosKeyTyped
                                                                                                                                                                                                                               
     /**
      * @param args the command line arguments
@@ -2193,6 +2510,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField txtCodBarraProductos1;
     private javax.swing.JTextField txtCodigoBarraVender;
     private javax.swing.JTextField txtCostoProd;
+    private javax.swing.JTextField txtCostoProductos;
     private javax.swing.JLabel txtDireccionActualProveedor;
     private javax.swing.JTextField txtDireccionProveedor;
     private javax.swing.JTextField txtFecha;
@@ -2200,6 +2518,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField txtIDProveedor1;
     private javax.swing.JTextField txtIdCompra;
     private javax.swing.JTextField txtIdVenta;
+    private javax.swing.JTextField txtInventarioProducto;
     private javax.swing.JTextField txtNIT;
     private javax.swing.JLabel txtNitActualProveedor;
     private javax.swing.JTextField txtNomProd;
@@ -2212,9 +2531,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField txtNuevoNIT;
     private javax.swing.JTextField txtNuevoNombreProveedor;
     private javax.swing.JTextField txtNuevoTelefonoProveedor;
-    private javax.swing.JTextField txtPrecioProductos;
     private javax.swing.JTextField txtPrecioProductos2;
-    private javax.swing.JTextField txtProductoInventario;
     private javax.swing.JTextField txtProductosBuscar;
     private javax.swing.JTextField txtProductosBuscar1;
     private javax.swing.JLabel txtTelefonoActualProveedor;
