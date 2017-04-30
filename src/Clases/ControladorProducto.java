@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,7 +28,7 @@ public class ControladorProducto {
             cn=new Conexion();
             cn.st.executeUpdate("INSERT INTO productos(CodBarra,Inventario,Costo,Nombre) VALUES('"+pr.getCodBarra()+"','"+pr.getInventario()+"','"+pr.getCosto()+"','"+pr.getNombre()+"')");
         } catch (SQLException e) {
-            throw new ErrorTienda("",e.getMessage());
+            throw new ErrorTienda("Class ControladorProducto/Agregar",e.getMessage());
         }
            
     }
@@ -49,22 +50,22 @@ public class ControladorProducto {
         }
     }
     
+    
     public static ArrayList<Producto> Buscar(String buscar) throws ErrorTienda{
         
         ArrayList<Object> producto = new ArrayList<Object>();
         
-        
-        
         cn=new Conexion();
         try {
-            rs=cn.st.executeQuery("SELECT CodBarra,nombre,Inventario,Costo FROM productos WHERE nombre='"+buscar+"'");
+            rs=cn.st.executeQuery("SELECT DISTINCT CodBarra,nombre,Inventario,Costo FROM productos WHERE nombre LIKE '%"+buscar+"%' OR CodBarra LIKE'%"+buscar+"%'");
             
-            while (rs.next()) {
-                producto.add(rs.getString(0));
-                producto.add(rs.getString(1));
-                producto.add(rs.getString(2));
-                producto.add(rs.getString(3));
-            }
+                while (rs.next()) {
+                    producto.add(rs.getString(1));
+                    producto.add(rs.getString(2));
+                    producto.add(rs.getString(3));
+                    producto.add(rs.getString(4));
+                }
+            
             
         } catch (SQLException e) {
             throw new ErrorTienda("Class ControladorProducto/Buscar",e.getMessage());
@@ -74,16 +75,18 @@ public class ControladorProducto {
         
         return productos;
     }
+    
+    
     public static Producto Obtener(String CodBarra) throws ErrorTienda{
         Producto miproducto=new Producto();
         cn=new Conexion();
         try {
-            rs=cn.st.executeQuery("SELECT CodBarra,nombre,Inevntario,Costo FROM productos WHERE CodBara='"+CodBarra+"'");
+            rs=cn.st.executeQuery("SELECT CodBarra,nombre,Inventario,Costo FROM productos WHERE CodBarra='"+CodBarra+"'");
             while (rs.next()) {
-                miproducto.setCodBarra(rs.getString(0));
-                miproducto.setNombre(rs.getString(1));
-                miproducto.setInventario(Integer.parseInt(rs.getString(2)));
-                miproducto.setCosto(Double.parseDouble(rs.getString(3)));
+                miproducto.setCodBarra(rs.getString(1));
+                miproducto.setNombre(rs.getString(2));
+                miproducto.setInventario(Integer.parseInt(rs.getString(3)));
+                miproducto.setCosto(Double.parseDouble(rs.getString(4)));
             }
         } catch (SQLException e) {
             throw new ErrorTienda("Class ControladorProducto/Obtener",e.getMessage());
