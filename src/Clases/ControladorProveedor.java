@@ -95,9 +95,9 @@ public class ControladorProveedor {
         rs = null;
         rs = cn.st.executeQuery("SELECT MAX(IdProveedor) FROM proveedor");
         
-        while(rs.next()){
-            IdProveedor = rs.getInt("IdProveedor");
-        }
+            while(rs.next()){
+                IdProveedor = rs.getInt("IdProveedor");
+            }
         }catch (Exception ex){
             throw new ErrorTienda("Class ControladorProveedor/ObtenerIdProveedor", ex.getMessage());
         } 

@@ -5,6 +5,8 @@ import Clases.Conexion;
 import Clases.ControladorProducto;
 import Clases.ErrorTienda;
 import Clases.Producto;
+import Clases.Proveedor;
+import Clases.ControladorProveedor;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
@@ -142,6 +144,13 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         txtInventarioProducto.setText("");
         txtCostoProductos.setText("");
         txtCodBarraProductos.requestFocus();
+    }
+    public void limpiandoTxtProveedor(){
+        txtIDProveedor.setText("");
+        txtNombreProveedor.setText("");
+        txtNIT.setText("");
+        txtTelefonoProveedor.setText("");
+        txtDireccionProveedor.requestFocus();
     }
     
    
@@ -795,6 +804,11 @@ public final class JFRPrincipal extends javax.swing.JFrame {
                 btnGuardarProveedorMouseExited(evt);
             }
         });
+        btnGuardarProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarProveedorActionPerformed(evt);
+            }
+        });
         jpnAgregarProv.add(btnGuardarProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 480, 110, 30));
 
         btnAtrasProveedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/atras.png"))); // NOI18N
@@ -811,11 +825,34 @@ public final class JFRPrincipal extends javax.swing.JFrame {
             }
         });
         jpnAgregarProv.add(btnAtrasProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 480, 110, 30));
+
+        txtDireccionProveedor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDireccionProveedorKeyTyped(evt);
+            }
+        });
         jpnAgregarProv.add(txtDireccionProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 290, 410, 30));
+
+        txtNIT.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNITKeyTyped(evt);
+            }
+        });
         jpnAgregarProv.add(txtNIT, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 350, 230, 30));
 
         txtNombreProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtNombreProveedor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreProveedorKeyTyped(evt);
+            }
+        });
         jpnAgregarProv.add(txtNombreProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, 410, 30));
+
+        txtTelefonoProveedor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefonoProveedorKeyTyped(evt);
+            }
+        });
         jpnAgregarProv.add(txtTelefonoProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, 230, 30));
 
         jPanel45.setBackground(new java.awt.Color(0, 0, 0));
@@ -835,6 +872,11 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         jPanel45.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 10, -1, 30));
 
         txtIDProveedor.setEditable(false);
+        txtIDProveedor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtIDProveedorKeyTyped(evt);
+            }
+        });
         jPanel45.add(txtIDProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 10, 90, 30));
 
         jpnAgregarProv.add(jPanel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 50));
@@ -1766,11 +1808,19 @@ public final class JFRPrincipal extends javax.swing.JFrame {
     private void btnAgregarProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarProveedorMouseClicked
         jpnProveedores.setVisible(false);
         jpnAgregarProv.setVisible(true);
+        int idProv;
+        try {
+            idProv = ControladorProveedor.ObtenerIdProveedor();
+            txtIDProveedor.setText(""+idProv+1);
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(JFRPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnAgregarProveedorMouseClicked
 
     private void btnAtrasProveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasProveedoresMouseClicked
         jpnAgregarProv.setVisible(false);
         jpnProveedores.setVisible(true);
+        limpiandoTxtProveedor();
     }//GEN-LAST:event_btnAtrasProveedoresMouseClicked
 
     private void btnVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentasMouseClicked
@@ -2277,6 +2327,97 @@ public final class JFRPrincipal extends javax.swing.JFrame {
          }
         
     }//GEN-LAST:event_jtblProductosKeyTyped
+
+    private void btnGuardarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarProveedorActionPerformed
+        Proveedor agregado=new Proveedor();
+        int idProv;
+      
+        if (txtDireccionProveedor.equals("") || txtNombreProveedor.equals("") || txtNIT.getText().equals("") || txtTelefonoProveedor.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Rellene todos los campos");
+        }
+        else{
+            try {
+                idProv = ControladorProveedor.ObtenerIdProveedor();
+                agregado.setIdProveedor(idProv+1);
+            } catch (ErrorTienda ex) {
+                Logger.getLogger(JFRPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+              }
+              agregado.setNombre(txtNombreProveedor.getText());
+              agregado.setTelefono(txtTelefonoProveedor.getText());
+              agregado.setNIT(txtNIT.getText());
+              agregado.setDireccion(txtDireccionProveedor.getText());
+       
+              try {
+              ControladorProveedor.Agregar(agregado);
+            
+              JOptionPane.showMessageDialog(null, "El Proveedor fue agregado correctamente");
+              limpiandoTxtProveedor();
+              } catch (ErrorTienda e) {      
+           }
+        }
+    }//GEN-LAST:event_btnGuardarProveedorActionPerformed
+
+    private void txtNombreProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreProveedorKeyTyped
+         //Pasar TXT a mayúsculas
+         int c=(int) evt.getKeyChar();
+         char mayu=evt.getKeyChar();
+         
+         if ((c>=65 && c<=90) || (c>=97 && c<=122)  || (c==32)) {
+             if (Character.isLowerCase(mayu)) {
+                 String cadena=(""+mayu).toUpperCase();
+                 mayu=cadena.charAt(0);
+                 evt.setKeyChar(mayu);
+             }
+        }else{
+             evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+            getToolkit().beep();
+            evt.consume();
+         }
+    }//GEN-LAST:event_txtNombreProveedorKeyTyped
+
+    private void txtDireccionProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionProveedorKeyTyped
+         char mayu=evt.getKeyChar();        
+         if (Character.isLowerCase(mayu)) {
+                 String cadena=(""+mayu).toUpperCase();
+                 mayu=cadena.charAt(0);
+                 evt.setKeyChar(mayu);
+        }
+        else{
+
+         }
+    }//GEN-LAST:event_txtDireccionProveedorKeyTyped
+
+    private void txtNITKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNITKeyTyped
+        char c = evt.getKeyChar();
+        if (c < '0' || c > '9') {          
+                if (c != (char) KeyEvent.VK_SPACE) {
+                    if (c != (char) KeyEvent.VK_BACK_SPACE) {
+                        if (c != (char) KeyEvent.VK_DELETE) {
+                            evt.consume();
+                            JOptionPane.showMessageDialog(null, "Solo Numeros", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } 
+            }
+        }   
+    }//GEN-LAST:event_txtNITKeyTyped
+
+    private void txtTelefonoProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoProveedorKeyTyped
+        char c = evt.getKeyChar();
+        if (c < '0' || c > '9') {          
+                if (c != (char) KeyEvent.VK_SPACE) {
+                    if (c != (char) KeyEvent.VK_BACK_SPACE) {
+                        if (c != (char) KeyEvent.VK_DELETE) {
+                            evt.consume();
+                            JOptionPane.showMessageDialog(null, "Solo Numeros", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } 
+            }
+        } 
+    }//GEN-LAST:event_txtTelefonoProveedorKeyTyped
+
+    private void txtIDProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDProveedorKeyTyped
+        
+    }//GEN-LAST:event_txtIDProveedorKeyTyped
                                                                                                                                                                                                                               
     /**
      * @param args the command line arguments
