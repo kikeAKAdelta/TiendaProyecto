@@ -2177,10 +2177,15 @@ public final class JFRPrincipal extends javax.swing.JFrame {
     private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
         String codBarra=txtProductosBuscar.getText();
         
+        
         if (codBarra.equals("")) {
-            JOptionPane.showMessageDialog(null, "No ha introducido el codigo de barra");
+            JOptionPane.showMessageDialog(null, "No ha introducido el codigo de barra o el nombre");
         }else{
         DefaultTableModel modeloProductos=(DefaultTableModel) jtblProductos.getModel();
+        
+            for (int i = 0; i < jtblProductos.getRowCount(); i++) {
+                modeloProductos.removeRow(i);
+            }
         
         ArrayList<Producto> busqueda=new ArrayList<Producto>();
         Object fila[]=new Object[4];
