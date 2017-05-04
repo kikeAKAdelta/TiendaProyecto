@@ -2469,6 +2469,8 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         }else{
         DefaultTableModel modeloProductos=(DefaultTableModel) jtblProductos.getModel();
         
+        
+            System.out.println(jtblProductos.getRowCount());
             for (int i = 0; i < jtblProductos.getRowCount(); i++) {
                 modeloProductos.removeRow(i);
             }
@@ -2528,10 +2530,10 @@ public final class JFRPrincipal extends javax.swing.JFrame {
             int inventario=Integer.parseInt(jtblProductos.getValueAt(fila, 2).toString());
             double costo=Double.parseDouble(jtblProductos.getValueAt(fila, 3).toString());
 
-            modificar.setCodBarra(codBarra);
-            modificar.setNombre(nombre);
-            modificar.setInventario(inventario);
-            modificar.setCosto(costo);
+//            modificar.setCodBarra(codBarra);
+//            modificar.setNombre(nombre);
+//            modificar.setInventario(inventario);
+//            modificar.setCosto(costo);
 
 
             try {
