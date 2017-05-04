@@ -150,9 +150,49 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         txtNombreProveedor.setText("");
         txtNIT.setText("");
         txtTelefonoProveedor.setText("");
-        txtDireccionProveedor.requestFocus();
+        txtDireccionProveedor.setText("");
+        txtNombreProveedor.requestFocus();
+        int idProv;
+        try {
+            idProv = ControladorProveedor.ObtenerIdProveedor();
+            idProv = idProv+1;
+            txtIDProveedor.setText(""+idProv);
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(JFRPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
+    //---------------------------Llenar tabla de proveedores----------------------------------------
+        public void actualizarTablaProveedor(){
+            DefaultTableModel modeloProveedores=(DefaultTableModel) tblProveedores.getModel();
+            ArrayList<Proveedor> listaProveedor=new ArrayList<Proveedor>();
+            Object fila[]=new Object[5];
+            
+            for (int i=0; i<tblProveedores.getRowCount(); i++) {
+                modeloProveedores.removeRow(i);
+                System.out.println(tblProveedores.getRowCount());
+                System.out.println(i);
+            }
+        
+            try {
+            listaProveedor=ControladorProveedor.Obtener();
+            Iterator<Proveedor> prov=listaProveedor.iterator();
+                while(prov.hasNext()){
+                    fila[0]= prov.next();
+                    fila[1]= prov.next();
+                    fila[2]= prov.next();
+                    fila[3]= prov.next();
+                    fila[4]= prov.next();
+                    modeloProveedores.addRow(fila);
+                }
+            }
+            
+         catch (ErrorTienda ex) {
+             Logger.getLogger(JFRPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            
+        
+         }
+    } 
    
 
     @SuppressWarnings("unchecked")
@@ -750,10 +790,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         };
         tblProveedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "idProveedor", "Nombre", "Teléfono", "Dirección", "NIT"
@@ -1791,6 +1828,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnProveedores);  
         apagado2();
         jpnProveedores.setVisible(true); 
+        actualizarTablaProveedor();
     }//GEN-LAST:event_btnProveedoresMouseClicked
 
     /*  ---- Acción de botones, cambiar de pantallas (Paneles) ----  */
@@ -1808,19 +1846,15 @@ public final class JFRPrincipal extends javax.swing.JFrame {
     private void btnAgregarProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarProveedorMouseClicked
         jpnProveedores.setVisible(false);
         jpnAgregarProv.setVisible(true);
-        int idProv;
-        try {
-            idProv = ControladorProveedor.ObtenerIdProveedor();
-            txtIDProveedor.setText(""+idProv+1);
-        } catch (ErrorTienda ex) {
-            Logger.getLogger(JFRPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        limpiandoTxtProveedor();
+        
     }//GEN-LAST:event_btnAgregarProveedorMouseClicked
 
     private void btnAtrasProveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasProveedoresMouseClicked
         jpnAgregarProv.setVisible(false);
         jpnProveedores.setVisible(true);
         limpiandoTxtProveedor();
+        actualizarTablaProveedor();
     }//GEN-LAST:event_btnAtrasProveedoresMouseClicked
 
     private void btnVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentasMouseClicked
