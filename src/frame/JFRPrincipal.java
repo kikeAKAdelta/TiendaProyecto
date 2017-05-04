@@ -165,14 +165,15 @@ public final class JFRPrincipal extends javax.swing.JFrame {
     //---------------------------Llenar tabla de proveedores----------------------------------------
         public void actualizarTablaProveedor(){
             DefaultTableModel modeloProveedores=(DefaultTableModel) tblProveedores.getModel();
-            ArrayList<Proveedor> listaProveedor=new ArrayList<Proveedor>();
-            Object fila[]=new Object[5];
+
             
             for (int i=0; i<tblProveedores.getRowCount(); i++) {
                 modeloProveedores.removeRow(i);
-                System.out.println(tblProveedores.getRowCount());
-                System.out.println(i);
             }
+            
+            ArrayList<Proveedor> listaProveedor=new ArrayList<Proveedor>();
+            Object fila[]=new Object[5];
+            
         
             try {
             listaProveedor=ControladorProveedor.Obtener();
