@@ -3,11 +3,13 @@ package frame;
 
 import Clases.Conexion;
 import Clases.ControladorProducto;
+import Clases.ControladorVenta;
 import Clases.ErrorTienda;
 import Clases.Producto;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,6 +30,9 @@ public final class JFRPrincipal extends javax.swing.JFrame {
     boolean apagado, principal;
     int x,y;
     JTableHeader tHeadVentas,tHeadCompras,tHeadProductos,tHeadCompra,tHeadProveedores,tHeadDetalleCompra;
+    Producto obtenerProducto=null;
+    DefaultTableModel modeloTablaVender;
+    DecimalFormat decimal = new DecimalFormat("0.00");
     
     public JFRPrincipal() {
         initComponents();
@@ -37,7 +42,9 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         tHeadCompra=tblCompra.getTableHeader();
         tHeadProveedores=tblProveedores.getTableHeader();
         tHeadDetalleCompra=tblDetalleCompra.getTableHeader();
-        
+        modeloTablaVender = (DefaultTableModel) tblProductosVender.getModel();
+        txtCantidadVender.setText("1");
+        txtCodigoBarraVender.requestFocus();
         cabezera();
         ventas = compras = productos = proveedores = apagado = false;
         btnVentas.setBorder(null);
@@ -143,7 +150,122 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         txtCostoProductos.setText("");
         txtCodBarraProductos.requestFocus();
     }
-    
+    public void buscarProductoVender(){
+        //COMPROBAR SI EL ESPACIO DE CODIGO DE BARRA ESTA VACIO
+             if(txtCodigoBarraVender.getText().isEmpty()){
+          JOptionPane.showMessageDialog(null, "Codigo de Barra no ingresado");
+      }else{
+                 Producto obtenerProducto=null;
+                 try {
+                     obtenerProducto = ControladorProducto.Obtener(txtCodigoBarraVender.getText());
+                 } catch (ErrorTienda ex) {
+                    
+                 }
+                 
+                 //COMPROBAR RESULTADOS DE LA CONSULTA
+                 if(obtenerProducto.getCodBarra().isEmpty()){
+                     JOptionPane.showMessageDialog(rootPane, "No se han encontrado resultados");
+                     
+                 }else{
+                     //ASIGNAR EL NOMBRE DEL PRODUCTO BUSCADO AL CAMPO ESPECIFICO
+                     txtNombreProductoVender.setText(obtenerProducto.getNombre());
+                     txtCantidadVender.requestFocus();
+                     txtCantidadVender.selectAll();
+                     
+                 }
+      }
+    }
+    public void tablaProductosVender(){
+        //COMPROBAR QUE SE HAYA ELEGIDO UN PRODUCTO
+        if(!txtNombreProductoVender.getText().isEmpty()){
+            
+                 try {
+                     obtenerProducto = ControladorProducto.Obtener(txtCodigoBarraVender.getText());
+                     int cantidad = Integer.parseInt(txtCantidadVender.getText());
+                     int fila = modeloTablaVender.getRowCount();
+                     //COMPARAR LA CANTIDAD DISPONIBLE DEL PRODUCTO CONTRA LA CANTIDAD DEMANDADA
+                     
+                     if(cantidad>obtenerProducto.getInventario()){
+                         JOptionPane.showMessageDialog(rootPane, "La cantidad demandada supera la cantidad disponible "+obtenerProducto.getInventario());
+                         txtCantidadVender.requestFocus();
+                         txtCantidadVender.selectAll();
+                     }else{
+                         //AGREGAR A LA TABLA
+                         
+                         if(!verificarTablaProductosVender()){
+                             modeloTablaVender.addRow(new Object[]{"","","","",""});
+                         modeloTablaVender.setValueAt(obtenerProducto.getCodBarra(), fila,0);
+                         modeloTablaVender.setValueAt(obtenerProducto.getNombre(), fila,1);
+                         modeloTablaVender.setValueAt(txtCantidadVender.getText(), fila,2);
+                         modeloTablaVender.setValueAt(obtenerProducto.getCosto(), fila,3);
+                         modeloTablaVender.setValueAt(decimal.format(cantidad*obtenerProducto.getCosto()), fila,4);
+                         txtCodigoBarraVender.setText("");
+                         txtNombreProductoVender.setText("");
+                         txtCantidadVender.setText("1");
+                         txtCodigoBarraVender.requestFocus();
+                         }else{
+                             txtCodigoBarraVender.setText("");
+                         txtNombreProductoVender.setText("");
+                         txtCantidadVender.setText("1");
+                         txtCodigoBarraVender.requestFocus();
+                         }
+                         
+                     }
+                            
+                 } catch (ErrorTienda ex) {
+                     
+                 }
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Producto no especificado");
+            txtCodigoBarraVender.requestFocus();
+            txtCodigoBarraVender.selectAll();
+        }
+        calcularTotal();
+    }
+    public boolean verificarTablaProductosVender(){
+        int filas = modeloTablaVender.getRowCount();
+       
+        if(filas!=0){
+            
+           int iteracion =0,encontrado=-100;
+           
+        while( iteracion < filas){
+            String codBarraBD = (String) modeloTablaVender.getValueAt(iteracion, 0);
+            
+            if(txtCodigoBarraVender.getText().equals(codBarraBD)){
+                encontrado=iteracion;
+            }
+            iteracion++;
+        }
+        
+           if(encontrado!=-100){
+            
+           int cantidadAntigua=Integer.parseInt(String.valueOf(modeloTablaVender.getValueAt(encontrado,2)));            
+           int nuevaCantidad=(Integer.parseInt(txtCantidadVender.getText()));
+           double nuevoSubTotal = ((nuevaCantidad+cantidadAntigua)*(Double.parseDouble(String.valueOf(modeloTablaVender.getValueAt(encontrado, 3)))));            
+            
+            modeloTablaVender.setValueAt((cantidadAntigua+nuevaCantidad), encontrado, 2);
+            modeloTablaVender.setValueAt(decimal.format(nuevoSubTotal), encontrado, 4);
+            
+            return true;
+            
+        }
+              
+        
+        }
+       return false;
+        
+    }
+    public void calcularTotal(){
+        int filas = modeloTablaVender.getRowCount();
+        int iteraciones=0;
+        double total=0;
+        while(iteraciones<filas){
+            total+=Double.parseDouble(String.valueOf(modeloTablaVender.getValueAt(iteraciones, 4)));
+            iteraciones++;
+        }
+        txtTotalventa.setText(decimal.format(total));
+    }
    
 
     @SuppressWarnings("unchecked")
@@ -987,21 +1109,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
 
         tblProductosVender.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Cod Barra", "Producto", "Cantidad", "Precio Unitario", "Sub Total"
@@ -1075,11 +1183,11 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         btnAgregarProductoVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/agregar2.png"))); // NOI18N
         btnAgregarProductoVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAgregarProductoVenta.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnAgregarProductoVentaMouseExited(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnAgregarProductoVentaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAgregarProductoVentaMouseExited(evt);
             }
         });
         btnAgregarProductoVenta.addActionListener(new java.awt.event.ActionListener() {
@@ -1137,6 +1245,12 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         jLabel35.setText("Total");
         jpnVentas.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 450, -1, -1));
         jpnVentas.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(617, 465, 40, 20));
+
+        txtCodigoBarraVender.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCodigoBarraVenderKeyPressed(evt);
+            }
+        });
         jpnVentas.add(txtCodigoBarraVender, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 140, 40));
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -1370,6 +1484,13 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         jtblProductos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jtblProductosMouseClicked(evt);
+            }
+        });
+        jtblProductos.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                jtblProductosInputMethodTextChanged(evt);
             }
         });
         jtblProductos.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1777,6 +1898,11 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         apagado();
         apagado2();
         jpnVentas.setVisible(true);
+        try {
+            txtIdVenta.setText(String.valueOf(ControladorVenta.ObtenerIdVenta()));
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(JFRPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnVentasMouseClicked
 
     private void btnNuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoProductoActionPerformed
@@ -2026,7 +2152,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnModificarProveedorMouseClicked
 
     private void btnAgregarProductoVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProductoVentaActionPerformed
-       
+      tablaProductosVender();
     }//GEN-LAST:event_btnAgregarProductoVentaActionPerformed
 
     private void txtInventarioProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInventarioProductoKeyTyped
@@ -2272,6 +2398,20 @@ public final class JFRPrincipal extends javax.swing.JFrame {
          }
         
     }//GEN-LAST:event_jtblProductosKeyTyped
+
+    private void jtblProductosInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jtblProductosInputMethodTextChanged
+    }//GEN-LAST:event_jtblProductosInputMethodTextChanged
+
+    private void txtCodigoBarraVenderKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoBarraVenderKeyPressed
+        char c=evt.getKeyChar();      
+         
+         
+         if (c == (char) KeyEvent.VK_ENTER) {
+             buscarProductoVender();
+             
+           
+        }
+    }//GEN-LAST:event_txtCodigoBarraVenderKeyPressed
                                                                                                                                                                                                                               
     /**
      * @param args the command line arguments

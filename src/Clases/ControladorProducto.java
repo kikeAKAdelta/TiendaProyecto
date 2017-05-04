@@ -36,7 +36,7 @@ public class ControladorProducto {
     public static void Modificar(Producto pr) throws ErrorTienda{
         try {
             cn=new Conexion();
-            cn.st.executeUpdate("UPDATE productos SET Inventario='"+pr.getInventario()+"',Costo='"+pr.getCosto()+"',Nombre='"+pr.getNombre()+"' WHERE CodBarra='"+pr.getCodBarra()+"'");
+            cn.st.execute("UPDATE productos SET Inventario='"+pr.getInventario()+"',Costo='"+pr.getCosto()+"',Nombre='"+pr.getNombre()+"' WHERE CodBarra='"+pr.getCodBarra()+"'");
         } catch (SQLException e) {
             throw new ErrorTienda("Class ControladorProducto/Modificar",e.getMessage());
         }
@@ -79,6 +79,8 @@ public class ControladorProducto {
     
     public static Producto Obtener(String CodBarra) throws ErrorTienda{
         Producto miproducto=new Producto();
+        
+        
         cn=new Conexion();
         try {
             rs=cn.st.executeQuery("SELECT CodBarra,nombre,Inventario,Costo FROM productos WHERE CodBarra='"+CodBarra+"'");
@@ -93,5 +95,7 @@ public class ControladorProducto {
         }
         return miproducto;
     }
+    
+    
     
 }

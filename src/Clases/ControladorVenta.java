@@ -18,7 +18,8 @@ public class ControladorVenta {
     
     
    
-    
+    static Conexion cn;
+    static ResultSet rs;
     
     public static void Agregar(Venta vn) throws ErrorTienda, SQLException{
         try {
@@ -32,16 +33,17 @@ public class ControladorVenta {
     public static int ObtenerIdVenta() throws ErrorTienda{
         int IdVenta=0;
         try {
-        ResultSet rsVenta = null;
-        rsVenta = cn.st.executeQuery("SELECT MAX(IdVenta) FROM detalleventa");
+            cn=new Conexion();
+       rs=null;
+        rs = cn.st.executeQuery("SELECT count(IdVenta) FROM venta");
         
-        while(rsVenta.next()){
-            IdVenta = rsVenta.getInt("IdVenta");
+        while(rs.next()){
+            IdVenta = rs.getInt(1);
         }
         }catch (Exception ex){
             throw new ErrorTienda("Class ControladorVenta/ObtenerIdVenta", ex.getMessage());
         } 
-        return IdVenta;
+        return IdVenta+1;
     }
     
     public static void ActualizarInventario(ArrayList<DetalleVenta> detalleVenta) throws ErrorTienda{
