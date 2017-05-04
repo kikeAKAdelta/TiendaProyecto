@@ -41,6 +41,9 @@ public final class JFRPrincipal extends javax.swing.JFrame {
     DefaultTableModel modeloTablaVender;
     DecimalFormat decimal = new DecimalFormat("0.00");
     private TableRowSorter trsFiltro;
+    DefaultTableModel tablaModel= new DefaultTableModel();
+    
+    
     
     public JFRPrincipal() {
         initComponents();
@@ -53,6 +56,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         modeloTablaVender = (DefaultTableModel) tblProductosVender.getModel();
         txtCantidadVender.setText("1");
         txtCodigoBarraVender.requestFocus();
+        TableModel();
         cabezera();
         ventas = compras = productos = proveedores = apagado = false;
         btnVentas.setBorder(null);
@@ -333,7 +337,11 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         
          }
     } 
-
+public void TableModel(){
+String headers[] = {"Cod Barra","Producto","Cantidad","Costo","Subtotal"};
+tablaModel.setColumnIdentifiers(headers);
+tblCompra.setModel(tablaModel);
+}
    
 
     @SuppressWarnings("unchecked")
@@ -1720,6 +1728,12 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         lblCostoProd.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblCostoProd.setText("Costo:");
         jpnRegistroCompra.add(lblCostoProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 194, 40, 20));
+
+        txtCostoProd.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCostoProdKeyTyped(evt);
+            }
+        });
         jpnRegistroCompra.add(txtCostoProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 190, 80, 30));
 
         getContentPane().add(jpnRegistroCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 730, 600));
@@ -2990,6 +3004,27 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_txtCodBarraProdKeyTyped
+
+    private void txtCostoProdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostoProdKeyTyped
+        // TODO add your handling code here:
+        
+        //AGREGAR COMPRAS A LA TABLA
+        char c = evt.getKeyChar();
+        if (c == (char) KeyEvent.VK_ENTER) {
+            String fila[]  = new String[5];
+            fila[0]=txtCodBarraProd.getText();
+            fila[1]=txtNomProd.getText();
+            fila[2]=txtCantidad.getText();
+            fila[3]=txtCostoProd.getText();
+            fila[4]=String.valueOf((Double.parseDouble(txtCantidad.getText()))*(Double.parseDouble(txtCostoProd.getText())));
+            tablaModel.addRow(fila);
+            tblCompra.setModel(tablaModel);
+            
+        }
+        
+        
+        
+    }//GEN-LAST:event_txtCostoProdKeyTyped
 
                                                                                                                                                                                                                               
     /**
