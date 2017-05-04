@@ -2,6 +2,7 @@
 package frame;
 
 import Clases.Conexion;
+import Clases.ControladorCompra;
 import Clases.ControladorProducto;
 import Clases.ControladorVenta;
 import Clases.ErrorTienda;
@@ -13,6 +14,7 @@ import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -1307,7 +1309,6 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         });
         jpnVentas.add(btnEliminarProductoVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 540, 110, 30));
 
-        btnBuscarProductoVenta.setBackground(new java.awt.Color(255, 255, 255));
         btnBuscarProductoVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/buscar.png"))); // NOI18N
         btnBuscarProductoVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBuscarProductoVenta.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1321,12 +1322,10 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         jpnVentas.add(btnBuscarProductoVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 540, 110, 30));
 
         txtTotalventa.setEditable(false);
-        txtTotalventa.setBackground(new java.awt.Color(255, 255, 255));
         txtTotalventa.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jpnVentas.add(txtTotalventa, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 470, 120, 40));
 
         txtNombreProductoVender.setEditable(false);
-        txtNombreProductoVender.setBackground(new java.awt.Color(255, 255, 255));
         txtNombreProductoVender.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jpnVentas.add(txtNombreProductoVender, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 350, 40));
 
@@ -1537,11 +1536,11 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         btnAgregarCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/agregar.png"))); // NOI18N
         btnAgregarCompra.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAgregarCompra.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnAgregarCompraMouseEntered(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnAgregarCompraMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnAgregarCompraMouseEntered(evt);
             }
         });
         btnAgregarCompra.addActionListener(new java.awt.event.ActionListener() {
@@ -1592,11 +1591,16 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/guardarprov.png"))); // NOI18N
         btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnGuardarMouseExited(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnGuardarMouseEntered(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnGuardarMouseExited(evt);
+        });
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
             }
         });
         jpnRegistroCompra.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 540, 110, 30));
@@ -1640,7 +1644,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         tblCompra.getTableHeader().setReorderingAllowed(false);
         jScrollPane6.setViewportView(tblCompra);
 
-        jpnRegistroCompra.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 660, 210));
+        jpnRegistroCompra.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 650, 200));
 
         txtTotal.setText("$");
         jpnRegistroCompra.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 500, 100, 40));
@@ -1736,10 +1740,10 @@ public final class JFRPrincipal extends javax.swing.JFrame {
             }
         });
         jtblProductos.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 jtblProductosInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jtblProductos.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -2180,8 +2184,38 @@ public final class JFRPrincipal extends javax.swing.JFrame {
     private void btnAgregarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCompraActionPerformed
         jpnRegistroCompra.setVisible(true);
         jpnCompras.setVisible(false);
+        try {
+             int idCompra;
+ 
+            idCompra = ControladorCompra.ObtenerIdCompra();
+            txtIdCompra.setText(""+idCompra+1);
+        //GENERAR FECHA 
+            Date utilDate=new Date();
+        SimpleDateFormat fecha= new SimpleDateFormat("dd'/'MM'/'YYYY");
+            txtFecha.setText(fecha.format(utilDate)); 
+         //AGREGAR PROVEEDORES AL COMBO BOX
+           ArrayList<Proveedor> proveedor = new ArrayList<>();
+             proveedor= ControladorProveedor.Obtener();
+          Object vector[] = new Object[5];
+            if (cmbProveedor.getItemCount()==0) {
+                 Iterator<Proveedor>iterador=proveedor.iterator();
+          while(iterador.hasNext()){
+          vector[0]=iterador.next();
+          vector[1]=iterador.next();
+          vector[2]=iterador.next();
+          vector[3]=iterador.next();
+          vector[4]=iterador.next();
+          cmbProveedor.addItem(vector[1]);
+          }
+            }
+         
+        } catch (Exception e) {
+        }
+        
+        
+       
     }//GEN-LAST:event_btnAgregarCompraActionPerformed
-
+    
     private void btnVerDetalleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVerDetalleMouseClicked
         jpnDetalleCompra.setVisible(true);
         jpnCompras.setVisible(false);
@@ -2921,6 +2955,10 @@ public final class JFRPrincipal extends javax.swing.JFrame {
     private void txtNuevoCodBarraProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNuevoCodBarraProductoKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNuevoCodBarraProductoKeyTyped
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
                                                                                                                                                                                                                               
     /**
