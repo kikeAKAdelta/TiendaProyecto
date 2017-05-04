@@ -50,7 +50,7 @@ public class ControladorProveedor {
     
             cn=new Conexion();   
             try { 
-            rs=cn.st.executeQuery("SELECT IdProveedor,Nombre,Telefono,Direccion, NIT FROM proveedores WHERE nombre='"+pv+"'");
+            rs=cn.st.executeQuery("SELECT IdProveedor,Nombre,Telefono,Direccion, NIT FROM proveedproveedorores WHERE nombre='"+pv+"'");
             
             while (rs.next()) {
                 proveedor.add(rs.getString(0));
@@ -67,36 +67,39 @@ public class ControladorProveedor {
         ArrayList<Proveedor> proveedores=(ArrayList) proveedor;
         return proveedores;
     }
+    
     public static ArrayList<Proveedor> Obtener()throws ErrorTienda{
     ArrayList<Object> proveedor = new ArrayList<Object>();
     
             cn=new Conexion();   
             try { 
-            rs=cn.st.executeQuery("SELECT IdProveedor,Nombre,Telefono,Direccion, NIT FROM proveedores");
-            
+                rs=null;
+            rs=cn.st.executeQuery("SELECT IdProveedor,Nombre,Telefono,Direccion, NIT FROM proveedor");
             while (rs.next()) {
-                proveedor.add(rs.getString(0));
+ 
                 proveedor.add(rs.getString(1));
                 proveedor.add(rs.getString(2));
                 proveedor.add(rs.getString(3));
                 proveedor.add(rs.getString(4));
+                proveedor.add(rs.getString(5));
             }
             
         } catch (SQLException e) {
-            throw new ErrorTienda("Class ControladorProveedor/Buscar",e.getMessage());
+            throw new ErrorTienda("Class ControladorProveedor/Obtener",e.getMessage());
         }
         
         ArrayList<Proveedor> proveedores=(ArrayList) proveedor;
         return proveedores;
     }
+    
     public static int ObtenerIdProveedor()throws ErrorTienda{
-        int IdProveedor=0;    
+        int IdProveedor=0;   
+        cn = new Conexion();
         try {
-        rs = null;
-        rs = cn.st.executeQuery("SELECT MAX(IdProveedor) FROM proveedor");
+        rs = cn.st.executeQuery("SELECT COUNT(IdProveedor) FROM proveedor");
         
             while(rs.next()){
-                IdProveedor = rs.getInt("IdProveedor");
+                IdProveedor = rs.getInt(1);
             }
         }catch (Exception ex){
             throw new ErrorTienda("Class ControladorProveedor/ObtenerIdProveedor", ex.getMessage());
