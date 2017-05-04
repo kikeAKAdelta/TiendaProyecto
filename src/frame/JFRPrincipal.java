@@ -2452,7 +2452,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
             
 
             String codBarra=jtblProductos.getValueAt(fila, 0).toString();
-            String nombre=jtblProductos.getValueAt(fila, 1).toString();
+            String nombre=jtblProductos.getValueAt(fila, 1).toString().toUpperCase();
             int inventario=Integer.parseInt(jtblProductos.getValueAt(fila, 2).toString());
             double costo=Double.parseDouble(jtblProductos.getValueAt(fila, 3).toString());
 
