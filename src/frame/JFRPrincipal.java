@@ -196,7 +196,10 @@ public final class JFRPrincipal extends javax.swing.JFrame {
                          //AGREGAR A LA TABLA
                          
                          if(!verificarTablaProductosVender()){
-                             modeloTablaVender.addRow(new Object[]{"","","","",""});
+                             if(Integer.parseInt(txtCantidadVender.getText())<=0){
+                                JOptionPane.showMessageDialog(rootPane, "Ingrese una cantidad válida");
+                             }else{
+                              modeloTablaVender.addRow(new Object[]{"","","","",""});
                          modeloTablaVender.setValueAt(obtenerProducto.getCodBarra(), fila,0);
                          modeloTablaVender.setValueAt(obtenerProducto.getNombre(), fila,1);
                          modeloTablaVender.setValueAt(txtCantidadVender.getText(), fila,2);
@@ -205,7 +208,9 @@ public final class JFRPrincipal extends javax.swing.JFrame {
                          txtCodigoBarraVender.setText("");
                          txtNombreProductoVender.setText("");
                          txtCantidadVender.setText("1");
-                         txtCodigoBarraVender.requestFocus();
+                         txtCodigoBarraVender.requestFocus();   
+                             }
+                             
                          }else{
                              txtCodigoBarraVender.setText("");
                          txtNombreProductoVender.setText("");
@@ -242,13 +247,17 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         }
         
            if(encontrado!=-100){
-            
-           int cantidadAntigua=Integer.parseInt(String.valueOf(modeloTablaVender.getValueAt(encontrado,2)));            
+            if(Integer.parseInt(txtCantidadVender.getText())<=0){
+              JOptionPane.showMessageDialog(rootPane, "Ingrese una cantidad válida");
+            }else{
+            int cantidadAntigua=Integer.parseInt(String.valueOf(modeloTablaVender.getValueAt(encontrado,2)));            
            int nuevaCantidad=(Integer.parseInt(txtCantidadVender.getText()));
            double nuevoSubTotal = ((nuevaCantidad+cantidadAntigua)*(Double.parseDouble(String.valueOf(modeloTablaVender.getValueAt(encontrado, 3)))));            
             
             modeloTablaVender.setValueAt((cantidadAntigua+nuevaCantidad), encontrado, 2);
-            modeloTablaVender.setValueAt(decimal.format(nuevoSubTotal), encontrado, 4);
+            modeloTablaVender.setValueAt(decimal.format(nuevoSubTotal), encontrado, 4);    
+            }
+           
             
             return true;
             
@@ -1255,11 +1264,18 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         txtTotalventa.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jpnVentas.add(txtTotalventa, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 470, 120, 40));
 
+        txtNombreProductoVender.setEditable(false);
+        txtNombreProductoVender.setBackground(new java.awt.Color(255, 255, 255));
         txtNombreProductoVender.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jpnVentas.add(txtNombreProductoVender, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 350, 40));
 
         txtCantidadVender.setText("  1");
         txtCantidadVender.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtCantidadVender.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCantidadVenderKeyTyped(evt);
+            }
+        });
         jpnVentas.add(txtCantidadVender, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 120, 80, 40));
 
         btnAgregarProductoVenta.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -1332,6 +1348,9 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         txtCodigoBarraVender.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCodigoBarraVenderKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodigoBarraVenderKeyTyped(evt);
             }
         });
         jpnVentas.add(txtCodigoBarraVender, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 140, 40));
@@ -2597,6 +2616,40 @@ public final class JFRPrincipal extends javax.swing.JFrame {
     private void txtIDProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDProveedorKeyTyped
         
     }//GEN-LAST:event_txtIDProveedorKeyTyped
+
+    private void txtCantidadVenderKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadVenderKeyTyped
+        char c = evt.getKeyChar();
+        if (c < '0' || c > '9') {
+            
+                if (c != (char) KeyEvent.VK_BEGIN) {
+                    if (c != (char) KeyEvent.VK_BACK_SPACE) {
+                        if (c != (char) KeyEvent.VK_DELETE) {
+                            if (c != (char) KeyEvent.VK_ENTER) {
+                            evt.consume();
+                            JOptionPane.showMessageDialog(null, "Solo Numeros", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                }
+                }
+        }
+    }//GEN-LAST:event_txtCantidadVenderKeyTyped
+
+    private void txtCodigoBarraVenderKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoBarraVenderKeyTyped
+       char c = evt.getKeyChar();
+        if (c < '0' || c > '9') {
+            
+                if (c != (char) KeyEvent.VK_BEGIN) {
+                    if (c != (char) KeyEvent.VK_BACK_SPACE) {
+                        if (c != (char) KeyEvent.VK_DELETE) {
+                            if (c != (char) KeyEvent.VK_ENTER) {
+                            evt.consume();
+                            JOptionPane.showMessageDialog(null, "Solo Numeros", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                }
+                }
+        }
+    }//GEN-LAST:event_txtCodigoBarraVenderKeyTyped
 
                                                                                                                                                                                                                               
     /**
