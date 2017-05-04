@@ -10,6 +10,7 @@ import Clases.Proveedor;
 import Clases.ControladorProveedor;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
 import java.util.*;
@@ -19,8 +20,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -35,6 +38,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
     Producto obtenerProducto=null;
     DefaultTableModel modeloTablaVender;
     DecimalFormat decimal = new DecimalFormat("0.00");
+    private TableRowSorter trsFiltro;
     
     public JFRPrincipal() {
         initComponents();
@@ -289,19 +293,16 @@ public final class JFRPrincipal extends javax.swing.JFrame {
     
     //---------------------------Llenar tabla de proveedores----------------------------------------
         public void actualizarTablaProveedor(){
-            DefaultTableModel modeloProveedores=(DefaultTableModel) tblProveedores.getModel();
-
+            DefaultTableModel modeloProveedores= new DefaultTableModel();
             
-            for (int i=0; i<tblProveedores.getRowCount(); i++) {
-                modeloProveedores.removeRow(i);
-            }
-            
-            ArrayList<Proveedor> listaProveedor=new ArrayList<Proveedor>();
+            ArrayList<Proveedor> listaProveedor=new ArrayList();
             Object fila[]=new Object[5];
             
         
             try {
             listaProveedor=ControladorProveedor.Obtener();
+            String[] proveedores = new String []{"IdProveedor","Nombre","Telefono","Direccion","NIT"};
+            modeloProveedores.setColumnIdentifiers(proveedores);
             Iterator<Proveedor> prov=listaProveedor.iterator();
                 while(prov.hasNext()){
                     fila[0]= prov.next();
@@ -310,6 +311,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
                     fila[3]= prov.next();
                     fila[4]= prov.next();
                     modeloProveedores.addRow(fila);
+                    tblProveedores.setModel(modeloProveedores);
                 }
             }
             
@@ -392,9 +394,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         btnGuardarProveedor = new javax.swing.JButton();
         btnAtrasProveedores = new javax.swing.JButton();
         txtDireccionProveedor = new javax.swing.JTextField();
-        txtNIT = new javax.swing.JTextField();
         txtNombreProveedor = new javax.swing.JTextField();
-        txtTelefonoProveedor = new javax.swing.JTextField();
         jPanel45 = new javax.swing.JPanel();
         jSeparator16 = new javax.swing.JSeparator();
         jLabel9 = new javax.swing.JLabel();
@@ -408,13 +408,13 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         jSeparator17 = new javax.swing.JSeparator();
         jSeparator18 = new javax.swing.JSeparator();
         jSeparator19 = new javax.swing.JSeparator();
+        txtTelefonoProveedor = new javax.swing.JFormattedTextField();
+        txtNIT = new javax.swing.JFormattedTextField();
         jpnModificarProveedor = new javax.swing.JPanel();
         btnGuardarModificarProveedor = new javax.swing.JButton();
         btnAtrasModificarProveedor = new javax.swing.JButton();
         txtNuevoDireccionProveedor = new javax.swing.JTextField();
-        txtNuevoNIT = new javax.swing.JTextField();
         txtNuevoNombreProveedor = new javax.swing.JTextField();
-        txtNuevoTelefonoProveedor = new javax.swing.JTextField();
         jPanel48 = new javax.swing.JPanel();
         jSeparator40 = new javax.swing.JSeparator();
         jLabel14 = new javax.swing.JLabel();
@@ -436,6 +436,8 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         jLabel39 = new javax.swing.JLabel();
         txtTelefonoActualProveedor = new javax.swing.JLabel();
         txtDireccionActualProveedor = new javax.swing.JLabel();
+        txtNuevoTelefono = new javax.swing.JFormattedTextField();
+        txtNuevoNit = new javax.swing.JFormattedTextField();
         jpnVentas = new javax.swing.JPanel();
         jSeparator2 = new javax.swing.JSeparator();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -871,6 +873,11 @@ public final class JFRPrincipal extends javax.swing.JFrame {
                 btnEliminarProveedorMouseExited(evt);
             }
         });
+        btnEliminarProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarProveedorActionPerformed(evt);
+            }
+        });
         jpnProveedores.add(btnEliminarProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 520, 110, 30));
 
         btnAgregarProveedor.setBackground(new java.awt.Color(0, 0, 0));
@@ -946,6 +953,12 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         jLabel7.setText("Listado de los Proveedores actuales:");
         jpnProveedores.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 175, -1, -1));
         jpnProveedores.add(jSeparator21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 230, -1));
+
+        txtProductosBuscar1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtProductosBuscar1KeyTyped(evt);
+            }
+        });
         jpnProveedores.add(txtProductosBuscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 670, 30));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -997,13 +1010,6 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         });
         jpnAgregarProv.add(txtDireccionProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 290, 410, 30));
 
-        txtNIT.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNITKeyTyped(evt);
-            }
-        });
-        jpnAgregarProv.add(txtNIT, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 350, 230, 30));
-
         txtNombreProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtNombreProveedor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -1011,13 +1017,6 @@ public final class JFRPrincipal extends javax.swing.JFrame {
             }
         });
         jpnAgregarProv.add(txtNombreProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, 410, 30));
-
-        txtTelefonoProveedor.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtTelefonoProveedorKeyTyped(evt);
-            }
-        });
-        jpnAgregarProv.add(txtTelefonoProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, 230, 30));
 
         jPanel45.setBackground(new java.awt.Color(0, 0, 0));
         jPanel45.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1065,6 +1064,20 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         jpnAgregarProv.add(jSeparator18, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 250, 60, 10));
         jpnAgregarProv.add(jSeparator19, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, 60, 10));
 
+        try {
+            txtTelefonoProveedor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jpnAgregarProv.add(txtTelefonoProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, 230, 30));
+
+        try {
+            txtNIT.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-######-###-#")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jpnAgregarProv.add(txtNIT, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 350, 230, 30));
+
         getContentPane().add(jpnAgregarProv, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 730, 600));
 
         jpnModificarProveedor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1077,6 +1090,11 @@ public final class JFRPrincipal extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnGuardarModificarProveedorMouseExited(evt);
+            }
+        });
+        btnGuardarModificarProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarModificarProveedorActionPerformed(evt);
             }
         });
         jpnModificarProveedor.add(btnGuardarModificarProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 500, 110, 30));
@@ -1095,12 +1113,21 @@ public final class JFRPrincipal extends javax.swing.JFrame {
             }
         });
         jpnModificarProveedor.add(btnAtrasModificarProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 500, 110, 30));
+
+        txtNuevoDireccionProveedor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNuevoDireccionProveedorKeyTyped(evt);
+            }
+        });
         jpnModificarProveedor.add(txtNuevoDireccionProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 310, 410, 30));
-        jpnModificarProveedor.add(txtNuevoNIT, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 400, 230, 30));
 
         txtNuevoNombreProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtNuevoNombreProveedor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNuevoNombreProveedorKeyTyped(evt);
+            }
+        });
         jpnModificarProveedor.add(txtNuevoNombreProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 410, 30));
-        jpnModificarProveedor.add(txtNuevoTelefonoProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, 230, 30));
 
         jPanel48.setBackground(new java.awt.Color(0, 0, 0));
         jPanel48.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1182,6 +1209,20 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         txtDireccionActualProveedor.setForeground(new java.awt.Color(102, 0, 0));
         txtDireccionActualProveedor.setText("Urb. Altos del Palmar Block D. Pasaje 8, Casa 17");
         jpnModificarProveedor.add(txtDireccionActualProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 347, 370, 20));
+
+        try {
+            txtNuevoTelefono.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jpnModificarProveedor.add(txtNuevoTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, 230, 30));
+
+        try {
+            txtNuevoNit.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-######-###-#")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jpnModificarProveedor.add(txtNuevoNit, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 400, 200, 30));
 
         getContentPane().add(jpnModificarProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 730, 600));
 
@@ -1972,6 +2013,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
     private void btnAgregarProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarProveedorMouseClicked
         jpnProveedores.setVisible(false);
         jpnAgregarProv.setVisible(true);
+        actualizarTablaProveedor();
         limpiandoTxtProveedor();
         
     }//GEN-LAST:event_btnAgregarProveedorMouseClicked
@@ -1980,7 +2022,6 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         jpnAgregarProv.setVisible(false);
         jpnProveedores.setVisible(true);
         limpiandoTxtProveedor();
-        actualizarTablaProveedor();
     }//GEN-LAST:event_btnAtrasProveedoresMouseClicked
 
     private void btnVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentasMouseClicked
@@ -2236,8 +2277,19 @@ public final class JFRPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAtrasModificarProveedorMouseExited
 
     private void btnModificarProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarProveedorMouseClicked
-        jpnProveedores.setVisible(false);
-        jpnModificarProveedor.setVisible(true);
+        if(tblProveedores.getSelectedRow()!=-1){
+            jpnProveedores.setVisible(false);
+            jpnModificarProveedor.setVisible(true);
+            txtIDProveedor1.setText(tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 0).toString());
+            txtNombreActualProveedor1.setText(tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 1).toString());
+            txtTelefonoActualProveedor.setText(tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 2).toString());
+            txtDireccionActualProveedor.setText(tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 3).toString());
+            txtNitActualProveedor.setText(tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 4).toString());
+            
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Primero debe de seleccionar un proveedor");
+        }
+        
     }//GEN-LAST:event_btnModificarProveedorMouseClicked
 
     private void btnAgregarProductoVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProductoVentaActionPerformed
@@ -2542,7 +2594,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
          int c=(int) evt.getKeyChar();
          char mayu=evt.getKeyChar();
          
-         if ((c>=65 && c<=90) || (c>=97 && c<=122)  || (c==32)) {
+         if ((c>=65 && c<=90) || (c>=97 && c<=122)  || (c==32) || (c== (char)KeyEvent.VK_BACK_SPACE)) {
              if (Character.isLowerCase(mayu)) {
                  String cadena=(""+mayu).toUpperCase();
                  mayu=cadena.charAt(0);
@@ -2567,37 +2619,112 @@ public final class JFRPrincipal extends javax.swing.JFrame {
          }
     }//GEN-LAST:event_txtDireccionProveedorKeyTyped
 
-    private void txtNITKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNITKeyTyped
-        char c = evt.getKeyChar();
-        if (c < '0' || c > '9') {          
-                if (c != (char) KeyEvent.VK_SPACE) {
-                    if (c != (char) KeyEvent.VK_BACK_SPACE) {
-                        if (c != (char) KeyEvent.VK_DELETE) {
-                            evt.consume();
-                            JOptionPane.showMessageDialog(null, "Solo Numeros", "Error", JOptionPane.ERROR_MESSAGE);
-                        }
-                    } 
-            }
-        }   
-    }//GEN-LAST:event_txtNITKeyTyped
-
-    private void txtTelefonoProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoProveedorKeyTyped
-        char c = evt.getKeyChar();
-        if (c < '0' || c > '9') {          
-                if (c != (char) KeyEvent.VK_SPACE) {
-                    if (c != (char) KeyEvent.VK_BACK_SPACE) {
-                        if (c != (char) KeyEvent.VK_DELETE) {
-                            evt.consume();
-                            JOptionPane.showMessageDialog(null, "Solo Numeros", "Error", JOptionPane.ERROR_MESSAGE);
-                        }
-                    } 
-            }
-        } 
-    }//GEN-LAST:event_txtTelefonoProveedorKeyTyped
-
     private void txtIDProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDProveedorKeyTyped
         
     }//GEN-LAST:event_txtIDProveedorKeyTyped
+
+    private void txtNuevoNombreProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNuevoNombreProveedorKeyTyped
+         //Pasar TXT a mayúsculas
+         int c=(int) evt.getKeyChar();
+         char mayu=evt.getKeyChar();
+         
+         if ((c>=65 && c<=90) || (c>=97 && c<=122)  || (c==32) || (c== (char)KeyEvent.VK_BACK_SPACE)) {
+             if (Character.isLowerCase(mayu)) {
+                 String cadena=(""+mayu).toUpperCase();
+                 mayu=cadena.charAt(0);
+                 evt.setKeyChar(mayu);
+             }
+        }else{
+             evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+            getToolkit().beep();
+            evt.consume();
+         }
+    }//GEN-LAST:event_txtNuevoNombreProveedorKeyTyped
+
+    private void txtNuevoDireccionProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNuevoDireccionProveedorKeyTyped
+         char mayu=evt.getKeyChar();        
+         if (Character.isLowerCase(mayu)) {
+                 String cadena=(""+mayu).toUpperCase();
+                 mayu=cadena.charAt(0);
+                 evt.setKeyChar(mayu);
+        }
+        else{
+
+         }
+    }//GEN-LAST:event_txtNuevoDireccionProveedorKeyTyped
+
+    private void btnGuardarModificarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarModificarProveedorActionPerformed
+        Proveedor proveedor = new Proveedor();
+        proveedor.setIdProveedor(Integer.parseInt(txtIDProveedor1.getText()));
+        proveedor.setNombre(txtNuevoNombreProveedor.getText());
+        proveedor.setTelefono(txtNuevoTelefono.getText());
+        proveedor.setDireccion(txtNuevoDireccionProveedor.getText());
+        proveedor.setNIT(txtNuevoNit.getText());
+        try{
+            ControladorProveedor.Modificar(proveedor);
+            JOptionPane.showMessageDialog(rootPane, "Datos modificados");
+        } catch(ErrorTienda ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            
+        }
+        tblProveedores.removeAll();
+        actualizarTablaProveedor();
+        jpnProveedores.setVisible(true);
+        jpnModificarProveedor.setVisible(false);
+        
+    }//GEN-LAST:event_btnGuardarModificarProveedorActionPerformed
+
+    private void txtProductosBuscar1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProductosBuscar1KeyTyped
+         int c=(int) evt.getKeyChar();
+         char mayu=evt.getKeyChar();
+         
+         if ((c>=65 && c<=90) || (c>=97 && c<=122)  || (c==32) || (c== (char)KeyEvent.VK_BACK_SPACE)){
+             if (Character.isLowerCase(mayu)) {
+                 String cadena=(""+mayu).toUpperCase();
+                 mayu=cadena.charAt(0);
+                 evt.setKeyChar(mayu);
+             }
+        }else{
+             evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+            getToolkit().beep();
+            evt.consume();
+         }
+        txtProductosBuscar1.addKeyListener(new KeyAdapter(){
+            
+            public void keyReleased(final KeyEvent e){
+                String cadena = (txtProductosBuscar1.getText());
+                txtProductosBuscar1.setText(cadena);
+                repaint();
+                trsFiltro.setRowFilter(RowFilter.regexFilter(txtProductosBuscar1.getText(), 1));
+            }
+        });
+        trsFiltro = new TableRowSorter(tblProveedores.getModel());
+        tblProveedores.setRowSorter(trsFiltro);
+    }//GEN-LAST:event_txtProductosBuscar1KeyTyped
+
+    private void btnEliminarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProveedorActionPerformed
+        if(tblProveedores.getSelectedRow()!=-1){
+            int seleccion;
+            seleccion = tblProveedores.getSelectedRow();
+            Proveedor proveedor = new Proveedor();
+            proveedor.setIdProveedor(Integer.parseInt(tblProveedores.getValueAt(seleccion, 0).toString()));
+            proveedor.setNombre(tblProveedores.getValueAt(seleccion, 1).toString());
+            proveedor.setTelefono(tblProveedores.getValueAt(seleccion, 2).toString());
+            proveedor.setDireccion(tblProveedores.getValueAt(seleccion, 3).toString());
+            proveedor.setNIT(tblProveedores.getValueAt(seleccion, 4).toString());
+            try{
+                ControladorProveedor.Eliminar(proveedor);
+                JOptionPane.showMessageDialog(rootPane, "Proveedor eliminado");
+                
+            }catch(ErrorTienda ex){
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }
+            tblProveedores.removeAll();
+            actualizarTablaProveedor();
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Seleccione un proveedor de la tabla");
+        }
+    }//GEN-LAST:event_btnEliminarProveedorActionPerformed
 
                                                                                                                                                                                                                               
     /**
@@ -2846,7 +2973,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField txtIdCompra;
     private javax.swing.JTextField txtIdVenta;
     private javax.swing.JTextField txtInventarioProducto;
-    private javax.swing.JTextField txtNIT;
+    private javax.swing.JFormattedTextField txtNIT;
     private javax.swing.JLabel txtNitActualProveedor;
     private javax.swing.JTextField txtNomProd;
     private javax.swing.JLabel txtNombreActualProveedor1;
@@ -2855,14 +2982,14 @@ public final class JFRPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField txtNombreProductos1;
     private javax.swing.JTextField txtNombreProveedor;
     private javax.swing.JTextField txtNuevoDireccionProveedor;
-    private javax.swing.JTextField txtNuevoNIT;
+    private javax.swing.JFormattedTextField txtNuevoNit;
     private javax.swing.JTextField txtNuevoNombreProveedor;
-    private javax.swing.JTextField txtNuevoTelefonoProveedor;
+    private javax.swing.JFormattedTextField txtNuevoTelefono;
     private javax.swing.JTextField txtPrecioProductos2;
     private javax.swing.JTextField txtProductosBuscar;
     private javax.swing.JTextField txtProductosBuscar1;
     private javax.swing.JLabel txtTelefonoActualProveedor;
-    private javax.swing.JTextField txtTelefonoProveedor;
+    private javax.swing.JFormattedTextField txtTelefonoProveedor;
     private javax.swing.JTextField txtTotal;
     private javax.swing.JTextField txtTotal2;
     private javax.swing.JTextField txtTotalventa;
