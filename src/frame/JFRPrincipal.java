@@ -1620,10 +1620,9 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         });
         jpnRegistroCompra.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 540, 110, 30));
 
-        txtIdCompra.setText("001");
+        txtIdCompra.setEditable(false);
         jpnRegistroCompra.add(txtIdCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 60, 30));
 
-        cmbProveedor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pollo Indio", "SONY", "Niña Mirna" }));
         jpnRegistroCompra.add(cmbProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 70, 180, 30));
 
         tblCompra =new javax.swing.JTable(){
@@ -1648,6 +1647,8 @@ public final class JFRPrincipal extends javax.swing.JFrame {
 
         txtTotal.setText("$");
         jpnRegistroCompra.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 500, 100, 40));
+
+        txtFecha.setEditable(false);
         jpnRegistroCompra.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 160, 30));
 
         jPanel39.setBackground(new java.awt.Color(0, 0, 0));
@@ -1686,11 +1687,19 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         lblCodBarraProd.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblCodBarraProd.setText("Cod Barra:");
         jpnRegistroCompra.add(lblCodBarraProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 80, 30));
+
+        txtCodBarraProd.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodBarraProdKeyTyped(evt);
+            }
+        });
         jpnRegistroCompra.add(txtCodBarraProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 120, 30));
 
         lblNomProd.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblNomProd.setText("Producto:");
         jpnRegistroCompra.add(lblNomProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 70, 30));
+
+        txtNomProd.setEditable(false);
         jpnRegistroCompra.add(txtNomProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 190, 140, 30));
 
         lblCantidad.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -2959,6 +2968,28 @@ public final class JFRPrincipal extends javax.swing.JFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void txtCodBarraProdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodBarraProdKeyTyped
+        // TODO add your handling code here:
+        
+         char c = evt.getKeyChar();
+         if (c == (char) KeyEvent.VK_ENTER) {
+             String codBarra=txtCodBarraProd.getText();
+             String producto;
+             
+             try {
+                 ControladorProducto.Obtener(codBarra);
+                 producto= ControladorProducto.Obtener(codBarra).getNombre();
+                 txtNomProd.setText(producto);
+             } catch (ErrorTienda ex) {
+                 Logger.getLogger(JFRPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+             }
+             
+    
+    }
+        
+        
+    }//GEN-LAST:event_txtCodBarraProdKeyTyped
 
                                                                                                                                                                                                                               
     /**

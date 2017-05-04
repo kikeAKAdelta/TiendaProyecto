@@ -88,13 +88,14 @@ public class ControladorCompra {
 //        cantidadactual*precioactual(25*0.30) + cantidadnuevacomprada*precionuevo(10*0.36)/CantidadTotal = precio ponderado del producto.
     }
     public static int ObtenerIdCompra() throws ErrorTienda {
+       cn =new Conexion();
         int IdCompra=0;
         try {
         ResultSet rsIdCompra = null;
-        rsIdCompra = cn.st.executeQuery("SELECT MAX(IdCompra) FROM detallecompra");
+        rsIdCompra = cn.st.executeQuery("SELECT COUNT(*) FROM compra");
         
         while(rsIdCompra.next()){
-            IdCompra = rsIdCompra.getInt("IdCompra");
+            IdCompra = rsIdCompra.getInt("count(*)");
         }
         }catch (Exception ex){
             throw new ErrorTienda("Class ControladorCompra/ObtenerIdCompra", ex.getMessage());
