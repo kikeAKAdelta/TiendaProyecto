@@ -47,7 +47,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         initComponents();
         tHeadVentas = tblProductosVender.getTableHeader();
         tHeadCompras=tblCompras.getTableHeader();
-        tHeadProductos=jtblProductos.getTableHeader();
+        tHeadProductos=tblProductos.getTableHeader();
         tHeadCompra=tblCompra.getTableHeader();
         tHeadProveedores=tblProveedores.getTableHeader();
         tHeadDetalleCompra=tblDetalleCompra.getTableHeader();
@@ -486,7 +486,7 @@ tblCompra.setModel(tablaModel);
         jpnModificarProducto = new javax.swing.JPanel();
         btnGuardarModificarProveedor1 = new javax.swing.JButton();
         btnAtrasModificarProveedor1 = new javax.swing.JButton();
-        txtNuevoDireccionProveedor1 = new javax.swing.JTextField();
+        txtNuevoInventarioProducto = new javax.swing.JTextField();
         txtNuevoCodBarraProducto = new javax.swing.JTextField();
         jPanel49 = new javax.swing.JPanel();
         jSeparator44 = new javax.swing.JSeparator();
@@ -501,6 +501,14 @@ tblCompra.setModel(tablaModel);
         jSeparator48 = new javax.swing.JSeparator();
         txtNuevoNombreProducto = new javax.swing.JTextField();
         txtNuevoCostoProducto = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        lblCostoActualizarProducto = new javax.swing.JLabel();
+        lblInventarioActualizarProducto = new javax.swing.JLabel();
+        jLabel41 = new javax.swing.JLabel();
+        jLabel46 = new javax.swing.JLabel();
+        lblNombreActualizarProducto = new javax.swing.JLabel();
+        jLabel47 = new javax.swing.JLabel();
+        lblCodBrraActualizarProducto = new javax.swing.JLabel();
         jpnCompras = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         tblCompras = new javax.swing.JTable();
@@ -543,7 +551,7 @@ tblCompra.setModel(tablaModel);
         txtCostoProd = new javax.swing.JTextField();
         jpnProductos = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jtblProductos = new javax.swing.JTable();
+        tblProductos = new javax.swing.JTable();
         btnNuevoProducto = new javax.swing.JButton();
         btnBuscarProducto = new javax.swing.JButton();
         btnModificarProducto = new javax.swing.JButton();
@@ -1460,14 +1468,19 @@ tblCompra.setModel(tablaModel);
                 btnAtrasModificarProveedor1MouseExited(evt);
             }
         });
-        jpnModificarProducto.add(btnAtrasModificarProveedor1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 500, 110, 30));
-
-        txtNuevoDireccionProveedor1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNuevoDireccionProveedor1KeyTyped(evt);
+        btnAtrasModificarProveedor1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasModificarProveedor1ActionPerformed(evt);
             }
         });
-        jpnModificarProducto.add(txtNuevoDireccionProveedor1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 310, 410, 30));
+        jpnModificarProducto.add(btnAtrasModificarProveedor1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 500, 110, 30));
+
+        txtNuevoInventarioProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNuevoInventarioProductoKeyTyped(evt);
+            }
+        });
+        jpnModificarProducto.add(txtNuevoInventarioProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 310, 410, 30));
 
         txtNuevoCodBarraProducto.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtNuevoCodBarraProducto.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1475,7 +1488,7 @@ tblCompra.setModel(tablaModel);
                 txtNuevoCodBarraProductoKeyTyped(evt);
             }
         });
-        jpnModificarProducto.add(txtNuevoCodBarraProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 410, 30));
+        jpnModificarProducto.add(txtNuevoCodBarraProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 130, 410, 30));
 
         jPanel49.setBackground(new java.awt.Color(0, 0, 0));
         jPanel49.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1492,7 +1505,7 @@ tblCompra.setModel(tablaModel);
 
         jLabel42.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel42.setText("Codigo de barra:");
-        jpnModificarProducto.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, -1, 20));
+        jpnModificarProducto.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, -1, 20));
 
         jLabel43.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel43.setText("Nombre:");
@@ -1506,11 +1519,63 @@ tblCompra.setModel(tablaModel);
         jLabel45.setText("Costo:");
         jpnModificarProducto.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 400, -1, 20));
         jpnModificarProducto.add(jSeparator45, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 420, 30, 10));
-        jpnModificarProducto.add(jSeparator46, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 90, 10));
+        jpnModificarProducto.add(jSeparator46, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 90, 10));
         jpnModificarProducto.add(jSeparator47, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 50, 10));
         jpnModificarProducto.add(jSeparator48, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 330, 60, 10));
+
+        txtNuevoNombreProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNuevoNombreProductoKeyTyped(evt);
+            }
+        });
         jpnModificarProducto.add(txtNuevoNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 410, 30));
+
+        txtNuevoCostoProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNuevoCostoProductoKeyTyped(evt);
+            }
+        });
         jpnModificarProducto.add(txtNuevoCostoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 400, 410, 30));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(102, 0, 0));
+        jLabel6.setText("Actual:");
+        jpnModificarProducto.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 440, -1, -1));
+
+        lblCostoActualizarProducto.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        lblCostoActualizarProducto.setForeground(new java.awt.Color(102, 0, 0));
+        lblCostoActualizarProducto.setText("$1.50");
+        jpnModificarProducto.add(lblCostoActualizarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 437, 370, 20));
+
+        lblInventarioActualizarProducto.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        lblInventarioActualizarProducto.setForeground(new java.awt.Color(102, 0, 0));
+        lblInventarioActualizarProducto.setText("25");
+        jpnModificarProducto.add(lblInventarioActualizarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 347, 370, 20));
+
+        jLabel41.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel41.setForeground(new java.awt.Color(102, 0, 0));
+        jLabel41.setText("Actual:");
+        jpnModificarProducto.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 350, -1, -1));
+
+        jLabel46.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel46.setForeground(new java.awt.Color(102, 0, 0));
+        jLabel46.setText("Actual:");
+        jpnModificarProducto.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, -1, -1));
+
+        lblNombreActualizarProducto.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        lblNombreActualizarProducto.setForeground(new java.awt.Color(102, 0, 0));
+        lblNombreActualizarProducto.setText("Pollo Indio");
+        jpnModificarProducto.add(lblNombreActualizarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 257, 370, 20));
+
+        jLabel47.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel47.setForeground(new java.awt.Color(102, 0, 0));
+        jLabel47.setText("Actual:");
+        jpnModificarProducto.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, -1, -1));
+
+        lblCodBrraActualizarProducto.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        lblCodBrraActualizarProducto.setForeground(new java.awt.Color(102, 0, 0));
+        lblCodBrraActualizarProducto.setText("1221545564");
+        jpnModificarProducto.add(lblCodBrraActualizarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 167, 370, 20));
 
         getContentPane().add(jpnModificarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 730, 600));
 
@@ -1738,7 +1803,7 @@ tblCompra.setModel(tablaModel);
 
         jpnProductos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jtblProductos.setModel(new javax.swing.table.DefaultTableModel(
+        tblProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -1754,25 +1819,25 @@ tblCompra.setModel(tablaModel);
                 return canEdit [columnIndex];
             }
         });
-        jtblProductos.getTableHeader().setReorderingAllowed(false);
-        jtblProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblProductos.getTableHeader().setReorderingAllowed(false);
+        tblProductos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtblProductosMouseClicked(evt);
+                tblProductosMouseClicked(evt);
             }
         });
-        jtblProductos.addInputMethodListener(new java.awt.event.InputMethodListener() {
+        tblProductos.addInputMethodListener(new java.awt.event.InputMethodListener() {
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                jtblProductosInputMethodTextChanged(evt);
+                tblProductosInputMethodTextChanged(evt);
             }
         });
-        jtblProductos.addKeyListener(new java.awt.event.KeyAdapter() {
+        tblProductos.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jtblProductosKeyTyped(evt);
+                tblProductosKeyTyped(evt);
             }
         });
-        jScrollPane3.setViewportView(jtblProductos);
+        jScrollPane3.setViewportView(tblProductos);
 
         jpnProductos.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 650, 260));
 
@@ -2568,20 +2633,20 @@ tblCompra.setModel(tablaModel);
     }//GEN-LAST:event_btnAgregarNuevoProductoActionPerformed
 
     private void btnEliminarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProductoActionPerformed
-        int fila=jtblProductos.getSelectedRow(); 
-        if (jtblProductos.isRowSelected(fila)) {
+        int fila=tblProductos.getSelectedRow(); 
+        if (tblProductos.isRowSelected(fila)) {
             
             if (fila>=0) {
                 
             
             Producto eliminar=new Producto();
-            DefaultTableModel modeloProductos=(DefaultTableModel) jtblProductos.getModel();
+            DefaultTableModel modeloProductos=(DefaultTableModel) tblProductos.getModel();
             
 
-            String codBarra=jtblProductos.getValueAt(fila, 0).toString();
-            String nombre=jtblProductos.getValueAt(fila, 1).toString();
-            int inventario=Integer.parseInt(jtblProductos.getValueAt(fila, 2).toString());
-            double costo=Double.parseDouble(jtblProductos.getValueAt(fila, 3).toString());
+            String codBarra=tblProductos.getValueAt(fila, 0).toString();
+            String nombre=tblProductos.getValueAt(fila, 1).toString();
+            int inventario=Integer.parseInt(tblProductos.getValueAt(fila, 2).toString());
+            double costo=Double.parseDouble(tblProductos.getValueAt(fila, 3).toString());
 
             eliminar.setCodBarra(codBarra);
             eliminar.setNombre(nombre);
@@ -2627,11 +2692,11 @@ tblCompra.setModel(tablaModel);
         if (codBarra.equals("")) {
             JOptionPane.showMessageDialog(null, "No ha introducido el codigo de barra o el nombre");
         }else{
-        DefaultTableModel modeloProductos=(DefaultTableModel) jtblProductos.getModel();
+        DefaultTableModel modeloProductos=(DefaultTableModel) tblProductos.getModel();
         
         
-            System.out.println(jtblProductos.getRowCount());
-            for (int i = 0; i < jtblProductos.getRowCount(); i++) {
+            System.out.println(tblProductos.getRowCount());
+            for (int i = 0; i < tblProductos.getRowCount(); i++) {
                 modeloProductos.removeRow(i);
             }
         
@@ -2666,53 +2731,31 @@ tblCompra.setModel(tablaModel);
         }
     }//GEN-LAST:event_btnBuscarProductoActionPerformed
 
-    private void jtblProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblProductosMouseClicked
-        int fila=jtblProductos.getSelectedRow();
-        if (jtblProductos.isRowSelected(fila)) {
+    private void tblProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductosMouseClicked
+        int fila=tblProductos.getSelectedRow();
+        if (tblProductos.isRowSelected(fila)) {
             disableBotonesProducto(true);
         }
         
-    }//GEN-LAST:event_jtblProductosMouseClicked
+    }//GEN-LAST:event_tblProductosMouseClicked
 
     private void btnModificarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarProductoActionPerformed
-         int fila=jtblProductos.getSelectedRow(); 
-        if (jtblProductos.isRowSelected(fila)) {
-            
-            if (fila>=0) {
-            jpnProductos.setVisible(false);
+        
+        if(tblProductos.getSelectedRow()!=-1){
+            int seleccion; 
+            seleccion = tblProductos.getSelectedRow();
+            lblCodBrraActualizarProducto.setText(tblProductos.getValueAt(seleccion, 0).toString());
+            lblNombreActualizarProducto.setText((tblProductos.getValueAt(seleccion, 1).toString()));
+            lblInventarioActualizarProducto.setText((tblProductos.getValueAt(seleccion, 2).toString()));
+            lblCostoActualizarProducto.setText((tblProductos.getValueAt(seleccion, 3).toString()));
             jpnModificarProducto.setVisible(true);
-                
-            
-            Producto modificar=new Producto();
-            DefaultTableModel modeloProductos=(DefaultTableModel) jtblProductos.getModel();
-            
-
-            String codBarra=jtblProductos.getValueAt(fila, 0).toString();
-            String nombre=jtblProductos.getValueAt(fila, 1).toString().toUpperCase();
-            int inventario=Integer.parseInt(jtblProductos.getValueAt(fila, 2).toString());
-            double costo=Double.parseDouble(jtblProductos.getValueAt(fila, 3).toString());
-            
-            
-
-//            modificar.setCodBarra(codBarra);
-//            modificar.setNombre(nombre);
-//            modificar.setInventario(inventario);
-//            modificar.setCosto(costo);
-
-
-            try {
-                ControladorProducto.Modificar(modificar);
-                JOptionPane.showMessageDialog(null, "El registro fue modificado con exito");
-            } catch (ErrorTienda ex) {
-                
-            }
-            }
+            jpnProductos.setVisible(false);
         }else{
-            JOptionPane.showMessageDialog(null, "No ha seleccionado una fila o la tabla esta vacia");
+            JOptionPane.showMessageDialog(rootPane, "Seleccione un dato de la tabla");
         }
     }//GEN-LAST:event_btnModificarProductoActionPerformed
 
-    private void jtblProductosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtblProductosKeyTyped
+    private void tblProductosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblProductosKeyTyped
         char mayu=evt.getKeyChar();      
          int c=(int) evt.getKeyChar();
          
@@ -2728,11 +2771,11 @@ tblCompra.setModel(tablaModel);
             evt.consume();
          }
         
-    }//GEN-LAST:event_jtblProductosKeyTyped
+    }//GEN-LAST:event_tblProductosKeyTyped
 
 
-    private void jtblProductosInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jtblProductosInputMethodTextChanged
-    }//GEN-LAST:event_jtblProductosInputMethodTextChanged
+    private void tblProductosInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_tblProductosInputMethodTextChanged
+    }//GEN-LAST:event_tblProductosInputMethodTextChanged
 
     private void txtCodigoBarraVenderKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoBarraVenderKeyPressed
         char c=evt.getKeyChar();      
@@ -2959,7 +3002,28 @@ tblCompra.setModel(tablaModel);
     }//GEN-LAST:event_btnGuardarModificarProveedor1MouseExited
 
     private void btnGuardarModificarProveedor1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarModificarProveedor1ActionPerformed
-        // TODO add your handling code here:
+        if (txtNuevoCodBarraProducto.getText().equals("")||txtNuevoNombreProducto.getText().equals("")||txtNuevoInventarioProducto.getText().equals("")||
+                txtNuevoCostoProducto.getText().equals("")) {
+            
+            JOptionPane.showMessageDialog(rootPane, "Debe de rellenar todos los campos");
+           
+        }else{
+            Producto producto = new Producto();
+            producto.setCodBarra(txtNuevoCodBarraProducto.getText());
+            producto.setNombre(txtNuevoNombreProducto.getText());
+            producto.setInventario(Integer.parseInt(txtNuevoInventarioProducto.getText()));
+            producto.setCosto(Double.parseDouble(txtNuevoCostoProducto.getText()));
+            try {
+                ControladorProducto.Modificar(producto);
+                JOptionPane.showMessageDialog(rootPane, "Modificado con exito");
+            } catch (ErrorTienda ex) {
+                JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+            }
+            tblProductos.removeAll();
+            jpnProductos.setVisible(true);
+            jpnModificarProducto.setVisible(false);
+            
+        }
     }//GEN-LAST:event_btnGuardarModificarProveedor1ActionPerformed
 
     private void btnAtrasModificarProveedor1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasModificarProveedor1MouseClicked
@@ -2973,14 +3037,6 @@ tblCompra.setModel(tablaModel);
     private void btnAtrasModificarProveedor1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasModificarProveedor1MouseExited
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAtrasModificarProveedor1MouseExited
-
-    private void txtNuevoDireccionProveedor1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNuevoDireccionProveedor1KeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNuevoDireccionProveedor1KeyTyped
-
-    private void txtNuevoCodBarraProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNuevoCodBarraProductoKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNuevoCodBarraProductoKeyTyped
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
@@ -3028,6 +3084,79 @@ tblCompra.setModel(tablaModel);
         
         
     }//GEN-LAST:event_txtCostoProdKeyTyped
+
+    private void txtNuevoCodBarraProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNuevoCodBarraProductoKeyTyped
+        char c = evt.getKeyChar();
+        if (c < '0' || c > '9') {
+            
+                if (c != (char) KeyEvent.VK_BEGIN) {
+                    if (c != (char) KeyEvent.VK_BACK_SPACE) {
+                        if (c != (char) KeyEvent.VK_DELETE) {
+                            if (c != (char) KeyEvent.VK_ENTER) {
+                            evt.consume();
+                            JOptionPane.showMessageDialog(null, "Solo Numeros", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                }
+                }
+        }
+    }//GEN-LAST:event_txtNuevoCodBarraProductoKeyTyped
+
+    private void txtNuevoInventarioProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNuevoInventarioProductoKeyTyped
+         char c = evt.getKeyChar();
+        if (c < '0' || c > '9') {
+            
+                if (c != (char) KeyEvent.VK_BEGIN) {
+                    if (c != (char) KeyEvent.VK_BACK_SPACE) {
+                        if (c != (char) KeyEvent.VK_DELETE) {
+                            if (c != (char) KeyEvent.VK_ENTER) {
+                            evt.consume();
+                            JOptionPane.showMessageDialog(null, "Solo Numeros", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                }
+                }
+        }
+    }//GEN-LAST:event_txtNuevoInventarioProductoKeyTyped
+
+    private void txtNuevoNombreProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNuevoNombreProductoKeyTyped
+        char mayu=evt.getKeyChar();        
+         if (Character.isLowerCase(mayu)) {
+                 String cadena=(""+mayu).toUpperCase();
+                 mayu=cadena.charAt(0);
+                 evt.setKeyChar(mayu);
+        }
+        else{
+
+         }
+    }//GEN-LAST:event_txtNuevoNombreProductoKeyTyped
+
+    private void txtNuevoCostoProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNuevoCostoProductoKeyTyped
+        int c=(int) evt.getKeyChar();
+        
+        if ((c >=48 && c<=57)  || (c==46)) {
+            if (c==46) {
+                String cadena=txtCostoProductos.getText();
+            int tamanio=cadena.length();
+            for (int i = 0; i <= tamanio; i++) {
+                if (cadena.contains(".")) {
+                    evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+                    getToolkit().beep();
+                    evt.consume();
+                }
+            }
+            }
+        }else{
+            evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNuevoCostoProductoKeyTyped
+
+    private void btnAtrasModificarProveedor1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasModificarProveedor1ActionPerformed
+        jpnModificarProducto.setVisible(false);
+        jpnProductos.setVisible(true);
+    }//GEN-LAST:event_btnAtrasModificarProveedor1ActionPerformed
 
                                                                                                                                                                                                                               
     /**
@@ -3132,11 +3261,15 @@ tblCompra.setModel(tablaModel);
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -3222,7 +3355,6 @@ tblCompra.setModel(tablaModel);
     private javax.swing.JPanel jpnSubMenu;
     private javax.swing.JPanel jpnTercero;
     private javax.swing.JPanel jpnVentas;
-    private javax.swing.JTable jtblProductos;
     private javax.swing.JLabel lbl11;
     private javax.swing.JLabel lbl12;
     private javax.swing.JLabel lbl13;
@@ -3251,9 +3383,12 @@ tblCompra.setModel(tablaModel);
     private javax.swing.JLabel lblBotonCerrar;
     private javax.swing.JLabel lblCantidad;
     private javax.swing.JLabel lblCodBarraProd;
+    private javax.swing.JLabel lblCodBrraActualizarProducto;
+    private javax.swing.JLabel lblCostoActualizarProducto;
     private javax.swing.JLabel lblCostoProd;
     private javax.swing.JLabel lblFecha;
     private javax.swing.JLabel lblIdCompra;
+    private javax.swing.JLabel lblInventarioActualizarProducto;
     private javax.swing.JLabel lblListadoCompras;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblMenu;
@@ -3263,6 +3398,7 @@ tblCompra.setModel(tablaModel);
     private javax.swing.JLabel lblMitad4;
     private javax.swing.JLabel lblMitad5;
     private javax.swing.JLabel lblNomProd;
+    private javax.swing.JLabel lblNombreActualizarProducto;
     private javax.swing.JLabel lblProveedor;
     private javax.swing.JLabel lblProveedores3;
     private javax.swing.JLabel lblProveedores4;
@@ -3272,6 +3408,7 @@ tblCompra.setModel(tablaModel);
     private javax.swing.JTable tblCompra;
     private javax.swing.JTable tblCompras;
     private javax.swing.JTable tblDetalleCompra;
+    private javax.swing.JTable tblProductos;
     private javax.swing.JTable tblProductosVender;
     private javax.swing.JTable tblProveedores;
     private javax.swing.JTextField txtCantidad;
@@ -3302,7 +3439,7 @@ tblCompra.setModel(tablaModel);
     private javax.swing.JTextField txtNuevoCodBarraProducto;
     private javax.swing.JTextField txtNuevoCostoProducto;
     private javax.swing.JTextField txtNuevoDireccionProveedor;
-    private javax.swing.JTextField txtNuevoDireccionProveedor1;
+    private javax.swing.JTextField txtNuevoInventarioProducto;
     private javax.swing.JFormattedTextField txtNuevoNit;
     private javax.swing.JTextField txtNuevoNombreProducto;
     private javax.swing.JTextField txtNuevoNombreProveedor;
