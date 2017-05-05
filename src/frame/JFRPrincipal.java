@@ -1,7 +1,6 @@
 
 package frame;
 
-import Clases.Conexion;
 import Clases.ControladorCompra;
 import Clases.ControladorProducto;
 import Clases.ControladorVenta;
@@ -21,7 +20,6 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
-import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -1110,7 +1108,7 @@ tblCompra.setModel(tablaModel);
         jpnAgregarProv.add(txtTelefonoProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, 230, 30));
 
         try {
-            txtNIT.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-######-###-#")));
+            txtNIT.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##############")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -1256,7 +1254,7 @@ tblCompra.setModel(tablaModel);
         jpnModificarProveedor.add(txtNuevoTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, 230, 30));
 
         try {
-            txtNuevoNit.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-######-###-#")));
+            txtNuevoNit.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##############")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -1763,10 +1761,10 @@ tblCompra.setModel(tablaModel);
             }
         });
         jtblProductos.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 jtblProductosInputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jtblProductos.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -2768,9 +2766,10 @@ tblCompra.setModel(tablaModel);
        
               try {
               ControladorProveedor.Agregar(agregado);
-            
               JOptionPane.showMessageDialog(null, "El Proveedor fue agregado correctamente");
               limpiandoTxtProveedor();
+              tblProveedores.removeAll();
+              actualizarTablaProveedor();
               } catch (ErrorTienda e) {      
            }
         }
@@ -2841,6 +2840,7 @@ tblCompra.setModel(tablaModel);
     }//GEN-LAST:event_txtNuevoDireccionProveedorKeyTyped
 
     private void btnGuardarModificarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarModificarProveedorActionPerformed
+        if (txtNuevoDireccionProveedor.equals("") || txtNuevoNombreProveedor.equals("") || txtNuevoNit.getText().equals("") || txtNuevoTelefono.getText().equals("")) {
         Proveedor proveedor = new Proveedor();
         proveedor.setIdProveedor(Integer.parseInt(txtIDProveedor1.getText()));
         proveedor.setNombre(txtNuevoNombreProveedor.getText());
@@ -2858,7 +2858,9 @@ tblCompra.setModel(tablaModel);
         actualizarTablaProveedor();
         jpnProveedores.setVisible(true);
         jpnModificarProveedor.setVisible(false);
-        
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Debe de rellenar todos los campos");
+        }
     }//GEN-LAST:event_btnGuardarModificarProveedorActionPerformed
 
     private void txtProductosBuscar1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProductosBuscar1KeyTyped
