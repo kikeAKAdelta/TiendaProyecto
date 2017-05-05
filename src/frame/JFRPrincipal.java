@@ -2884,25 +2884,26 @@ tblCompra.setModel(tablaModel);
 
     private void btnGuardarModificarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarModificarProveedorActionPerformed
         if (txtNuevoDireccionProveedor.equals("") || txtNuevoNombreProveedor.equals("") || txtNuevoNit.getText().equals("") || txtNuevoTelefono.getText().equals("")) {
-        Proveedor proveedor = new Proveedor();
-        proveedor.setIdProveedor(Integer.parseInt(txtIDProveedor1.getText()));
-        proveedor.setNombre(txtNuevoNombreProveedor.getText());
-        proveedor.setTelefono(txtNuevoTelefono.getText());
-        proveedor.setDireccion(txtNuevoDireccionProveedor.getText());
-        proveedor.setNIT(txtNuevoNit.getText());
-        try{
-            ControladorProveedor.Modificar(proveedor);
-            JOptionPane.showMessageDialog(rootPane, "Datos modificados");
-        } catch(ErrorTienda ex){
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-            
-        }
-        tblProveedores.removeAll();
-        actualizarTablaProveedor();
-        jpnProveedores.setVisible(true);
-        jpnModificarProveedor.setVisible(false);
-        }else{
             JOptionPane.showMessageDialog(rootPane, "Debe de rellenar todos los campos");
+        }else{
+            
+            Proveedor proveedor = new Proveedor();
+            proveedor.setIdProveedor(Integer.parseInt(txtIDProveedor1.getText()));
+            proveedor.setNombre(txtNuevoNombreProveedor.getText());
+            proveedor.setTelefono(txtNuevoTelefono.getText());
+            proveedor.setDireccion(txtNuevoDireccionProveedor.getText());
+            proveedor.setNIT(txtNuevoNit.getText());
+            try{
+                ControladorProveedor.Modificar(proveedor);
+                JOptionPane.showMessageDialog(rootPane, "Datos modificados");
+            } catch(ErrorTienda ex){
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+
+            }
+            tblProveedores.removeAll();
+            actualizarTablaProveedor();
+            jpnProveedores.setVisible(true);
+            jpnModificarProveedor.setVisible(false);
         }
     }//GEN-LAST:event_btnGuardarModificarProveedorActionPerformed
 
