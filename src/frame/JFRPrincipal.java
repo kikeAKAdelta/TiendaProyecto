@@ -315,8 +315,8 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         
             try {
             listaProveedor=ControladorProveedor.Obtener();
-            String[] proveedores = new String []{"IdProveedor","Nombre","Telefono","Direccion","NIT"};
-            modeloProveedores.setColumnIdentifiers(proveedores);
+            String[] nombreProveedores = new String []{"IdProveedor","Nombre","Telefono","Direccion","NIT"};
+            modeloProveedores.setColumnIdentifiers(nombreProveedores);
             Iterator<Proveedor> prov=listaProveedor.iterator();
                 while(prov.hasNext()){
                     fila[0]= prov.next();
@@ -2880,6 +2880,7 @@ tblCompra.setModel(tablaModel);
          }
         txtProductosBuscar1.addKeyListener(new KeyAdapter(){
             
+            @Override
             public void keyReleased(final KeyEvent e){
                 String cadena = (txtProductosBuscar1.getText());
                 txtProductosBuscar1.setText(cadena);
@@ -3058,6 +3059,7 @@ tblCompra.setModel(tablaModel);
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new JFRPrincipal().setVisible(true);
             }
