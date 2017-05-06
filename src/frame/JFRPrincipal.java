@@ -460,14 +460,6 @@ public void eliminar(){
         jSeparator41 = new javax.swing.JSeparator();
         jSeparator42 = new javax.swing.JSeparator();
         jSeparator43 = new javax.swing.JSeparator();
-        jLabel5 = new javax.swing.JLabel();
-        txtNitActualProveedor = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
-        txtNombreActualProveedor1 = new javax.swing.JLabel();
-        jLabel38 = new javax.swing.JLabel();
-        jLabel39 = new javax.swing.JLabel();
-        txtTelefonoActualProveedor = new javax.swing.JLabel();
-        txtDireccionActualProveedor = new javax.swing.JLabel();
         txtNuevoTelefono = new javax.swing.JFormattedTextField();
         txtNuevoNit = new javax.swing.JFormattedTextField();
         jpnVentas = new javax.swing.JPanel();
@@ -1171,6 +1163,7 @@ public void eliminar(){
         });
         jpnModificarProveedor.add(btnAtrasModificarProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 500, 110, 30));
 
+        txtNuevoDireccionProveedor.setForeground(new java.awt.Color(102, 0, 0));
         txtNuevoDireccionProveedor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNuevoDireccionProveedorKeyTyped(evt);
@@ -1178,6 +1171,7 @@ public void eliminar(){
         });
         jpnModificarProveedor.add(txtNuevoDireccionProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 310, 410, 30));
 
+        txtNuevoNombreProveedor.setForeground(new java.awt.Color(102, 0, 0));
         txtNuevoNombreProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtNuevoNombreProveedor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -1227,46 +1221,7 @@ public void eliminar(){
         jpnModificarProveedor.add(jSeparator42, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 60, 10));
         jpnModificarProveedor.add(jSeparator43, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 330, 60, 10));
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(102, 0, 0));
-        jLabel5.setText("Actual:");
-        jpnModificarProveedor.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 440, -1, -1));
-
-        txtNitActualProveedor.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
-        txtNitActualProveedor.setForeground(new java.awt.Color(102, 0, 0));
-        txtNitActualProveedor.setText("0210-300496-102-2");
-        jpnModificarProveedor.add(txtNitActualProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 437, 370, 20));
-
-        jLabel32.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel32.setForeground(new java.awt.Color(102, 0, 0));
-        jLabel32.setText("Actual:");
-        jpnModificarProveedor.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, -1, -1));
-
-        txtNombreActualProveedor1.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
-        txtNombreActualProveedor1.setForeground(new java.awt.Color(102, 0, 0));
-        txtNombreActualProveedor1.setText("Juanito Martinez");
-        jpnModificarProveedor.add(txtNombreActualProveedor1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 167, 370, 20));
-
-        jLabel38.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel38.setForeground(new java.awt.Color(102, 0, 0));
-        jLabel38.setText("Actual:");
-        jpnModificarProveedor.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, -1, -1));
-
-        jLabel39.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel39.setForeground(new java.awt.Color(102, 0, 0));
-        jLabel39.setText("Actual:");
-        jpnModificarProveedor.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 350, -1, -1));
-
-        txtTelefonoActualProveedor.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
-        txtTelefonoActualProveedor.setForeground(new java.awt.Color(102, 0, 0));
-        txtTelefonoActualProveedor.setText("755555555");
-        jpnModificarProveedor.add(txtTelefonoActualProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 257, 370, 20));
-
-        txtDireccionActualProveedor.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
-        txtDireccionActualProveedor.setForeground(new java.awt.Color(102, 0, 0));
-        txtDireccionActualProveedor.setText("Urb. Altos del Palmar Block D. Pasaje 8, Casa 17");
-        jpnModificarProveedor.add(txtDireccionActualProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 347, 370, 20));
-
+        txtNuevoTelefono.setForeground(new java.awt.Color(102, 0, 0));
         try {
             txtNuevoTelefono.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-####")));
         } catch (java.text.ParseException ex) {
@@ -1274,6 +1229,7 @@ public void eliminar(){
         }
         jpnModificarProveedor.add(txtNuevoTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, 230, 30));
 
+        txtNuevoNit.setForeground(new java.awt.Color(102, 0, 0));
         try {
             txtNuevoNit.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##############")));
         } catch (java.text.ParseException ex) {
@@ -2531,10 +2487,10 @@ public void eliminar(){
             jpnProveedores.setVisible(false);
             jpnModificarProveedor.setVisible(true);
             txtIDProveedor1.setText(tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 0).toString());
-            txtNombreActualProveedor1.setText(tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 1).toString());
-            txtTelefonoActualProveedor.setText(tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 2).toString());
-            txtDireccionActualProveedor.setText(tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 3).toString());
-            txtNitActualProveedor.setText(tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 4).toString());
+            txtNuevoNombreProveedor.setText(tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 1).toString());
+            txtNuevoTelefono.setText(tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 2).toString());
+            txtNuevoDireccionProveedor.setText(tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 3).toString());
+            txtNuevoNit.setText(tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 4).toString());
             
         } else {
             JOptionPane.showMessageDialog(rootPane, "Primero debe de seleccionar un proveedor");
@@ -3311,14 +3267,11 @@ public void eliminar(){
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
@@ -3328,7 +3281,6 @@ public void eliminar(){
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -3480,7 +3432,6 @@ public void eliminar(){
     private javax.swing.JTextField txtCodigoBarraVender;
     private javax.swing.JTextField txtCostoProd;
     private javax.swing.JTextField txtCostoProductos;
-    private javax.swing.JLabel txtDireccionActualProveedor;
     private javax.swing.JTextField txtDireccionProveedor;
     private javax.swing.JTextField txtFecha;
     private javax.swing.JTextField txtIDProveedor;
@@ -3489,9 +3440,7 @@ public void eliminar(){
     private javax.swing.JTextField txtIdVenta;
     private javax.swing.JTextField txtInventarioProducto;
     private javax.swing.JFormattedTextField txtNIT;
-    private javax.swing.JLabel txtNitActualProveedor;
     private javax.swing.JTextField txtNomProd;
-    private javax.swing.JLabel txtNombreActualProveedor1;
     private javax.swing.JTextField txtNombreProductoVender;
     private javax.swing.JTextField txtNombreProductos;
     private javax.swing.JTextField txtNombreProductos1;
@@ -3507,7 +3456,6 @@ public void eliminar(){
     private javax.swing.JTextField txtPrecioProductos2;
     private javax.swing.JTextField txtProductosBuscar;
     private javax.swing.JTextField txtProductosBuscar1;
-    private javax.swing.JLabel txtTelefonoActualProveedor;
     private javax.swing.JFormattedTextField txtTelefonoProveedor;
     private javax.swing.JTextField txtTotal;
     private javax.swing.JTextField txtTotal2;
