@@ -2677,12 +2677,17 @@ public void eliminar(){
     private void txtProductosBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProductosBuscarKeyTyped
         char mayu=evt.getKeyChar();      
          int c=(int) evt.getKeyChar();
+        int limiteCaracteres=13;
+        
          
          if ((c >=48 && c<=57) || (c>=65 && c<=90) || (c>=97 && c<=122) || (c==32)) {
-            if (Character.isLowerCase(mayu)) {
-                 String cadena=(""+mayu).toUpperCase();
-                 mayu=cadena.charAt(0);
-                 evt.setKeyChar(mayu);
+             if (txtProductosBuscar.getText().length()==limiteCaracteres) {
+                 getToolkit().beep();
+                 evt.consume();
+             }else if (Character.isLowerCase(mayu)) {
+                     String cadena=(""+mayu).toUpperCase();
+                     mayu=cadena.charAt(0);
+                     evt.setKeyChar(mayu);
              }
         }else{
              evt.setKeyChar((char) KeyEvent.VK_CLEAR);
@@ -2701,7 +2706,6 @@ public void eliminar(){
         DefaultTableModel modeloProductos=(DefaultTableModel) tblProductos.getModel();
         
         
-            System.out.println(tblProductos.getRowCount());
             for (int i = 0; i < tblProductos.getRowCount(); i++) {
                 modeloProductos.removeRow(i);
             }
