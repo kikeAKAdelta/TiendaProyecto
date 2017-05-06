@@ -492,10 +492,10 @@ public void eliminar(){
         btnGuardarModificarProveedor1 = new javax.swing.JButton();
         btnAtrasModificarProveedor1 = new javax.swing.JButton();
         txtNuevoInventarioProducto = new javax.swing.JTextField();
-        txtNuevoCodBarraProducto = new javax.swing.JTextField();
         jPanel49 = new javax.swing.JPanel();
         jSeparator44 = new javax.swing.JSeparator();
         jLabel40 = new javax.swing.JLabel();
+        txtNuevoCodBarraProducto = new javax.swing.JTextField();
         jLabel42 = new javax.swing.JLabel();
         jLabel43 = new javax.swing.JLabel();
         jLabel44 = new javax.swing.JLabel();
@@ -506,14 +506,6 @@ public void eliminar(){
         jSeparator48 = new javax.swing.JSeparator();
         txtNuevoNombreProducto = new javax.swing.JTextField();
         txtNuevoCostoProducto = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        lblCostoActualizarProducto = new javax.swing.JLabel();
-        lblInventarioActualizarProducto = new javax.swing.JLabel();
-        jLabel41 = new javax.swing.JLabel();
-        jLabel46 = new javax.swing.JLabel();
-        lblNombreActualizarProducto = new javax.swing.JLabel();
-        jLabel47 = new javax.swing.JLabel();
-        lblCodBrraActualizarProducto = new javax.swing.JLabel();
         jpnCompras = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         tblCompras = new javax.swing.JTable();
@@ -1439,20 +1431,13 @@ public void eliminar(){
         });
         jpnModificarProducto.add(btnAtrasModificarProveedor1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 500, 110, 30));
 
+        txtNuevoInventarioProducto.setForeground(new java.awt.Color(102, 0, 0));
         txtNuevoInventarioProducto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNuevoInventarioProductoKeyTyped(evt);
             }
         });
-        jpnModificarProducto.add(txtNuevoInventarioProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 310, 410, 30));
-
-        txtNuevoCodBarraProducto.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        txtNuevoCodBarraProducto.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNuevoCodBarraProductoKeyTyped(evt);
-            }
-        });
-        jpnModificarProducto.add(txtNuevoCodBarraProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 130, 410, 30));
+        jpnModificarProducto.add(txtNuevoInventarioProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 270, 80, 30));
 
         jPanel49.setBackground(new java.awt.Color(0, 0, 0));
         jPanel49.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1465,81 +1450,54 @@ public void eliminar(){
         jLabel40.setText("Modifica un producto:");
         jPanel49.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 170, 30));
 
-        jpnModificarProducto.add(jPanel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 50));
+        txtNuevoCodBarraProducto.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtNuevoCodBarraProducto.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtNuevoCodBarraProducto.setEnabled(false);
+        txtNuevoCodBarraProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNuevoCodBarraProductoKeyTyped(evt);
+            }
+        });
+        jPanel49.add(txtNuevoCodBarraProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, 100, 30));
 
         jLabel42.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel42.setForeground(new java.awt.Color(255, 255, 255));
         jLabel42.setText("Codigo de barra:");
-        jpnModificarProducto.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, -1, 20));
+        jPanel49.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, -1, 30));
+
+        jpnModificarProducto.add(jPanel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 50));
 
         jLabel43.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel43.setText("Nombre:");
-        jpnModificarProducto.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, -1, 20));
+        jpnModificarProducto.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, -1, 20));
 
         jLabel44.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel44.setText("Inventario:");
-        jpnModificarProducto.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, -1, 20));
+        jpnModificarProducto.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, -1, 20));
 
         jLabel45.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel45.setText("Costo:");
-        jpnModificarProducto.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 400, -1, 20));
-        jpnModificarProducto.add(jSeparator45, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 420, 30, 10));
-        jpnModificarProducto.add(jSeparator46, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 90, 10));
-        jpnModificarProducto.add(jSeparator47, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 50, 10));
-        jpnModificarProducto.add(jSeparator48, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 330, 60, 10));
+        jpnModificarProducto.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 360, -1, 20));
+        jpnModificarProducto.add(jSeparator45, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 380, 40, 10));
+        jpnModificarProducto.add(jSeparator46, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, -1, 10));
+        jpnModificarProducto.add(jSeparator47, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 50, 10));
+        jpnModificarProducto.add(jSeparator48, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, 70, 10));
 
+        txtNuevoNombreProducto.setForeground(new java.awt.Color(102, 0, 0));
         txtNuevoNombreProducto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNuevoNombreProductoKeyTyped(evt);
             }
         });
-        jpnModificarProducto.add(txtNuevoNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 410, 30));
+        jpnModificarProducto.add(txtNuevoNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, 410, 30));
 
+        txtNuevoCostoProducto.setForeground(new java.awt.Color(102, 0, 0));
         txtNuevoCostoProducto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNuevoCostoProductoKeyTyped(evt);
             }
         });
-        jpnModificarProducto.add(txtNuevoCostoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 400, 410, 30));
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(102, 0, 0));
-        jLabel6.setText("Actual:");
-        jpnModificarProducto.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 440, -1, -1));
-
-        lblCostoActualizarProducto.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
-        lblCostoActualizarProducto.setForeground(new java.awt.Color(102, 0, 0));
-        lblCostoActualizarProducto.setText("$1.50");
-        jpnModificarProducto.add(lblCostoActualizarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 437, 370, 20));
-
-        lblInventarioActualizarProducto.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
-        lblInventarioActualizarProducto.setForeground(new java.awt.Color(102, 0, 0));
-        lblInventarioActualizarProducto.setText("25");
-        jpnModificarProducto.add(lblInventarioActualizarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 347, 370, 20));
-
-        jLabel41.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel41.setForeground(new java.awt.Color(102, 0, 0));
-        jLabel41.setText("Actual:");
-        jpnModificarProducto.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 350, -1, -1));
-
-        jLabel46.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel46.setForeground(new java.awt.Color(102, 0, 0));
-        jLabel46.setText("Actual:");
-        jpnModificarProducto.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, -1, -1));
-
-        lblNombreActualizarProducto.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
-        lblNombreActualizarProducto.setForeground(new java.awt.Color(102, 0, 0));
-        lblNombreActualizarProducto.setText("Pollo Indio");
-        jpnModificarProducto.add(lblNombreActualizarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 257, 370, 20));
-
-        jLabel47.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel47.setForeground(new java.awt.Color(102, 0, 0));
-        jLabel47.setText("Actual:");
-        jpnModificarProducto.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, -1, -1));
-
-        lblCodBrraActualizarProducto.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
-        lblCodBrraActualizarProducto.setForeground(new java.awt.Color(102, 0, 0));
-        lblCodBrraActualizarProducto.setText("1221545564");
-        jpnModificarProducto.add(lblCodBrraActualizarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 167, 370, 20));
+        jpnModificarProducto.add(txtNuevoCostoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 360, 90, 30));
 
         getContentPane().add(jpnModificarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 730, 600));
 
@@ -2710,10 +2668,10 @@ public void eliminar(){
         if(tblProductos.getSelectedRow()!=-1){
             int seleccion; 
             seleccion = tblProductos.getSelectedRow();
-            lblCodBrraActualizarProducto.setText(tblProductos.getValueAt(seleccion, 0).toString());
-            lblNombreActualizarProducto.setText((tblProductos.getValueAt(seleccion, 1).toString()));
-            lblInventarioActualizarProducto.setText((tblProductos.getValueAt(seleccion, 2).toString()));
-            lblCostoActualizarProducto.setText((tblProductos.getValueAt(seleccion, 3).toString()));
+            txtNuevoCodBarraProducto.setText(tblProductos.getValueAt(seleccion, 0).toString());
+            txtNuevoNombreProducto.setText((tblProductos.getValueAt(seleccion, 1).toString()));
+            txtNuevoInventarioProducto.setText((tblProductos.getValueAt(seleccion, 2).toString()));
+            txtNuevoCostoProducto.setText((tblProductos.getValueAt(seleccion, 3).toString()));
             jpnModificarProducto.setVisible(true);
             jpnProductos.setVisible(false);
         }else{
@@ -3274,14 +3232,10 @@ public void eliminar(){
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
-    private javax.swing.JLabel jLabel46;
-    private javax.swing.JLabel jLabel47;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -3395,12 +3349,9 @@ public void eliminar(){
     private javax.swing.JLabel lblBotonCerrar;
     private javax.swing.JLabel lblCantidad;
     private javax.swing.JLabel lblCodBarraProd;
-    private javax.swing.JLabel lblCodBrraActualizarProducto;
-    private javax.swing.JLabel lblCostoActualizarProducto;
     private javax.swing.JLabel lblCostoProd;
     private javax.swing.JLabel lblFecha;
     private javax.swing.JLabel lblIdCompra;
-    private javax.swing.JLabel lblInventarioActualizarProducto;
     private javax.swing.JLabel lblListadoCompras;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblMenu;
@@ -3410,7 +3361,6 @@ public void eliminar(){
     private javax.swing.JLabel lblMitad4;
     private javax.swing.JLabel lblMitad5;
     private javax.swing.JLabel lblNomProd;
-    private javax.swing.JLabel lblNombreActualizarProducto;
     private javax.swing.JLabel lblProveedor;
     private javax.swing.JLabel lblProveedores3;
     private javax.swing.JLabel lblProveedores4;
