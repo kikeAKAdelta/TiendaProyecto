@@ -1811,6 +1811,11 @@ public void eliminar(){
 
         jpnProductos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tblProductos =new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         tblProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -2757,20 +2762,48 @@ public void eliminar(){
     }//GEN-LAST:event_btnModificarProductoActionPerformed
 
     private void tblProductosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblProductosKeyTyped
-        char mayu=evt.getKeyChar();      
-         int c=(int) evt.getKeyChar();
+//        char mayu=evt.getKeyChar();      
+//         int c=(int) evt.getKeyChar();
+
+
+         int fila=tblProductos.getSelectedRow();
          
-         if ((c>=65 && c<=90) || (c>=97 && c<=122) || (c==32)) {
-            if (Character.isLowerCase(mayu)) {
-                 String cadena=(""+mayu).toUpperCase();
-                 mayu=cadena.charAt(0);
-                 evt.setKeyChar(mayu);
-             }
+         if (tblProductos.isRowSelected(fila)) {
+              if(KeyEvent.VK_DELETE==127){
+                if (fila>=0) {
+                
+            
+            Producto eliminar=new Producto();
+            DefaultTableModel modeloProductos=(DefaultTableModel) tblProductos.getModel();
+            
+
+            String codBarra=tblProductos.getValueAt(fila, 0).toString();
+            String nombre=tblProductos.getValueAt(fila, 1).toString();
+            int inventario=Integer.parseInt(tblProductos.getValueAt(fila, 2).toString());
+            double costo=Double.parseDouble(tblProductos.getValueAt(fila, 3).toString());
+
+            eliminar.setCodBarra(codBarra);
+            eliminar.setNombre(nombre);
+            eliminar.setInventario(inventario);
+            eliminar.setCosto(costo);
+
+
+            try {
+                ControladorProducto.Eliminar(eliminar);
+                modeloProductos.removeRow(fila);
+                JOptionPane.showMessageDialog(null, "El registro fue eliminado con exito");
+            } catch (ErrorTienda ex) {
+                
+            }
+            }
         }else{
-             evt.setKeyChar((char) KeyEvent.VK_CLEAR);
-            getToolkit().beep();
-            evt.consume();
-         }
+            JOptionPane.showMessageDialog(null, "No ha seleccionado una fila o la tabla esta vacia");
+        }
+              
+        }
+        
+    
+         
         
     }//GEN-LAST:event_tblProductosKeyTyped
 
