@@ -2883,9 +2883,7 @@ tblCompra.setModel(tablaModel);
     }//GEN-LAST:event_txtNuevoDireccionProveedorKeyTyped
 
     private void btnGuardarModificarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarModificarProveedorActionPerformed
-        if (txtNuevoDireccionProveedor.equals("") || txtNuevoNombreProveedor.equals("") || txtNuevoNit.getText().equals("") || txtNuevoTelefono.getText().equals("")) {
-            JOptionPane.showMessageDialog(rootPane, "Debe de rellenar todos los campos");
-        }else{
+        if (!txtNuevoDireccionProveedor.equals("") && !txtNuevoNombreProveedor.equals("") && !txtNuevoNit.getText().equals("") && !txtNuevoTelefono.getText().equals("")) {
             
             Proveedor proveedor = new Proveedor();
             proveedor.setIdProveedor(Integer.parseInt(txtIDProveedor1.getText()));
@@ -2904,6 +2902,8 @@ tblCompra.setModel(tablaModel);
             actualizarTablaProveedor();
             jpnProveedores.setVisible(true);
             jpnModificarProveedor.setVisible(false);
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Debe de rellenar todos los campos");
         }
     }//GEN-LAST:event_btnGuardarModificarProveedorActionPerformed
 
