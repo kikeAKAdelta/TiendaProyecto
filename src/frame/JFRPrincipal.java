@@ -2494,7 +2494,7 @@ public void eliminar(){
     private void txtInventarioProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInventarioProductoKeyTyped
         int c=(int) evt.getKeyChar();
         
-        if (c >=48 && c<=57) {
+        if ((c >=48 && c<=57) || (c==8)) {
             //No pasa nada
         }else{
             evt.setKeyChar((char) KeyEvent.VK_CLEAR);
@@ -2508,7 +2508,7 @@ public void eliminar(){
          int c=(int) evt.getKeyChar();
          char mayu=evt.getKeyChar();
          
-         if ((c>=65 && c<=90) || (c>=97 && c<=122)  || (c==32)) {
+         if ((c>=65 && c<=90) || (c>=97 && c<=122)  || (c==32) || (c==8)) {
              if (Character.isLowerCase(mayu)) {
                  String cadena=(""+mayu).toUpperCase();
                  mayu=cadena.charAt(0);
@@ -2525,7 +2525,7 @@ public void eliminar(){
     private void txtCostoProductosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostoProductosKeyTyped
         int c=(int) evt.getKeyChar();
         
-        if ((c >=48 && c<=57)  || (c==46)) {
+        if ((c >=48 && c<=57)  || (c==46) || (c==8)) {
             if (c==46) {
                 String cadena=txtCostoProductos.getText();
             int tamanio=cadena.length();
@@ -2551,7 +2551,7 @@ public void eliminar(){
         int limiteCaracteres=13;
         
          
-         if ((c >=48 && c<=57)) {
+         if ((c >=48 && c<=57) || (c==8)) {
              if(txtCodBarraProductos.getText().length()==limiteCaracter){
                 getToolkit().beep();
                 evt.consume();
@@ -2631,7 +2631,7 @@ public void eliminar(){
         int limiteCaracteres=13;
         
          
-         if ((c >=48 && c<=57) || (c>=65 && c<=90) || (c>=97 && c<=122) || (c==32)) {
+         if ((c >=48 && c<=57) || (c>=65 && c<=90) || (c>=97 && c<=122) || (c==32) || (c==8)) {
              if (txtProductosBuscar.getText().length()==limiteCaracteres) {
                  getToolkit().beep();
                  evt.consume();
@@ -2956,7 +2956,7 @@ public void eliminar(){
         int limiteCaracteres=13;
         
          
-         if ((c >=48 && c<=57)) {
+         if ((c >=48 && c<=57) || (c==8)) {
              if(txtCodigoBarraVender.getText().length()==limiteCaracter){
                 getToolkit().beep();
                 evt.consume();
@@ -3025,7 +3025,7 @@ public void eliminar(){
           int x=(int) evt.getKeyChar();
           int limiteCaracter=13;
          
-         if (x >=48 && x<=57) {
+         if ((x >=48 && x<=57) || (x==8)) {
              
              if(txtCodBarraProd.getText().length()==limiteCaracter){
                 getToolkit().beep();
@@ -3122,7 +3122,7 @@ public void eliminar(){
     private void txtNuevoCostoProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNuevoCostoProductoKeyTyped
         int c=(int) evt.getKeyChar();
         
-        if ((c >=48 && c<=57)  || (c==46)) {
+        if ((c >=48 && c<=57)  || (c==46) || (c==8)) {
             if (c==46) {
                 String cadena=txtNuevoCostoProducto.getText();
             int tamanio=cadena.length();
