@@ -2240,6 +2240,7 @@ public void eliminar(){
     private void btnAgregarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCompraActionPerformed
         jpnRegistroCompra.setVisible(true);
         jpnCompras.setVisible(false);
+        txtCodBarraProd.requestFocus();
         try {
              int idCompra;
  
@@ -3050,6 +3051,7 @@ public void eliminar(){
                         } else {
                             txtNomProd.setText(producto);
                         txtCantidad.requestFocus();
+                        exprod=true;
                         }
                         
                         
@@ -3090,7 +3092,12 @@ public void eliminar(){
             fila[4]=String.valueOf((Double.parseDouble(txtCantidad.getText()))*(Double.parseDouble(txtCostoProd.getText())));
             tablaModel.addRow(fila);
             tblCompra.setModel(tablaModel);
-            
+            //LIMPIAR LOS TXT 
+            txtCodBarraProd.setText("");
+            txtNomProd.setText("");
+            txtCantidad.setText("1");
+            txtCostoProd.setText("");
+            txtCodBarraProd.requestFocus();
         }
         
         
