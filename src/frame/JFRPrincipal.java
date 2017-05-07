@@ -3120,7 +3120,7 @@ public void eliminar(){
         
         if ((c >=48 && c<=57)  || (c==46)) {
             if (c==46) {
-                String cadena=txtCostoProductos.getText();
+                String cadena=txtNuevoCostoProducto.getText();
             int tamanio=cadena.length();
             for (int i = 0; i <= tamanio; i++) {
                 if (cadena.contains(".")) {
