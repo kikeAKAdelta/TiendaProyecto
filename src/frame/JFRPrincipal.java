@@ -3098,7 +3098,14 @@ public void eliminar(){
             txtCantidad.setText("1");
             txtCostoProd.setText("");
             txtCodBarraProd.requestFocus();
+            
+            double total = 0;
+           for (int i = 0; i < fila.length; i++) {
+             total = total+Double.parseDouble((String)tablaModel.getValueAt(i, 4));
+             txtTotal.setText(String.valueOf(total));
+           }
         }
+        
         
         
         
