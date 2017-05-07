@@ -2643,46 +2643,28 @@ public void eliminar(){
 
     private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
         String codBarra=txtProductosBuscar.getText();
-        
-        
+        DefaultTableModel modeloProductos = new DefaultTableModel();
+        ArrayList<Producto> productos = new ArrayList();
+        Object[] fila = new Object[4];
         if (codBarra.equals("")) {
             JOptionPane.showMessageDialog(null, "No ha introducido el codigo de barra o el nombre");
         }else{
-        DefaultTableModel modeloProductos=(DefaultTableModel) tblProductos.getModel();
-        
-        
-            for (int i = 0; i < tblProductos.getRowCount(); i++) {
-                modeloProductos.removeRow(i);
-            }
-        
-        ArrayList<Producto> busqueda=new ArrayList<Producto>();
-        Object fila[]=new Object[4];
-        
-        
-        try {
-            busqueda=ControladorProducto.Buscar(codBarra);
-            
-            if (busqueda.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Su busqueda no coincide ni con el codigo de barra y ni el nombre");
-            }else{
-            
-                Iterator<Producto> iterador=busqueda.iterator();
-
-                while(iterador.hasNext()){
-                    fila[0]=iterador.next();
-                    fila[1]=iterador.next();
-                    fila[2]=""+iterador.next();
-                    fila[3]=""+iterador.next();
-
+            String[] campos = new String[] {"CodBarra", "Nombre", "Inventario", "Costo"};
+            try {
+                productos = ControladorProducto.Buscar(codBarra);
+                modeloProductos.setColumnIdentifiers(campos);
+                Iterator<Producto> prod = productos.iterator();
+                while (prod.hasNext()) {
+                    fila[0] = prod.next();
+                    fila[1] = prod.next();
+                    fila[2] = prod.next();
+                    fila[3] = prod.next();
                     modeloProductos.addRow(fila);
+                    tblProductos.setModel(modeloProductos);
                 }
-
-                txtProductosBuscar.setText("");
+            } catch (ErrorTienda ex) {
+                JOptionPane.showMessageDialog(rootPane, ex.getMessage());
             }
-            
-        } catch (ErrorTienda ex) {
-            
-        }
         }
     }//GEN-LAST:event_btnBuscarProductoActionPerformed
 
@@ -3003,7 +2985,7 @@ public void eliminar(){
             } catch (ErrorTienda ex) {
                 JOptionPane.showMessageDialog(rootPane, ex.getMessage());
             }
-            tblProductos.removeAll();
+            tblProveedores.removeAll();
             jpnProductos.setVisible(true);
             jpnModificarProducto.setVisible(false);
             
