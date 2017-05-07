@@ -1783,10 +1783,10 @@ public void eliminar(){
             }
         });
         tblProductos.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 tblProductosInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         tblProductos.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -3020,17 +3020,7 @@ public void eliminar(){
     private void txtCodBarraProdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodBarraProdKeyTyped
         // TODO add your handling code here:
         
-         char c = evt.getKeyChar();
-         
-          int x=(int) evt.getKeyChar();
-          int limiteCaracter=13;
-         
-         if ((x >=48 && x<=57) || (x==8)) {
-             
-             if(txtCodBarraProd.getText().length()==limiteCaracter){
-                getToolkit().beep();
-                evt.consume();
-             }else{
+         char c = evt.getKeyChar();               
                  if (c == (char) KeyEvent.VK_ENTER) {
                     String codBarra=txtCodBarraProd.getText();
                     String producto;
@@ -3043,12 +3033,8 @@ public void eliminar(){
                         Logger.getLogger(JFRPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-             }
-           }else{
-                     evt.setKeyChar((char) KeyEvent.VK_CLEAR);
-                    getToolkit().beep();
-                    evt.consume();
-           }
+             
+           
         
     }//GEN-LAST:event_txtCodBarraProdKeyTyped
 
