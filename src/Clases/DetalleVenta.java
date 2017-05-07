@@ -24,17 +24,21 @@ DecimalFormat decimal = new DecimalFormat("0.00");
     public DetalleVenta() {
     }
 
-    public DetalleVenta(Producto producto, int Cantidad, double PrecioUnitario) {
-        this.Producto = producto;
-        this.Cantidad = Cantidad;
-        this.PrecioUnitario = PrecioUnitario;
-        
-    }
+//    public DetalleVenta(Producto producto, int Cantidad, double PrecioUnitario) {
+//        this.Producto = producto;
+//        this.Cantidad = Cantidad;
+//        this.PrecioUnitario = PrecioUnitario;
+//        
+//    }
+    
     
   public void New(String CodBarra, int Cantidad){
         this.Cantidad = Cantidad;
-        Producto p=new Producto();
-        p.setCodBarra(CodBarra);
+//        Producto p=new Producto();
+//        
+        
+
+          
     }
 
 
@@ -54,7 +58,7 @@ DecimalFormat decimal = new DecimalFormat("0.00");
         return Producto;
     }
 
-    public void setProductoO(Producto Producto) {
+    public void setProducto(Producto Producto) {
         this.Producto = Producto;
     }
 

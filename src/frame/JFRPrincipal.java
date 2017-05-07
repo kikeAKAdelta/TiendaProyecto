@@ -8,6 +8,8 @@ import Clases.ErrorTienda;
 import Clases.Producto;
 import Clases.Proveedor;
 import Clases.ControladorProveedor;
+import Clases.DetalleVenta;
+import Clases.Venta;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
@@ -24,6 +26,7 @@ import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableRowSorter;
+import javax.swing.*;
 
 /**
  *
@@ -1169,6 +1172,11 @@ public void eliminar(){
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnVenderMouseExited(evt);
+            }
+        });
+        btnVender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVenderActionPerformed(evt);
             }
         });
         jpnVentas.add(btnVender, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 540, 110, 30));
@@ -3240,6 +3248,32 @@ public void eliminar(){
         txtCostoProd.requestFocus();
         }
     }//GEN-LAST:event_txtCantidadKeyTyped
+
+    private void btnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVenderActionPerformed
+        int fila=tblProductosVender.getSelectedRow();
+        if (tblProductosVender.isRowSelected(fila)) {
+            
+            String codBarra=tblProductosVender.getValueAt(fila, 0).toString();
+            int cantidad=Integer.parseInt(tblProductosVender.getValueAt(fila, 2).toString());
+            if (fila>=0) {
+                DetalleVenta detalle=new DetalleVenta();
+                Venta miventa=new Venta(13,new Date(),"no mames",434);
+                
+                detalle.setProducto(obtenerProducto);
+                detalle.New(codBarra, cantidad);
+                miventa.AgregarItem(detalle);
+                
+                
+                try {
+                    ControladorVenta.Agregar(miventa);
+                } catch (ErrorTienda ex) {
+                    
+                }
+                
+            }
+            
+        }
+    }//GEN-LAST:event_btnVenderActionPerformed
 
                                                                                                                                                                                                                               
     /**

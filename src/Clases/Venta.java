@@ -29,18 +29,17 @@ public class Venta {
         articulo = new ArrayList<DetalleVenta>();
     }
 
-    public Venta(int IdVenta, Date Fecha, String Cliente, double Total, ArrayList<DetalleVenta> articulo) {
+    public Venta(int IdVenta, Date Fecha, String Cliente, double Total) {
         this.IdVenta = IdVenta;
         this.Fecha = Fecha;
         this.Cliente = Cliente;
         this.Total = Total;
-        this.articulo = articulo;
+        this.articulo = new ArrayList<DetalleVenta>();
     }
     
    
     public void AgregarItem(DetalleVenta detalleVenta){   
         
-        articulo=new ArrayList<DetalleVenta>();
         articulo.add(detalleVenta);
     }
     

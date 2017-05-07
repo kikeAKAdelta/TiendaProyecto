@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Iterator;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,36 +27,49 @@ public class ControladorVenta {
     static ResultSet rs;
     public PreparedStatement ps=null;
     
-    public static void Agregar(Venta vn) throws ErrorTienda, SQLException{
-       java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    public static void Agregar(Venta vn) throws ErrorTienda{
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        
             String Fecha = sdf.format(vn.getFecha());
-            cn = new Conexion();
-            cn.st.execute("INSERT INTO venta (IdVenta,Fecha,Cliente,Total) VALUES('"+vn.getIdVenta()+"','"+Fecha+"','"+vn.getCliente()+"','"+vn.getTotal()+"')");
-            cn.conexion.close();
-            ControladorVenta.ActualizarInventario(vn.getArticulo()); //actualiza el inventario
+            System.out.println("1");
+            
             
             try{
+                
                 cn = new Conexion();
-               
-            for(DetalleVenta d: vn.getArticulo()){  //inserta el detalle venta de cada detalle
-                JOptionPane.showMessageDialog(null, "Total articulos "+vn.getArticulo().size());
-            PreparedStatement consulta2;
-            consulta2 = cn.conexion.prepareStatement("INSERT INTO detalleventa (IdVenta, CodBarra, Cantidad, PrecioUnitario) VALUES (?, ?, ?, ?)");
-            consulta2.setInt(1, vn.getIdVenta());
-            consulta2.setString(2, d.getProducto().getCodBarra());
-            consulta2.setInt(3, d.getCantidad());
-            DecimalFormat df = new DecimalFormat("#.##");
+                cn.st.execute("INSERT INTO venta (IdVenta,Fecha,Cliente,Total) VALUES('"+vn.getIdVenta()+"','"+Fecha+"','"+vn.getCliente()+"','"+vn.getTotal()+"')");
+//                cn.conexion.close();
+                
+                ControladorVenta.ActualizarInventario(vn.getArticulo()); //actualiza el inventario
+                
+                
+                System.out.println(vn.getArticulo().size());
+                
+                Iterator<DetalleVenta> deta=vn.getArticulo().iterator();
+                Object ara[]=new Object[4];
+             
+                
+                for(DetalleVenta d: vn.getArticulo()){  //inserta el detalle venta de cada detalle
+                    
+                    JOptionPane.showMessageDialog(null, "Total articulos "+vn.getArticulo().size());
+                    PreparedStatement consulta2;
+                    consulta2 = cn.conexion.prepareStatement("INSERT INTO detalleventa (IdVenta, CodBarra, Cantidad, PrecioUnitario) VALUES (?, ?, ?, ?)");
+                    
+                    consulta2.setInt(1, vn.getIdVenta());
+                    consulta2.setString(2, vn.getArticulo().get(0).getProducto().getCodBarra());
+                    consulta2.setInt(3, vn.getArticulo().get(0).getCantidad());
+                    
+                    DecimalFormat df = new DecimalFormat("#.##");
                     df.setRoundingMode(RoundingMode.CEILING);
-            consulta2.setDouble(4, Double.parseDouble(df.format(d.getPrecioUnitario())));
-            consulta2.executeUpdate();
+                    consulta2.setDouble(4, Double.parseDouble(df.format(767676)));
+                    consulta2.executeUpdate();
             }
             
         }catch(SQLException ex){
             throw new ErrorTienda("Error SQL, ControladorVenta.Agregar", ex.getMessage());
         }finally{
-          cn.conexion.close();
+          //cn.conexion.close();
         }
-
     }
     
     public static int ObtenerIdVenta() throws ErrorTienda{
@@ -96,7 +110,7 @@ public class ControladorVenta {
         }catch(SQLException ex){
             throw new ErrorTienda("Error SQL ControladorVenta.actualizarIventario", ex.getMessage());    
         }finally{
-            cn.conexion.close();
+//            cn.conexion.close();
         }
         
     }
