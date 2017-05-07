@@ -16,7 +16,7 @@ import java.text.DecimalFormat;
 public class DetalleVenta {
     
 public Producto Producto;
-public String Cantidad;
+public int Cantidad;
 public double PrecioUnitario;
 
 DecimalFormat decimal = new DecimalFormat("0.00");
@@ -24,14 +24,14 @@ DecimalFormat decimal = new DecimalFormat("0.00");
     public DetalleVenta() {
     }
 
-    public DetalleVenta(Producto producto, String Cantidad, double PrecioUnitario) {
+    public DetalleVenta(Producto producto, int Cantidad, double PrecioUnitario) {
         this.Producto = producto;
         this.Cantidad = Cantidad;
         this.PrecioUnitario = PrecioUnitario;
         
     }
     
-  public void New(String CodBarra, String Cantidad){
+  public void New(String CodBarra, int Cantidad){
         this.Cantidad = Cantidad;
         Producto p=new Producto();
         p.setCodBarra(CodBarra);
@@ -58,11 +58,11 @@ DecimalFormat decimal = new DecimalFormat("0.00");
         this.Producto = Producto;
     }
 
-    public String getCantidad() {
+    public int getCantidad() {
         return Cantidad;
     }
 
-    public void setCantidad(String Cantidad) {
+    public void setCantidad(int Cantidad) {
         this.Cantidad = Cantidad;
     }
 

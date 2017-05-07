@@ -48,7 +48,7 @@ public class Venta {
         double total=0;
         try{
             for(DetalleVenta v: this.articulo){
-            total=total+(Double.parseDouble(v.getCantidad())*(v.getPrecioUnitario()));
+            total=total+((v.getCantidad())*(v.getPrecioUnitario()));
         }
         this.Total=total;
         decimal.setRoundingMode(RoundingMode.CEILING);
