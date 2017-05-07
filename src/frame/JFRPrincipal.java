@@ -2508,7 +2508,7 @@ public void eliminar(){
          int c=(int) evt.getKeyChar();
          char mayu=evt.getKeyChar();
          
-         if ((c>=65 && c<=90) || (c>=97 && c<=122)  || (c==32) || (c==8)) {
+         if ((c>=65 && c<=90) || (c>=97 && c<=122)  || (c==32) || (c==8) || (c >=48 && c<=57)) {
              if (Character.isLowerCase(mayu)) {
                  String cadena=(""+mayu).toUpperCase();
                  mayu=cadena.charAt(0);
