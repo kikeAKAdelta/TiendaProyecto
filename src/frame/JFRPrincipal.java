@@ -41,7 +41,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
     private TableRowSorter trsFiltro;
     DefaultTableModel tablaModel= new DefaultTableModel();
     
-    
+    boolean exprod;
     
     public JFRPrincipal() {
         initComponents();
@@ -69,6 +69,8 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         Proveedores(false);
         //disableBotonesProducto(false);
     }
+    
+    
     
     /*  ---- Color a las cabeceras de las tablas ----  */
     public void cabezera(){
@@ -1723,13 +1725,23 @@ public void eliminar(){
         jpnRegistroCompra.add(lblNomProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 70, 30));
 
         txtNomProd.setEditable(false);
+        txtNomProd.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNomProdKeyTyped(evt);
+            }
+        });
         jpnRegistroCompra.add(txtNomProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 190, 140, 30));
 
         lblCantidad.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblCantidad.setText("Cantidad:");
         jpnRegistroCompra.add(lblCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 190, 70, 30));
 
-        txtCantidad.setText("  1");
+        txtCantidad.setText("1");
+        txtCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCantidadKeyTyped(evt);
+            }
+        });
         jpnRegistroCompra.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 190, 40, 30));
 
         jSeparator5.setBackground(new java.awt.Color(0, 0, 0));
@@ -3026,9 +3038,21 @@ public void eliminar(){
                     String producto;
 
                     try {
+                        
                         ControladorProducto.Obtener(codBarra);
                         producto= ControladorProducto.Obtener(codBarra).getNombre();
-                        txtNomProd.setText(producto);
+                        //PARA SABER SI EXISTE O NO EXISTE UN PRODUCTO
+                        if (producto==null || producto=="") {
+                           txtNomProd.setEditable(true);
+                           txtNomProd.requestFocus();                          
+                           JOptionPane.showMessageDialog(rootPane, "El producto no esta guardado, agregar");
+                           exprod=false;
+                        } else {
+                            txtNomProd.setText(producto);
+                        txtCantidad.requestFocus();
+                        }
+                        
+                        
                     } catch (ErrorTienda ex) {
                         Logger.getLogger(JFRPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -3044,6 +3068,20 @@ public void eliminar(){
         //AGREGAR COMPRAS A LA TABLA
         char c = evt.getKeyChar();
         if (c == (char) KeyEvent.VK_ENTER) {
+            Producto pr = new Producto();
+            
+            if (exprod==false){
+            pr.setCodBarra(txtCodBarraProd.getText());
+             pr.setNombre(txtNomProd.getText());
+             pr.setInventario(Integer.parseInt(txtCantidad.getText()));
+             pr.setCosto(Double.parseDouble(txtCostoProd.getText()));
+                try {
+                    ControladorProducto.Agregar(pr);
+                } catch (ErrorTienda ex) {
+                    Logger.getLogger(JFRPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+             exprod=true;
+            }
             String fila[]  = new String[5];
             fila[0]=txtCodBarraProd.getText();
             fila[1]=txtNomProd.getText();
@@ -3177,6 +3215,24 @@ public void eliminar(){
     private void txtNuevoDireccionProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNuevoDireccionProveedorActionPerformed
         txtNuevoNit.requestFocus();
     }//GEN-LAST:event_txtNuevoDireccionProveedorActionPerformed
+
+    private void txtNomProdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomProdKeyTyped
+        // TODO add your handling code here:
+         char c = evt.getKeyChar();               
+
+        if (c == (char) KeyEvent.VK_ENTER) {
+        txtCantidad.requestFocus();
+        }
+    }//GEN-LAST:event_txtNomProdKeyTyped
+
+    private void txtCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyTyped
+        // TODO add your handling code here:
+          char c = evt.getKeyChar();               
+
+        if (c == (char) KeyEvent.VK_ENTER) {
+        txtCostoProd.requestFocus();
+        }
+    }//GEN-LAST:event_txtCantidadKeyTyped
 
                                                                                                                                                                                                                               
     /**
