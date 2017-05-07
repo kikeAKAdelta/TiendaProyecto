@@ -2545,14 +2545,20 @@ public void eliminar(){
     }//GEN-LAST:event_txtCostoProductosKeyTyped
 
     private void txtCodBarraProductosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodBarraProductosKeyTyped
-         int c=(int) evt.getKeyChar();
+         int limiteCaracter=13;
+       
+       int c=(int) evt.getKeyChar();
+        int limiteCaracteres=13;
+        
          
-         if (c >=48 && c<=57) {
-            
-        }else{
-             evt.setKeyChar((char) KeyEvent.VK_CLEAR);
-            getToolkit().beep();
-            evt.consume();
+         if ((c >=48 && c<=57)) {
+             if(txtCodBarraProductos.getText().length()==limiteCaracter){
+                getToolkit().beep();
+                evt.consume();
+             }
+         }else{
+             getToolkit().beep();
+             evt.consume();
          }
     }//GEN-LAST:event_txtCodBarraProductosKeyTyped
 
@@ -2961,20 +2967,23 @@ public void eliminar(){
     }//GEN-LAST:event_txtCantidadVenderKeyTyped
 
     private void txtCodigoBarraVenderKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoBarraVenderKeyTyped
-       char c = evt.getKeyChar();
-        if (c < '0' || c > '9') {
-            
-                if (c != (char) KeyEvent.VK_BEGIN) {
-                    if (c != (char) KeyEvent.VK_BACK_SPACE) {
-                        if (c != (char) KeyEvent.VK_DELETE) {
-                            if (c != (char) KeyEvent.VK_ENTER) {
-                            evt.consume();
-                            JOptionPane.showMessageDialog(null, "Solo Numeros", "Error", JOptionPane.ERROR_MESSAGE);
-                        }
-                    }
-                }
-                }
-        }
+       
+       int limiteCaracter=13;
+       
+       int c=(int) evt.getKeyChar();
+        int limiteCaracteres=13;
+        
+         
+         if ((c >=48 && c<=57)) {
+             if(txtCodigoBarraVender.getText().length()==limiteCaracter){
+                getToolkit().beep();
+                evt.consume();
+             }
+         }else{
+             getToolkit().beep();
+             evt.consume();
+         }
+       
     }//GEN-LAST:event_txtCodigoBarraVenderKeyTyped
 
     private void btnGuardarModificarProveedor1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarModificarProveedor1MouseEntered
@@ -3030,21 +3039,34 @@ public void eliminar(){
         // TODO add your handling code here:
         
          char c = evt.getKeyChar();
-         if (c == (char) KeyEvent.VK_ENTER) {
-             String codBarra=txtCodBarraProd.getText();
-             String producto;
+         
+          int x=(int) evt.getKeyChar();
+          int limiteCaracter=13;
+         
+         if (x >=48 && x<=57) {
              
-             try {
-                 ControladorProducto.Obtener(codBarra);
-                 producto= ControladorProducto.Obtener(codBarra).getNombre();
-                 txtNomProd.setText(producto);
-             } catch (ErrorTienda ex) {
-                 Logger.getLogger(JFRPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+             if(txtCodBarraProd.getText().length()==limiteCaracter){
+                getToolkit().beep();
+                evt.consume();
+             }else{
+                 if (c == (char) KeyEvent.VK_ENTER) {
+                    String codBarra=txtCodBarraProd.getText();
+                    String producto;
+
+                    try {
+                        ControladorProducto.Obtener(codBarra);
+                        producto= ControladorProducto.Obtener(codBarra).getNombre();
+                        txtNomProd.setText(producto);
+                    } catch (ErrorTienda ex) {
+                        Logger.getLogger(JFRPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
              }
-             
-    
-    }
-        
+           }else{
+                     evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+                    getToolkit().beep();
+                    evt.consume();
+           }
         
     }//GEN-LAST:event_txtCodBarraProdKeyTyped
 
