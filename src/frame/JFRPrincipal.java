@@ -1044,6 +1044,11 @@ public void eliminar(){
         });
         jpnAgregarProv.add(btnAtrasProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 480, 110, 30));
 
+        txtDireccionProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDireccionProveedorActionPerformed(evt);
+            }
+        });
         txtDireccionProveedor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtDireccionProveedorKeyTyped(evt);
@@ -1052,6 +1057,11 @@ public void eliminar(){
         jpnAgregarProv.add(txtDireccionProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 290, 410, 30));
 
         txtNombreProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtNombreProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreProveedorActionPerformed(evt);
+            }
+        });
         txtNombreProveedor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNombreProveedorKeyTyped(evt);
@@ -1110,6 +1120,11 @@ public void eliminar(){
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtTelefonoProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTelefonoProveedorActionPerformed(evt);
+            }
+        });
         jpnAgregarProv.add(txtTelefonoProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, 230, 30));
 
         try {
@@ -1156,21 +1171,31 @@ public void eliminar(){
         jpnModificarProveedor.add(btnAtrasModificarProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 500, 110, 30));
 
         txtNuevoDireccionProveedor.setForeground(new java.awt.Color(102, 0, 0));
+        txtNuevoDireccionProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNuevoDireccionProveedorActionPerformed(evt);
+            }
+        });
         txtNuevoDireccionProveedor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNuevoDireccionProveedorKeyTyped(evt);
             }
         });
-        jpnModificarProveedor.add(txtNuevoDireccionProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 310, 410, 30));
+        jpnModificarProveedor.add(txtNuevoDireccionProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 300, 410, 30));
 
         txtNuevoNombreProveedor.setForeground(new java.awt.Color(102, 0, 0));
         txtNuevoNombreProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtNuevoNombreProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNuevoNombreProveedorActionPerformed(evt);
+            }
+        });
         txtNuevoNombreProveedor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNuevoNombreProveedorKeyTyped(evt);
             }
         });
-        jpnModificarProveedor.add(txtNuevoNombreProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 410, 30));
+        jpnModificarProveedor.add(txtNuevoNombreProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 160, 410, 30));
 
         jPanel48.setBackground(new java.awt.Color(0, 0, 0));
         jPanel48.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1195,23 +1220,23 @@ public void eliminar(){
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel18.setText("Nombre:");
-        jpnModificarProveedor.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, -1, 20));
+        jpnModificarProveedor.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, -1, 20));
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel23.setText("Teléfono:");
-        jpnModificarProveedor.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, -1, 20));
+        jpnModificarProveedor.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, -1, 20));
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel24.setText("Dirección:");
-        jpnModificarProveedor.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, -1, 20));
+        jpnModificarProveedor.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, -1, 20));
 
         jLabel31.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel31.setText("NIT:");
-        jpnModificarProveedor.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 400, -1, 20));
-        jpnModificarProveedor.add(jSeparator12, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 420, 30, 10));
-        jpnModificarProveedor.add(jSeparator41, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 50, 10));
-        jpnModificarProveedor.add(jSeparator42, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 60, 10));
-        jpnModificarProveedor.add(jSeparator43, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 330, 60, 10));
+        jpnModificarProveedor.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 370, -1, 20));
+        jpnModificarProveedor.add(jSeparator12, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 390, 30, 10));
+        jpnModificarProveedor.add(jSeparator41, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 50, 10));
+        jpnModificarProveedor.add(jSeparator42, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 250, 60, 10));
+        jpnModificarProveedor.add(jSeparator43, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, 60, 10));
 
         txtNuevoTelefono.setForeground(new java.awt.Color(102, 0, 0));
         try {
@@ -1219,7 +1244,12 @@ public void eliminar(){
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jpnModificarProveedor.add(txtNuevoTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, 230, 30));
+        txtNuevoTelefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNuevoTelefonoActionPerformed(evt);
+            }
+        });
+        jpnModificarProveedor.add(txtNuevoTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, 230, 30));
 
         txtNuevoNit.setForeground(new java.awt.Color(102, 0, 0));
         try {
@@ -1227,7 +1257,7 @@ public void eliminar(){
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jpnModificarProveedor.add(txtNuevoNit, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 400, 200, 30));
+        jpnModificarProveedor.add(txtNuevoNit, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 370, 200, 30));
 
         getContentPane().add(jpnModificarProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 730, 600));
 
@@ -2449,6 +2479,7 @@ public void eliminar(){
             txtNuevoTelefono.setText(tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 2).toString());
             txtNuevoDireccionProveedor.setText(tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 3).toString());
             txtNuevoNit.setText(tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 4).toString());
+            txtNuevoNombreProveedor.requestFocus();
             
         } else {
             JOptionPane.showMessageDialog(rootPane, "Primero debe de seleccionar un proveedor");
@@ -2775,7 +2806,7 @@ public void eliminar(){
          int c=(int) evt.getKeyChar();
          char mayu=evt.getKeyChar();
          
-         if ((c>=65 && c<=90) || (c>=97 && c<=122)  || (c==32) || (c== (char)KeyEvent.VK_BACK_SPACE)) {
+         if ((c>=65 && c<=90) || (c>=97 && c<=122)  || (c==32) || (c== (char)KeyEvent.VK_BACK_SPACE) || (c== (char)KeyEvent.VK_ENTER)) {
              if (Character.isLowerCase(mayu)) {
                  String cadena=(""+mayu).toUpperCase();
                  mayu=cadena.charAt(0);
@@ -2809,7 +2840,7 @@ public void eliminar(){
          int c=(int) evt.getKeyChar();
          char mayu=evt.getKeyChar();
          
-         if ((c>=65 && c<=90) || (c>=97 && c<=122)  || (c==32) || (c== (char)KeyEvent.VK_BACK_SPACE)) {
+         if ((c>=65 && c<=90) || (c>=97 && c<=122)  || (c==32) || (c== (char)KeyEvent.VK_BACK_SPACE) || (c== (char)KeyEvent.VK_ENTER)){
              if (Character.isLowerCase(mayu)) {
                  String cadena=(""+mayu).toUpperCase();
                  mayu=cadena.charAt(0);
@@ -3132,6 +3163,30 @@ public void eliminar(){
             
         }
     }//GEN-LAST:event_tblProductosVenderKeyPressed
+
+    private void txtNombreProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreProveedorActionPerformed
+        txtTelefonoProveedor.requestFocus();
+    }//GEN-LAST:event_txtNombreProveedorActionPerformed
+
+    private void txtTelefonoProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoProveedorActionPerformed
+        txtDireccionProveedor.requestFocus();
+    }//GEN-LAST:event_txtTelefonoProveedorActionPerformed
+
+    private void txtDireccionProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDireccionProveedorActionPerformed
+        txtNIT.requestFocus();
+    }//GEN-LAST:event_txtDireccionProveedorActionPerformed
+
+    private void txtNuevoNombreProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNuevoNombreProveedorActionPerformed
+        txtNuevoTelefono.requestFocus();
+    }//GEN-LAST:event_txtNuevoNombreProveedorActionPerformed
+
+    private void txtNuevoTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNuevoTelefonoActionPerformed
+        txtNuevoDireccionProveedor.requestFocus();
+    }//GEN-LAST:event_txtNuevoTelefonoActionPerformed
+
+    private void txtNuevoDireccionProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNuevoDireccionProveedorActionPerformed
+        txtNuevoNit.requestFocus();
+    }//GEN-LAST:event_txtNuevoDireccionProveedorActionPerformed
 
                                                                                                                                                                                                                               
     /**
