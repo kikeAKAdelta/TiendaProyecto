@@ -1179,7 +1179,7 @@ public void eliminar(){
                 btnVenderActionPerformed(evt);
             }
         });
-        jpnVentas.add(btnVender, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 540, 110, 30));
+        jpnVentas.add(btnVender, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 540, 110, 30));
 
         btnBuscarProductoVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/buscar.png"))); // NOI18N
         btnBuscarProductoVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -1191,7 +1191,7 @@ public void eliminar(){
                 btnBuscarProductoVentaMouseExited(evt);
             }
         });
-        jpnVentas.add(btnBuscarProductoVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 540, 110, 30));
+        jpnVentas.add(btnBuscarProductoVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 540, 110, 30));
 
         txtTotalventa.setEditable(false);
         txtTotalventa.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -1699,6 +1699,11 @@ public void eliminar(){
         jpnModificarProducto.add(btnAtrasModificarProveedor1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 500, 110, 30));
 
         txtNuevoInventarioProducto.setForeground(new java.awt.Color(102, 0, 0));
+        txtNuevoInventarioProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNuevoInventarioProductoActionPerformed(evt);
+            }
+        });
         txtNuevoInventarioProducto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNuevoInventarioProductoKeyTyped(evt);
@@ -1751,6 +1756,11 @@ public void eliminar(){
         jpnModificarProducto.add(jSeparator48, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, 70, 10));
 
         txtNuevoNombreProducto.setForeground(new java.awt.Color(102, 0, 0));
+        txtNuevoNombreProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNuevoNombreProductoActionPerformed(evt);
+            }
+        });
         txtNuevoNombreProducto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNuevoNombreProductoKeyTyped(evt);
@@ -1954,6 +1964,11 @@ public void eliminar(){
         });
         jpnNuevoProducto.add(btnSalirProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 500, 110, 30));
 
+        txtCodBarraProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodBarraProductosActionPerformed(evt);
+            }
+        });
         txtCodBarraProductos.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCodBarraProductosKeyTyped(evt);
@@ -1961,19 +1976,24 @@ public void eliminar(){
         });
         jpnNuevoProducto.add(txtCodBarraProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 180, 220, 30));
 
+        txtNombreProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreProductosActionPerformed(evt);
+            }
+        });
         txtNombreProductos.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNombreProductosKeyTyped(evt);
             }
         });
-        jpnNuevoProducto.add(txtNombreProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, 270, 30));
+        jpnNuevoProducto.add(txtNombreProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 250, 270, 30));
 
         txtCostoProductos.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCostoProductosKeyTyped(evt);
             }
         });
-        jpnNuevoProducto.add(txtCostoProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 360, 80, 30));
+        jpnNuevoProducto.add(txtCostoProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 370, 80, 30));
 
         jPanel46.setBackground(new java.awt.Color(0, 0, 0));
         jPanel46.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1990,33 +2010,39 @@ public void eliminar(){
 
         jLabel27.setBackground(new java.awt.Color(0, 0, 0));
         jLabel27.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(102, 0, 0));
         jLabel27.setText("Código de barra:");
-        jpnNuevoProducto.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, -1, 20));
+        jpnNuevoProducto.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, -1, 20));
 
         jLabel29.setBackground(new java.awt.Color(0, 0, 0));
         jLabel29.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel29.setText("Nombre:");
-        jpnNuevoProducto.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, -1, 20));
+        jpnNuevoProducto.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, -1, 20));
 
         jLabel25.setBackground(new java.awt.Color(0, 0, 0));
         jLabel25.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel25.setText("Costo:");
-        jpnNuevoProducto.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 350, 60, 40));
-        jpnNuevoProducto.add(jSeparator13, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 100, 10));
-        jpnNuevoProducto.add(jSeparator26, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 315, 70, 20));
-        jpnNuevoProducto.add(jSeparator34, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 380, 40, 30));
+        jpnNuevoProducto.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 60, 40));
+        jpnNuevoProducto.add(jSeparator13, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, 100, 10));
+        jpnNuevoProducto.add(jSeparator26, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, 70, 20));
+        jpnNuevoProducto.add(jSeparator34, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 390, 40, 30));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Inventario:");
-        jpnNuevoProducto.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 300, -1, 10));
+        jpnNuevoProducto.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, -1, 20));
 
+        txtInventarioProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtInventarioProductoActionPerformed(evt);
+            }
+        });
         txtInventarioProducto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtInventarioProductoKeyTyped(evt);
             }
         });
-        jpnNuevoProducto.add(txtInventarioProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 300, 60, 30));
-        jpnNuevoProducto.add(jSeparator39, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 260, 50, 20));
+        jpnNuevoProducto.add(txtInventarioProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 310, 60, 30));
+        jpnNuevoProducto.add(jSeparator39, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 270, 50, 20));
 
         getContentPane().add(jpnNuevoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 730, 600));
 
@@ -2225,6 +2251,7 @@ public void eliminar(){
     private void btnNuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoProductoActionPerformed
         jpnProductos.setVisible(false);
         jpnNuevoProducto.setVisible(true);
+        txtCodBarraProductos.requestFocus();
     }//GEN-LAST:event_btnNuevoProductoActionPerformed
 
     private void btnSalirProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirProductosActionPerformed
@@ -2511,7 +2538,7 @@ public void eliminar(){
     private void txtInventarioProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInventarioProductoKeyTyped
         int c=(int) evt.getKeyChar();
         
-        if ((c >=48 && c<=57) || (c==8)) {
+        if ((c >=48 && c<=57) || (c==8) || (c== (char)KeyEvent.VK_BACK_SPACE) || (c== (char)KeyEvent.VK_ENTER)) {
             //No pasa nada
         }else{
             evt.setKeyChar((char) KeyEvent.VK_CLEAR);
@@ -2525,7 +2552,7 @@ public void eliminar(){
          int c=(int) evt.getKeyChar();
          char mayu=evt.getKeyChar();
          
-         if ((c>=65 && c<=90) || (c>=97 && c<=122)  || (c==32) || (c==8) || (c >=48 && c<=57)) {
+         if ((c>=65 && c<=90) || (c>=97 && c<=122)  || (c==32) || (c==8) || (c >=48 && c<=57) || (c== (char)KeyEvent.VK_BACK_SPACE) || (c== (char)KeyEvent.VK_ENTER)) {
              if (Character.isLowerCase(mayu)) {
                  String cadena=(""+mayu).toUpperCase();
                  mayu=cadena.charAt(0);
@@ -2542,7 +2569,7 @@ public void eliminar(){
     private void txtCostoProductosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostoProductosKeyTyped
         int c=(int) evt.getKeyChar();
         
-        if ((c >=48 && c<=57)  || (c==46) || (c==8)) {
+        if ((c >=48 && c<=57)  || (c==46) || (c==8) || (c== (char)KeyEvent.VK_BACK_SPACE) || (c== (char)KeyEvent.VK_ENTER)) {
             if (c==46) {
                 String cadena=txtCostoProductos.getText();
             int tamanio=cadena.length();
@@ -2568,7 +2595,7 @@ public void eliminar(){
         int limiteCaracteres=13;
         
          
-         if ((c >=48 && c<=57) || (c==8)) {
+         if ((c >=48 && c<=57) || (c==8) || (c== (char)KeyEvent.VK_BACK_SPACE) || (c== (char)KeyEvent.VK_ENTER)) {
              if(txtCodBarraProductos.getText().length()==limiteCaracter){
                 getToolkit().beep();
                 evt.consume();
@@ -2693,6 +2720,7 @@ public void eliminar(){
 
     private void tblProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductosMouseClicked
         int fila=tblProductos.getSelectedRow();
+        
         if (tblProductos.isRowSelected(fila)) {
             disableBotonesProducto(true);
         }
@@ -2710,6 +2738,7 @@ public void eliminar(){
             txtNuevoCostoProducto.setText((tblProductos.getValueAt(seleccion, 3).toString()));
             jpnModificarProducto.setVisible(true);
             jpnProductos.setVisible(false);
+            txtNuevoNombreProducto.requestFocus();
         }else{
             JOptionPane.showMessageDialog(rootPane, "Seleccione un dato de la tabla");
         }
@@ -3274,6 +3303,26 @@ public void eliminar(){
             
         }
     }//GEN-LAST:event_btnVenderActionPerformed
+
+    private void txtCodBarraProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodBarraProductosActionPerformed
+        txtNombreProductos.requestFocus();
+    }//GEN-LAST:event_txtCodBarraProductosActionPerformed
+
+    private void txtNombreProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreProductosActionPerformed
+        txtInventarioProducto.requestFocus();
+    }//GEN-LAST:event_txtNombreProductosActionPerformed
+
+    private void txtInventarioProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInventarioProductoActionPerformed
+        txtCostoProductos.requestFocus();
+    }//GEN-LAST:event_txtInventarioProductoActionPerformed
+
+    private void txtNuevoNombreProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNuevoNombreProductoActionPerformed
+        txtNuevoInventarioProducto.requestFocus();
+    }//GEN-LAST:event_txtNuevoNombreProductoActionPerformed
+
+    private void txtNuevoInventarioProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNuevoInventarioProductoActionPerformed
+        txtNuevoCostoProducto.requestFocus();
+    }//GEN-LAST:event_txtNuevoInventarioProductoActionPerformed
 
                                                                                                                                                                                                                               
     /**
