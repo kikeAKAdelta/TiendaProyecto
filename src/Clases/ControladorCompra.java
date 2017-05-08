@@ -23,7 +23,7 @@ public class ControladorCompra {
     public static void Agregar(Compra cm) throws ErrorTienda{
     
      try {
-            cn.st.executeUpdate("INSERT INTO compra(IdCompra,Fecha,IdProveedor,Total) VALUES('"+cm.IdCompra+"','"+cm.Fecha+"','"+cm.PROVEEDOR.IdProveedor+"','"+cm.Total+"')");
+            cn.st.executeUpdate("INSERT INTO compra(IdCompra,Fecha,IdProveedor,Total) VALUES('"+cm.IdCompra+"','"+cm.getFecha()+"','"+cm.PROVEEDOR.IdProveedor+"','"+cm.Total+"')");
         } catch (SQLException ex) {
             throw new ErrorTienda("Class ControladorCompra/Agregar", ex.getMessage());
         }

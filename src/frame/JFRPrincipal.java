@@ -3388,12 +3388,15 @@ public void idVenta() throws ErrorTienda{
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         ArrayList<Proveedor> Proveedor = new ArrayList();
         Object IdProveedor;
+        Object[] llenarProveedor = new Object[4];
         ArrayList<DetalleCompra> Articulos = new ArrayList();
         DetalleCompra detalleCompra = new DetalleCompra();
-        Date utilDate = new Date();
+        Date fechaActual = new Date();
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Compra compra = new Compra();
         ControladorProducto producto = new ControladorProducto();
         Proveedor proveedor = new Proveedor();
+        JOptionPane.showMessageDialog(rootPane, formato.format(fechaActual));
         try {
             Proveedor = ControladorProveedor.Buscar(cmbProveedor.getSelectedItem().toString());
             Iterator<Proveedor> prov = Proveedor.iterator();
@@ -3403,14 +3406,28 @@ public void idVenta() throws ErrorTienda{
                 for (int i = 0; i < tblCompra.getRowCount(); i++) {
                     detalleCompra.setCostoUnitario(Double.parseDouble(tblCompra.getValueAt(i, 3).toString()));
                     detalleCompra.setCantidad(Integer.parseInt(tblCompra.getValueAt(i, 2).toString()));
-                    detalleCompra.setPRODUCTO(producto.Obtener(tblCompra.getValueAt(i, 0).toString()));
+                    detalleCompra.setPRODUCTO(ControladorProducto.Obtener(tblCompra.getValueAt(i, 0).toString()));
+                    Articulos.add(detalleCompra);
                 }
+                while (prov.hasNext()) {
+                    llenarProveedor[0] = prov.next();
+                    llenarProveedor[1] = prov.next();
+                    llenarProveedor[2] = prov.next();
+                    llenarProveedor[3] = prov.next();
+                    
+                    
+                }    
+                    proveedor.setIdProveedor(Integer.parseInt(IdProveedor.toString()));
+                    proveedor.setNombre(llenarProveedor[0].toString());
+                    proveedor.setTelefono(llenarProveedor[1].toString());
+                    proveedor.setDireccion(llenarProveedor[2].toString());
+                    proveedor.setNIT(llenarProveedor[3].toString());
+                    
                 
  
                compra.setIdCompra(Integer.parseInt(txtIdCompra.getText()));
                compra.setPROVEEDOR(proveedor);
-               compra.setFecha(utilDate);
-               compra.setPROVEEDOR(proveedor);
+               compra.setFecha(formato.format(fechaActual));
                compra.setARTICULOS(Articulos);
                compra.setTotal(Double.parseDouble(txtTotal.getText()));
                ControladorCompra.Agregar(compra);

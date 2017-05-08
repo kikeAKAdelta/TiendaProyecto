@@ -8,6 +8,7 @@ package Clases;
 import static Clases.ControladorProducto.cn;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,7 +20,7 @@ import java.util.logging.Logger;
 public class Compra {
     
 public int IdCompra;
-public Date Fecha;
+public String Fecha;
 public Proveedor PROVEEDOR;
 public double Total;
 public ArrayList<DetalleCompra> ARTICULOS;
@@ -54,11 +55,11 @@ public ArrayList<DetalleCompra> ARTICULOS;
         this.IdCompra = IdCompra;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return Fecha;
     }
 
-    public void setFecha(Date Fecha) {
+    public void setFecha(String Fecha) {
         this.Fecha = Fecha;
     }
 
