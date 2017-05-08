@@ -3257,7 +3257,7 @@ public void eliminar(){
             int cantidad=Integer.parseInt(tblProductosVender.getValueAt(fila, 2).toString());
             if (fila>=0) {
                 DetalleVenta detalle=new DetalleVenta();
-                Venta miventa=new Venta(13,new Date(),"no mames",434);
+                Venta miventa=new Venta(14,new Date(),"no mames",434);
                 
                 detalle.setProducto(obtenerProducto);
                 detalle.New(codBarra, cantidad);
@@ -3272,6 +3272,8 @@ public void eliminar(){
                 
             }
             
+        }else{
+            JOptionPane.showMessageDialog(null, "No ha seleccionado la fila o la tabla esta vacia");
         }
     }//GEN-LAST:event_btnVenderActionPerformed
 
