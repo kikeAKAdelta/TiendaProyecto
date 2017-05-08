@@ -422,6 +422,14 @@ public void limpiarVenta() throws ErrorTienda{
          
     }
 
+public void limpiarCompra() throws ErrorTienda{
+        txtCodBarraProd.setText("");
+         txtNomProd.setText("");
+         txtCantidad.setText("1");
+         txtCostoProd.setText("");
+         txtCodBarraProd.requestFocus();   
+    }
+
 public void idVenta() throws ErrorTienda{
         
         txtIdVenta.setText(String.valueOf(ControladorVenta.ObtenerIdVenta()));
@@ -2360,10 +2368,9 @@ public void idVenta() throws ErrorTienda{
         jpnCompras.setVisible(false);
         txtCodBarraProd.requestFocus();
         try {
-             int idCompra;
- 
+            int idCompra;
             idCompra = ControladorCompra.ObtenerIdCompra();
-            txtIdCompra.setText(""+idCompra+1);
+            txtIdCompra.setText(String.valueOf(idCompra+1));
         //GENERAR FECHA 
             Date utilDate=new Date();
         SimpleDateFormat fecha= new SimpleDateFormat("dd'/'MM'/'YYYY");
@@ -3396,7 +3403,6 @@ public void idVenta() throws ErrorTienda{
         Compra compra = new Compra();
         ControladorProducto producto = new ControladorProducto();
         Proveedor proveedor = new Proveedor();
-        JOptionPane.showMessageDialog(rootPane, formato.format(fechaActual));
         try {
             Proveedor = ControladorProveedor.Buscar(cmbProveedor.getSelectedItem().toString());
             Iterator<Proveedor> prov = Proveedor.iterator();
@@ -3430,14 +3436,36 @@ public void idVenta() throws ErrorTienda{
                compra.setFecha(formato.format(fechaActual));
                compra.setARTICULOS(Articulos);
                compra.setTotal(Double.parseDouble(txtTotal.getText()));
-               ControladorCompra.Agregar(compra);
+               
+               Object [][] detallesCompra;
+            
+            int filas = tablaModel.getRowCount();
+            detallesCompra = new Object[filas][4];
+            for(int x=0;x<filas;x++){
+                detallesCompra[x][0]=tablaModel.getValueAt(x, 0);
+                detallesCompra[x][1]=Integer.parseInt(txtIdCompra.getText());
+                detallesCompra[x][2]=Integer.parseInt(String.valueOf(tablaModel.getValueAt(x, 2)));
+                detallesCompra[x][3]=Double.parseDouble(String.valueOf(tablaModel.getValueAt(x, 3)));
+            }
+               ControladorCompra.Agregar(compra, detallesCompra);
                JOptionPane.showMessageDialog(rootPane, "Compra agregada con exito");
             }
             
+            int idCompra;
+            idCompra = ControladorCompra.ObtenerIdCompra();
+            limpiarCompra();
+            txtIdCompra.setText(String.valueOf(idCompra+1));
+            tablaModel.setNumRows(0);
+            txtTotal.setText("$");
             
         } catch (ErrorTienda ex) {
             Logger.getLogger(JFRPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(JFRPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
+        
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txtProductosBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProductosBuscarKeyPressed

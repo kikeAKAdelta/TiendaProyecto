@@ -11,24 +11,43 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author pedro
  */
 public class ControladorCompra {
-    
+    static Conexion cn;
      
              
-    public static void Agregar(Compra cm) throws ErrorTienda{
+    public static void Agregar(Compra cm, Object[][] detalleCompra) throws ErrorTienda, SQLException{
     
      try {
             cn.st.executeUpdate("INSERT INTO compra(IdCompra,Fecha,IdProveedor,Total) VALUES('"+cm.IdCompra+"','"+cm.getFecha()+"','"+cm.PROVEEDOR.IdProveedor+"','"+cm.Total+"')");
-        } catch (SQLException ex) {
+            cn.conexion.close();
+            
+            cn = new Conexion();
+              try {
+                for(int x=0;x<detalleCompra.length;x++){
+                   cn.st.execute("INSERT INTO detallecompra(CodBarra,IdCompra,Cantidad,CostoUnitario)VALUES('"
+                           +detalleCompra[x][0]+"','"+detalleCompra[x][1]+"','"+detalleCompra[x][2]+"','"+detalleCompra[x][3]+"')");
+                   
+               }
+                
+            } catch (Exception e) {
+                throw new ErrorTienda("ControladorCompra Agregar", e.getMessage());
+            }
+            
+     } catch (SQLException ex) {
             throw new ErrorTienda("Class ControladorCompra/Agregar", ex.getMessage());
+        }finally{
+            cn.conexion.close();
         }
     
     }
+    
+    
     public static void ActualizarInventario(Compra cm) throws ErrorTienda {
         //Obtener la cantidad actual del producto
         int CantidadActual=0;
