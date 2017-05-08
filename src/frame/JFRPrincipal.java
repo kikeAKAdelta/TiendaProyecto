@@ -453,6 +453,16 @@ public void idVenta() throws ErrorTienda{
         btnVentas = new javax.swing.JButton();
         btnProveedores = new javax.swing.JButton();
         btnHome = new javax.swing.JLabel();
+        jpnCompras = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tblCompras = new javax.swing.JTable();
+        btnAgregarCompra = new javax.swing.JButton();
+        btnVerDetalle = new javax.swing.JButton();
+        jPanel37 = new javax.swing.JPanel();
+        jSeparator27 = new javax.swing.JSeparator();
+        lblProveedores3 = new javax.swing.JLabel();
+        lblListadoCompras = new javax.swing.JLabel();
+        jSeparator35 = new javax.swing.JSeparator();
         jpnRegistroCompra = new javax.swing.JPanel();
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
@@ -483,16 +493,6 @@ public void idVenta() throws ErrorTienda{
         jSeparator36 = new javax.swing.JSeparator();
         lblCostoProd = new javax.swing.JLabel();
         txtCostoProd = new javax.swing.JTextField();
-        jpnCompras = new javax.swing.JPanel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        tblCompras = new javax.swing.JTable();
-        btnAgregarCompra = new javax.swing.JButton();
-        btnVerDetalle = new javax.swing.JButton();
-        jPanel37 = new javax.swing.JPanel();
-        jSeparator27 = new javax.swing.JSeparator();
-        lblProveedores3 = new javax.swing.JLabel();
-        lblListadoCompras = new javax.swing.JLabel();
-        jSeparator35 = new javax.swing.JSeparator();
         jpnPrincipal = new javax.swing.JPanel();
         jpnPrimero = new javax.swing.JPanel();
         lbl3 = new javax.swing.JLabel();
@@ -808,6 +808,84 @@ public void idVenta() throws ErrorTienda{
 
         getContentPane().add(jpnBarraMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 190, 600));
 
+        jpnCompras.setName("jpnCompras"); // NOI18N
+        jpnCompras.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tblCompras =new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
+        tblCompras.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tblCompras.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"Compra 1", "Pollo Indio", "12/Febrero/17", "$23.00"},
+                {"Compra 2", null, null, null},
+                {"Compra 3", null, null, null},
+                {"Compra 4", null, null, null}
+            },
+            new String [] {
+                "Id Compra", "Proveedor", "Fecha", "Total"
+            }
+        ));
+        tblCompras.getTableHeader().setReorderingAllowed(false);
+        jScrollPane5.setViewportView(tblCompras);
+
+        jpnCompras.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 660, 310));
+
+        btnAgregarCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/agregar.png"))); // NOI18N
+        btnAgregarCompra.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAgregarCompra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAgregarCompraMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnAgregarCompraMouseEntered(evt);
+            }
+        });
+        btnAgregarCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarCompraActionPerformed(evt);
+            }
+        });
+        jpnCompras.add(btnAgregarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 490, 110, 30));
+
+        btnVerDetalle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/detalles2.png"))); // NOI18N
+        btnVerDetalle.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVerDetalle.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnVerDetalleMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnVerDetalleMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnVerDetalleMouseExited(evt);
+            }
+        });
+        jpnCompras.add(btnVerDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 490, 110, 30));
+
+        jPanel37.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel37.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jSeparator27.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jPanel37.add(jSeparator27, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 0, -1, 50));
+
+        lblProveedores3.setBackground(new java.awt.Color(255, 255, 255));
+        lblProveedores3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblProveedores3.setForeground(new java.awt.Color(255, 255, 255));
+        lblProveedores3.setText("Compras");
+        jPanel37.add(lblProveedores3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 90, 30));
+
+        jpnCompras.add(jPanel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 50));
+
+        lblListadoCompras.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblListadoCompras.setText("Listado de Compras Realizadas:");
+        jpnCompras.add(lblListadoCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 200, -1));
+        jpnCompras.add(jSeparator35, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 117, 200, 10));
+
+        getContentPane().add(jpnCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 730, 600));
+
         jpnRegistroCompra.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/guardarprov.png"))); // NOI18N
@@ -959,84 +1037,6 @@ public void idVenta() throws ErrorTienda{
         jpnRegistroCompra.add(txtCostoProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 190, 80, 30));
 
         getContentPane().add(jpnRegistroCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 730, 600));
-
-        jpnCompras.setName("jpnCompras"); // NOI18N
-        jpnCompras.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        tblCompras =new javax.swing.JTable(){
-            public boolean isCellEditable(int rowIndex, int colIndex){
-                return false;
-            }
-        };
-        tblCompras.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        tblCompras.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"Compra 1", "Pollo Indio", "12/Febrero/17", "$23.00"},
-                {"Compra 2", null, null, null},
-                {"Compra 3", null, null, null},
-                {"Compra 4", null, null, null}
-            },
-            new String [] {
-                "Id Compra", "Proveedor", "Fecha", "Total"
-            }
-        ));
-        tblCompras.getTableHeader().setReorderingAllowed(false);
-        jScrollPane5.setViewportView(tblCompras);
-
-        jpnCompras.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 660, 310));
-
-        btnAgregarCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/agregar.png"))); // NOI18N
-        btnAgregarCompra.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnAgregarCompra.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnAgregarCompraMouseExited(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnAgregarCompraMouseEntered(evt);
-            }
-        });
-        btnAgregarCompra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarCompraActionPerformed(evt);
-            }
-        });
-        jpnCompras.add(btnAgregarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 490, 110, 30));
-
-        btnVerDetalle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/detalles2.png"))); // NOI18N
-        btnVerDetalle.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnVerDetalle.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnVerDetalleMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnVerDetalleMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnVerDetalleMouseExited(evt);
-            }
-        });
-        jpnCompras.add(btnVerDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 490, 110, 30));
-
-        jPanel37.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel37.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jSeparator27.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel37.add(jSeparator27, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 0, -1, 50));
-
-        lblProveedores3.setBackground(new java.awt.Color(255, 255, 255));
-        lblProveedores3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lblProveedores3.setForeground(new java.awt.Color(255, 255, 255));
-        lblProveedores3.setText("Compras");
-        jPanel37.add(lblProveedores3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 90, 30));
-
-        jpnCompras.add(jPanel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 50));
-
-        lblListadoCompras.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblListadoCompras.setText("Listado de Compras Realizadas:");
-        jpnCompras.add(lblListadoCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 200, -1));
-        jpnCompras.add(jSeparator35, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 117, 200, 10));
-
-        getContentPane().add(jpnCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 730, 600));
 
         jpnPrincipal.setBackground(new java.awt.Color(255, 255, 255));
         jpnPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

@@ -26,6 +26,7 @@ public class ControladorCompra {
      try {
             cn.st.executeUpdate("INSERT INTO compra(IdCompra,Fecha,IdProveedor,Total) VALUES('"+cm.IdCompra+"','"+cm.getFecha()+"','"+cm.PROVEEDOR.IdProveedor+"','"+cm.Total+"')");
             cn.conexion.close();
+            ControladorCompra.ActualizarInventario(detalleCompra);
             
             cn = new Conexion();
               try {
@@ -47,29 +48,24 @@ public class ControladorCompra {
     
     }
     
-    
-    public static void ActualizarInventario(Compra cm) throws ErrorTienda {
-        //Obtener la cantidad actual del producto
-        int CantidadActual=0;
+    public static void ActualizarInventario(Object[][] detalleCompra) throws ErrorTienda {
+        cn = new Conexion();
         try {
-        ResultSet rsCantidad = null;
-        rsCantidad = cn.st.executeQuery("SELECT Cantidad FROM productos WHERE CodBarra='"+cm.ARTICULOS.get(0).PRODUCTO.CodBarra+"'");
-        
-        while(rsCantidad.next()){
-            CantidadActual = rsCantidad.getInt("Cantidad");
+            Clases.Producto pr;
+        for(int x =0;x<detalleCompra.length;x++){
+            pr = ControladorProducto.Obtener(String.valueOf(detalleCompra[x][0]));
+            int cantidad = pr.getInventario();
+            int cantidad2= Integer.parseInt(String.valueOf(detalleCompra[x][2]));
+            
+            System.out.println("Cantidad en la bd "+cantidad+" Cantidad exigida "+cantidad2);
+            cn.st.execute("UPDATE productos SET Inventario='"+(cantidad+cantidad2)+"' WHERE CodBarra='"+detalleCompra[x][0]+"'");
+        }    
+        } catch (SQLException e) {
+        throw new ErrorTienda("Controlador Compra actualizar inventario", e.getMessage());
         }
-        }catch (Exception ex){
-            throw new ErrorTienda("Class ControladorCompra/ActualizarInventario", ex.getMessage());
-        }
-        
-        //Actualizamos el inventario 
-                try {
-            cn.st.executeUpdate("UPDATE productos SET Inventario='"+(CantidadActual+cm.ARTICULOS.get(0).Cantidad)+"' WHERE CodBarra='"+cm.ARTICULOS.get(0).PRODUCTO.CodBarra+"'");
-        } catch (Exception ex) {
-            throw new ErrorTienda("Class ControladorCompra/ActualizarInventario", ex.getMessage());
-        }
-         
     }
+    
+    
     public static void ActualizarPrecioPromedioProducto(ArrayList<DetalleCompra> detalleCompra) throws ErrorTienda {
          //Obtener la cantidad actual del producto
         int CantidadActual=0;
