@@ -780,6 +780,11 @@ public void idVenta() throws ErrorTienda{
                 btnGuardarMouseExited(evt);
             }
         });
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
         jpnRegistroCompra.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 540, 110, 30));
 
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/atras.png"))); // NOI18N
@@ -3369,6 +3374,20 @@ public void idVenta() throws ErrorTienda{
     private void btnCancelarVentaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarVentaMouseExited
         btnCancelarVenta.setIcon(new ImageIcon(getClass().getResource("/iconos/cancelar.png")));
     }//GEN-LAST:event_btnCancelarVentaMouseExited
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+    ArrayList<Proveedor> Proveedor = new ArrayList();
+        Object IdProveedor;
+        
+        try {
+            Proveedor = ControladorProveedor.Buscar(cmbProveedor.getSelectedItem().toString());
+            Iterator<Proveedor> prov = Proveedor.iterator();
+            IdProveedor = prov.next();
+            JOptionPane.showMessageDialog(rootPane, IdProveedor);
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(JFRPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
                                                                                                                                                                                                                               
     /**
