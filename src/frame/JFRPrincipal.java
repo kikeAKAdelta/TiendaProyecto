@@ -14,6 +14,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -219,17 +220,11 @@ public final class JFRPrincipal extends javax.swing.JFrame {
                          modeloTablaVender.setValueAt(txtCantidadVender.getText(), fila,2);
                          modeloTablaVender.setValueAt(obtenerProducto.getCosto(), fila,3);
                          modeloTablaVender.setValueAt(decimal.format(cantidad*obtenerProducto.getCosto()), fila,4);
-                         txtCodigoBarraVender.setText("");
-                         txtNombreProductoVender.setText("");
-                         txtCantidadVender.setText("1");
-                         txtCodigoBarraVender.requestFocus();   
+                         limpiarVenta();
                              }
                              
                          }else{
-                             txtCodigoBarraVender.setText("");
-                         txtNombreProductoVender.setText("");
-                         txtCantidadVender.setText("1");
-                         txtCodigoBarraVender.requestFocus();
+                             limpiarVenta();
                          }
                          
                      }
@@ -357,6 +352,47 @@ public void eliminar(){
         }
         
         
+        
+    }
+public void guardarVenta() throws ErrorTienda, SQLException{
+    Date utilDate=new Date();
+        Clases.Venta vn;
+        vn = new Venta();
+         vn.setIdVenta(Integer.parseInt(txtIdVenta.getText()));
+         vn.setFecha(utilDate);
+         vn.setCliente("PACMAN");
+         double total = Double.parseDouble(txtTotalventa.getText().substring(1));
+         
+         vn.setTotal(total);
+         Clases.ControladorVenta cv = new ControladorVenta();
+         
+            Object [][] detallesVenta;
+            
+            int filas = modeloTablaVender.getRowCount();
+            detallesVenta = new Object[filas][4];
+            for(int x=0;x<filas;x++){
+                detallesVenta[x][0]=Integer.parseInt(txtIdVenta.getText());
+                detallesVenta[x][1]=modeloTablaVender.getValueAt(x, 0);
+                detallesVenta[x][2]=Integer.parseInt(String.valueOf(modeloTablaVender.getValueAt(x, 2)));
+                detallesVenta[x][3]=Double.parseDouble(String.valueOf(modeloTablaVender.getValueAt(x, 3)));
+            }
+            cv.Agregar(vn, detallesVenta);
+            limpiarVenta();
+            idVenta();
+            modeloTablaVender.setNumRows(0);
+            txtTotalventa.setText("$0");
+}
+public void limpiarVenta() throws ErrorTienda{
+        txtCodigoBarraVender.setText("");
+         txtNombreProductoVender.setText("");
+         txtCantidadVender.setText("1");
+         txtCodigoBarraVender.requestFocus();
+         
+    }
+
+public void idVenta() throws ErrorTienda{
+        
+        txtIdVenta.setText(String.valueOf(ControladorVenta.ObtenerIdVenta()));
         
     }
    
@@ -2996,21 +3032,24 @@ public void eliminar(){
 
     private void txtCodigoBarraVenderKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoBarraVenderKeyTyped
        
-       int limiteCaracter=13;
-       
-       int c=(int) evt.getKeyChar();
-        int limiteCaracteres=13;
-        
-         
-         if ((c >=48 && c<=57) || (c==8)) {
-             if(txtCodigoBarraVender.getText().length()==limiteCaracter){
-                getToolkit().beep();
-                evt.consume();
-             }
-         }else{
-             getToolkit().beep();
-             evt.consume();
-         }
+       char c = evt.getKeyChar();
+    if(txtCodigoBarraVender.getText().length()>=13){
+               evt.consume();
+        }else{
+        if (c < '0' || c > '9') {
+            
+                if (c != (char) KeyEvent.VK_BEGIN) {
+                    if (c != (char) KeyEvent.VK_BACK_SPACE) {
+                        if (c != (char) KeyEvent.VK_DELETE) {
+                            if (c != (char) KeyEvent.VK_ENTER) {
+                            evt.consume();
+                            JOptionPane.showMessageDialog(null, "Solo Numeros", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                }
+                }
+        }   
+    }
        
     }//GEN-LAST:event_txtCodigoBarraVenderKeyTyped
 
@@ -3279,30 +3318,13 @@ public void eliminar(){
     }//GEN-LAST:event_txtCantidadKeyTyped
 
     private void btnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVenderActionPerformed
-        int fila=tblProductosVender.getSelectedRow();
-        if (tblProductosVender.isRowSelected(fila)) {
-            
-            String codBarra=tblProductosVender.getValueAt(fila, 0).toString();
-            int cantidad=Integer.parseInt(tblProductosVender.getValueAt(fila, 2).toString());
-            if (fila>=0) {
-                DetalleVenta detalle=new DetalleVenta();
-                Venta miventa=new Venta(16,new Date(),"no mames",434);
-                
-                detalle.setProducto(obtenerProducto);
-                detalle.New(codBarra, cantidad);
-                miventa.AgregarItem(detalle);
-                
-                
-                try {
-                    ControladorVenta.Agregar(miventa);
-                } catch (ErrorTienda ex) {
-                    
-                }
-                
-            }
-            
-        }else{
-            JOptionPane.showMessageDialog(null, "No ha seleccionado la fila o la tabla esta vacia");
+        try {
+            guardarVenta();
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(JFRPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(JFRPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+
         }
     }//GEN-LAST:event_btnVenderActionPerformed
 

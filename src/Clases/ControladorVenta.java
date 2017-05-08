@@ -27,39 +27,37 @@ public class ControladorVenta {
     static ResultSet rs;
     public PreparedStatement ps=null;
     
-    public static void Agregar(Venta vn) throws ErrorTienda{
-        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        
+    public static void Agregar(Venta vn,Object[][] detalles) throws ErrorTienda, SQLException{
+        try {
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String Fecha = sdf.format(vn.getFecha());
-            try{
-                
-                cn = new Conexion();
-                cn.st.execute("INSERT INTO venta (IdVenta,Fecha,Cliente,Total) VALUES('"+vn.getIdVenta()+"','"+Fecha+"','"+vn.getCliente()+"','"+vn.getTotal()+"')");
-//                cn.conexion.close();
-                
-                ControladorVenta.ActualizarInventario(vn.getArticulo()); //actualiza el inventario
-                
-                for(DetalleVenta d: vn.getArticulo()){  //inserta el detalle venta de cada detalle
-                    
-                    JOptionPane.showMessageDialog(null, "Total articulos "+vn.getArticulo().size());
-                    PreparedStatement consulta2;
-                    consulta2 = cn.conexion.prepareStatement("INSERT INTO detalleventa (IdVenta, CodBarra, Cantidad, PrecioUnitario) VALUES (?, ?, ?, ?)");
-                    
-                    consulta2.setInt(1, vn.getIdVenta());
-                    consulta2.setString(2, vn.getArticulo().get(0).getProducto().getCodBarra());
-                    consulta2.setInt(3, vn.getArticulo().get(0).getCantidad());
-                    
-                    DecimalFormat df = new DecimalFormat("#.##");
-                    df.setRoundingMode(RoundingMode.CEILING);
-                    consulta2.setDouble(4, Double.parseDouble(df.format(767676)));
-                    consulta2.executeUpdate();
-            }
+            cn = new Conexion();
+            cn.st.execute("INSERT INTO venta (IdVenta,Fecha,Cliente,Total) VALUES('"
+                    +vn.getIdVenta()+"','"+Fecha+"','"+vn.getCliente()+"','"+Double.parseDouble(String.valueOf(vn.getTotal()))+"')");
+            cn.conexion.close();
+            ControladorVenta.ActualizarInventario(detalles); //actualiza el inventario
             
-        }catch(SQLException ex){
-            throw new ErrorTienda("Error SQL, ControladorVenta.Agregar", ex.getMessage());
+
+                cn = new Conexion();
+              try {
+                for(int x=0;x<detalles.length;x++){
+                   cn.st.execute("INSERT INTO detalleventa(IdVenta,CodBarra,Cantidad,PrecioUnitario)VALUES('"
+                           +detalles[x][0]+"','"+detalles[x][1]+"','"+detalles[x][2]+"','"+detalles[x][3]+"')");
+                   
+               }
+                JOptionPane.showMessageDialog(null, "Venta realizada exitosamente");
+            } catch (Exception e) {
+                throw new ErrorTienda("ControladorVentas Agregar", e.getMessage());
+            }
+                
+               
+            
+        } catch (SQLException e) {
+            throw new ErrorTienda("ControladorVentas Agregar", e.getMessage());
         }finally{
-          //cn.conexion.close();
+            cn.conexion.close();
         }
+       
     }
     
     public static int ObtenerIdVenta() throws ErrorTienda{
@@ -78,27 +76,24 @@ public class ControladorVenta {
         return IdVenta+1;
     }
     
-    public static void ActualizarInventario(ArrayList<DetalleVenta> detalleVenta) throws ErrorTienda, SQLException{
-        try{
-            cn = new Conexion();
-            PreparedStatement consulta;
-            for(DetalleVenta d: detalleVenta){ //se recorre detalleventa y calcula la cantidad nueva del inventario
-                
-                int nuevoInventario = (d.getProducto().getInventario()-d.getCantidad());
-                d.getProducto().setInventario(nuevoInventario);  //se elimino la query y se modifico por medio del objeto detalleventa
-                
-                
-                consulta= cn.conexion.prepareStatement("UPDATE productos SET Inventario = ? WHERE CodBarra = ?");
-                consulta.setInt(1, d.getProducto().getInventario());
-                consulta.setString(2, d.getProducto().getCodBarra());
-                consulta.executeUpdate();
-            }
+    public static void ActualizarInventario(Object[][] detalles) throws ErrorTienda, SQLException{
+        cn = new Conexion();
+        try {
+            Clases.Producto pr;
+        for(int x =0;x<detalles.length;x++){
+          
+            pr = ControladorProducto.Obtener(String.valueOf(detalles[x][1]));
+          int cantidad = pr.getInventario();
             
-        }catch(SQLException ex){
-            throw new ErrorTienda("Error SQL ControladorVenta.actualizarIventario", ex.getMessage());    
-        }finally{
-//            cn.conexion.close();
+            int cantidad2= Integer.parseInt(String.valueOf(detalles[x][2]));
+            
+            System.out.println("Cantidad en la bd "+cantidad+" Cantidad exigida "+cantidad2);
+            cn.st.execute("UPDATE productos SET Inventario='"+(cantidad-cantidad2)+"' WHERE CodBarra='"+detalles[x][1]+"'");
+        }    
+        } catch (SQLException e) {
+        throw new ErrorTienda("Controlador Venta catualizar inventario", e.getMessage());
         }
+        
         
     }
 
