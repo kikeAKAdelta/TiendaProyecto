@@ -50,14 +50,14 @@ public class ControladorProveedor {
     
             cn=new Conexion();   
             try { 
-            rs=cn.st.executeQuery("SELECT IdProveedor,Nombre,Telefono,Direccion, NIT FROM proveedor WHERE nombre='"+pv+"'");
+            rs=cn.st.executeQuery("SELECT * FROM proveedor WHERE Nombre='"+pv+"'");
             
             while (rs.next()) {
-                proveedor.add(rs.getString(0));
                 proveedor.add(rs.getString(1));
                 proveedor.add(rs.getString(2));
                 proveedor.add(rs.getString(3));
                 proveedor.add(rs.getString(4));
+                proveedor.add(rs.getString(5));
             }
             
         } catch (SQLException e) {
