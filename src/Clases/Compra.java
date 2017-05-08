@@ -44,5 +44,47 @@ public ArrayList<DetalleCompra> ARTICULOS;
                 throw new ErrorTienda("Class Compra/AgregarItem", ex.getMessage());
             }
            
-        }        
+        }  
+
+    public int getIdCompra() {
+        return IdCompra;
+    }
+
+    public void setIdCompra(int IdCompra) {
+        this.IdCompra = IdCompra;
+    }
+
+    public Date getFecha() {
+        return Fecha;
+    }
+
+    public void setFecha(Date Fecha) {
+        this.Fecha = Fecha;
+    }
+
+    public Proveedor getPROVEEDOR() {
+        return PROVEEDOR;
+    }
+
+    public void setPROVEEDOR(Proveedor PROVEEDOR) {
+        this.PROVEEDOR = PROVEEDOR;
+    }
+
+    public double getTotal() {
+        return Total;
+    }
+
+    public void setTotal(double Total) {
+        this.Total = Total;
+    }
+
+    public ArrayList<DetalleCompra> getARTICULOS() {
+        return ARTICULOS;
+    }
+
+    public void setARTICULOS(ArrayList<DetalleCompra> ARTICULOS) {
+        this.ARTICULOS = ARTICULOS;
+    }
+        
+        
 }

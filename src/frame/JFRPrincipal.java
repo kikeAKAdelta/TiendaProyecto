@@ -28,7 +28,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableRowSorter;
 import javax.swing.*;
-
+import Clases.Compra;
 /**
  *
  * @author Jose Lopez Garcia
@@ -773,11 +773,11 @@ public void idVenta() throws ErrorTienda{
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/guardarprov.png"))); // NOI18N
         btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnGuardarMouseEntered(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnGuardarMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnGuardarMouseEntered(evt);
             }
         });
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -826,8 +826,6 @@ public void idVenta() throws ErrorTienda{
         jScrollPane6.setViewportView(tblCompra);
 
         jpnRegistroCompra.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 650, 200));
-
-        txtTotal.setText("$");
         jpnRegistroCompra.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 500, 100, 40));
 
         txtFecha.setEditable(false);
@@ -1863,10 +1861,10 @@ public void idVenta() throws ErrorTienda{
             }
         });
         tblProductos.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 tblProductosInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         tblProductos.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -3194,7 +3192,7 @@ public void idVenta() throws ErrorTienda{
                iteraciones++;
             }
             double totalFinal=Double.parseDouble(decimal.format(total));
-            txtTotal.setText("$"+totalFinal);
+            txtTotal.setText(""+totalFinal);
 
         }   
     }//GEN-LAST:event_txtCostoProdKeyTyped
@@ -3378,12 +3376,23 @@ public void idVenta() throws ErrorTienda{
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
     ArrayList<Proveedor> Proveedor = new ArrayList();
         Object IdProveedor;
-        
+        Compra cm = new Compra();
+        Date utilDate = new Date();
         try {
             Proveedor = ControladorProveedor.Buscar(cmbProveedor.getSelectedItem().toString());
             Iterator<Proveedor> prov = Proveedor.iterator();
-            IdProveedor = prov.next();
+            IdProveedor = prov.next();            
             JOptionPane.showMessageDialog(rootPane, IdProveedor);
+            if (tblCompra.getRowCount()>0) {
+                String IDprov=IdProveedor.toString();
+               cm.setIdCompra(Integer.parseInt(txtIdCompra.getText()));
+               cm.PROVEEDOR.IdProveedor=Integer.parseInt(IDprov);
+               cm.setFecha(utilDate);
+               cm.setTotal(Double.parseDouble(txtTotal.getText()));
+               ControladorCompra.Agregar(cm);
+            }
+            
+            
         } catch (ErrorTienda ex) {
             Logger.getLogger(JFRPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
