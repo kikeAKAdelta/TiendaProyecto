@@ -515,6 +515,7 @@ public void idVenta() throws ErrorTienda{
         txtCodigoBarraVender = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
         jSeparator24 = new javax.swing.JSeparator();
+        btnCancelarVenta = new javax.swing.JButton();
         jpnProveedores = new javax.swing.JPanel();
         btnEliminarProveedor = new javax.swing.JButton();
         btnAgregarProveedor = new javax.swing.JButton();
@@ -1215,7 +1216,7 @@ public void idVenta() throws ErrorTienda{
                 btnVenderActionPerformed(evt);
             }
         });
-        jpnVentas.add(btnVender, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 540, 110, 30));
+        jpnVentas.add(btnVender, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 540, 110, 30));
 
         btnBuscarProductoVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/buscar.png"))); // NOI18N
         btnBuscarProductoVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -1227,7 +1228,7 @@ public void idVenta() throws ErrorTienda{
                 btnBuscarProductoVentaMouseExited(evt);
             }
         });
-        jpnVentas.add(btnBuscarProductoVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 540, 110, 30));
+        jpnVentas.add(btnBuscarProductoVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 540, 110, 30));
 
         txtTotalventa.setEditable(false);
         txtTotalventa.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -1331,6 +1332,18 @@ public void idVenta() throws ErrorTienda{
         jLabel22.setText("Código de Barra");
         jpnVentas.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, -1, -1));
         jpnVentas.add(jSeparator24, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 115, 100, 10));
+
+        btnCancelarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/cancelar.png"))); // NOI18N
+        btnCancelarVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancelarVenta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCancelarVentaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCancelarVentaMouseExited(evt);
+            }
+        });
+        jpnVentas.add(btnCancelarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, 110, 30));
 
         getContentPane().add(jpnVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 730, 600));
 
@@ -3349,6 +3362,14 @@ public void idVenta() throws ErrorTienda{
         txtNuevoCostoProducto.requestFocus();
     }//GEN-LAST:event_txtNuevoInventarioProductoActionPerformed
 
+    private void btnCancelarVentaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarVentaMouseEntered
+        btnCancelarVenta.setIcon(new ImageIcon(getClass().getResource("/iconos/cancelarB.png")));
+    }//GEN-LAST:event_btnCancelarVentaMouseEntered
+
+    private void btnCancelarVentaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarVentaMouseExited
+        btnCancelarVenta.setIcon(new ImageIcon(getClass().getResource("/iconos/cancelar.png")));
+    }//GEN-LAST:event_btnCancelarVentaMouseExited
+
                                                                                                                                                                                                                               
     /**
      * @param args the command line arguments
@@ -3398,6 +3419,7 @@ public void idVenta() throws ErrorTienda{
     private javax.swing.JButton btnBuscarProducto;
     private javax.swing.JButton btnBuscarProductoVenta;
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnCancelarVenta;
     private javax.swing.JButton btnCompras;
     private javax.swing.JButton btnEliminarProducto;
     private javax.swing.JButton btnEliminarProveedor;
