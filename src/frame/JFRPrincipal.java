@@ -369,6 +369,36 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         
          }
     } 
+        
+        public void LlenarCompra(){
+    try {
+            int idCompra;
+            idCompra = ControladorCompra.ObtenerIdCompra();
+            txtIdCompra.setText(String.valueOf(idCompra+1));
+        //GENERAR FECHA 
+            Date utilDate=new Date();
+        SimpleDateFormat fecha= new SimpleDateFormat("dd'/'MM'/'YYYY");
+            txtFecha.setText(fecha.format(utilDate)); 
+         //AGREGAR PROVEEDORES AL COMBO BOX
+            ArrayList<Proveedor> proveedor = new ArrayList<>();
+             proveedor= ControladorProveedor.Obtener();
+            Object vector[] = new Object[5];
+            if (cmbProveedor.getItemCount()==0) {
+                 Iterator<Proveedor>iterador=proveedor.iterator();
+                    while(iterador.hasNext()){
+                           vector[0]=iterador.next();
+                            vector[1]=iterador.next();
+                            vector[2]=iterador.next();
+                            vector[3]=iterador.next();
+                            vector[4]=iterador.next();
+                            cmbProveedor.addItem(vector[1]);
+          }
+            }
+         
+        } catch (Exception e) {
+        }
+
+}
 public void TableModel(){
 String headers[] = {"Cod Barra","Producto","Cantidad","Costo","Subtotal"};
 tablaModel.setColumnIdentifiers(headers);
@@ -845,11 +875,11 @@ public void idVenta() throws ErrorTienda{
         btnAgregarCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/agregar.png"))); // NOI18N
         btnAgregarCompra.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAgregarCompra.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnAgregarCompraMouseExited(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnAgregarCompraMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAgregarCompraMouseExited(evt);
             }
         });
         btnAgregarCompra.addActionListener(new java.awt.event.ActionListener() {
@@ -968,7 +998,7 @@ public void idVenta() throws ErrorTienda{
         lbl3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Entypo_e776(0)_64.png"))); // NOI18N
         jpnPrimero.add(lbl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 80, -1, -1));
 
-        jpnPrincipal.add(jpnPrimero, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 730, 600));
+        jpnPrincipal.add(jpnPrimero, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 1070, 600));
 
         jpnSegundo.setBackground(new java.awt.Color(0, 0, 0));
         jpnSegundo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -2417,35 +2447,7 @@ public void idVenta() throws ErrorTienda{
         jpnRegistroCompra.setVisible(true);
         jpnCompras.setVisible(false);
         txtCodBarraProd.requestFocus();
-        try {
-            int idCompra;
-            idCompra = ControladorCompra.ObtenerIdCompra();
-            txtIdCompra.setText(String.valueOf(idCompra+1));
-        //GENERAR FECHA 
-            Date utilDate=new Date();
-        SimpleDateFormat fecha= new SimpleDateFormat("dd'/'MM'/'YYYY");
-            txtFecha.setText(fecha.format(utilDate)); 
-         //AGREGAR PROVEEDORES AL COMBO BOX
-           ArrayList<Proveedor> proveedor = new ArrayList<>();
-             proveedor= ControladorProveedor.Obtener();
-          Object vector[] = new Object[5];
-            if (cmbProveedor.getItemCount()==0) {
-                 Iterator<Proveedor>iterador=proveedor.iterator();
-          while(iterador.hasNext()){
-          vector[0]=iterador.next();
-          vector[1]=iterador.next();
-          vector[2]=iterador.next();
-          vector[3]=iterador.next();
-          vector[4]=iterador.next();
-          cmbProveedor.addItem(vector[1]);
-          }
-            }
-         
-        } catch (Exception e) {
-        }
-        
-        
-       
+   
     }//GEN-LAST:event_btnAgregarCompraActionPerformed
     
     private void btnVerDetalleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVerDetalleMouseClicked
@@ -2463,7 +2465,8 @@ public void idVenta() throws ErrorTienda{
         apagado();
         Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnCompras);  
         apagado2();
-        jpnCompras.setVisible(true);
+        jpnRegistroCompra.setVisible(true);
+        LlenarCompra();
     }//GEN-LAST:event_btnComprasMouseClicked
 
     /*  ---- Mover barra ----  */
