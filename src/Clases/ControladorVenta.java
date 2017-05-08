@@ -31,9 +31,6 @@ public class ControladorVenta {
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         
             String Fecha = sdf.format(vn.getFecha());
-            System.out.println("1");
-            
-            
             try{
                 
                 cn = new Conexion();
@@ -41,13 +38,6 @@ public class ControladorVenta {
 //                cn.conexion.close();
                 
                 ControladorVenta.ActualizarInventario(vn.getArticulo()); //actualiza el inventario
-                
-                
-                System.out.println(vn.getArticulo().size());
-                
-                Iterator<DetalleVenta> deta=vn.getArticulo().iterator();
-                Object ara[]=new Object[4];
-             
                 
                 for(DetalleVenta d: vn.getArticulo()){  //inserta el detalle venta de cada detalle
                     
@@ -92,7 +82,6 @@ public class ControladorVenta {
         try{
             cn = new Conexion();
             PreparedStatement consulta;
-            System.out.println(detalleVenta.size());
             for(DetalleVenta d: detalleVenta){ //se recorre detalleventa y calcula la cantidad nueva del inventario
                 
                 int nuevoInventario = (d.getProducto().getInventario()-d.getCantidad());
@@ -101,8 +90,6 @@ public class ControladorVenta {
                 
                 consulta= cn.conexion.prepareStatement("UPDATE productos SET Inventario = ? WHERE CodBarra = ?");
                 consulta.setInt(1, d.getProducto().getInventario());
-                System.out.println(d.getProducto().getCodBarra());
-                System.out.println(d.getProducto().getInventario());
                 consulta.setString(2, d.getProducto().getCodBarra());
                 consulta.executeUpdate();
             }

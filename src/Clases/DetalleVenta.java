@@ -24,20 +24,10 @@ DecimalFormat decimal = new DecimalFormat("0.00");
     public DetalleVenta() {
     }
 
-//    public DetalleVenta(Producto producto, int Cantidad, double PrecioUnitario) {
-//        this.Producto = producto;
-//        this.Cantidad = Cantidad;
-//        this.PrecioUnitario = PrecioUnitario;
-//        
-//    }
     
     
   public void New(String CodBarra, int Cantidad){
         this.Cantidad = Cantidad;
-//        Producto p=new Producto();
-//        
-        
-
           
     }
 
