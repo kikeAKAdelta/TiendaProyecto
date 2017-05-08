@@ -96,7 +96,7 @@ public class ControladorProveedor {
         int IdProveedor=0;   
         cn = new Conexion();
         try {
-        rs = cn.st.executeQuery("SELECT COUNT(IdProveedor) FROM proveedor");
+        rs = cn.st.executeQuery("SELECT MAX(IdProveedor) FROM proveedor");
         
             while(rs.next()){
                 IdProveedor = rs.getInt(1);
