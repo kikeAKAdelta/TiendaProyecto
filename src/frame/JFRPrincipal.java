@@ -193,6 +193,37 @@ public final class JFRPrincipal extends javax.swing.JFrame {
                  }
       }
     }
+    
+    //--------------------llenando tabla de productos----------------
+    
+    public void tablaBuscarProductos(){
+        String codBarra=txtProductosBuscar.getText();
+        DefaultTableModel modeloProductos = new DefaultTableModel();
+        ArrayList<Producto> productos = new ArrayList();
+        Object[] fila = new Object[4];
+        if (codBarra.equals("")) {
+            JOptionPane.showMessageDialog(null, "No ha introducido el codigo de barra o el nombre");
+        }else{
+            String[] campos = new String[] {"CodBarra", "Nombre", "Inventario", "Costo"};
+            try {
+                productos = ControladorProducto.Buscar(codBarra);
+                modeloProductos.setColumnIdentifiers(campos);
+                Iterator<Producto> prod = productos.iterator();
+                while (prod.hasNext()) {
+                    fila[0] = prod.next();
+                    fila[1] = prod.next();
+                    fila[2] = prod.next();
+                    fila[3] = prod.next();
+                    modeloProductos.addRow(fila);
+                    tblProductos.setModel(modeloProductos);
+                }
+            } catch (ErrorTienda ex) {
+                JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+            }
+        }
+    }
+    
+    
     public void tablaProductosVender(){
         //COMPROBAR QUE SE HAYA ELEGIDO UN PRODUCTO
         if(!txtNombreProductoVender.getText().isEmpty()){
@@ -1861,10 +1892,10 @@ public void idVenta() throws ErrorTienda{
             }
         });
         tblProductos.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 tblProductosInputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         tblProductos.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1968,6 +1999,9 @@ public void idVenta() throws ErrorTienda{
         jpnProductos.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, -1));
 
         txtProductosBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtProductosBuscarKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtProductosBuscarKeyTyped(evt);
             }
@@ -2745,30 +2779,7 @@ public void idVenta() throws ErrorTienda{
     }//GEN-LAST:event_txtProductosBuscarKeyTyped
 
     private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
-        String codBarra=txtProductosBuscar.getText();
-        DefaultTableModel modeloProductos = new DefaultTableModel();
-        ArrayList<Producto> productos = new ArrayList();
-        Object[] fila = new Object[4];
-        if (codBarra.equals("")) {
-            JOptionPane.showMessageDialog(null, "No ha introducido el codigo de barra o el nombre");
-        }else{
-            String[] campos = new String[] {"CodBarra", "Nombre", "Inventario", "Costo"};
-            try {
-                productos = ControladorProducto.Buscar(codBarra);
-                modeloProductos.setColumnIdentifiers(campos);
-                Iterator<Producto> prod = productos.iterator();
-                while (prod.hasNext()) {
-                    fila[0] = prod.next();
-                    fila[1] = prod.next();
-                    fila[2] = prod.next();
-                    fila[3] = prod.next();
-                    modeloProductos.addRow(fila);
-                    tblProductos.setModel(modeloProductos);
-                }
-            } catch (ErrorTienda ex) {
-                JOptionPane.showMessageDialog(rootPane, ex.getMessage());
-            }
-        }
+            tablaBuscarProductos();
     }//GEN-LAST:event_btnBuscarProductoActionPerformed
 
     private void tblProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductosMouseClicked
@@ -3397,6 +3408,13 @@ public void idVenta() throws ErrorTienda{
             Logger.getLogger(JFRPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void txtProductosBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProductosBuscarKeyPressed
+        char c=evt.getKeyChar();    
+        if (c == (char) KeyEvent.VK_ENTER) {
+            tablaBuscarProductos();
+        }
+    }//GEN-LAST:event_txtProductosBuscarKeyPressed
 
                                                                                                                                                                                                                               
     /**
