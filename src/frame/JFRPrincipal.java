@@ -1286,6 +1286,7 @@ public void idVenta() throws ErrorTienda{
 
         txtClienteVenta.setEditable(false);
         txtClienteVenta.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        txtClienteVenta.setText("PACMAN");
         txtClienteVenta.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         jPanel44.add(txtClienteVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 30, 280, 30));
 
