@@ -3397,8 +3397,7 @@ public void idVenta() throws ErrorTienda{
         try {
             Proveedor = ControladorProveedor.Buscar(cmbProveedor.getSelectedItem().toString());
             Iterator<Proveedor> prov = Proveedor.iterator();
-            IdProveedor = prov.next();            
-            JOptionPane.showMessageDialog(rootPane, IdProveedor);
+            IdProveedor = prov.next();                       
             if (tblCompra.getRowCount()>0) {
                String IDprov=IdProveedor.toString();
                 for (int i = 0; i < tblCompra.getRowCount(); i++) {
