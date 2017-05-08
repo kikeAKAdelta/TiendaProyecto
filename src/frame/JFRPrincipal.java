@@ -152,6 +152,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         jpnCompras.setVisible(false);
         jpnDetalleCompra.setVisible(false);
         jpnModificarProducto.setVisible(false);
+        pnlPortada.setVisible(false);
     }
     
     //------------------botones desactivados producto-------------
@@ -453,6 +454,50 @@ public void idVenta() throws ErrorTienda{
         btnVentas = new javax.swing.JButton();
         btnProveedores = new javax.swing.JButton();
         btnHome = new javax.swing.JLabel();
+        jpnPrincipal = new javax.swing.JPanel();
+        jpnPrimero = new javax.swing.JPanel();
+        lbl4 = new javax.swing.JLabel();
+        lbl7 = new javax.swing.JLabel();
+        lbl5 = new javax.swing.JLabel();
+        lbl6 = new javax.swing.JLabel();
+        lblMitad = new javax.swing.JLabel();
+        pnlPortada = new javax.swing.JPanel();
+        lbl8 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        lbl3 = new javax.swing.JLabel();
+        jpnSegundo = new javax.swing.JPanel();
+        lbl11 = new javax.swing.JLabel();
+        lbl12 = new javax.swing.JLabel();
+        lbl13 = new javax.swing.JLabel();
+        lbl14 = new javax.swing.JLabel();
+        lbl15 = new javax.swing.JLabel();
+        lblMitad2 = new javax.swing.JLabel();
+        jpnTercero = new javax.swing.JPanel();
+        lbl21 = new javax.swing.JLabel();
+        lbl22 = new javax.swing.JLabel();
+        lbl23 = new javax.swing.JLabel();
+        lbl24 = new javax.swing.JLabel();
+        lbl25 = new javax.swing.JLabel();
+        lblMitad3 = new javax.swing.JLabel();
+        jpnCuarto = new javax.swing.JPanel();
+        lbl31 = new javax.swing.JLabel();
+        lbl32 = new javax.swing.JLabel();
+        lbl33 = new javax.swing.JLabel();
+        lbl34 = new javax.swing.JLabel();
+        lbl35 = new javax.swing.JLabel();
+        lblMitad4 = new javax.swing.JLabel();
+        jpnQuinto = new javax.swing.JPanel();
+        lbl41 = new javax.swing.JLabel();
+        lbl42 = new javax.swing.JLabel();
+        lbl43 = new javax.swing.JLabel();
+        lbl44 = new javax.swing.JLabel();
+        lbl45 = new javax.swing.JLabel();
+        lblMitad5 = new javax.swing.JLabel();
         jpnCompras = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         tblCompras = new javax.swing.JTable();
@@ -493,42 +538,6 @@ public void idVenta() throws ErrorTienda{
         jSeparator36 = new javax.swing.JSeparator();
         lblCostoProd = new javax.swing.JLabel();
         txtCostoProd = new javax.swing.JTextField();
-        jpnPrincipal = new javax.swing.JPanel();
-        jpnPrimero = new javax.swing.JPanel();
-        lbl3 = new javax.swing.JLabel();
-        lbl4 = new javax.swing.JLabel();
-        lbl7 = new javax.swing.JLabel();
-        lbl5 = new javax.swing.JLabel();
-        lbl6 = new javax.swing.JLabel();
-        lblMitad = new javax.swing.JLabel();
-        jpnSegundo = new javax.swing.JPanel();
-        lbl11 = new javax.swing.JLabel();
-        lbl12 = new javax.swing.JLabel();
-        lbl13 = new javax.swing.JLabel();
-        lbl14 = new javax.swing.JLabel();
-        lbl15 = new javax.swing.JLabel();
-        lblMitad2 = new javax.swing.JLabel();
-        jpnTercero = new javax.swing.JPanel();
-        lbl21 = new javax.swing.JLabel();
-        lbl22 = new javax.swing.JLabel();
-        lbl23 = new javax.swing.JLabel();
-        lbl24 = new javax.swing.JLabel();
-        lbl25 = new javax.swing.JLabel();
-        lblMitad3 = new javax.swing.JLabel();
-        jpnCuarto = new javax.swing.JPanel();
-        lbl31 = new javax.swing.JLabel();
-        lbl32 = new javax.swing.JLabel();
-        lbl33 = new javax.swing.JLabel();
-        lbl34 = new javax.swing.JLabel();
-        lbl35 = new javax.swing.JLabel();
-        lblMitad4 = new javax.swing.JLabel();
-        jpnQuinto = new javax.swing.JPanel();
-        lbl41 = new javax.swing.JLabel();
-        lbl42 = new javax.swing.JLabel();
-        lbl43 = new javax.swing.JLabel();
-        lbl44 = new javax.swing.JLabel();
-        lbl45 = new javax.swing.JLabel();
-        lblMitad5 = new javax.swing.JLabel();
         jpnVentas = new javax.swing.JPanel();
         jSeparator2 = new javax.swing.JSeparator();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -808,6 +817,220 @@ public void idVenta() throws ErrorTienda{
 
         getContentPane().add(jpnBarraMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 190, 600));
 
+        jpnPrincipal.setBackground(new java.awt.Color(255, 255, 255));
+        jpnPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jpnPrimero.setBackground(new java.awt.Color(0, 0, 0));
+        jpnPrimero.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl4.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        lbl4.setForeground(new java.awt.Color(255, 255, 255));
+        lbl4.setText("iShop");
+        jpnPrimero.add(lbl4, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 150, 50, -1));
+
+        lbl7.setBackground(new java.awt.Color(153, 153, 153));
+        lbl7.setForeground(new java.awt.Color(102, 102, 102));
+        lbl7.setText("Versión 1.0");
+        lbl7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbl7MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbl7MouseExited(evt);
+            }
+        });
+        jpnPrimero.add(lbl7, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 570, 70, -1));
+
+        lbl5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl5.setForeground(new java.awt.Color(102, 102, 102));
+        lbl5.setText("Te damos la bienvenida a tu");
+        jpnPrimero.add(lbl5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, -1, -1));
+
+        lbl6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl6.setForeground(new java.awt.Color(102, 102, 102));
+        lbl6.setText("nuevo sistema de Tienda.");
+        jpnPrimero.add(lbl6, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 210, -1, 20));
+
+        lblMitad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mitad.jpg"))); // NOI18N
+        jpnPrimero.add(lblMitad, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 600));
+
+        pnlPortada.setBackground(new java.awt.Color(0, 0, 0));
+        pnlPortada.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)), "Desarrolladores", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+        pnlPortada.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/config48.png"))); // NOI18N
+        pnlPortada.add(lbl8, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 50, 50));
+
+        jLabel1.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel1.setText("Gil Menjívar, Sergio Daniel");
+        pnlPortada.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 250, -1));
+
+        jLabel5.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel5.setText("Alegría Arévalo, Ismael Enrique");
+        pnlPortada.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 250, -1));
+
+        jLabel6.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel6.setText("Baños Lobos, Pedro Javier");
+        pnlPortada.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 250, -1));
+
+        jLabel32.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel32.setText("Barrientos Hernández, Ricardo Alberto");
+        pnlPortada.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 250, -1));
+
+        jLabel38.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel38.setText("García López, José Armando");
+        pnlPortada.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 250, -1));
+
+        jLabel39.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel39.setText("García Rodríguez, Oscar Arnoldo");
+        pnlPortada.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 250, -1));
+
+        jpnPrimero.add(pnlPortada, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 400, 290, 160));
+
+        lbl3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Entypo_e776(0)_64.png"))); // NOI18N
+        jpnPrimero.add(lbl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, -1, -1));
+
+        jpnPrincipal.add(jpnPrimero, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 730, 600));
+
+        jpnSegundo.setBackground(new java.awt.Color(0, 0, 0));
+        jpnSegundo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl11.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        lbl11.setForeground(new java.awt.Color(255, 255, 255));
+        lbl11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Entypo_e73d(0)_32.png"))); // NOI18N
+        lbl11.setText("Compras");
+        jpnSegundo.add(lbl11, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 120, -1));
+
+        lbl12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl12.setForeground(new java.awt.Color(102, 102, 102));
+        lbl12.setText("Podrás realizar compras y ");
+        jpnSegundo.add(lbl12, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, -1, -1));
+
+        lbl13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl13.setForeground(new java.awt.Color(102, 102, 102));
+        lbl13.setText("abastecer tu Tienda.");
+        jpnSegundo.add(lbl13, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, -1, 30));
+
+        lbl14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl14.setForeground(new java.awt.Color(102, 102, 102));
+        lbl14.setText("Usa esta opción para manejar");
+        jpnSegundo.add(lbl14, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, 190, -1));
+
+        lbl15.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl15.setForeground(new java.awt.Color(102, 102, 102));
+        lbl15.setText("el sistema de Compras.");
+        jpnSegundo.add(lbl15, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, -1, 30));
+
+        lblMitad2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mitad2.jpg"))); // NOI18N
+        jpnSegundo.add(lblMitad2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 0, 370, 600));
+
+        jpnPrincipal.add(jpnSegundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 730, 600));
+
+        jpnTercero.setBackground(new java.awt.Color(0, 0, 0));
+        jpnTercero.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl21.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        lbl21.setForeground(new java.awt.Color(255, 255, 255));
+        lbl21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Entypo_e789(2)_32.png"))); // NOI18N
+        lbl21.setText("Ventas");
+        jpnTercero.add(lbl21, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 200, 120, -1));
+
+        lbl22.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl22.setForeground(new java.awt.Color(102, 102, 102));
+        lbl22.setText("Podrás manejar los ingresos");
+        jpnTercero.add(lbl22, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 250, -1, -1));
+
+        lbl23.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl23.setForeground(new java.awt.Color(102, 102, 102));
+        lbl23.setText("que obtiene tu tienda.");
+        jpnTercero.add(lbl23, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 260, -1, 30));
+
+        lbl24.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl24.setForeground(new java.awt.Color(102, 102, 102));
+        lbl24.setText("Usa esta opción y maneja");
+        jpnTercero.add(lbl24, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 300, 160, -1));
+
+        lbl25.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl25.setForeground(new java.awt.Color(102, 102, 102));
+        lbl25.setText("el sistema de Ventas.");
+        jpnTercero.add(lbl25, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 310, -1, 30));
+
+        lblMitad3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mitad3.jpg"))); // NOI18N
+        lblMitad3.setText("jLabel2");
+        jpnTercero.add(lblMitad3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 600));
+
+        jpnPrincipal.add(jpnTercero, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 730, 600));
+
+        jpnCuarto.setBackground(new java.awt.Color(0, 0, 0));
+        jpnCuarto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl31.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        lbl31.setForeground(new java.awt.Color(255, 255, 255));
+        lbl31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Entypo_e738(1)_32.png"))); // NOI18N
+        lbl31.setText("Productos");
+        jpnCuarto.add(lbl31, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 130, -1));
+
+        lbl32.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl32.setForeground(new java.awt.Color(102, 102, 102));
+        lbl32.setText("Podrás manejar los productos");
+        jpnCuarto.add(lbl32, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, 190, -1));
+
+        lbl33.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl33.setForeground(new java.awt.Color(102, 102, 102));
+        lbl33.setText("de tu sistema de Tienda.");
+        jpnCuarto.add(lbl33, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 260, -1, 30));
+
+        lbl34.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl34.setForeground(new java.awt.Color(102, 102, 102));
+        lbl34.setText("Usa esta opción para modificar,");
+        jpnCuarto.add(lbl34, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, 200, -1));
+
+        lbl35.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl35.setForeground(new java.awt.Color(102, 102, 102));
+        lbl35.setText("agregar o eliminar Productos.");
+        jpnCuarto.add(lbl35, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 190, 30));
+
+        lblMitad4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mitad4.jpg"))); // NOI18N
+        jpnCuarto.add(lblMitad4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 0, 360, 600));
+
+        jpnPrincipal.add(jpnCuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 730, 600));
+
+        jpnQuinto.setBackground(new java.awt.Color(0, 0, 0));
+        jpnQuinto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl41.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        lbl41.setForeground(new java.awt.Color(255, 255, 255));
+        lbl41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Entypo_e78e(0)_32.png"))); // NOI18N
+        lbl41.setText("Proveedores");
+        jpnQuinto.add(lbl41, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 200, 160, -1));
+
+        lbl42.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl42.setForeground(new java.awt.Color(102, 102, 102));
+        lbl42.setText("¿Deseas nuevas alianzas?");
+        jpnQuinto.add(lbl42, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 250, -1, -1));
+
+        lbl43.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl43.setForeground(new java.awt.Color(102, 102, 102));
+        lbl43.setText("¡Estamos para eso!");
+        jpnQuinto.add(lbl43, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 260, -1, 30));
+
+        lbl44.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl44.setForeground(new java.awt.Color(102, 102, 102));
+        lbl44.setText("Usa esta opción y agrega");
+        jpnQuinto.add(lbl44, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 300, 160, -1));
+
+        lbl45.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbl45.setForeground(new java.awt.Color(102, 102, 102));
+        lbl45.setText("a tus nuevos proveedores.");
+        jpnQuinto.add(lbl45, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 310, -1, 30));
+
+        lblMitad5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mitad5.jpg"))); // NOI18N
+        jpnQuinto.add(lblMitad5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 600));
+
+        jpnPrincipal.add(jpnQuinto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 730, 600));
+
+        getContentPane().add(jpnPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 55, 750, 595));
+
         jpnCompras.setName("jpnCompras"); // NOI18N
         jpnCompras.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1037,179 +1260,6 @@ public void idVenta() throws ErrorTienda{
         jpnRegistroCompra.add(txtCostoProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 190, 80, 30));
 
         getContentPane().add(jpnRegistroCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 730, 600));
-
-        jpnPrincipal.setBackground(new java.awt.Color(255, 255, 255));
-        jpnPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jpnPrimero.setBackground(new java.awt.Color(0, 0, 0));
-        jpnPrimero.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lbl3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Entypo_e776(0)_64.png"))); // NOI18N
-        jpnPrimero.add(lbl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, 70, 60));
-
-        lbl4.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        lbl4.setForeground(new java.awt.Color(255, 255, 255));
-        lbl4.setText("iShop");
-        jpnPrimero.add(lbl4, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 150, 50, -1));
-
-        lbl7.setBackground(new java.awt.Color(153, 153, 153));
-        lbl7.setForeground(new java.awt.Color(102, 102, 102));
-        lbl7.setText("Versión 1.0");
-        jpnPrimero.add(lbl7, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 570, 70, -1));
-
-        lbl5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl5.setForeground(new java.awt.Color(102, 102, 102));
-        lbl5.setText("Te damos la bienvenida a tu");
-        jpnPrimero.add(lbl5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, -1, -1));
-
-        lbl6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl6.setForeground(new java.awt.Color(102, 102, 102));
-        lbl6.setText("nuevo sistema de Tienda.");
-        jpnPrimero.add(lbl6, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 210, -1, 20));
-
-        lblMitad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mitad.jpg"))); // NOI18N
-        jpnPrimero.add(lblMitad, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 600));
-
-        jpnPrincipal.add(jpnPrimero, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 730, 600));
-
-        jpnSegundo.setBackground(new java.awt.Color(0, 0, 0));
-        jpnSegundo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lbl11.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        lbl11.setForeground(new java.awt.Color(255, 255, 255));
-        lbl11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Entypo_e73d(0)_32.png"))); // NOI18N
-        lbl11.setText("Compras");
-        jpnSegundo.add(lbl11, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 120, -1));
-
-        lbl12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl12.setForeground(new java.awt.Color(102, 102, 102));
-        lbl12.setText("Podrás realizar compras y ");
-        jpnSegundo.add(lbl12, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, -1, -1));
-
-        lbl13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl13.setForeground(new java.awt.Color(102, 102, 102));
-        lbl13.setText("abastecer tu Tienda.");
-        jpnSegundo.add(lbl13, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, -1, 30));
-
-        lbl14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl14.setForeground(new java.awt.Color(102, 102, 102));
-        lbl14.setText("Usa esta opción para manejar");
-        jpnSegundo.add(lbl14, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, 190, -1));
-
-        lbl15.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl15.setForeground(new java.awt.Color(102, 102, 102));
-        lbl15.setText("el sistema de Compras.");
-        jpnSegundo.add(lbl15, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, -1, 30));
-
-        lblMitad2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mitad2.jpg"))); // NOI18N
-        jpnSegundo.add(lblMitad2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 0, 370, 600));
-
-        jpnPrincipal.add(jpnSegundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 730, 600));
-
-        jpnTercero.setBackground(new java.awt.Color(0, 0, 0));
-        jpnTercero.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lbl21.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        lbl21.setForeground(new java.awt.Color(255, 255, 255));
-        lbl21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Entypo_e789(2)_32.png"))); // NOI18N
-        lbl21.setText("Ventas");
-        jpnTercero.add(lbl21, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 200, 120, -1));
-
-        lbl22.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl22.setForeground(new java.awt.Color(102, 102, 102));
-        lbl22.setText("Podrás manejar los ingresos");
-        jpnTercero.add(lbl22, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 250, -1, -1));
-
-        lbl23.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl23.setForeground(new java.awt.Color(102, 102, 102));
-        lbl23.setText("que obtiene tu tienda.");
-        jpnTercero.add(lbl23, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 260, -1, 30));
-
-        lbl24.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl24.setForeground(new java.awt.Color(102, 102, 102));
-        lbl24.setText("Usa esta opción y maneja");
-        jpnTercero.add(lbl24, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 300, 160, -1));
-
-        lbl25.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl25.setForeground(new java.awt.Color(102, 102, 102));
-        lbl25.setText("el sistema de Ventas.");
-        jpnTercero.add(lbl25, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 310, -1, 30));
-
-        lblMitad3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mitad3.jpg"))); // NOI18N
-        lblMitad3.setText("jLabel2");
-        jpnTercero.add(lblMitad3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 600));
-
-        jpnPrincipal.add(jpnTercero, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 730, 600));
-
-        jpnCuarto.setBackground(new java.awt.Color(0, 0, 0));
-        jpnCuarto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lbl31.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        lbl31.setForeground(new java.awt.Color(255, 255, 255));
-        lbl31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Entypo_e738(1)_32.png"))); // NOI18N
-        lbl31.setText("Productos");
-        jpnCuarto.add(lbl31, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 130, -1));
-
-        lbl32.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl32.setForeground(new java.awt.Color(102, 102, 102));
-        lbl32.setText("Podrás manejar los productos");
-        jpnCuarto.add(lbl32, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, 190, -1));
-
-        lbl33.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl33.setForeground(new java.awt.Color(102, 102, 102));
-        lbl33.setText("de tu sistema de Tienda.");
-        jpnCuarto.add(lbl33, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 260, -1, 30));
-
-        lbl34.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl34.setForeground(new java.awt.Color(102, 102, 102));
-        lbl34.setText("Usa esta opción para modificar,");
-        jpnCuarto.add(lbl34, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, 200, -1));
-
-        lbl35.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl35.setForeground(new java.awt.Color(102, 102, 102));
-        lbl35.setText("agregar o eliminar Productos.");
-        jpnCuarto.add(lbl35, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 190, 30));
-
-        lblMitad4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mitad4.jpg"))); // NOI18N
-        jpnCuarto.add(lblMitad4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 0, 360, 600));
-
-        jpnPrincipal.add(jpnCuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 730, 600));
-
-        jpnQuinto.setBackground(new java.awt.Color(0, 0, 0));
-        jpnQuinto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lbl41.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        lbl41.setForeground(new java.awt.Color(255, 255, 255));
-        lbl41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Entypo_e78e(0)_32.png"))); // NOI18N
-        lbl41.setText("Proveedores");
-        jpnQuinto.add(lbl41, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 200, 160, -1));
-
-        lbl42.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl42.setForeground(new java.awt.Color(102, 102, 102));
-        lbl42.setText("¿Deseas nuevas alianzas?");
-        jpnQuinto.add(lbl42, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 250, -1, -1));
-
-        lbl43.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl43.setForeground(new java.awt.Color(102, 102, 102));
-        lbl43.setText("¡Estamos para eso!");
-        jpnQuinto.add(lbl43, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 260, -1, 30));
-
-        lbl44.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl44.setForeground(new java.awt.Color(102, 102, 102));
-        lbl44.setText("Usa esta opción y agrega");
-        jpnQuinto.add(lbl44, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 300, 160, -1));
-
-        lbl45.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbl45.setForeground(new java.awt.Color(102, 102, 102));
-        lbl45.setText("a tus nuevos proveedores.");
-        jpnQuinto.add(lbl45, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 310, -1, 30));
-
-        lblMitad5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mitad5.jpg"))); // NOI18N
-        jpnQuinto.add(lblMitad5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 600));
-
-        jpnPrincipal.add(jpnQuinto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 730, 600));
-
-        getContentPane().add(jpnPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 55, 750, 595));
 
         jpnVentas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -3475,6 +3525,14 @@ public void idVenta() throws ErrorTienda{
         }
     }//GEN-LAST:event_txtProductosBuscarKeyPressed
 
+    private void lbl7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl7MouseEntered
+        pnlPortada.setVisible(true);
+    }//GEN-LAST:event_lbl7MouseEntered
+
+    private void lbl7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl7MouseExited
+        pnlPortada.setVisible(false);
+    }//GEN-LAST:event_lbl7MouseExited
+
                                                                                                                                                                                                                               
     /**
      * @param args the command line arguments
@@ -3544,6 +3602,7 @@ public void idVenta() throws ErrorTienda{
     private javax.swing.JButton btnVerDetalle;
     private javax.swing.ButtonGroup btngFiltroProductos;
     private javax.swing.JComboBox cmbProveedor;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -3568,17 +3627,22 @@ public void idVenta() throws ErrorTienda{
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -3689,6 +3753,7 @@ public void idVenta() throws ErrorTienda{
     private javax.swing.JLabel lbl5;
     private javax.swing.JLabel lbl6;
     private javax.swing.JLabel lbl7;
+    private javax.swing.JLabel lbl8;
     private javax.swing.JLabel lblBotonCerrar;
     private javax.swing.JLabel lblCantidad;
     private javax.swing.JLabel lblCodBarraProd;
@@ -3710,6 +3775,7 @@ public void idVenta() throws ErrorTienda{
     private javax.swing.JLabel lblProveedores5;
     private javax.swing.JLabel lblProveedores6;
     private javax.swing.JLabel lblTotal;
+    private javax.swing.JPanel pnlPortada;
     private javax.swing.JTable tblCompra;
     private javax.swing.JTable tblCompras;
     private javax.swing.JTable tblDetalleCompra;
