@@ -904,7 +904,7 @@ public void idVenta() throws ErrorTienda{
         lbl4.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         lbl4.setForeground(new java.awt.Color(255, 255, 255));
         lbl4.setText("iShop");
-        jpnPrimero.add(lbl4, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 150, 50, -1));
+        jpnPrimero.add(lbl4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 150, 50, -1));
 
         lbl7.setBackground(new java.awt.Color(153, 153, 153));
         lbl7.setForeground(new java.awt.Color(102, 102, 102));
@@ -922,22 +922,22 @@ public void idVenta() throws ErrorTienda{
         lbl5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lbl5.setForeground(new java.awt.Color(102, 102, 102));
         lbl5.setText("Te damos la bienvenida a tu");
-        jpnPrimero.add(lbl5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, -1, -1));
+        jpnPrimero.add(lbl5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 190, -1, -1));
 
         lbl6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lbl6.setForeground(new java.awt.Color(102, 102, 102));
         lbl6.setText("nuevo sistema de Tienda.");
-        jpnPrimero.add(lbl6, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 210, -1, 20));
+        jpnPrimero.add(lbl6, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 210, -1, 20));
 
         lblMitad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mitad.jpg"))); // NOI18N
         jpnPrimero.add(lblMitad, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 600));
 
         pnlPortada.setBackground(new java.awt.Color(0, 0, 0));
-        pnlPortada.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)), "Desarrolladores", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+        pnlPortada.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)), "Desarrolladores", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
         pnlPortada.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lbl8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/config48.png"))); // NOI18N
-        pnlPortada.add(lbl8, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 50, 50));
+        pnlPortada.add(lbl8, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, 50, 50));
 
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setText("Gil Menjívar, Sergio Daniel");
@@ -963,10 +963,10 @@ public void idVenta() throws ErrorTienda{
         jLabel39.setText("García Rodríguez, Oscar Arnoldo");
         pnlPortada.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 250, -1));
 
-        jpnPrimero.add(pnlPortada, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 400, 290, 160));
+        jpnPrimero.add(pnlPortada, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 400, 350, 160));
 
         lbl3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Entypo_e776(0)_64.png"))); // NOI18N
-        jpnPrimero.add(lbl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, -1, -1));
+        jpnPrimero.add(lbl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 80, -1, -1));
 
         jpnPrincipal.add(jpnPrimero, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 730, 600));
 
