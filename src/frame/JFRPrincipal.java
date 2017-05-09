@@ -540,7 +540,6 @@ public void idVenta() throws ErrorTienda{
         lblMitad5 = new javax.swing.JLabel();
         jpnRegistroCompra = new javax.swing.JPanel();
         btnGuardar = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
         txtIdCompra = new javax.swing.JTextField();
         cmbProveedor = new javax.swing.JComboBox();
         jScrollPane6 = new javax.swing.JScrollPane();
@@ -1144,11 +1143,11 @@ public void idVenta() throws ErrorTienda{
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/guardarprov.png"))); // NOI18N
         btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnGuardarMouseEntered(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnGuardarMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnGuardarMouseEntered(evt);
             }
         });
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -1156,22 +1155,7 @@ public void idVenta() throws ErrorTienda{
                 btnGuardarActionPerformed(evt);
             }
         });
-        jpnRegistroCompra.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 540, 110, 30));
-
-        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/atras.png"))); // NOI18N
-        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCancelarMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnCancelarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnCancelarMouseExited(evt);
-            }
-        });
-        jpnRegistroCompra.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 540, 110, 30));
+        jpnRegistroCompra.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 540, 110, 30));
 
         txtIdCompra.setEditable(false);
         jpnRegistroCompra.add(txtIdCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 60, 30));
@@ -1197,6 +1181,8 @@ public void idVenta() throws ErrorTienda{
         jScrollPane6.setViewportView(tblCompra);
 
         jpnRegistroCompra.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 650, 200));
+
+        txtTotal.setEditable(false);
         jpnRegistroCompra.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 500, 100, 40));
 
         txtFecha.setEditable(false);
@@ -1244,7 +1230,7 @@ public void idVenta() throws ErrorTienda{
                 txtCodBarraProdKeyTyped(evt);
             }
         });
-        jpnRegistroCompra.add(txtCodBarraProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 120, 30));
+        jpnRegistroCompra.add(txtCodBarraProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 120, 30));
 
         lblNomProd.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblNomProd.setText("Producto:");
@@ -1280,14 +1266,14 @@ public void idVenta() throws ErrorTienda{
 
         lblCostoProd.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblCostoProd.setText("Costo:");
-        jpnRegistroCompra.add(lblCostoProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 194, 40, 20));
+        jpnRegistroCompra.add(lblCostoProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 194, 60, 20));
 
         txtCostoProd.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCostoProdKeyTyped(evt);
             }
         });
-        jpnRegistroCompra.add(txtCostoProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 190, 80, 30));
+        jpnRegistroCompra.add(txtCostoProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 190, 80, 30));
 
         getContentPane().add(jpnRegistroCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 730, 600));
 
@@ -1442,11 +1428,11 @@ public void idVenta() throws ErrorTienda{
         jpnVentas.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(617, 465, 40, 20));
 
         txtCodigoBarraVender.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtCodigoBarraVenderKeyPressed(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCodigoBarraVenderKeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCodigoBarraVenderKeyPressed(evt);
             }
         });
         jpnVentas.add(txtCodigoBarraVender, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 140, 40));
@@ -1981,10 +1967,10 @@ public void idVenta() throws ErrorTienda{
             }
         });
         tblProductos.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 tblProductosInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         tblProductos.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -2088,11 +2074,11 @@ public void idVenta() throws ErrorTienda{
         jpnProductos.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, -1));
 
         txtProductosBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtProductosBuscarKeyPressed(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtProductosBuscarKeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtProductosBuscarKeyPressed(evt);
             }
         });
         jpnProductos.add(txtProductosBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 430, 30));
@@ -2456,11 +2442,6 @@ public void idVenta() throws ErrorTienda{
         
     }//GEN-LAST:event_btnVerDetalleMouseClicked
 
-    private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
-        jpnCompras.setVisible(true);
-        jpnRegistroCompra.setVisible(false);
-    }//GEN-LAST:event_btnCancelarMouseClicked
-
     private void btnComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnComprasMouseClicked
         apagado();
         Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnCompras);  
@@ -2552,14 +2533,6 @@ public void idVenta() throws ErrorTienda{
     private void btnVenderMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVenderMouseExited
         btnVender.setIcon(new ImageIcon(getClass().getResource("/iconos/vender.png")));
     }//GEN-LAST:event_btnVenderMouseExited
-
-    private void btnCancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseEntered
-        btnCancelar.setIcon(new ImageIcon(getClass().getResource("/iconos/atrasB.png")));
-    }//GEN-LAST:event_btnCancelarMouseEntered
-
-    private void btnCancelarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseExited
-        btnCancelar.setIcon(new ImageIcon(getClass().getResource("/iconos/atras.png")));
-    }//GEN-LAST:event_btnCancelarMouseExited
 
     private void btnGuardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseEntered
         btnGuardar.setIcon(new ImageIcon(getClass().getResource("/iconos/guardarprovB.png")));
@@ -3189,7 +3162,24 @@ public void idVenta() throws ErrorTienda{
 
     private void txtCodBarraProdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodBarraProdKeyTyped
         // TODO add your handling code here:
-        
+        char ch = evt.getKeyChar();
+    if(txtCodBarraProd.getText().length()>=13){
+               evt.consume();
+        }else{
+        if (ch < '0' || ch > '9') {
+            
+                if (ch != (char) KeyEvent.VK_BEGIN) {
+                    if (ch != (char) KeyEvent.VK_BACK_SPACE) {
+                        if (ch != (char) KeyEvent.VK_DELETE) {
+                            
+                            evt.consume();
+                            JOptionPane.showMessageDialog(null, "Solo Numeros", "Error", JOptionPane.ERROR_MESSAGE);
+                        
+                    }
+                }
+                }
+        }   
+    }
          char c = evt.getKeyChar();               
                  if (c == (char) KeyEvent.VK_ENTER) {
                     String codBarra=txtCodBarraProd.getText();
@@ -3223,24 +3213,44 @@ public void idVenta() throws ErrorTienda{
 
     private void txtCostoProdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostoProdKeyTyped
         // TODO add your handling code here:
+        int ch=(int) evt.getKeyChar();
         
+        if ((ch >=48 && ch<=57)  || (ch==46) || (ch==8) || (ch== (char)KeyEvent.VK_BACK_SPACE) || (ch== (char)KeyEvent.VK_ENTER)) {
+            if (ch==46) {
+                String cadena=txtCostoProductos.getText();
+            int tamanio=cadena.length();
+            for (int i = 0; i <= tamanio; i++) {
+                if (cadena.contains(".")) {
+                    evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+                    getToolkit().beep();
+                    evt.consume();
+                }
+            }
+            }
+        }else{
+            evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+            getToolkit().beep();
+            evt.consume();
+        }
         //AGREGAR COMPRAS A LA TABLA
         char c = evt.getKeyChar();
         if (c == (char) KeyEvent.VK_ENTER) {
             Producto pr = new Producto();
             
             if (exprod==false){
-            pr.setCodBarra(txtCodBarraProd.getText());
-             pr.setNombre(txtNomProd.getText());
-             pr.setInventario(Integer.parseInt(txtCantidad.getText()));
-             pr.setCosto(Double.parseDouble(txtCostoProd.getText()));
-                try {
-                    ControladorProducto.Agregar(pr);
-                } catch (ErrorTienda ex) {
-                    Logger.getLogger(JFRPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-                }
-             exprod=true;
-            }
+                pr.setCodBarra(txtCodBarraProd.getText());
+                pr.setNombre(txtNomProd.getText());
+                pr.setInventario(Integer.parseInt(txtCantidad.getText()));
+                pr.setCosto(Double.parseDouble(txtCostoProd.getText()));
+                    try {
+                        ControladorProducto.Agregar(pr);
+                    } catch (ErrorTienda ex) {
+                        Logger.getLogger(JFRPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                 exprod=true;
+                 txtNomProd.setEditable(false);
+                 JOptionPane.showMessageDialog(rootPane, "Producto Agregado");
+            }else{
             String fila[]  = new String[5];
             fila[0]=txtCodBarraProd.getText();
             fila[1]=txtNomProd.getText();
@@ -3261,11 +3271,11 @@ public void idVenta() throws ErrorTienda{
             double total=0;
             while(iteraciones<filas){
                total+=Double.parseDouble(String.valueOf(tablaModel.getValueAt(iteraciones, 4)));
-               iteraciones++;
-            }
+               iteraciones++;}
+            
             double totalFinal=Double.parseDouble(decimal.format(total));
-            txtTotal.setText(""+totalFinal);
-
+            txtTotal.setText("$"+totalFinal);
+            }
         }   
     }//GEN-LAST:event_txtCostoProdKeyTyped
 
@@ -3390,11 +3400,26 @@ public void idVenta() throws ErrorTienda{
 
     private void txtNomProdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomProdKeyTyped
         // TODO add your handling code here:
-         char c = evt.getKeyChar();               
+         char ch = evt.getKeyChar();               
 
-        if (c == (char) KeyEvent.VK_ENTER) {
+        if (ch == (char) KeyEvent.VK_ENTER) {
         txtCantidad.requestFocus();
+        
         }
+         int c=(int) evt.getKeyChar();
+         char mayu=evt.getKeyChar();
+         
+         if ((c>=65 && c<=90) || (c>=97 && c<=122)  || (c==32) || (c== (char)KeyEvent.VK_BACK_SPACE) || (c== (char)KeyEvent.VK_ENTER)) {
+             if (Character.isLowerCase(mayu)) {
+                 String cadena=(""+mayu).toUpperCase();
+                 mayu=cadena.charAt(0);
+                 evt.setKeyChar(mayu);
+             }
+        }else{
+             evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+            getToolkit().beep();
+            evt.consume();
+         }
     }//GEN-LAST:event_txtNomProdKeyTyped
 
     private void txtCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyTyped
@@ -3482,13 +3507,17 @@ public void idVenta() throws ErrorTienda{
                     proveedor.setDireccion(llenarProveedor[2].toString());
                     proveedor.setNIT(llenarProveedor[3].toString());
                     
+                String total="";
                 
+                for (int j = 1; j < txtTotal.getText().length(); j++) {
+                    total = total + txtTotal.getText().charAt(j);
+                }
  
                compra.setIdCompra(Integer.parseInt(txtIdCompra.getText()));
                compra.setPROVEEDOR(proveedor);
                compra.setFecha(formato.format(fechaActual));
                compra.setARTICULOS(Articulos);
-               compra.setTotal(Double.parseDouble(txtTotal.getText()));
+               compra.setTotal(Double.parseDouble(total));
                
                Object [][] detallesCompra;
             
@@ -3501,6 +3530,7 @@ public void idVenta() throws ErrorTienda{
                 detallesCompra[x][3]=Double.parseDouble(String.valueOf(tablaModel.getValueAt(x, 3)));
             }
                ControladorCompra.Agregar(compra, detallesCompra);
+               ControladorCompra.ActualizarInventario(detallesCompra);
                JOptionPane.showMessageDialog(rootPane, "Compra agregada con exito");
             }
             
@@ -3584,7 +3614,6 @@ public void idVenta() throws ErrorTienda{
     private javax.swing.JButton btnAtrasProveedores;
     private javax.swing.JButton btnBuscarProducto;
     private javax.swing.JButton btnBuscarProductoVenta;
-    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCancelarVenta;
     private javax.swing.JButton btnCompras;
     private javax.swing.JButton btnEliminarProducto;
