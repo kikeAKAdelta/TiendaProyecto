@@ -3171,10 +3171,12 @@ public void idVenta() throws ErrorTienda{
                 if (ch != (char) KeyEvent.VK_BEGIN) {
                     if (ch != (char) KeyEvent.VK_BACK_SPACE) {
                         if (ch != (char) KeyEvent.VK_DELETE) {
+                            if(ch != (char) KeyEvent.VK_ENTER){
                             
                             evt.consume();
                             JOptionPane.showMessageDialog(null, "Solo Numeros", "Error", JOptionPane.ERROR_MESSAGE);
-                        
+                            
+                            }
                     }
                 }
                 }
