@@ -45,7 +45,7 @@ public class ControladorProducto {
         try {
             cn=new Conexion();
             cn.st.executeUpdate("DELETE FROM productos WHERE CodBarra='"+pr.getCodBarra()+"'");
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new ErrorTienda("Class ControladorProducto/Eliminar",e.getMessage());
         }
     }
