@@ -1511,9 +1511,7 @@ public void idVenta() throws ErrorTienda{
         jLabel20.setText("ID Venta");
         jPanel44.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 70, -1));
 
-        txtClienteVenta.setEditable(false);
         txtClienteVenta.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        txtClienteVenta.setText("PACMAN");
         txtClienteVenta.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         jPanel44.add(txtClienteVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 30, 280, 30));
 
@@ -3066,7 +3064,7 @@ public void idVenta() throws ErrorTienda{
          int c=(int) evt.getKeyChar();
          char mayu=evt.getKeyChar();
          
-         if ((c>=65 && c<=90) || (c>=97 && c<=122)  || (c==32) || (c== (char)KeyEvent.VK_BACK_SPACE) || (c== (char)KeyEvent.VK_ENTER)) {
+         if ((c>=65 && c<=90) || (c>=97 && c<=122)  || (c==32) || (c== (char)KeyEvent.VK_BACK_SPACE) || (c== (char)KeyEvent.VK_ENTER) || (c== (char)KeyEvent.VK_PERIOD)) {
              if (Character.isLowerCase(mayu)) {
                  String cadena=(""+mayu).toUpperCase();
                  mayu=cadena.charAt(0);
@@ -3100,7 +3098,7 @@ public void idVenta() throws ErrorTienda{
          int c=(int) evt.getKeyChar();
          char mayu=evt.getKeyChar();
          
-         if ((c>=65 && c<=90) || (c>=97 && c<=122)  || (c==32) || (c== (char)KeyEvent.VK_BACK_SPACE) || (c== (char)KeyEvent.VK_ENTER)){
+         if ((c>=65 && c<=90) || (c>=97 && c<=122)  || (c==32) || (c== (char)KeyEvent.VK_BACK_SPACE) || (c== (char)KeyEvent.VK_ENTER)  || (c== (char)KeyEvent.VK_PERIOD)){
              if (Character.isLowerCase(mayu)) {
                  String cadena=(""+mayu).toUpperCase();
                  mayu=cadena.charAt(0);
