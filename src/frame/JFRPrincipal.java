@@ -3394,25 +3394,24 @@ public void idVenta() throws ErrorTienda{
 
     private void txtCostoProdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostoProdKeyTyped
         // TODO add your handling code here:
-        int ch=(int) evt.getKeyChar();
+        Character s;
+        
         boolean encontrado = false;
-        if ((ch >=48 && ch<=57)  || (ch==46) || (ch==8) || (ch== (char)KeyEvent.VK_BACK_SPACE) || (ch== (char)KeyEvent.VK_ENTER)) {
-            if (ch==46) {
-                String cadena=txtCostoProductos.getText();
-            int tamanio=cadena.length();
-            for (int i = 0; i <= tamanio; i++) {
-                if (cadena.contains(".")) {
-                    evt.setKeyChar((char) KeyEvent.VK_CLEAR);
-                    getToolkit().beep();
-                    evt.consume();
-                }
-            }
-            }
-        }else{
-            evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+        s = evt.getKeyChar();
+        if (txtCostoProd.getText().length()==0) {
+            if (!Character.isDigit(s) || s == KeyEvent.VK_0) {
             getToolkit().beep();
             evt.consume();
         }
+        }else{
+        
+        
+        
+        
+        if (!Character.isDigit(s) && s != KeyEvent.VK_PERIOD) {
+            getToolkit().beep();
+            evt.consume();
+        }}
         //AGREGAR COMPRAS A LA TABLA
         char c = evt.getKeyChar();
         if (c == (char) KeyEvent.VK_ENTER) {
@@ -3477,8 +3476,9 @@ public void idVenta() throws ErrorTienda{
 
                 double totalFinal=Double.parseDouble(decimal.format(total));
                 txtTotal.setText("$"+totalFinal);
-            }
-        }   
+            
+        }
+        }
     }//GEN-LAST:event_txtCostoProdKeyTyped
 
     private void txtNuevoCodBarraProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNuevoCodBarraProductoKeyTyped
@@ -3629,7 +3629,10 @@ public void idVenta() throws ErrorTienda{
           char c = evt.getKeyChar();               
 
         if (c == (char) KeyEvent.VK_ENTER) {
-        txtCostoProd.requestFocus();
+            if (txtCantidad.getText().equals("0")) {
+                JOptionPane.showMessageDialog(rootPane, "Cantidad no puede ser cero");
+            }else{
+        txtCostoProd.requestFocus();}
         }
     }//GEN-LAST:event_txtCantidadKeyTyped
 
@@ -3733,6 +3736,7 @@ public void idVenta() throws ErrorTienda{
             }
                ControladorCompra.Agregar(compra, detallesCompra);
                ControladorCompra.ActualizarInventario(detallesCompra);
+               ControladorCompra.ActualizarPrecioPromedioProducto(Articulos);
                JOptionPane.showMessageDialog(rootPane, "Compra agregada con exito");
             }
             
