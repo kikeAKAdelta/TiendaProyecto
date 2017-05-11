@@ -3067,7 +3067,7 @@ public void idVenta() throws ErrorTienda{
          int c=(int) evt.getKeyChar();
          char mayu=evt.getKeyChar();
          
-         if ((c>=65 && c<=90) || (c>=97 && c<=122)  || (c==32) || (c== (char)KeyEvent.VK_BACK_SPACE) || (c== (char)KeyEvent.VK_ENTER)) {
+         if ((c>=65 && c<=90) || (c>=97 && c<=122)  || (c==32) || (c== (char)KeyEvent.VK_BACK_SPACE) || (c== (char)KeyEvent.VK_ENTER) || (c== (char)KeyEvent.VK_PERIOD)) {
              if (Character.isLowerCase(mayu)) {
                  String cadena=(""+mayu).toUpperCase();
                  mayu=cadena.charAt(0);
@@ -3101,7 +3101,7 @@ public void idVenta() throws ErrorTienda{
          int c=(int) evt.getKeyChar();
          char mayu=evt.getKeyChar();
          
-         if ((c>=65 && c<=90) || (c>=97 && c<=122)  || (c==32) || (c== (char)KeyEvent.VK_BACK_SPACE) || (c== (char)KeyEvent.VK_ENTER)){
+         if ((c>=65 && c<=90) || (c>=97 && c<=122)  || (c==32) || (c== (char)KeyEvent.VK_BACK_SPACE) || (c== (char)KeyEvent.VK_ENTER)  || (c== (char)KeyEvent.VK_PERIOD)){
              if (Character.isLowerCase(mayu)) {
                  String cadena=(""+mayu).toUpperCase();
                  mayu=cadena.charAt(0);
