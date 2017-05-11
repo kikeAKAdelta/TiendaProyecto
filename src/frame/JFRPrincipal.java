@@ -2762,6 +2762,7 @@ public void idVenta() throws ErrorTienda{
                 
             
             Producto eliminar=new Producto();
+            ControladorProducto controlador=new ControladorProducto();
             DefaultTableModel modeloProductos=(DefaultTableModel) tblProductos.getModel();
             
 
@@ -2778,8 +2779,14 @@ public void idVenta() throws ErrorTienda{
 
             try {
                 ControladorProducto.Eliminar(eliminar);
-                modeloProductos.removeRow(fila);
-                JOptionPane.showMessageDialog(null, "El registro fue eliminado con exito");
+                if (ControladorProducto.isCambio()) {
+                    JOptionPane.showMessageDialog(null, "No puede eliminar este producto porque tiene registros vigentes");
+                }else{
+                    modeloProductos.removeRow(fila);
+                    txtProductosBuscar.setText("");
+                    JOptionPane.showMessageDialog(null, "El registro fue eliminado con exito");
+                }
+                
             } catch (ErrorTienda ex) {
                 
             }
