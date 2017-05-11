@@ -422,6 +422,8 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         }
 
 }
+        
+        
 public void TableModel(){
 String headers[] = {"Cod Barra","Producto","Cantidad","Costo","Subtotal"};
 tablaModel.setColumnIdentifiers(headers);
@@ -440,6 +442,17 @@ public void eliminarProductos(){
         
         
     }
+
+public void eliminarCompras(){
+    int fila = tblCompra.getSelectedRow();
+    if (fila != -1) {
+        int opcion1=JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea eliminar el producto seleccionado?", "Eliminar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, new ImageIcon("src/iconos/pregunta.png"));
+    
+    if (opcion1 == 0) {
+        tablaModel.removeRow(tblCompra.getSelectedRow());
+        
+    }}
+}
 public void guardarVenta() throws ErrorTienda, SQLException{
     Date utilDate=new Date();
         Clases.Venta vn;
@@ -1252,11 +1265,11 @@ public void idVenta() throws ErrorTienda{
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/guardarprov.png"))); // NOI18N
         btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnGuardarMouseEntered(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnGuardarMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnGuardarMouseEntered(evt);
             }
         });
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -1287,6 +1300,14 @@ public void idVenta() throws ErrorTienda{
             }
         ));
         tblCompra.getTableHeader().setReorderingAllowed(false);
+        tblCompra.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tblCompraKeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tblCompraKeyPressed(evt);
+            }
+        });
         jScrollPane6.setViewportView(tblCompra);
 
         jpnRegistroCompra.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 650, 200));
@@ -1467,11 +1488,11 @@ public void idVenta() throws ErrorTienda{
         txtCantidadVender.setText("  1");
         txtCantidadVender.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtCantidadVender.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtCantidadVenderKeyPressed(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCantidadVenderKeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCantidadVenderKeyPressed(evt);
             }
         });
         jpnVentas.add(txtCantidadVender, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 120, 80, 40));
@@ -1480,11 +1501,11 @@ public void idVenta() throws ErrorTienda{
         btnAgregarProductoVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/agregar2.png"))); // NOI18N
         btnAgregarProductoVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAgregarProductoVenta.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnAgregarProductoVentaMouseEntered(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnAgregarProductoVentaMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnAgregarProductoVentaMouseEntered(evt);
             }
         });
         btnAgregarProductoVenta.addActionListener(new java.awt.event.ActionListener() {
@@ -2087,10 +2108,10 @@ public void idVenta() throws ErrorTienda{
             }
         });
         tblProductos.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 tblProductosInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         tblProductos.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -3374,7 +3395,7 @@ public void idVenta() throws ErrorTienda{
     private void txtCostoProdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostoProdKeyTyped
         // TODO add your handling code here:
         int ch=(int) evt.getKeyChar();
-        
+        boolean encontrado = false;
         if ((ch >=48 && ch<=57)  || (ch==46) || (ch==8) || (ch== (char)KeyEvent.VK_BACK_SPACE) || (ch== (char)KeyEvent.VK_ENTER)) {
             if (ch==46) {
                 String cadena=txtCostoProductos.getText();
@@ -3411,30 +3432,51 @@ public void idVenta() throws ErrorTienda{
                  txtNomProd.setEditable(false);
                  JOptionPane.showMessageDialog(rootPane, "Producto Agregado");
             }else{
-            String fila[]  = new String[5];
-            fila[0]=txtCodBarraProd.getText();
-            fila[1]=txtNomProd.getText();
-            fila[2]=txtCantidad.getText();
-            fila[3]=txtCostoProd.getText();
-            fila[4]=String.valueOf((Double.parseDouble(txtCantidad.getText()))*(Double.parseDouble(txtCostoProd.getText())));
-            tablaModel.addRow(fila);
-            tblCompra.setModel(tablaModel);
-            //LIMPIAR LOS TXT 
-            txtCodBarraProd.setText("");
-            txtNomProd.setText("");
-            txtCantidad.setText("1");
-            txtCostoProd.setText("");
-            txtCodBarraProd.requestFocus();
-           
-            int filas = tablaModel.getRowCount();
-            int iteraciones=0;
-            double total=0;
-            while(iteraciones<filas){
-               total+=Double.parseDouble(String.valueOf(tablaModel.getValueAt(iteraciones, 4)));
-               iteraciones++;}
-            
-            double totalFinal=Double.parseDouble(decimal.format(total));
-            txtTotal.setText("$"+totalFinal);
+                for (int i = 0; i < tblCompra.getRowCount(); i++) {
+                    encontrado = tblCompra.getValueAt(i, 0).equals(txtCodBarraProd.getText());
+                }
+                
+                if(encontrado == false){
+                    String fila[]  = new String[5];
+                    fila[0]=txtCodBarraProd.getText();
+                    fila[1]=txtNomProd.getText();
+                    fila[2]=txtCantidad.getText();
+                    fila[3]=txtCostoProd.getText();
+                    fila[4]=String.valueOf((Double.parseDouble(txtCantidad.getText()))*(Double.parseDouble(txtCostoProd.getText())));
+                    tablaModel.addRow(fila);
+                    tblCompra.setModel(tablaModel);
+                }else{
+                    boolean buscar=false;
+                    int i=0;
+                    int nuevaCantidad;
+                    double nuevoCosto;
+                    while (buscar==false) {
+                        buscar = tblCompra.getValueAt(i, 0).equals(txtCodBarraProd.getText());
+                        i++;
+                    }
+                    nuevaCantidad = Integer.parseInt(txtCantidad.getText()) + Integer.parseInt(tblCompra.getValueAt(i-1, 2).toString());
+                    nuevoCosto = Double.parseDouble(txtCostoProd.getText()) + Double.parseDouble(tblCompra.getValueAt(i-1, 3).toString());
+                    tablaModel.setValueAt(nuevaCantidad, i-1, 2);
+                    tablaModel.setValueAt(nuevoCosto, i-1, 3);
+                    tablaModel.setValueAt(nuevaCantidad*nuevoCosto, i-1, 4);
+                    tblCompra.setModel(tablaModel);
+                }
+                //LIMPIAR LOS TXT 
+                txtCodBarraProd.setText("");
+                txtNomProd.setText("");
+                txtCantidad.setText("1");
+                txtCostoProd.setText("");
+                txtCodBarraProd.requestFocus();
+
+                int filas = tablaModel.getRowCount();
+                int iteraciones=0;
+                double total=0;
+                while(iteraciones<filas){
+                   total+=Double.parseDouble(String.valueOf(tablaModel.getValueAt(iteraciones, 4)));
+                   iteraciones++;}
+
+                double totalFinal=Double.parseDouble(decimal.format(total));
+                txtTotal.setText("$"+totalFinal);
             }
         }   
     }//GEN-LAST:event_txtCostoProdKeyTyped
@@ -3790,6 +3832,30 @@ public void idVenta() throws ErrorTienda{
             Logger.getLogger(JFRPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnCancelarVentaActionPerformed
+
+    private void tblCompraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblCompraKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblCompraKeyTyped
+
+    private void tblCompraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblCompraKeyPressed
+        char c=evt.getKeyChar();      
+        int iteraciones=0;
+         
+         if (c == (char) KeyEvent.VK_DELETE) {
+             eliminarCompras();
+             int filas = tablaModel.getRowCount();
+            
+            double total=0;
+            while(iteraciones<filas){
+               total+=Double.parseDouble(String.valueOf(tablaModel.getValueAt(iteraciones, 4)));
+               iteraciones++;}
+            
+            double totalFinal=Double.parseDouble(decimal.format(total));
+            txtTotal.setText("$"+totalFinal);
+            
+            
+        }
+    }//GEN-LAST:event_tblCompraKeyPressed
 
                                                                                                                                                                                                                               
     /**
