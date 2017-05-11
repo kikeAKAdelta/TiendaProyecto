@@ -760,6 +760,7 @@ public void idVenta() throws ErrorTienda{
         frmBUscarVentas.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(102, 0, 0));
+        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtBuscarProductoVender.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1366,11 +1367,9 @@ public void idVenta() throws ErrorTienda{
         jpnRegistroCompra.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 190, 40, 30));
 
         jSeparator5.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator5.setForeground(new java.awt.Color(0, 0, 0));
         jpnRegistroCompra.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 750, 10));
 
         jSeparator36.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator36.setForeground(new java.awt.Color(0, 0, 0));
         jpnRegistroCompra.add(jSeparator36, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 750, 10));
 
         lblCostoProd.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -1389,7 +1388,6 @@ public void idVenta() throws ErrorTienda{
         jpnVentas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jSeparator2.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
         jpnVentas.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 750, 10));
 
         tblProductosVender.setModel(new javax.swing.table.DefaultTableModel(
@@ -2389,8 +2387,6 @@ public void idVenta() throws ErrorTienda{
         jScrollPane7.setViewportView(tblDetalleCompra);
 
         jpnDetalleCompra.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 670, 230));
-
-        jSeparator32.setForeground(new java.awt.Color(0, 0, 0));
         jpnDetalleCompra.add(jSeparator32, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 232, 750, 10));
 
         jLabel37.setBackground(new java.awt.Color(0, 0, 0));
