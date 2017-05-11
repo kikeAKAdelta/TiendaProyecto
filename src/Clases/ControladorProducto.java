@@ -21,6 +21,17 @@ public class ControladorProducto {
     
     static Conexion cn;
     static ResultSet rs;
+    private static boolean cambio;
+
+    public static boolean isCambio() {
+        return cambio;
+    }
+
+    public static void setCambio(boolean cambio) {
+        ControladorProducto.cambio = cambio;
+    }
+
+   
    
     public static void Agregar(Producto pr) throws ErrorTienda{
         
@@ -41,10 +52,38 @@ public class ControladorProducto {
             throw new ErrorTienda("Class ControladorProducto/Modificar",e.getMessage());
         }
     }
+    
     public static void Eliminar(Producto pr) throws ErrorTienda{
         try {
-            cn=new Conexion();
-            cn.st.executeUpdate("DELETE FROM productos WHERE CodBarra='"+pr.getCodBarra()+"'");
+            
+            String [] matriz=new String[4];
+            String [] matriz2=new String[4];
+            rs=cn.st.executeQuery("SELECT * FROM detallecompra WHERE CodBarra='"+pr.getCodBarra()+"'");
+            
+            while (rs.next()) {
+                matriz[0]=rs.getString(1);
+                matriz[1]=rs.getString(2);
+                matriz[2]=rs.getString(3);
+                matriz[3]=rs.getString(4);
+                System.out.println(matriz[0]);
+            }
+            
+            rs=cn.st.executeQuery("SELECT * FROM detalleventa WHERE CodBarra='"+pr.getCodBarra()+"'");
+            
+            while (rs.next()) {
+                matriz2[0]=rs.getString(1);
+                matriz2[1]=rs.getString(2);
+                matriz2[2]=rs.getString(3);
+                matriz2[3]=rs.getString(4);
+                System.out.println(matriz2[1]);
+            }
+            
+            if (matriz[0] != null || matriz2[1] != null) {
+                setCambio(true);
+            }else{
+                cn.st.executeUpdate("DELETE FROM productos WHERE CodBarra='"+pr.getCodBarra()+"'");
+                setCambio(false);
+            }
         } catch (SQLException e) {
             throw new ErrorTienda("Class ControladorProducto/Eliminar",e.getMessage());
         }
@@ -96,6 +135,6 @@ public class ControladorProducto {
         return miproducto;
     }
     
-    
+     
     
 }
