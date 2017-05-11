@@ -6,6 +6,8 @@
 package Clases;
 
 import static Clases.ControladorProducto.cn;
+import static Clases.ControladorProducto.rs;
+import static Clases.ControladorProducto.setCambio;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,6 +21,15 @@ import java.util.logging.Logger;
 public class ControladorProveedor {
     static Conexion cn;
     static ResultSet rs;
+    private static boolean cambio;
+
+    public static boolean isCambio() {
+        return cambio;
+    }
+
+    public static void setCambio(boolean cambio) {
+        ControladorProveedor.cambio = cambio;
+    }
     
     
     public static void Agregar(Proveedor pv)throws ErrorTienda{
@@ -39,8 +50,24 @@ public class ControladorProveedor {
     }
     public static void Modificar(Proveedor pv)throws ErrorTienda{
         try {
-            cn.st.executeUpdate("UPDATE proveedor SET Nombre='"+pv.getNombre()+"',Telefono='"+pv.getTelefono()+"',Direccion='"+pv.getDireccion()+"',NIT='"+pv.getNIT()+"' WHERE IdProveedor='"+pv.getIdProveedor()+"'");
-        } catch (Exception e) {
+            String [] matriz=new String[4];
+            rs=cn.st.executeQuery("SELECT * FROM compra WHERE CodBarra='"+pv.getIdProveedor()+"'");
+            
+            while (rs.next()) {
+                matriz[0]=rs.getString(1);
+                matriz[1]=rs.getString(2);
+                matriz[2]=rs.getString(3);
+                matriz[3]=rs.getString(4);
+                
+            }
+            
+            if (matriz[3] != null) {
+                setCambio(true);
+            }else{
+                cn.st.executeUpdate("UPDATE proveedor SET Nombre='"+pv.getNombre()+"',Telefono='"+pv.getTelefono()+"',Direccion='"+pv.getDireccion()+"',NIT='"+pv.getNIT()+"' WHERE IdProveedor='"+pv.getIdProveedor()+"'");
+                setCambio(false);
+            }
+            } catch (Exception e) {
             throw new ErrorTienda("Class ControladorProveedor/Modificar", e.getMessage());
         }
     }

@@ -42,7 +42,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
     JTableHeader tHeadVentas,tHeadCompras,tHeadProductos,tHeadCompra,tHeadProveedores,tHeadDetalleCompra,tHeadBuscarVender;
     Producto obtenerProducto=null;
     DefaultTableModel modeloTablaVender;
-     DefaultTableModel modeloProductos = new DefaultTableModel();
+    DefaultTableModel modeloProductos = new DefaultTableModel();
     DecimalFormat decimal = new DecimalFormat("0.00");
     private TableRowSorter trsFiltro;
     DefaultTableModel tablaModel= new DefaultTableModel();
@@ -427,7 +427,7 @@ String headers[] = {"Cod Barra","Producto","Cantidad","Costo","Subtotal"};
 tablaModel.setColumnIdentifiers(headers);
 tblCompra.setModel(tablaModel);
 }
-public void eliminar(){
+public void eliminarProductos(){
         int fila = tblProductosVender.getSelectedRow();
         if(fila!=-1){
         int opcion=JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea eliminar el producto seleccionado?", "Eliminar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, new ImageIcon("src/iconos/pregunta.png"));
@@ -754,7 +754,6 @@ public void idVenta() throws ErrorTienda{
         frmBUscarVentas.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         frmBUscarVentas.setTitle("Ventas");
         frmBUscarVentas.setAlwaysOnTop(true);
-        frmBUscarVentas.setMaximumSize(new java.awt.Dimension(740, 420));
         frmBUscarVentas.setUndecorated(true);
         frmBUscarVentas.setSize(new java.awt.Dimension(740, 420));
         frmBUscarVentas.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1253,11 +1252,11 @@ public void idVenta() throws ErrorTienda{
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/guardarprov.png"))); // NOI18N
         btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnGuardarMouseExited(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnGuardarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnGuardarMouseExited(evt);
             }
         });
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -1546,11 +1545,11 @@ public void idVenta() throws ErrorTienda{
         jpnVentas.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(617, 465, 40, 20));
 
         txtCodigoBarraVender.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtCodigoBarraVenderKeyTyped(evt);
-            }
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCodigoBarraVenderKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodigoBarraVenderKeyTyped(evt);
             }
         });
         jpnVentas.add(txtCodigoBarraVender, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 140, 40));
@@ -2090,10 +2089,10 @@ public void idVenta() throws ErrorTienda{
             }
         });
         tblProductos.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 tblProductosInputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         tblProductos.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -3181,10 +3180,28 @@ public void idVenta() throws ErrorTienda{
     }//GEN-LAST:event_txtProductosBuscar1KeyTyped
 
     private void btnEliminarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProveedorActionPerformed
-        if(tblProveedores.getSelectedRow()!=-1){
+//        if(tblProveedores.getSelectedRow()!=-1){
+
+            
+            
+         int fila = tblProveedores.getSelectedRow(); 
+         System.out.println(fila);
+        if (tblProveedores.isRowSelected(fila)) {
+            
+            if (fila>=0) {
             int seleccion;
             seleccion = tblProveedores.getSelectedRow();
+            DefaultTableModel modeloProveedores=(DefaultTableModel) tblProveedores.getModel();
             Proveedor proveedor = new Proveedor();
+            
+            int idProve=Integer.parseInt(tblProveedores.getValueAt(seleccion, 0).toString());
+            String nom=tblProveedores.getValueAt(seleccion, 1).toString();
+            String tel=tblProveedores.getValueAt(seleccion, 2).toString();
+            String dire=tblProveedores.getValueAt(seleccion, 3).toString();
+            String nit=tblProveedores.getValueAt(seleccion, 4).toString();
+            
+            
+            
             proveedor.setIdProveedor(Integer.parseInt(tblProveedores.getValueAt(seleccion, 0).toString()));
             proveedor.setNombre(tblProveedores.getValueAt(seleccion, 1).toString());
             proveedor.setTelefono(tblProveedores.getValueAt(seleccion, 2).toString());
@@ -3192,13 +3209,21 @@ public void idVenta() throws ErrorTienda{
             proveedor.setNIT(tblProveedores.getValueAt(seleccion, 4).toString());
             try{
                 ControladorProveedor.Eliminar(proveedor);
-                JOptionPane.showMessageDialog(rootPane, "Proveedor eliminado");
+                if (ControladorProveedor.isCambio()) {
+                    JOptionPane.showMessageDialog(null, "No puede eliminar este producto porque tiene registros vigentes");
+                }else{
+                    modeloProveedores.removeRow(fila);
+                    txtProductosBuscar1.setText("");
+                    JOptionPane.showMessageDialog(null, "El registro fue eliminado con exito");
+                }
+                
                 
             }catch(ErrorTienda ex){
                 JOptionPane.showMessageDialog(null, ex.getMessage());
             }
-            tblProveedores.removeAll();
-            actualizarTablaProveedor();
+           
+            
+        }
         }else{
             JOptionPane.showMessageDialog(rootPane, "Seleccione un proveedor de la tabla");
         }
@@ -3505,7 +3530,7 @@ public void idVenta() throws ErrorTienda{
          
          
          if (c == (char) KeyEvent.VK_DELETE) {
-             eliminar();
+             eliminarProductos();
              
             
         }
