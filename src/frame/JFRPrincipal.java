@@ -39,13 +39,14 @@ public final class JFRPrincipal extends javax.swing.JFrame {
     boolean ventas, compras, productos, proveedores;
     boolean apagado, principal;
     int x,y;
-    JTableHeader tHeadVentas,tHeadCompras,tHeadProductos,tHeadCompra,tHeadProveedores,tHeadDetalleCompra;
+    JTableHeader tHeadVentas,tHeadCompras,tHeadProductos,tHeadCompra,tHeadProveedores,tHeadDetalleCompra,tHeadBuscarVender;
     Producto obtenerProducto=null;
     DefaultTableModel modeloTablaVender;
+     DefaultTableModel modeloProductos = new DefaultTableModel();
     DecimalFormat decimal = new DecimalFormat("0.00");
     private TableRowSorter trsFiltro;
     DefaultTableModel tablaModel= new DefaultTableModel();
-    
+    public String CodBarraVentas="";
     boolean exprod;
     
     public JFRPrincipal() {
@@ -56,6 +57,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         tHeadCompra=tblCompra.getTableHeader();
         tHeadProveedores=tblProveedores.getTableHeader();
         tHeadDetalleCompra=tblDetalleCompra.getTableHeader();
+        tHeadBuscarVender=tblBuscarProductosVender.getTableHeader();
         modeloTablaVender = (DefaultTableModel) tblProductosVender.getModel();
         txtCantidadVender.setText("1");
         txtCodigoBarraVender.requestFocus();
@@ -103,6 +105,10 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         tHeadDetalleCompra.setBackground(jpnBarraMenu.getBackground());
         tHeadDetalleCompra.setForeground(Color.WHITE);
         tHeadDetalleCompra.setFont(fuente);
+        
+        tHeadBuscarVender.setBackground(jpnBarraMenu.getBackground());
+        tHeadBuscarVender.setForeground(Color.WHITE);
+        tHeadBuscarVender.setFont(fuente);
         
     }
  
@@ -169,7 +175,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         txtCostoProductos.setText("");
         txtCodBarraProductos.requestFocus();
     }
-
+    
     public void buscarProductoVender(){
         //COMPROBAR SI EL ESPACIO DE CODIGO DE BARRA ESTA VACIO
              if(txtCodigoBarraVender.getText().isEmpty()){
@@ -194,6 +200,23 @@ public final class JFRPrincipal extends javax.swing.JFrame {
                      
                  }
       }
+    }
+     public void AsignarCodBarra() throws ErrorTienda{
+        int fila=0;
+        try {
+             fila = tblBuscarProductosVender.getSelectedRow();
+            
+            
+        String codBarra = String.valueOf(modeloProductos.getValueAt(fila, 0));
+        
+       txtCodigoBarraVender.setText(codBarra);
+        buscarProductoVender();
+        
+        } catch (Exception e) {
+            throw new ErrorTienda("Errorrrrrrrrrrr", e.getMessage());
+        }
+        
+        
     }
     
     //--------------------llenando tabla de productos----------------
@@ -473,6 +496,14 @@ public void idVenta() throws ErrorTienda{
     private void initComponents() {
 
         btngFiltroProductos = new javax.swing.ButtonGroup();
+        frmBUscarVentas = new javax.swing.JFrame();
+        jPanel1 = new javax.swing.JPanel();
+        txtBuscarProductoVender = new javax.swing.JTextField();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblBuscarProductosVender = new javax.swing.JTable();
+        jLabel41 = new javax.swing.JLabel();
+        btnBuscarAgregarVenta = new javax.swing.JButton();
+        lblCerrarVentasBuscar = new javax.swing.JLabel();
         jpnBarraSuperior = new javax.swing.JPanel();
         lblBotonCerrar = new javax.swing.JLabel();
         lblLogo = new javax.swing.JLabel();
@@ -719,6 +750,82 @@ public void idVenta() throws ErrorTienda{
         txtPrecioProductos2 = new javax.swing.JTextField();
         txtTotal2 = new javax.swing.JTextField();
         btnAtrasDetalleCompra = new javax.swing.JButton();
+
+        frmBUscarVentas.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        frmBUscarVentas.setTitle("Ventas");
+        frmBUscarVentas.setAlwaysOnTop(true);
+        frmBUscarVentas.setMaximumSize(new java.awt.Dimension(740, 420));
+        frmBUscarVentas.setUndecorated(true);
+        frmBUscarVentas.setSize(new java.awt.Dimension(740, 420));
+        frmBUscarVentas.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setBackground(new java.awt.Color(102, 0, 0));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtBuscarProductoVender.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtBuscarProductoVenderKeyPressed(evt);
+            }
+        });
+        jPanel1.add(txtBuscarProductoVender, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 350, -1));
+
+        tblBuscarProductosVender.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Codigo Barra", "Nombre Producto", "Cantidad", "Precio Unitario $"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblBuscarProductosVender.getTableHeader().setReorderingAllowed(false);
+        jScrollPane4.setViewportView(tblBuscarProductosVender);
+        if (tblBuscarProductosVender.getColumnModel().getColumnCount() > 0) {
+            tblBuscarProductosVender.getColumnModel().getColumn(0).setResizable(false);
+            tblBuscarProductosVender.getColumnModel().getColumn(1).setResizable(false);
+            tblBuscarProductosVender.getColumnModel().getColumn(1).setPreferredWidth(200);
+            tblBuscarProductosVender.getColumnModel().getColumn(2).setResizable(false);
+            tblBuscarProductosVender.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 680, 180));
+
+        jLabel41.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel41.setText("Nombre Producto");
+        jPanel1.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+
+        btnBuscarAgregarVenta.setText("Agregar a la Venta");
+        btnBuscarAgregarVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarAgregarVentaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnBuscarAgregarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, -1, -1));
+
+        lblCerrarVentasBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/exit32.png"))); // NOI18N
+        lblCerrarVentasBuscar.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        lblCerrarVentasBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCerrarVentasBuscarMouseClicked(evt);
+            }
+        });
+        jPanel1.add(lblCerrarVentasBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 0, -1, 30));
+
+        frmBUscarVentas.getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 420));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/iconos/lanzador.png")).getImage());
@@ -1292,7 +1399,7 @@ public void idVenta() throws ErrorTienda{
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, true
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -1306,6 +1413,12 @@ public void idVenta() throws ErrorTienda{
             }
         });
         jScrollPane2.setViewportView(tblProductosVender);
+        if (tblProductosVender.getColumnModel().getColumnCount() > 0) {
+            tblProductosVender.getColumnModel().getColumn(0).setResizable(false);
+            tblProductosVender.getColumnModel().getColumn(1).setResizable(false);
+            tblProductosVender.getColumnModel().getColumn(1).setPreferredWidth(200);
+            tblProductosVender.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         jpnVentas.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 710, 190));
 
@@ -1330,11 +1443,16 @@ public void idVenta() throws ErrorTienda{
         btnBuscarProductoVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/buscar.png"))); // NOI18N
         btnBuscarProductoVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBuscarProductoVenta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBuscarProductoVentaMouseExited(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnBuscarProductoVentaMouseEntered(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnBuscarProductoVentaMouseExited(evt);
+        });
+        btnBuscarProductoVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarProductoVentaActionPerformed(evt);
             }
         });
         jpnVentas.add(btnBuscarProductoVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 540, 110, 30));
@@ -1445,11 +1563,16 @@ public void idVenta() throws ErrorTienda{
         btnCancelarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/cancelar.png"))); // NOI18N
         btnCancelarVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCancelarVenta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCancelarVentaMouseExited(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnCancelarVentaMouseEntered(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnCancelarVentaMouseExited(evt);
+        });
+        btnCancelarVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarVentaActionPerformed(evt);
             }
         });
         jpnVentas.add(btnCancelarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, 110, 30));
@@ -3574,6 +3697,71 @@ public void idVenta() throws ErrorTienda{
         pnlPortada.setVisible(false);
     }//GEN-LAST:event_lbl7MouseExited
 
+    private void btnBuscarProductoVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoVentaActionPerformed
+        frmBUscarVentas.show();
+        frmBUscarVentas.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btnBuscarProductoVentaActionPerformed
+
+    private void txtBuscarProductoVenderKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarProductoVenderKeyPressed
+        char c=evt.getKeyChar();
+
+        if (c == (char) KeyEvent.VK_ENTER) {
+            
+            String nombre=txtBuscarProductoVender.getText();
+            modeloProductos.setRowCount(0);
+            ArrayList<Producto> productos = new ArrayList();
+            Object[] fila = new Object[4];
+            if (nombre.equals("")) {
+                JOptionPane.showMessageDialog(null, "No ha introducido el codigo de barra o el nombre");
+            }else{
+                String[] campos = new String[] {"CodBarra", "Nombre", "Inventario", "Costo"};
+                try {
+
+                    productos = ControladorProducto.Buscar(nombre);
+                    modeloProductos.setColumnIdentifiers(campos);
+                    Iterator<Producto> prod = productos.iterator();
+                    while (prod.hasNext()) {
+                        fila[0] = prod.next();
+                        fila[1] = prod.next();
+                        fila[2] = prod.next();
+                        fila[3] = prod.next();
+                        modeloProductos.addRow(fila);
+                        tblBuscarProductosVender.setModel(modeloProductos);
+
+                    }
+                } catch (ErrorTienda ex) {
+                    JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+                }
+            }
+
+        }
+    }//GEN-LAST:event_txtBuscarProductoVenderKeyPressed
+
+    private void btnBuscarAgregarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarAgregarVentaActionPerformed
+        try {
+            AsignarCodBarra();
+            frmBUscarVentas.dispose();
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(JFRPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnBuscarAgregarVentaActionPerformed
+
+    private void lblCerrarVentasBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarVentasBuscarMouseClicked
+        frmBUscarVentas.dispose();
+        modeloTablaVender.setRowCount(0);
+        txtBuscarProductoVender.setText("");
+    }//GEN-LAST:event_lblCerrarVentasBuscarMouseClicked
+
+    private void btnCancelarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarVentaActionPerformed
+        try {
+            modeloTablaVender.setRowCount(0);
+            limpiarVenta();
+            txtTotalventa.setText("$0");
+        } catch (ErrorTienda ex) {
+            Logger.getLogger(JFRPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnCancelarVentaActionPerformed
+
                                                                                                                                                                                                                               
     /**
      * @param args the command line arguments
@@ -3620,6 +3808,7 @@ public void idVenta() throws ErrorTienda{
     private javax.swing.JButton btnAtrasModificarProveedor;
     private javax.swing.JButton btnAtrasModificarProveedor1;
     private javax.swing.JButton btnAtrasProveedores;
+    private javax.swing.JButton btnBuscarAgregarVenta;
     private javax.swing.JButton btnBuscarProducto;
     private javax.swing.JButton btnBuscarProductoVenta;
     private javax.swing.JButton btnCancelarVenta;
@@ -3642,6 +3831,7 @@ public void idVenta() throws ErrorTienda{
     private javax.swing.JButton btnVerDetalle;
     private javax.swing.ButtonGroup btngFiltroProductos;
     private javax.swing.JComboBox cmbProveedor;
+    private javax.swing.JFrame frmBUscarVentas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -3677,6 +3867,7 @@ public void idVenta() throws ErrorTienda{
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
@@ -3686,6 +3877,7 @@ public void idVenta() throws ErrorTienda{
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel37;
     private javax.swing.JPanel jPanel39;
     private javax.swing.JPanel jPanel42;
@@ -3699,6 +3891,7 @@ public void idVenta() throws ErrorTienda{
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
@@ -3767,7 +3960,7 @@ public void idVenta() throws ErrorTienda{
     private javax.swing.JPanel jpnSegundo;
     private javax.swing.JPanel jpnSubMenu;
     private javax.swing.JPanel jpnTercero;
-    private javax.swing.JPanel jpnVentas;
+    public static javax.swing.JPanel jpnVentas;
     private javax.swing.JLabel lbl11;
     private javax.swing.JLabel lbl12;
     private javax.swing.JLabel lbl13;
@@ -3796,6 +3989,7 @@ public void idVenta() throws ErrorTienda{
     private javax.swing.JLabel lbl8;
     private javax.swing.JLabel lblBotonCerrar;
     private javax.swing.JLabel lblCantidad;
+    private javax.swing.JLabel lblCerrarVentasBuscar;
     private javax.swing.JLabel lblCodBarraProd;
     private javax.swing.JLabel lblCostoProd;
     private javax.swing.JLabel lblFecha;
@@ -3816,19 +4010,21 @@ public void idVenta() throws ErrorTienda{
     private javax.swing.JLabel lblProveedores6;
     private javax.swing.JLabel lblTotal;
     private javax.swing.JPanel pnlPortada;
+    private javax.swing.JTable tblBuscarProductosVender;
     private javax.swing.JTable tblCompra;
     private javax.swing.JTable tblCompras;
     private javax.swing.JTable tblDetalleCompra;
     private javax.swing.JTable tblProductos;
     private javax.swing.JTable tblProductosVender;
     private javax.swing.JTable tblProveedores;
+    private javax.swing.JTextField txtBuscarProductoVender;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtCantidadVender;
     private javax.swing.JTextField txtClienteVenta;
     private javax.swing.JTextField txtCodBarraProd;
     private javax.swing.JTextField txtCodBarraProductos;
     private javax.swing.JTextField txtCodBarraProductos1;
-    private javax.swing.JTextField txtCodigoBarraVender;
+    public static javax.swing.JTextField txtCodigoBarraVender;
     private javax.swing.JTextField txtCostoProd;
     private javax.swing.JTextField txtCostoProductos;
     private javax.swing.JTextField txtDireccionProveedor;
