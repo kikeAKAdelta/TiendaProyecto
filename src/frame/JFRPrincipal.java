@@ -3162,8 +3162,10 @@ public void idVenta() throws ErrorTienda{
     }//GEN-LAST:event_btnAtrasModificarProveedor1MouseExited
 
     private void txtCodBarraProdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodBarraProdKeyTyped
-        // TODO add your handling code here:
-        char ch = evt.getKeyChar();
+        if (txtCodBarraProd.getText().equals("")) {
+            JOptionPane.showMessageDialog(rootPane, "Ingrese un codigo de barras");
+        } else {
+            char ch = evt.getKeyChar();
     if(txtCodBarraProd.getText().length()>=13){
                evt.consume();
         }else{
@@ -3172,10 +3174,12 @@ public void idVenta() throws ErrorTienda{
                 if (ch != (char) KeyEvent.VK_BEGIN) {
                     if (ch != (char) KeyEvent.VK_BACK_SPACE) {
                         if (ch != (char) KeyEvent.VK_DELETE) {
+                            if(ch != (char) KeyEvent.VK_ENTER){
                             
                             evt.consume();
                             JOptionPane.showMessageDialog(null, "Solo Numeros", "Error", JOptionPane.ERROR_MESSAGE);
-                        
+                            
+                            }
                     }
                 }
                 }
@@ -3207,6 +3211,8 @@ public void idVenta() throws ErrorTienda{
                         Logger.getLogger(JFRPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
+        }
+    
              
            
         
