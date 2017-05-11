@@ -808,13 +808,14 @@ public void idVenta() throws ErrorTienda{
         jLabel41.setText("Nombre Producto");
         jPanel1.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
 
-        btnBuscarAgregarVenta.setText("Agregar a la Venta");
+        btnBuscarAgregarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/AgregarVentaBuscar.png"))); // NOI18N
+        btnBuscarAgregarVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBuscarAgregarVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarAgregarVentaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBuscarAgregarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, -1, -1));
+        jPanel1.add(btnBuscarAgregarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 240, 40));
 
         lblCerrarVentasBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/exit32.png"))); // NOI18N
         lblCerrarVentasBuscar.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
