@@ -754,7 +754,6 @@ public void idVenta() throws ErrorTienda{
         frmBUscarVentas.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         frmBUscarVentas.setTitle("Ventas");
         frmBUscarVentas.setAlwaysOnTop(true);
-        frmBUscarVentas.setMaximumSize(new java.awt.Dimension(740, 420));
         frmBUscarVentas.setUndecorated(true);
         frmBUscarVentas.setSize(new java.awt.Dimension(740, 420));
         frmBUscarVentas.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1512,9 +1511,7 @@ public void idVenta() throws ErrorTienda{
         jLabel20.setText("ID Venta");
         jPanel44.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 70, -1));
 
-        txtClienteVenta.setEditable(false);
         txtClienteVenta.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        txtClienteVenta.setText("PACMAN");
         txtClienteVenta.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         jPanel44.add(txtClienteVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 30, 280, 30));
 
@@ -1546,11 +1543,11 @@ public void idVenta() throws ErrorTienda{
         jpnVentas.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(617, 465, 40, 20));
 
         txtCodigoBarraVender.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtCodigoBarraVenderKeyTyped(evt);
-            }
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCodigoBarraVenderKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodigoBarraVenderKeyTyped(evt);
             }
         });
         jpnVentas.add(txtCodigoBarraVender, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 140, 40));
@@ -2090,10 +2087,10 @@ public void idVenta() throws ErrorTienda{
             }
         });
         tblProductos.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 tblProductosInputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         tblProductos.addKeyListener(new java.awt.event.KeyAdapter() {
