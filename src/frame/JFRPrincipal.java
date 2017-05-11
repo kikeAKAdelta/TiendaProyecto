@@ -3161,55 +3161,57 @@ public void idVenta() throws ErrorTienda{
     }//GEN-LAST:event_btnAtrasModificarProveedor1MouseExited
 
     private void txtCodBarraProdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodBarraProdKeyTyped
-        if (txtCodBarraProd.getText().equals("")) {
-            JOptionPane.showMessageDialog(rootPane, "Ingrese un codigo de barras");
-        } else {
-            char ch = evt.getKeyChar();
-    if(txtCodBarraProd.getText().length()>=13){
-               evt.consume();
+       
+        char ch = evt.getKeyChar();
+        if(txtCodBarraProd.getText().length()>=13){
+           evt.consume();
         }else{
-        if (ch < '0' || ch > '9') {
-            
+            if (ch < '0' || ch > '9') {
+
                 if (ch != (char) KeyEvent.VK_BEGIN) {
                     if (ch != (char) KeyEvent.VK_BACK_SPACE) {
                         if (ch != (char) KeyEvent.VK_DELETE) {
                             if(ch != (char) KeyEvent.VK_ENTER){
-                            
-                            evt.consume();
-                            JOptionPane.showMessageDialog(null, "Solo Numeros", "Error", JOptionPane.ERROR_MESSAGE);
-                            
+
+                                evt.consume();
+                                JOptionPane.showMessageDialog(null, "Solo Numeros", "Error", JOptionPane.ERROR_MESSAGE);
+
                             }
+                        }
                     }
                 }
-                }
-        }   
-    }
-         char c = evt.getKeyChar();               
-                 if (c == (char) KeyEvent.VK_ENTER) {
-                    String codBarra=txtCodBarraProd.getText();
-                    String producto;
+            }   
+        }
+        char c = evt.getKeyChar();               
+             if (c == (char) KeyEvent.VK_ENTER) {
+                String codBarra=txtCodBarraProd.getText();
+                String producto;
 
                     try {
-                        
-                        ControladorProducto.Obtener(codBarra);
-                        producto= ControladorProducto.Obtener(codBarra).getNombre();
-                        //PARA SABER SI EXISTE O NO EXISTE UN PRODUCTO
-                        if (producto==null || producto=="") {
-                           txtNomProd.setEditable(true);
-                           txtNomProd.requestFocus();                          
-                           JOptionPane.showMessageDialog(rootPane, "El producto no esta guardado, agregar");
-                           exprod=false;
+                        if (codBarra.equals("")) {
+                            JOptionPane.showMessageDialog(rootPane, "Ingrese un codigo de barras");
                         } else {
-                            txtNomProd.setText(producto);
-                        txtCantidad.requestFocus();
-                        exprod=true;
+                            ControladorProducto.Obtener(codBarra);
+                            producto= ControladorProducto.Obtener(codBarra).getNombre();
+                            //PARA SABER SI EXISTE O NO EXISTE UN PRODUCTO
+                            if (producto==null || producto=="") {
+                                txtNomProd.setEditable(true);
+                                txtNomProd.requestFocus();                          
+                                JOptionPane.showMessageDialog(rootPane, "El producto no esta guardado, agregar");
+                                exprod=false;
+                            } else {
+                                txtNomProd.setText(producto);
+                                txtCantidad.requestFocus();
+                                exprod=true;
+                            }
                         }
                         
-                        
+
+
                     } catch (ErrorTienda ex) {
                         Logger.getLogger(JFRPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                }
+                
         }
     
              
