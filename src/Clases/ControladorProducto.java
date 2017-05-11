@@ -65,7 +65,7 @@ public class ControladorProducto {
                 matriz[1]=rs.getString(2);
                 matriz[2]=rs.getString(3);
                 matriz[3]=rs.getString(4);
-                System.out.println(matriz[0]);
+                
             }
             
             rs=cn.st.executeQuery("SELECT * FROM detalleventa WHERE CodBarra='"+pr.getCodBarra()+"'");
@@ -75,7 +75,7 @@ public class ControladorProducto {
                 matriz2[1]=rs.getString(2);
                 matriz2[2]=rs.getString(3);
                 matriz2[3]=rs.getString(4);
-                System.out.println(matriz2[1]);
+                
             }
             
             if (matriz[0] != null || matriz2[1] != null) {
