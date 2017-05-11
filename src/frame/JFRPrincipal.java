@@ -818,6 +818,7 @@ public void idVenta() throws ErrorTienda{
 
         lblCerrarVentasBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/exit32.png"))); // NOI18N
         lblCerrarVentasBuscar.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        lblCerrarVentasBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblCerrarVentasBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblCerrarVentasBuscarMouseClicked(evt);
