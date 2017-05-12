@@ -70,35 +70,37 @@ public class ControladorCompra {
          //Obtener la cantidad actual del producto
         int CantidadActual=0;
         try {
-        ResultSet rsCantidad = null;
-        rsCantidad = cn.st.executeQuery("SELECT Cantidad FROM productos WHERE CodBarra='"+detalleCompra.get(0).PRODUCTO.CodBarra);
+            for (int i = 0; i < detalleCompra.size(); i++) {
+                
+            
+                ResultSet rsCantidad = null;
+                rsCantidad = cn.st.executeQuery("SELECT Inventario FROM productos WHERE CodBarra='"+detalleCompra.get(i).PRODUCTO.getCodBarra()+"'");
+
+                while(rsCantidad.next()){
+                    CantidadActual = rsCantidad.getInt(1);
+                }
+
+                //Obtener el precio actual
+                double PrecioActual=0;
+
+                ResultSet rsPrecio = null;
+                rsPrecio = cn.st.executeQuery("SELECT Costo FROM productos WHERE CodBarra='"+detalleCompra.get(i).PRODUCTO.getCodBarra()+"'");
+
+                while(rsPrecio.next()){
+                    PrecioActual = rsPrecio.getDouble(1);
+
+
+                }
+
+                cn.st.executeUpdate("UPDATE productos SET Costo='"+(((PrecioActual)+(((detalleCompra.get(i).getCostoUnitario()))))/2)+"' WHERE CodBarra='"+detalleCompra.get(i).PRODUCTO.getCodBarra()+"'");
+            }
         
-        while(rsCantidad.next()){
-            CantidadActual = rsCantidad.getInt("Cantidad");
-        }
-        }catch (Exception ex){
-            throw new ErrorTienda("Class ControladorCompra/ActualizarPrecioPromedioProducto", ex.getMessage());
-        }
-       
-        //Obtener el precio actual
-        double PrecioActual=0;
-        try {
-        ResultSet rsPrecio = null;
-        rsPrecio = cn.st.executeQuery("SELECT Costo FROM productos WHERE CodBarra='"+detalleCompra.get(0).PRODUCTO.CodBarra);
-        
-        while(rsPrecio.next()){
-            PrecioActual = rsPrecio.getDouble("Costo");
-        }
         }catch (Exception ex){
             throw new ErrorTienda("Class ControladorCompra/ActualizarPrecioPromedioProducto", ex.getMessage());
         }
         
         //Actualizamos el precio promedio
-         try {
-            cn.st.executeUpdate("UPDATE productos SET Costo='"+((CantidadActual*PrecioActual)+((detalleCompra.get(0).Cantidad)*(detalleCompra.get(0).CostoUnitario)))+"'");
-        } catch (Exception ex) {
-            throw new ErrorTienda("Class ControladorCompra/ActualizarPrecioPromedioProducto", ex.getMessage());
-        }
+         
         
 //        cantidadactual*precioactual(25*0.30) + cantidadnuevacomprada*precionuevo(10*0.36)/CantidadTotal = precio ponderado del producto.
     }
