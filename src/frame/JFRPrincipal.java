@@ -31,6 +31,7 @@ import javax.swing.*;
 import Clases.Compra;
 import Clases.DetalleCompra;
 import Clases.Parametro;
+import java.math.RoundingMode;
 /**
  *
  * @author Jose Lopez Garcia
@@ -460,7 +461,7 @@ public void guardarVenta() throws ErrorTienda, SQLException{
         vn = new Venta();
          vn.setIdVenta(Integer.parseInt(txtIdVenta.getText()));
          vn.setFecha(utilDate);
-         vn.setCliente("PACMAN");
+         vn.setCliente(txtClienteVenta.getText());
          double total = Double.parseDouble(txtTotalventa.getText().substring(1));
          
          vn.setTotal(total);
@@ -3797,17 +3798,18 @@ public void idVenta() throws ErrorTienda{
             if (nombre.equals("")) {
                 JOptionPane.showMessageDialog(null, "No ha introducido el codigo de barra o el nombre");
             }else{
-                String[] campos = new String[] {"CodBarra", "Nombre", "Inventario", "Costo"};
+                String[] campos = new String[] {"CodBarra", "Nombre", "Inventario", "Costo $"};
                 try {
 
                     productos = ControladorProducto.Buscar(nombre);
                     modeloProductos.setColumnIdentifiers(campos);
+                    decimal.setRoundingMode(RoundingMode.CEILING); 
                     Iterator<Producto> prod = productos.iterator();
                     while (prod.hasNext()) {
                         fila[0] = prod.next();
                         fila[1] = prod.next();
                         fila[2] = prod.next();
-                        fila[3] = prod.next();
+                        fila[3] = decimal.format(columnaprecio(Double.parseDouble(String.valueOf(prod.next()))));
                         modeloProductos.addRow(fila);
                         tblBuscarProductosVender.setModel(modeloProductos);
 
@@ -3820,6 +3822,11 @@ public void idVenta() throws ErrorTienda{
         }
     }//GEN-LAST:event_txtBuscarProductoVenderKeyPressed
 
+    public double columnaprecio(double precio){
+        double resultado=0;
+        resultado = precio+(precio*0.25);
+        return resultado;
+    }
     private void btnBuscarAgregarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarAgregarVentaActionPerformed
         try {
             AsignarCodBarra();
