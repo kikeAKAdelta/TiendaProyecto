@@ -8,6 +8,7 @@ package Clases;
 import static Clases.ControladorProducto.cn;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +20,7 @@ import javax.swing.JOptionPane;
  */
 public class ControladorCompra {
     static Conexion cn;
+    static DecimalFormat decimal = new DecimalFormat("0.00");
      
              
     public static void Agregar(Compra cm, Object[][] detalleCompra) throws ErrorTienda, SQLException{
@@ -91,8 +93,9 @@ public class ControladorCompra {
 
 
                 }
-
-                cn.st.executeUpdate("UPDATE productos SET Costo='"+(((PrecioActual)+(((detalleCompra.get(i).getCostoUnitario()))))/2)+"' WHERE CodBarra='"+detalleCompra.get(i).PRODUCTO.getCodBarra()+"'");
+                double actualizarPrecio = ((((CantidadActual)*(PrecioActual))+((detalleCompra.get(i).getCantidad())*(detalleCompra.get(i).getCostoUnitario())))/((detalleCompra.get(i).getCantidad())+CantidadActual));
+                
+                cn.st.executeUpdate("UPDATE productos SET Costo='"+decimal.format(actualizarPrecio)+"' WHERE CodBarra='"+detalleCompra.get(i).PRODUCTO.getCodBarra()+"'");
             }
         
         }catch (Exception ex){

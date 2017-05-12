@@ -320,9 +320,16 @@ public final class JFRPrincipal extends javax.swing.JFrame {
             int cantidadAntigua=Integer.parseInt(String.valueOf(modeloTablaVender.getValueAt(encontrado,2)));            
            int nuevaCantidad=(Integer.parseInt(txtCantidadVender.getText()));
            double nuevoSubTotal = ((nuevaCantidad+cantidadAntigua)*(Double.parseDouble(String.valueOf(modeloTablaVender.getValueAt(encontrado, 3)))));            
+            int cantidadBase=obtenerProducto.getInventario();
+            int cantidadTotal = nuevaCantidad+cantidadAntigua;
             
+            if(cantidadTotal>cantidadBase){
+            JOptionPane.showMessageDialog(null, "La cantidad demanda supera la cantidad disponible "+cantidadBase);
+            }else{
             modeloTablaVender.setValueAt((cantidadAntigua+nuevaCantidad), encontrado, 2);
             modeloTablaVender.setValueAt(decimal.format(nuevoSubTotal), encontrado, 4);    
+            }
+                
             }
            
             
@@ -613,6 +620,7 @@ public void idVenta() throws ErrorTienda{
         jSeparator36 = new javax.swing.JSeparator();
         lblCostoProd = new javax.swing.JLabel();
         txtCostoProd = new javax.swing.JTextField();
+        btnCancelarVenta1 = new javax.swing.JButton();
         jpnVentas = new javax.swing.JPanel();
         jSeparator2 = new javax.swing.JSeparator();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -1267,11 +1275,11 @@ public void idVenta() throws ErrorTienda{
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/guardarprov.png"))); // NOI18N
         btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnGuardarMouseExited(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnGuardarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnGuardarMouseExited(evt);
             }
         });
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -1279,7 +1287,7 @@ public void idVenta() throws ErrorTienda{
                 btnGuardarActionPerformed(evt);
             }
         });
-        jpnRegistroCompra.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 540, 110, 30));
+        jpnRegistroCompra.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 530, 110, 30));
 
         txtIdCompra.setEditable(false);
         jpnRegistroCompra.add(txtIdCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 60, 30));
@@ -1303,11 +1311,11 @@ public void idVenta() throws ErrorTienda{
         ));
         tblCompra.getTableHeader().setReorderingAllowed(false);
         tblCompra.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tblCompraKeyTyped(evt);
-            }
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 tblCompraKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tblCompraKeyTyped(evt);
             }
         });
         jScrollPane6.setViewportView(tblCompra);
@@ -1404,6 +1412,23 @@ public void idVenta() throws ErrorTienda{
             }
         });
         jpnRegistroCompra.add(txtCostoProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 190, 80, 30));
+
+        btnCancelarVenta1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/cancelar.png"))); // NOI18N
+        btnCancelarVenta1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancelarVenta1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCancelarVenta1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCancelarVenta1MouseExited(evt);
+            }
+        });
+        btnCancelarVenta1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarVenta1ActionPerformed(evt);
+            }
+        });
+        jpnRegistroCompra.add(btnCancelarVenta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 530, 110, 30));
 
         getContentPane().add(jpnRegistroCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 730, 600));
 
@@ -1583,11 +1608,11 @@ public void idVenta() throws ErrorTienda{
         btnCancelarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/cancelar.png"))); // NOI18N
         btnCancelarVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCancelarVenta.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnCancelarVentaMouseExited(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnCancelarVentaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCancelarVentaMouseExited(evt);
             }
         });
         btnCancelarVenta.addActionListener(new java.awt.event.ActionListener() {
@@ -2110,10 +2135,10 @@ public void idVenta() throws ErrorTienda{
             }
         });
         tblProductos.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 tblProductosInputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         tblProductos.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -3312,6 +3337,7 @@ public void idVenta() throws ErrorTienda{
             JOptionPane.showMessageDialog(rootPane, "Debe de rellenar todos los campos");
            
         }else{
+            DefaultTableModel modeloProductos=(DefaultTableModel) tblProductos.getModel();
             Producto producto = new Producto();
             producto.setCodBarra(txtNuevoCodBarraProducto.getText());
             producto.setNombre(txtNuevoNombreProducto.getText());
@@ -3319,6 +3345,8 @@ public void idVenta() throws ErrorTienda{
             producto.setCosto(Double.parseDouble(txtNuevoCostoProducto.getText()));
             try {
                 ControladorProducto.Modificar(producto);
+                modeloProductos.setRowCount(0);
+                txtProductosBuscar.setText("");
                 JOptionPane.showMessageDialog(rootPane, "Modificado con exito");
             } catch (ErrorTienda ex) {
                 JOptionPane.showMessageDialog(rootPane, ex.getMessage());
@@ -3407,23 +3435,17 @@ public void idVenta() throws ErrorTienda{
         
         boolean encontrado = false;
         s = evt.getKeyChar();
-        if (txtCostoProd.getText().length()==0) {
-            if (!Character.isDigit(s) || s == KeyEvent.VK_0) {
-            getToolkit().beep();
-            evt.consume();
-        }
-        }else{
+
         
-        
-        
-        
+      // double actualizarPrecio = ((((CantidadActual)*(PrecioActual))+((detalleCompra.get(i).getCantidad())*(detalleCompra.get(i).getCostoUnitario())))/((detalleCompra.get(i).getCantidad())+CantidadActual)); 
         if (!Character.isDigit(s) && s != KeyEvent.VK_PERIOD) {
             getToolkit().beep();
             evt.consume();
-        }}
+        }
         //AGREGAR COMPRAS A LA TABLA
         char c = evt.getKeyChar();
         if (c == (char) KeyEvent.VK_ENTER) {
+            if(Double.parseDouble(txtCostoProd.getText()) > 0){
             Producto pr = new Producto();
             
             if (exprod==false){
@@ -3463,12 +3485,13 @@ public void idVenta() throws ErrorTienda{
                         i++;
                     }
                     nuevaCantidad = Integer.parseInt(txtCantidad.getText()) + Integer.parseInt(tblCompra.getValueAt(i-1, 2).toString());
-                    nuevoCosto = Double.parseDouble(txtCostoProd.getText()) + Double.parseDouble(tblCompra.getValueAt(i-1, 3).toString());
+                    nuevoCosto = (Double.parseDouble(txtCostoProd.getText()) + Double.parseDouble(tblCompra.getValueAt(i-1, 3).toString()))/2;
                     tablaModel.setValueAt(nuevaCantidad, i-1, 2);
                     tablaModel.setValueAt(nuevoCosto, i-1, 3);
                     tablaModel.setValueAt(nuevaCantidad*nuevoCosto, i-1, 4);
                     tblCompra.setModel(tablaModel);
                 }
+
                 //LIMPIAR LOS TXT 
                 txtCodBarraProd.setText("");
                 txtNomProd.setText("");
@@ -3487,6 +3510,9 @@ public void idVenta() throws ErrorTienda{
                 txtTotal.setText("$"+totalFinal);
             
         }
+                           }else{
+                       JOptionPane.showMessageDialog(rootPane, "El Costo debe ser mayor a 0");
+                       }
         }
     }//GEN-LAST:event_txtCostoProdKeyTyped
 
@@ -3876,6 +3902,27 @@ public void idVenta() throws ErrorTienda{
         }
     }//GEN-LAST:event_tblCompraKeyPressed
 
+    private void btnCancelarVenta1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarVenta1MouseExited
+        btnCancelarVenta.setIcon(new ImageIcon(getClass().getResource("/iconos/cancelarB.png")));
+    }//GEN-LAST:event_btnCancelarVenta1MouseExited
+
+    private void btnCancelarVenta1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarVenta1MouseEntered
+        btnCancelarVenta.setIcon(new ImageIcon(getClass().getResource("/iconos/cancelar.png")));
+    }//GEN-LAST:event_btnCancelarVenta1MouseEntered
+
+    private void btnCancelarVenta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarVenta1ActionPerformed
+        /*for(int i =0; i<tablaModel.getRowCount(); i++){
+            tablaModel.removeRow(i);
+        }*/
+        tablaModel.setRowCount(0);
+        //tblCompras.removeAll();
+        txtCodBarraProd.setText("");
+        txtNomProd.setText("");
+        txtCantidad.setText("1");
+        txtCostoProd.setText("");
+        
+    }//GEN-LAST:event_btnCancelarVenta1ActionPerformed
+
                                                                                                                                                                                                                               
     /**
      * @param args the command line arguments
@@ -3926,6 +3973,7 @@ public void idVenta() throws ErrorTienda{
     private javax.swing.JButton btnBuscarProducto;
     private javax.swing.JButton btnBuscarProductoVenta;
     private javax.swing.JButton btnCancelarVenta;
+    private javax.swing.JButton btnCancelarVenta1;
     private javax.swing.JButton btnCompras;
     private javax.swing.JButton btnEliminarProducto;
     private javax.swing.JButton btnEliminarProveedor;
