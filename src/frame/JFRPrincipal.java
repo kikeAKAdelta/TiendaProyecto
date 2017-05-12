@@ -2869,27 +2869,34 @@ public void idVenta() throws ErrorTienda{
 
     private void btnAgregarNuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarNuevoProductoActionPerformed
        Producto agregado=new Producto();
+       
       
         if (txtCodBarraProductos.equals("") || txtNombreProductos.equals("") || txtInventarioProducto.getText().equals("") || txtCostoProductos.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Rellene todos los campos");
         
         }else{
-       agregado.setCodBarra(txtCodBarraProductos.getText());
-       agregado.setNombre(txtNombreProductos.getText());
-       agregado.setInventario(Integer.parseInt(txtInventarioProducto.getText()));
-       agregado.setCosto(Double.parseDouble(txtCostoProductos.getText()));
-       
-        
-     
-       
-        try {
-            ControladorProducto.Agregar(agregado);
             
-            JOptionPane.showMessageDialog(null, "El producto fue agregado correctamente");
-            limpiandoTxtProducto();
-        } catch (ErrorTienda e) {
+            int inven=Integer.parseInt(txtInventarioProducto.getText());
+            double cost=Double.parseDouble(txtCostoProductos.getText());
+            if(inven<=0 || cost<=0){
+                JOptionPane.showMessageDialog(null, "Los campos inventario y costo no pueden estar en cero o menor que cero");
+            }else{
+                    agregado.setCodBarra(txtCodBarraProductos.getText());
+                    agregado.setNombre(txtNombreProductos.getText());
+                    agregado.setInventario(Integer.parseInt(txtInventarioProducto.getText()));
+                    agregado.setCosto(Double.parseDouble(txtCostoProductos.getText()));
+
+
+                try {
+                    ControladorProducto.Agregar(agregado);
+
+                    JOptionPane.showMessageDialog(null, "El producto fue agregado correctamente");
+                    limpiandoTxtProducto();
+                } catch (ErrorTienda e) {
+
+                }
+            }
             
-        }
         }
        
     }//GEN-LAST:event_btnAgregarNuevoProductoActionPerformed
