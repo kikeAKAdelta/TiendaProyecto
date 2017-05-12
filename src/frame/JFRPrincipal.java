@@ -30,6 +30,7 @@ import javax.swing.table.TableRowSorter;
 import javax.swing.*;
 import Clases.Compra;
 import Clases.DetalleCompra;
+import Clases.Parametro;
 /**
  *
  * @author Jose Lopez Garcia
@@ -257,6 +258,11 @@ public final class JFRPrincipal extends javax.swing.JFrame {
                      obtenerProducto = ControladorProducto.Obtener(txtCodigoBarraVender.getText());
                      int cantidad = Integer.parseInt(txtCantidadVender.getText());
                      int fila = modeloTablaVender.getRowCount();
+                     double utilidad = 0;
+                     double nuevoCosto; 
+                     
+                     utilidad = Parametro.ObtenerUtilidad();
+                     nuevoCosto = (utilidad*obtenerProducto.getCosto()) + obtenerProducto.getCosto();
                      //COMPARAR LA CANTIDAD DISPONIBLE DEL PRODUCTO CONTRA LA CANTIDAD DEMANDADA
                      
                      if(cantidad>obtenerProducto.getInventario()){
@@ -274,8 +280,9 @@ public final class JFRPrincipal extends javax.swing.JFrame {
                          modeloTablaVender.setValueAt(obtenerProducto.getCodBarra(), fila,0);
                          modeloTablaVender.setValueAt(obtenerProducto.getNombre(), fila,1);
                          modeloTablaVender.setValueAt(txtCantidadVender.getText(), fila,2);
-                         modeloTablaVender.setValueAt(obtenerProducto.getCosto(), fila,3);
-                         modeloTablaVender.setValueAt(decimal.format(cantidad*obtenerProducto.getCosto()), fila,4);
+                                 System.out.println(utilidad);
+                         modeloTablaVender.setValueAt(DetalleVenta.CalcularPrecio(obtenerProducto), fila,3);
+                         modeloTablaVender.setValueAt(decimal.format(cantidad*DetalleVenta.CalcularPrecio(obtenerProducto)), fila,4);
                          limpiarVenta();
                              }
                              

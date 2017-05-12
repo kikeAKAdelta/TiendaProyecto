@@ -41,20 +41,20 @@ static ResultSet rs;
         return parametros;
     }
     
-    public static Parametro ObtenerUtilidad() throws ErrorTienda{
+    public static double  ObtenerUtilidad() throws ErrorTienda{
 
-        Parametro mipara=new Parametro();
+        double utilidad=0.0;
         cn=new Conexion();
         try {
-            rs=cn.st.executeQuery("SELECT Valor FROM parametros");
+            rs=cn.st.executeQuery("SELECT Valor FROM parametros WHERE IdParametro = 3");
             while (rs.next()) {
-                mipara.setUtilidad(rs.getString(1));
+                utilidad = Double.parseDouble(rs.getString(1))/100;
             }
         } catch (Exception e) {
             throw new ErrorTienda("Class Parametro/ObtenerUtilidad",e.getMessage());
         }
 
-        return mipara;
+        return utilidad;
     }
 
     public String getDireccion() {

@@ -15,11 +15,11 @@ import java.text.DecimalFormat;
  */
 public class DetalleVenta {
     
-public Producto Producto;
+public static Producto Producto;
 public int Cantidad;
 public double PrecioUnitario;
 
-DecimalFormat decimal = new DecimalFormat("0.00");
+static DecimalFormat decimal = new DecimalFormat("0.00");
 
     public DetalleVenta() {
     }
@@ -33,11 +33,11 @@ DecimalFormat decimal = new DecimalFormat("0.00");
 
 
 
-    public double CalcularPrecio() throws SQLException, ClassNotFoundException, ErrorTienda{
+    public static double CalcularPrecio(Producto producto) throws ErrorTienda{
         Parametro p=new Parametro();
         try{
            decimal.setRoundingMode(RoundingMode.CEILING); 
-        return Double.parseDouble(decimal.format(Producto.getCosto()/(1-(Double.parseDouble(p.ObtenerUtilidad().getUtilidad())/100))));
+        return Double.parseDouble(decimal.format(producto.getCosto()*Parametro.ObtenerUtilidad()+producto.getCosto()));
         }catch(ArithmeticException ex){
             throw new ErrorTienda("class DetalleVenta/CalcularPrecio", ex.getMessage());
         }
