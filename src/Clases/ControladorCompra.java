@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  */
 public class ControladorCompra {
     static Conexion cn;
-    static DecimalFormat decimal = new DecimalFormat("0.00");
+    static DecimalFormat decimal = new DecimalFormat("0.0000");
      
              
     public static void Agregar(Compra cm, Object[][] detalleCompra) throws ErrorTienda, SQLException{
@@ -28,7 +28,7 @@ public class ControladorCompra {
      try {
             cn.st.executeUpdate("INSERT INTO compra(IdCompra,Fecha,IdProveedor,Total) VALUES('"+cm.IdCompra+"','"+cm.getFecha()+"','"+cm.PROVEEDOR.IdProveedor+"','"+cm.Total+"')");
             cn.conexion.close();
-            ControladorCompra.ActualizarInventario(detalleCompra);
+            
             
             cn = new Conexion();
               try {

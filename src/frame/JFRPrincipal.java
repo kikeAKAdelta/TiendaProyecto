@@ -1473,11 +1473,11 @@ public void idVenta() throws ErrorTienda{
         btnVender.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/vender.png"))); // NOI18N
         btnVender.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnVender.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnVenderMouseEntered(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnVenderMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnVenderMouseEntered(evt);
             }
         });
         btnVender.addActionListener(new java.awt.event.ActionListener() {
@@ -1740,11 +1740,11 @@ public void idVenta() throws ErrorTienda{
         btnGuardarProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/guardarprov.png"))); // NOI18N
         btnGuardarProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardarProveedor.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnGuardarProveedorMouseEntered(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnGuardarProveedorMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnGuardarProveedorMouseEntered(evt);
             }
         });
         btnGuardarProveedor.addActionListener(new java.awt.event.ActionListener() {
@@ -2135,10 +2135,10 @@ public void idVenta() throws ErrorTienda{
             }
         });
         tblProductos.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 tblProductosInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         tblProductos.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -3109,6 +3109,7 @@ public void idVenta() throws ErrorTienda{
               limpiandoTxtProveedor();
               tblProveedores.removeAll();
               actualizarTablaProveedor();
+              LlenarCompra();
               } catch (ErrorTienda e) {      
            }
         }
@@ -3462,9 +3463,14 @@ public void idVenta() throws ErrorTienda{
                  txtNomProd.setEditable(false);
                  JOptionPane.showMessageDialog(rootPane, "Producto Agregado");
             }else{
-                for (int i = 0; i < tblCompra.getRowCount(); i++) {
-                    encontrado = tblCompra.getValueAt(i, 0).equals(txtCodBarraProd.getText());
+                if (tblCompra.getRowCount()>0) {
+                    int i = 0;
+                    while (encontrado==false&&i<tblCompra.getRowCount()) {
+                        encontrado = tblCompra.getValueAt(i, 0).equals(txtCodBarraProd.getText());
+                        i++;
+                    }
                 }
+                
                 
                 if(encontrado == false){
                     String fila[]  = new String[5];
@@ -3477,21 +3483,22 @@ public void idVenta() throws ErrorTienda{
                     tblCompra.setModel(tablaModel);
                 }else{
                     boolean buscar=false;
-                    int i=0;
+                    int j=0;
                     int nuevaCantidad;
                     double nuevoCosto;
                     while (buscar==false) {
-                        buscar = tblCompra.getValueAt(i, 0).equals(txtCodBarraProd.getText());
-                        i++;
+                        buscar = tblCompra.getValueAt(j, 0).equals(txtCodBarraProd.getText());
+                        j++;
                     }
-                    nuevaCantidad = Integer.parseInt(txtCantidad.getText()) + Integer.parseInt(tblCompra.getValueAt(i-1, 2).toString());
-                    nuevoCosto = (Double.parseDouble(txtCostoProd.getText()) + Double.parseDouble(tblCompra.getValueAt(i-1, 3).toString()))/2;
-                    tablaModel.setValueAt(nuevaCantidad, i-1, 2);
-                    tablaModel.setValueAt(nuevoCosto, i-1, 3);
-                    tablaModel.setValueAt(nuevaCantidad*nuevoCosto, i-1, 4);
+                    nuevaCantidad = Integer.parseInt(txtCantidad.getText()) + Integer.parseInt(tblCompra.getValueAt(j-1, 2).toString());
+                    nuevoCosto = (Double.parseDouble(txtCostoProd.getText()) + Double.parseDouble(tblCompra.getValueAt(j-1, 3).toString()))/2;
+                    System.out.println(j);
+                    tablaModel.setValueAt(nuevaCantidad, j-1, 2);
+                    tablaModel.setValueAt(nuevoCosto, j-1, 3);
+                    tablaModel.setValueAt(nuevaCantidad*nuevoCosto, j-1, 4);
                     tblCompra.setModel(tablaModel);
                 }
-
+                encontrado = false;
                 //LIMPIAR LOS TXT 
                 txtCodBarraProd.setText("");
                 txtNomProd.setText("");

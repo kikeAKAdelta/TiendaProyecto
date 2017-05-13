@@ -37,7 +37,7 @@ static DecimalFormat decimal = new DecimalFormat("0.00");
         Parametro p=new Parametro();
         try{
            decimal.setRoundingMode(RoundingMode.CEILING); 
-        return Double.parseDouble(decimal.format(producto.getCosto()*Parametro.ObtenerUtilidad()+producto.getCosto()));
+        return Double.parseDouble(decimal.format(producto.getCosto()/(1-Parametro.ObtenerUtilidad())));
         }catch(ArithmeticException ex){
             throw new ErrorTienda("class DetalleVenta/CalcularPrecio", ex.getMessage());
         }
