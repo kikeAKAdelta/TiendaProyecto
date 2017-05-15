@@ -175,6 +175,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         txtNombreProductos.setText("");
         txtInventarioProducto.setText("");
         txtCostoProductos.setText("");
+        txtProductosBuscar.setText("");
         txtCodBarraProductos.requestFocus();
     }
     
@@ -930,6 +931,11 @@ public void idVenta() throws ErrorTienda{
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnProductosMouseExited(evt);
+            }
+        });
+        btnProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProductosActionPerformed(evt);
             }
         });
         jpnSubMenu.add(btnProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 120, 180, 40));
@@ -2135,10 +2141,10 @@ public void idVenta() throws ErrorTienda{
             }
         });
         tblProductos.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 tblProductosInputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         tblProductos.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -2585,6 +2591,8 @@ public void idVenta() throws ErrorTienda{
     private void btnSalirProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirProductosActionPerformed
             jpnNuevoProducto.setVisible(false);
             jpnProductos.setVisible(true);
+            DefaultTableModel modeloProductos=(DefaultTableModel) tblProductos.getModel();
+            modeloProductos.setRowCount(0);
             limpiandoTxtProducto();
     }//GEN-LAST:event_btnSalirProductosActionPerformed
 
@@ -3653,7 +3661,7 @@ public void idVenta() throws ErrorTienda{
          int c=(int) evt.getKeyChar();
          char mayu=evt.getKeyChar();
          
-         if ((c>=65 && c<=90) || (c>=97 && c<=122)  || (c==32) || (c== (char)KeyEvent.VK_BACK_SPACE) || (c== (char)KeyEvent.VK_ENTER)) {
+         if ((c>=65 && c<=90) || (c>=97 && c<=122)  || (c==32) || (c >=48 && c<=57) || (c== (char)KeyEvent.VK_BACK_SPACE) || (c== (char)KeyEvent.VK_ENTER)) {
              if (Character.isLowerCase(mayu)) {
                  String cadena=(""+mayu).toUpperCase();
                  mayu=cadena.charAt(0);
@@ -3664,6 +3672,8 @@ public void idVenta() throws ErrorTienda{
             getToolkit().beep();
             evt.consume();
          }
+         
+        
     }//GEN-LAST:event_txtNomProdKeyTyped
 
     private void txtCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyTyped
@@ -3929,6 +3939,13 @@ public void idVenta() throws ErrorTienda{
         txtCostoProd.setText("");
         
     }//GEN-LAST:event_btnCancelarVenta1ActionPerformed
+
+    private void btnProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosActionPerformed
+        txtProductosBuscar.setText("");
+        DefaultTableModel modeloProductos=(DefaultTableModel) tblProductos.getModel();
+        modeloProductos.setRowCount(0);
+        
+    }//GEN-LAST:event_btnProductosActionPerformed
 
                                                                                                                                                                                                                               
     /**
