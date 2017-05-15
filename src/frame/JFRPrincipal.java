@@ -49,7 +49,10 @@ public final class JFRPrincipal extends javax.swing.JFrame {
     private TableRowSorter trsFiltro;
     DefaultTableModel tablaModel= new DefaultTableModel();
     public String CodBarraVentas="";
-    boolean exprod;
+    boolean exprod, encontrado;
+    Character s;
+        
+        
     
     public JFRPrincipal() {
         initComponents();
@@ -854,6 +857,7 @@ public void idVenta() throws ErrorTienda{
         frmBUscarVentas.getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 420));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("iShop");
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/iconos/lanzador.png")).getImage());
         setUndecorated(true);
         setResizable(false);
@@ -2141,10 +2145,10 @@ public void idVenta() throws ErrorTienda{
             }
         });
         tblProductos.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 tblProductosInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         tblProductos.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -3437,28 +3441,9 @@ public void idVenta() throws ErrorTienda{
            
         
     }//GEN-LAST:event_txtCodBarraProdKeyTyped
-
-    private void txtCostoProdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostoProdKeyTyped
-        // TODO add your handling code here:
-        Character s;
-        
-        boolean encontrado = false;
-        s = evt.getKeyChar();
-
-        
-      // double actualizarPrecio = ((((CantidadActual)*(PrecioActual))+((detalleCompra.get(i).getCantidad())*(detalleCompra.get(i).getCostoUnitario())))/((detalleCompra.get(i).getCantidad())+CantidadActual)); 
-        if (!Character.isDigit(s) && s != KeyEvent.VK_PERIOD) {
-            getToolkit().beep();
-            evt.consume();
-        }
-        //AGREGAR COMPRAS A LA TABLA
-        char c = evt.getKeyChar();
-        if (c == (char) KeyEvent.VK_ENTER) {
-            if(Double.parseDouble(txtCostoProd.getText()) > 0){
-            Producto pr = new Producto();
-            
-            if (exprod==false){
-                pr.setCodBarra(txtCodBarraProd.getText());
+public void AgregarProductoCompras(){
+    Producto pr = new Producto();
+    pr.setCodBarra(txtCodBarraProd.getText());
                 pr.setNombre(txtNomProd.getText());
                 pr.setInventario(Integer.parseInt(txtCantidad.getText()));
                 pr.setCosto(Double.parseDouble(txtCostoProd.getText()));
@@ -3469,9 +3454,11 @@ public void idVenta() throws ErrorTienda{
                     }
                  exprod=true;
                  txtNomProd.setEditable(false);
+                 AgregarProductoTablaCompras();
                  JOptionPane.showMessageDialog(rootPane, "Producto Agregado");
-            }else{
-                if (tblCompra.getRowCount()>0) {
+}
+public void AgregarProductoTablaCompras(){
+    if (tblCompra.getRowCount()>0) {
                     int i = 0;
                     while (encontrado==false&&i<tblCompra.getRowCount()) {
                         encontrado = tblCompra.getValueAt(i, 0).equals(txtCodBarraProd.getText());
@@ -3523,6 +3510,28 @@ public void idVenta() throws ErrorTienda{
 
                 double totalFinal=Double.parseDouble(decimal.format(total));
                 txtTotal.setText("$"+totalFinal);
+}
+    private void txtCostoProdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostoProdKeyTyped
+        // TODO add your handling code here:
+        
+        s = evt.getKeyChar();
+        encontrado = false;
+        
+      // double actualizarPrecio = ((((CantidadActual)*(PrecioActual))+((detalleCompra.get(i).getCantidad())*(detalleCompra.get(i).getCostoUnitario())))/((detalleCompra.get(i).getCantidad())+CantidadActual)); 
+        if (!Character.isDigit(s) && s != KeyEvent.VK_PERIOD) {
+            getToolkit().beep();
+            evt.consume();
+        }
+        //AGREGAR COMPRAS A LA TABLA
+        char c = evt.getKeyChar();
+        if (c == (char) KeyEvent.VK_ENTER) {
+            if(Double.parseDouble(txtCostoProd.getText()) > 0){
+            
+            
+            if (exprod==false){
+                AgregarProductoCompras();
+            }else{
+                AgregarProductoTablaCompras();
             
         }
                            }else{
@@ -3867,7 +3876,7 @@ public void idVenta() throws ErrorTienda{
 
     public double columnaprecio(double precio){
         double resultado=0;
-        resultado = precio+(precio*0.25);
+        resultado = precio/(0.85);
         return resultado;
     }
     private void btnBuscarAgregarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarAgregarVentaActionPerformed
