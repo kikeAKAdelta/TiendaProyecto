@@ -302,6 +302,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         calcularTotal();
     }
     public boolean verificarTablaProductosVender(){
+        decimal.setRoundingMode(RoundingMode.CEILING); 
         int filas = modeloTablaVender.getRowCount();
        
         if(filas!=0){
@@ -347,6 +348,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         
     }
     public void calcularTotal(){
+        decimal.setRoundingMode(RoundingMode.CEILING); 
         int filas = modeloTablaVender.getRowCount();
         int iteraciones=0;
         double total=0;
