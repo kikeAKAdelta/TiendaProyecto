@@ -2994,7 +2994,7 @@ public void idVenta() throws ErrorTienda{
 
     private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
             tablaBuscarProductos();
-            System.out.println();
+            
     }//GEN-LAST:event_btnBuscarProductoActionPerformed
 
     private void tblProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductosMouseClicked
