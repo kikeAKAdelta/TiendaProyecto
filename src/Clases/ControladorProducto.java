@@ -7,6 +7,7 @@ package Clases;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -91,7 +92,6 @@ public class ControladorProducto {
     
     
     public static ArrayList<Producto> Buscar(String buscar) throws ErrorTienda{
-        
         ArrayList<Object> producto = new ArrayList<Object>();
         
         cn=new Conexion();

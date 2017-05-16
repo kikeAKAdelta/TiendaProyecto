@@ -3756,7 +3756,7 @@ public void AgregarProductoTablaCompras(){
             if (tblCompra.getRowCount()>0) {
                String IDprov=IdProveedor.toString();
                 for (int i = 0; i < tblCompra.getRowCount(); i++) {
-                    detalleCompra.setCostoUnitario(Double.parseDouble(tblCompra.getValueAt(i, 3).toString()));
+                    detalleCompra.setCostoUnitario(Double.parseDouble(decimal.format(Double.parseDouble(tblCompra.getValueAt(i, 3).toString()))));
                     detalleCompra.setCantidad(Integer.parseInt(tblCompra.getValueAt(i, 2).toString()));
                     detalleCompra.setPRODUCTO(ControladorProducto.Obtener(tblCompra.getValueAt(i, 0).toString()));
                     Articulos.add(detalleCompra);

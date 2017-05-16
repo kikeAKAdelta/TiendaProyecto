@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  */
 public class ControladorCompra {
     static Conexion cn;
-    static DecimalFormat decimal = new DecimalFormat("0.0000");
+    static DecimalFormat decimal = new DecimalFormat("0.00");
      
              
     public static void Agregar(Compra cm, Object[][] detalleCompra) throws ErrorTienda, SQLException{
