@@ -48,6 +48,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
     DecimalFormat decimal = new DecimalFormat("0.00");
     private TableRowSorter trsFiltro;
     DefaultTableModel tablaModel= new DefaultTableModel();
+    DefaultTableModel modeloProveedores= new DefaultTableModel();
     public String CodBarraVentas="";
     boolean exprod, encontrado;
     Character s;
@@ -379,7 +380,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
     
     //---------------------------Llenar tabla de proveedores----------------------------------------
         public void actualizarTablaProveedor(){
-            DefaultTableModel modeloProveedores= new DefaultTableModel();
+            modeloProveedores.setRowCount(0);
             
             ArrayList<Proveedor> listaProveedor=new ArrayList();
             Object fila[]=new Object[5];
@@ -1540,11 +1541,11 @@ public void idVenta() throws ErrorTienda{
         btnAgregarProductoVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/agregar2.png"))); // NOI18N
         btnAgregarProductoVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAgregarProductoVenta.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnAgregarProductoVentaMouseExited(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnAgregarProductoVentaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAgregarProductoVentaMouseExited(evt);
             }
         });
         btnAgregarProductoVenta.addActionListener(new java.awt.event.ActionListener() {
@@ -1752,11 +1753,11 @@ public void idVenta() throws ErrorTienda{
         btnGuardarProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/guardarprov.png"))); // NOI18N
         btnGuardarProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardarProveedor.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnGuardarProveedorMouseExited(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnGuardarProveedorMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnGuardarProveedorMouseExited(evt);
             }
         });
         btnGuardarProveedor.addActionListener(new java.awt.event.ActionListener() {
@@ -2147,10 +2148,10 @@ public void idVenta() throws ErrorTienda{
             }
         });
         tblProductos.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 tblProductosInputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         tblProductos.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -2473,8 +2474,6 @@ public void idVenta() throws ErrorTienda{
 
         getContentPane().add(jpnDetalleCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 730, 600));
 
-        getAccessibleContext().setAccessibleName("iShop");
-
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -2547,6 +2546,8 @@ public void idVenta() throws ErrorTienda{
         Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnProveedores);  
         apagado2();
         jpnProveedores.setVisible(true); 
+        tblProveedores.removeAll();
+        modeloProveedores.setRowCount(0);
         actualizarTablaProveedor();
     }//GEN-LAST:event_btnProveedoresMouseClicked
 
@@ -3130,20 +3131,14 @@ public void idVenta() throws ErrorTienda{
     }//GEN-LAST:event_btnGuardarProveedorActionPerformed
 
     private void txtNombreProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreProveedorKeyTyped
-         //Pasar TXT a mayúsculas
-         int c=(int) evt.getKeyChar();
-         char mayu=evt.getKeyChar();
-         
-         if ((c>=65 && c<=90) || (c>=97 && c<=122)  || (c==32) || (c== (char)KeyEvent.VK_BACK_SPACE) || (c== (char)KeyEvent.VK_ENTER) || (c== (char)KeyEvent.VK_PERIOD)) {
-             if (Character.isLowerCase(mayu)) {
+         char mayu=evt.getKeyChar();        
+         if (Character.isLowerCase(mayu)) {
                  String cadena=(""+mayu).toUpperCase();
                  mayu=cadena.charAt(0);
                  evt.setKeyChar(mayu);
-             }
-        }else{
-             evt.setKeyChar((char) KeyEvent.VK_CLEAR);
-            getToolkit().beep();
-            evt.consume();
+        }
+        else{
+
          }
     }//GEN-LAST:event_txtNombreProveedorKeyTyped
 
@@ -3164,20 +3159,14 @@ public void idVenta() throws ErrorTienda{
     }//GEN-LAST:event_txtIDProveedorKeyTyped
 
     private void txtNuevoNombreProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNuevoNombreProveedorKeyTyped
-         //Pasar TXT a mayúsculas
-         int c=(int) evt.getKeyChar();
-         char mayu=evt.getKeyChar();
-         
-         if ((c>=65 && c<=90) || (c>=97 && c<=122)  || (c==32) || (c== (char)KeyEvent.VK_BACK_SPACE) || (c== (char)KeyEvent.VK_ENTER)  || (c== (char)KeyEvent.VK_PERIOD)){
-             if (Character.isLowerCase(mayu)) {
+         char mayu=evt.getKeyChar();        
+         if (Character.isLowerCase(mayu)) {
                  String cadena=(""+mayu).toUpperCase();
                  mayu=cadena.charAt(0);
                  evt.setKeyChar(mayu);
-             }
-        }else{
-             evt.setKeyChar((char) KeyEvent.VK_CLEAR);
-            getToolkit().beep();
-            evt.consume();
+        }
+        else{
+
          }
     }//GEN-LAST:event_txtNuevoNombreProveedorKeyTyped
 
@@ -3219,19 +3208,13 @@ public void idVenta() throws ErrorTienda{
     }//GEN-LAST:event_btnGuardarModificarProveedorActionPerformed
 
     private void txtProductosBuscar1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProductosBuscar1KeyTyped
-         int c=(int) evt.getKeyChar();
-         char mayu=evt.getKeyChar();
-         
-         if ((c>=65 && c<=90) || (c>=97 && c<=122)  || (c==32) || (c== (char)KeyEvent.VK_BACK_SPACE)){
-             if (Character.isLowerCase(mayu)) {
+         char mayu=evt.getKeyChar();        
+         if (Character.isLowerCase(mayu)) {
                  String cadena=(""+mayu).toUpperCase();
                  mayu=cadena.charAt(0);
                  evt.setKeyChar(mayu);
-             }
-        }else{
-             evt.setKeyChar((char) KeyEvent.VK_CLEAR);
-            getToolkit().beep();
-            evt.consume();
+        }
+        else{
          }
         txtProductosBuscar1.addKeyListener(new KeyAdapter(){
             
@@ -3366,7 +3349,7 @@ public void idVenta() throws ErrorTienda{
             } catch (ErrorTienda ex) {
                 JOptionPane.showMessageDialog(rootPane, ex.getMessage());
             }
-            tblProveedores.removeAll();
+            //tblProveedores.removeAll();
             jpnProductos.setVisible(true);
             jpnModificarProducto.setVisible(false);
             
