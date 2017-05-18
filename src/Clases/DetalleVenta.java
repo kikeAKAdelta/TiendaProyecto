@@ -6,7 +6,6 @@
 package Clases;
 
 import java.math.RoundingMode;
-import java.sql.SQLException;
 import java.text.DecimalFormat;
 
 /**

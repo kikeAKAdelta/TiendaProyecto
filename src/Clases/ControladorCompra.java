@@ -5,14 +5,12 @@
  */
 package Clases;
 
-import static Clases.ControladorProducto.cn;
+
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -20,7 +18,8 @@ import javax.swing.JOptionPane;
  */
 public class ControladorCompra {
     static Conexion cn;
-    static DecimalFormat decimal = new DecimalFormat("0.00");
+    
+    
      
              
     public static void Agregar(Compra cm, Object[][] detalleCompra) throws ErrorTienda, SQLException{
@@ -59,7 +58,7 @@ public class ControladorCompra {
             int cantidad = pr.getInventario();
             int cantidad2= Integer.parseInt(String.valueOf(detalleCompra[x][2]));
             
-            System.out.println("Cantidad en la bd "+cantidad+" Cantidad exigida "+cantidad2);
+            
             cn.st.execute("UPDATE productos SET Inventario='"+(cantidad+cantidad2)+"' WHERE CodBarra='"+detalleCompra[x][0]+"'");
         }    
         } catch (SQLException e) {
@@ -68,16 +67,19 @@ public class ControladorCompra {
     }
     
     
-    public static void ActualizarPrecioPromedioProducto(ArrayList<DetalleCompra> detalleCompra) throws ErrorTienda {
+    public static void ActualizarPrecioPromedioProducto(Object[][] detalleCompra) throws ErrorTienda {
          //Obtener la cantidad actual del producto
         int CantidadActual=0;
+        DecimalFormat decimal = new DecimalFormat("#.##");
+        
         try {
-            for (int i = 0; i < detalleCompra.size(); i++) {
-                
+            for (int i = 0; i < detalleCompra.length; i++) {
+                double actualizarPrecio=0.0;
             
                 ResultSet rsCantidad = null;
-                rsCantidad = cn.st.executeQuery("SELECT Inventario FROM productos WHERE CodBarra='"+detalleCompra.get(i).PRODUCTO.getCodBarra()+"'");
-
+                rsCantidad = cn.st.executeQuery("SELECT Inventario FROM productos WHERE CodBarra='"+detalleCompra[i][0]+"';");
+                
+                CantidadActual=0;
                 while(rsCantidad.next()){
                     CantidadActual = rsCantidad.getInt(1);
                 }
@@ -86,16 +88,20 @@ public class ControladorCompra {
                 double PrecioActual=0;
 
                 ResultSet rsPrecio = null;
-                rsPrecio = cn.st.executeQuery("SELECT Costo FROM productos WHERE CodBarra='"+detalleCompra.get(i).PRODUCTO.getCodBarra()+"'");
+                rsPrecio = cn.st.executeQuery("SELECT Costo FROM productos WHERE CodBarra='"+detalleCompra[i][0]+"';");
 
                 while(rsPrecio.next()){
                     PrecioActual = rsPrecio.getDouble(1);
 
 
                 }
-                double actualizarPrecio = ((((CantidadActual)*(PrecioActual))+((detalleCompra.get(i).getCantidad())*(detalleCompra.get(i).getCostoUnitario())))/((detalleCompra.get(i).getCantidad())+CantidadActual));
                 
-                cn.st.executeUpdate("UPDATE productos SET Costo='"+decimal.format(actualizarPrecio)+"' WHERE CodBarra='"+detalleCompra.get(i).PRODUCTO.getCodBarra()+"'");
+                actualizarPrecio = CantidadActual * PrecioActual;
+                actualizarPrecio = actualizarPrecio + ( Integer.parseInt(detalleCompra[i][2].toString()) * Double.parseDouble(detalleCompra[i][3].toString()) );
+                actualizarPrecio = actualizarPrecio / (Integer.parseInt(detalleCompra[i][2].toString())+CantidadActual);
+                System.out.println(actualizarPrecio);
+                cn.st.executeUpdate("UPDATE productos SET Costo='"+decimal.format(actualizarPrecio)+"' WHERE CodBarra='"+detalleCompra[i][0]+"';");
+                
             }
         
         }catch (Exception ex){

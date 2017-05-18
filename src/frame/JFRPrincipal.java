@@ -1288,11 +1288,11 @@ public void idVenta() throws ErrorTienda{
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/guardarprov.png"))); // NOI18N
         btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnGuardarMouseEntered(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnGuardarMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnGuardarMouseEntered(evt);
             }
         });
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -2148,10 +2148,10 @@ public void idVenta() throws ErrorTienda{
             }
         });
         tblProductos.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 tblProductosInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         tblProductos.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -3672,14 +3672,17 @@ public void AgregarProductoTablaCompras(){
 
     private void txtCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyTyped
         // TODO add your handling code here:
-          char c = evt.getKeyChar();               
+        s = evt.getKeyChar();
+        if (!Character.isDigit(s)) {
+            getToolkit().beep();
+            evt.consume();
 
-        if (c == (char) KeyEvent.VK_ENTER) {
-            if (txtCantidad.getText().equals("0")) {
-                JOptionPane.showMessageDialog(rootPane, "Cantidad no puede ser cero");
-            }else{
-        txtCostoProd.requestFocus();}
         }
+        if (s == KeyEvent.VK_ENTER && Integer.parseInt(txtCantidad.getText())>0) {
+                
+            txtCostoProd.requestFocus();
+        }
+          
     }//GEN-LAST:event_txtCantidadKeyTyped
 
     private void btnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVenderActionPerformed
@@ -3782,7 +3785,7 @@ public void AgregarProductoTablaCompras(){
             }
                ControladorCompra.Agregar(compra, detallesCompra);
                ControladorCompra.ActualizarInventario(detallesCompra);
-               ControladorCompra.ActualizarPrecioPromedioProducto(Articulos);
+               ControladorCompra.ActualizarPrecioPromedioProducto(detallesCompra);
                JOptionPane.showMessageDialog(rootPane, "Compra agregada con exito");
             }
             

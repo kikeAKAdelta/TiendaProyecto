@@ -5,14 +5,9 @@
  */
 package Clases;
 
-import static Clases.ControladorProducto.cn;
-import java.math.RoundingMode;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Iterator;
 import javax.swing.JOptionPane;
 
 /**

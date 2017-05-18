@@ -5,13 +5,8 @@
  */
 package Clases;
 
-import static Clases.ControladorProducto.cn;
-import java.sql.SQLException;
+
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

@@ -5,14 +5,10 @@
  */
 package Clases;
 
-import static Clases.ControladorProducto.cn;
-import static Clases.ControladorProducto.rs;
-import static Clases.ControladorProducto.setCambio;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
