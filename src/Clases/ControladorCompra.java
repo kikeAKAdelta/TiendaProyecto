@@ -44,7 +44,7 @@ public class ControladorCompra {
      } catch (SQLException ex) {
             throw new ErrorTienda("Class ControladorCompra/Agregar", ex.getMessage());
         }finally{
-            cn.conexion.close();
+            
         }
     
     }
@@ -70,7 +70,7 @@ public class ControladorCompra {
     public static void ActualizarPrecioPromedioProducto(Object[][] detalleCompra) throws ErrorTienda {
          //Obtener la cantidad actual del producto
         int CantidadActual=0;
-        DecimalFormat decimal = new DecimalFormat("#.##");
+        DecimalFormat decimal = new DecimalFormat("#.####");
         
         try {
             for (int i = 0; i < detalleCompra.length; i++) {
@@ -99,7 +99,6 @@ public class ControladorCompra {
                 actualizarPrecio = CantidadActual * PrecioActual;
                 actualizarPrecio = actualizarPrecio + ( Integer.parseInt(detalleCompra[i][2].toString()) * Double.parseDouble(detalleCompra[i][3].toString()) );
                 actualizarPrecio = actualizarPrecio / (Integer.parseInt(detalleCompra[i][2].toString())+CantidadActual);
-                System.out.println(actualizarPrecio);
                 cn.st.executeUpdate("UPDATE productos SET Costo='"+decimal.format(actualizarPrecio)+"' WHERE CodBarra='"+detalleCompra[i][0]+"';");
                 
             }

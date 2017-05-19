@@ -2152,10 +2152,10 @@ public void idVenta() throws ErrorTienda{
             }
         });
         tblProductos.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 tblProductosInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         tblProductos.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -3790,8 +3790,9 @@ public void AgregarProductoTablaCompras(){
                 detallesCompra[x][3]=Double.parseDouble(String.valueOf(tablaModel.getValueAt(x, 3)));
             }
                ControladorCompra.Agregar(compra, detallesCompra);
-               ControladorCompra.ActualizarInventario(detallesCompra);
                ControladorCompra.ActualizarPrecioPromedioProducto(detallesCompra);
+               ControladorCompra.ActualizarInventario(detallesCompra);
+
                JOptionPane.showMessageDialog(rootPane, "Compra agregada con exito");
             }
             
