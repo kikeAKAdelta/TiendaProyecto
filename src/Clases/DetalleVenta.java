@@ -35,8 +35,8 @@ static DecimalFormat decimal = new DecimalFormat("0.00");
     public static double CalcularPrecio(Producto producto) throws ErrorTienda{
         Parametro p=new Parametro();
         try{
-           decimal.setRoundingMode(RoundingMode.CEILING); 
-        return Double.parseDouble(decimal.format(producto.getCosto()/(1-Parametro.ObtenerUtilidad())));
+           //decimal.setRoundingMode(RoundingMode.CEILING); 
+        return Double.parseDouble(""+producto.getCosto()/(1-Parametro.ObtenerUtilidad()));
         }catch(ArithmeticException ex){
             throw new ErrorTienda("class DetalleVenta/CalcularPrecio", ex.getMessage());
         }

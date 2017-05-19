@@ -280,9 +280,12 @@ public final class JFRPrincipal extends javax.swing.JFrame {
                               modeloTablaVender.addRow(new Object[]{"","","","",""});
                          modeloTablaVender.setValueAt(obtenerProducto.getCodBarra(), fila,0);
                          modeloTablaVender.setValueAt(obtenerProducto.getNombre(), fila,1);
-                         modeloTablaVender.setValueAt(txtCantidadVender.getText(), fila,2);                                 
-                         modeloTablaVender.setValueAt(DetalleVenta.CalcularPrecio(obtenerProducto), fila,3);
-                         modeloTablaVender.setValueAt(decimal.format(cantidad*DetalleVenta.CalcularPrecio(obtenerProducto)), fila,4);
+                         modeloTablaVender.setValueAt(txtCantidadVender.getText(), fila,2);
+                         double precioCalculado = DetalleVenta.CalcularPrecio(obtenerProducto);
+                         System.out.println(precioCalculado);
+                         System.out.println(decimal.format(precioCalculado));
+                         modeloTablaVender.setValueAt(decimal.format(precioCalculado), fila,3);
+                         modeloTablaVender.setValueAt(decimal.format(cantidad*precioCalculado), fila,4);
                          limpiarVenta();
                              }
                              
@@ -303,7 +306,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         calcularTotal();
     }
     public boolean verificarTablaProductosVender(){
-        decimal.setRoundingMode(RoundingMode.CEILING); 
+        //decimal.setRoundingMode(RoundingMode.CEILING); 
         int filas = modeloTablaVender.getRowCount();
        
         if(filas!=0){
@@ -349,7 +352,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         
     }
     public void calcularTotal(){
-        decimal.setRoundingMode(RoundingMode.CEILING); 
+        //decimal.setRoundingMode(RoundingMode.CEILING); 
         int filas = modeloTablaVender.getRowCount();
         int iteraciones=0;
         double total=0;
@@ -1542,11 +1545,11 @@ public void idVenta() throws ErrorTienda{
         btnAgregarProductoVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/agregar2.png"))); // NOI18N
         btnAgregarProductoVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAgregarProductoVenta.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnAgregarProductoVentaMouseExited(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnAgregarProductoVentaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAgregarProductoVentaMouseExited(evt);
             }
         });
         btnAgregarProductoVenta.addActionListener(new java.awt.event.ActionListener() {
@@ -2149,10 +2152,10 @@ public void idVenta() throws ErrorTienda{
             }
         });
         tblProductos.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 tblProductosInputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         tblProductos.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -3846,7 +3849,7 @@ public void AgregarProductoTablaCompras(){
 
                     productos = ControladorProducto.Buscar(nombre);
                     modeloProductos.setColumnIdentifiers(campos);
-                    decimal.setRoundingMode(RoundingMode.CEILING); 
+                    //decimal.setRoundingMode(RoundingMode.CEILING); 
                     Iterator<Producto> prod = productos.iterator();
                     while (prod.hasNext()) {
                         fila[0] = prod.next();
