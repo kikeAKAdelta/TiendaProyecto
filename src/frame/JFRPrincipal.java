@@ -410,6 +410,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
     } 
         
         public void LlenarCompra(){
+            cmbProveedor.removeAllItems();
     try {
             int idCompra;
             idCompra = ControladorCompra.ObtenerIdCompra();
@@ -1541,11 +1542,11 @@ public void idVenta() throws ErrorTienda{
         btnAgregarProductoVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/agregar2.png"))); // NOI18N
         btnAgregarProductoVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAgregarProductoVenta.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnAgregarProductoVentaMouseEntered(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnAgregarProductoVentaMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnAgregarProductoVentaMouseEntered(evt);
             }
         });
         btnAgregarProductoVenta.addActionListener(new java.awt.event.ActionListener() {
@@ -1753,11 +1754,11 @@ public void idVenta() throws ErrorTienda{
         btnGuardarProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/guardarprov.png"))); // NOI18N
         btnGuardarProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardarProveedor.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnGuardarProveedorMouseEntered(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnGuardarProveedorMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnGuardarProveedorMouseEntered(evt);
             }
         });
         btnGuardarProveedor.addActionListener(new java.awt.event.ActionListener() {
@@ -3124,10 +3125,12 @@ public void idVenta() throws ErrorTienda{
               limpiandoTxtProveedor();
               tblProveedores.removeAll();
               actualizarTablaProveedor();
-              LlenarCompra();
+              
               } catch (ErrorTienda e) {      
            }
+              
         }
+        LlenarCompra();
     }//GEN-LAST:event_btnGuardarProveedorActionPerformed
 
     private void txtNombreProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreProveedorKeyTyped
