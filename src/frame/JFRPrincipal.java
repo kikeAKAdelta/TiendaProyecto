@@ -3516,6 +3516,9 @@ public void AgregarProductoTablaCompras(){
         //AGREGAR COMPRAS A LA TABLA
         char c = evt.getKeyChar();
         if (c == (char) KeyEvent.VK_ENTER) {
+            if (txtCodBarraProd.getText().equals("")||txtNomProd.getText().equals("")||txtCostoProd.getText().equals("")||txtCantidad.getText().equals("")) {
+                JOptionPane.showMessageDialog(rootPane, "Llene todos los campos");
+            }else{
             if(Double.parseDouble(txtCostoProd.getText()) > 0){
             
             
@@ -3527,7 +3530,7 @@ public void AgregarProductoTablaCompras(){
         }
                            }else{
                        JOptionPane.showMessageDialog(rootPane, "El Costo debe ser mayor a 0");
-                       }
+                       }}
         }
     }//GEN-LAST:event_txtCostoProdKeyTyped
 
@@ -3609,8 +3612,12 @@ public void AgregarProductoTablaCompras(){
          
          
          if (c == (char) KeyEvent.VK_ENTER) {
+             if(txtCantidadVender.getText().isEmpty()||txtCodigoBarraVender.getText().isEmpty()){
+                 JOptionPane.showMessageDialog(rootPane, "Ingrese una cantidad valida");
+             }else{
+                 tablaProductosVender();
+             }
              
-             tablaProductosVender();
             
         }
     }//GEN-LAST:event_txtCantidadVenderKeyPressed
