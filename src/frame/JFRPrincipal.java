@@ -2838,7 +2838,16 @@ public void idVenta() throws ErrorTienda{
     }//GEN-LAST:event_btnModificarProveedorMouseClicked
 
     private void btnAgregarProductoVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProductoVentaActionPerformed
-      tablaProductosVender();
+      if(txtCantidadVender.getText().isEmpty()){
+          JOptionPane.showMessageDialog(rootPane, "Ingrese una cantidad, campo vacío");
+          txtCantidadVender.requestFocus();
+          txtCantidadVender.selectAll();
+      }else{
+          tablaProductosVender();
+      }
+            
+      
+        
     }//GEN-LAST:event_btnAgregarProductoVentaActionPerformed
 
     private void txtInventarioProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInventarioProductoKeyTyped
@@ -3612,8 +3621,10 @@ public void AgregarProductoTablaCompras(){
          
          
          if (c == (char) KeyEvent.VK_ENTER) {
-             if(txtCantidadVender.getText().isEmpty()||txtCodigoBarraVender.getText().isEmpty()){
+             if(txtCantidadVender.getText().isEmpty()){
                  JOptionPane.showMessageDialog(rootPane, "Ingrese una cantidad valida");
+                 txtCantidadVender.requestFocus();
+          txtCantidadVender.selectAll();
              }else{
                  tablaProductosVender();
              }
