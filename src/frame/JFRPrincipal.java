@@ -3612,8 +3612,12 @@ public void AgregarProductoTablaCompras(){
          
          
          if (c == (char) KeyEvent.VK_ENTER) {
+             if(txtCantidadVender.getText().isEmpty()||txtCodigoBarraVender.getText().isEmpty()){
+                 JOptionPane.showMessageDialog(rootPane, "Ingrese una cantidad valida");
+             }else{
+                 tablaProductosVender();
+             }
              
-             tablaProductosVender();
             
         }
     }//GEN-LAST:event_txtCantidadVenderKeyPressed
