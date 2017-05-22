@@ -22,6 +22,7 @@ public class FacadeShop {
         sp.setVisible(true);
         //Splash sp = new Splash();
         //sp.setVisible(true);
+
     }
     
 }

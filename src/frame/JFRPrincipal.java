@@ -50,7 +50,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
     DefaultTableModel tablaModel= new DefaultTableModel();
     DefaultTableModel modeloProveedores= new DefaultTableModel();
     public String CodBarraVentas="";
-    boolean exprod, encontrado;
+    boolean exprod, encontrado, encontradoProv;
     Character s;
         
         
@@ -1292,11 +1292,11 @@ public void idVenta() throws ErrorTienda{
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/guardarprov.png"))); // NOI18N
         btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnGuardarMouseExited(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnGuardarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnGuardarMouseExited(evt);
             }
         });
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -1532,11 +1532,11 @@ public void idVenta() throws ErrorTienda{
         txtCantidadVender.setText("  1");
         txtCantidadVender.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtCantidadVender.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtCantidadVenderKeyTyped(evt);
-            }
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCantidadVenderKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCantidadVenderKeyTyped(evt);
             }
         });
         jpnVentas.add(txtCantidadVender, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 120, 80, 40));
@@ -1757,11 +1757,11 @@ public void idVenta() throws ErrorTienda{
         btnGuardarProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/guardarprov.png"))); // NOI18N
         btnGuardarProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardarProveedor.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnGuardarProveedorMouseExited(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnGuardarProveedorMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnGuardarProveedorMouseExited(evt);
             }
         });
         btnGuardarProveedor.addActionListener(new java.awt.event.ActionListener() {
@@ -2152,10 +2152,10 @@ public void idVenta() throws ErrorTienda{
             }
         });
         tblProductos.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 tblProductosInputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         tblProductos.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -3126,11 +3126,18 @@ public void idVenta() throws ErrorTienda{
             } catch (ErrorTienda ex) {
                 Logger.getLogger(JFRPrincipal.class.getName()).log(Level.SEVERE, null, ex);
               }
-              agregado.setNombre(txtNombreProveedor.getText());
-              agregado.setTelefono(txtTelefonoProveedor.getText());
-              agregado.setNIT(txtNIT.getText());
-              agregado.setDireccion(txtDireccionProveedor.getText());
-       
+              if (tblProveedores.getRowCount()>0) {
+                  int i = 0;
+                  while (encontradoProv==false&&i<tblProveedores.getRowCount()) {
+                     encontradoProv = tblProveedores.getValueAt(i, 1).equals(txtNombreProveedor.getText());
+                     i++;
+                  }
+              }
+              if(encontradoProv == false){
+                  agregado.setNombre(txtNombreProveedor.getText());
+                  agregado.setTelefono(txtTelefonoProveedor.getText());
+                  agregado.setNIT(txtNIT.getText());
+                  agregado.setDireccion(txtDireccionProveedor.getText());
               try {
               ControladorProveedor.Agregar(agregado);
               JOptionPane.showMessageDialog(null, "El Proveedor fue agregado correctamente");
@@ -3140,7 +3147,11 @@ public void idVenta() throws ErrorTienda{
               
               } catch (ErrorTienda e) {      
            }
-              
+        }else{JOptionPane.showMessageDialog(null, "El nombre de ese proveedor ya está registrado, cámbielo");}
+              encontradoProv=false;
+              txtNombreProveedor.requestFocus();
+              txtNombreProveedor.selectAll();
+                
         }
         LlenarCompra();
     }//GEN-LAST:event_btnGuardarProveedorActionPerformed
