@@ -46,6 +46,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
     DefaultTableModel modeloTablaVender;
     DefaultTableModel modeloProductos = new DefaultTableModel();
     DecimalFormat decimal = new DecimalFormat("0.00");
+    DecimalFormat decimalProductos = new DecimalFormat("0.0000");
     private TableRowSorter trsFiltro;
     DefaultTableModel tablaModel= new DefaultTableModel();
     DefaultTableModel modeloProveedores= new DefaultTableModel();
@@ -1340,6 +1341,7 @@ public void idVenta() throws ErrorTienda{
         jpnRegistroCompra.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 650, 200));
 
         txtTotal.setEditable(false);
+        txtTotal.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jpnRegistroCompra.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 500, 100, 40));
 
         txtFecha.setEditable(false);
@@ -2643,6 +2645,7 @@ public void idVenta() throws ErrorTienda{
         apagado2();
         jpnRegistroCompra.setVisible(true);
         LlenarCompra();
+        txtCodBarraProd.requestFocus();
     }//GEN-LAST:event_btnComprasMouseClicked
 
     /*  ---- Mover barra ----  */
@@ -3524,8 +3527,9 @@ public void AgregarProductoTablaCompras(){
                     fila[0]=txtCodBarraProd.getText();
                     fila[1]=txtNomProd.getText();
                     fila[2]=txtCantidad.getText();
-                    fila[3]=txtCostoProd.getText();
-                    fila[4]=String.valueOf((Double.parseDouble(txtCantidad.getText()))*(Double.parseDouble(txtCostoProd.getText())));
+                    //System.out.println(decimalProductos.format(txtCostoProd.getText().toString()));
+                    fila[3]=decimalProductos.format(Double.parseDouble(txtCostoProd.getText()));
+                    fila[4]=String.valueOf(decimalProductos.format((Double.parseDouble(txtCantidad.getText()))*(Double.parseDouble(txtCostoProd.getText()))));
                     tablaModel.addRow(fila);
                     tblCompra.setModel(tablaModel);
                 }else{
@@ -3541,8 +3545,8 @@ public void AgregarProductoTablaCompras(){
                     nuevoCosto = (Double.parseDouble(txtCostoProd.getText()) + Double.parseDouble(tblCompra.getValueAt(j-1, 3).toString()))/2;
                     System.out.println(j);
                     tablaModel.setValueAt(nuevaCantidad, j-1, 2);
-                    tablaModel.setValueAt(nuevoCosto, j-1, 3);
-                    tablaModel.setValueAt(nuevaCantidad*nuevoCosto, j-1, 4);
+                    tablaModel.setValueAt(decimalProductos.format(nuevoCosto), j-1, 3);
+                    tablaModel.setValueAt(decimalProductos.format(nuevaCantidad*nuevoCosto), j-1, 4);
                     tblCompra.setModel(tablaModel);
                 }
                 encontrado = false;
