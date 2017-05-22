@@ -670,7 +670,7 @@ public void idVenta() throws ErrorTienda{
         lblProveedores6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jSeparator21 = new javax.swing.JSeparator();
-        txtProductosBuscar1 = new javax.swing.JTextField();
+        txtProveedoresBuscar = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jSeparator38 = new javax.swing.JSeparator();
         jpnAgregarProv = new javax.swing.JPanel();
@@ -692,7 +692,7 @@ public void idVenta() throws ErrorTienda{
         jSeparator18 = new javax.swing.JSeparator();
         jSeparator19 = new javax.swing.JSeparator();
         txtTelefonoProveedor = new javax.swing.JFormattedTextField();
-        txtNIT = new javax.swing.JFormattedTextField();
+        txtNIT = new javax.swing.JTextField();
         jpnModificarProveedor = new javax.swing.JPanel();
         btnGuardarModificarProveedor = new javax.swing.JButton();
         btnAtrasModificarProveedor = new javax.swing.JButton();
@@ -712,7 +712,7 @@ public void idVenta() throws ErrorTienda{
         jSeparator42 = new javax.swing.JSeparator();
         jSeparator43 = new javax.swing.JSeparator();
         txtNuevoTelefono = new javax.swing.JFormattedTextField();
-        txtNuevoNit = new javax.swing.JFormattedTextField();
+        txtNuevoNit = new javax.swing.JTextField();
         jpnModificarProducto = new javax.swing.JPanel();
         btnGuardarModificarProveedor1 = new javax.swing.JButton();
         btnAtrasModificarProveedor1 = new javax.swing.JButton();
@@ -1737,12 +1737,12 @@ public void idVenta() throws ErrorTienda{
         jpnProveedores.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 175, -1, -1));
         jpnProveedores.add(jSeparator21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 230, -1));
 
-        txtProductosBuscar1.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtProveedoresBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtProductosBuscar1KeyTyped(evt);
+                txtProveedoresBuscarKeyTyped(evt);
             }
         });
-        jpnProveedores.add(txtProductosBuscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 670, 30));
+        jpnProveedores.add(txtProveedoresBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 670, 30));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Proveedor a buscar:");
@@ -1869,11 +1869,11 @@ public void idVenta() throws ErrorTienda{
         });
         jpnAgregarProv.add(txtTelefonoProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, 230, 30));
 
-        try {
-            txtNIT.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##############")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+        txtNIT.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNITKeyTyped(evt);
+            }
+        });
         jpnAgregarProv.add(txtNIT, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 350, 230, 30));
 
         getContentPane().add(jpnAgregarProv, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 730, 600));
@@ -1993,12 +1993,11 @@ public void idVenta() throws ErrorTienda{
         });
         jpnModificarProveedor.add(txtNuevoTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, 230, 30));
 
-        txtNuevoNit.setForeground(new java.awt.Color(102, 0, 0));
-        try {
-            txtNuevoNit.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##############")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+        txtNuevoNit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNuevoNitKeyTyped(evt);
+            }
+        });
         jpnModificarProveedor.add(txtNuevoNit, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 370, 200, 30));
 
         getContentPane().add(jpnModificarProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 730, 600));
@@ -2553,6 +2552,16 @@ public void idVenta() throws ErrorTienda{
         tblProveedores.removeAll();
         modeloProveedores.setRowCount(0);
         actualizarTablaProveedor();
+        txtProveedoresBuscar.requestFocus();
+        if(txtProveedoresBuscar.getText().equals("")){
+        } else {
+            repaint();
+            trsFiltro.setRowFilter(RowFilter.regexFilter("", 1));
+            trsFiltro = new TableRowSorter(tblProveedores.getModel());
+            tblProveedores.setRowSorter(trsFiltro);
+            txtProveedoresBuscar.setText("");
+        }
+        
     }//GEN-LAST:event_btnProveedoresMouseClicked
 
     /*  ---- Acción de botones, cambiar de pantallas (Paneles) ----  */
@@ -2579,6 +2588,7 @@ public void idVenta() throws ErrorTienda{
         jpnAgregarProv.setVisible(false);
         jpnProveedores.setVisible(true);
         limpiandoTxtProveedor();
+        txtProveedoresBuscar.requestFocus();
     }//GEN-LAST:event_btnAtrasProveedoresMouseClicked
 
     private void btnVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentasMouseClicked
@@ -2810,6 +2820,7 @@ public void idVenta() throws ErrorTienda{
     private void btnAtrasModificarProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasModificarProveedorMouseClicked
         jpnModificarProveedor.setVisible(false);
         jpnProveedores.setVisible(true);
+        txtProveedoresBuscar.requestFocus();
     }//GEN-LAST:event_btnAtrasModificarProveedorMouseClicked
 
     private void btnAtrasModificarProveedorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasModificarProveedorMouseEntered
@@ -3115,11 +3126,17 @@ public void idVenta() throws ErrorTienda{
     private void btnGuardarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarProveedorActionPerformed
         Proveedor agregado=new Proveedor();
         int idProv;
-      
-        if (txtDireccionProveedor.equals("") || txtNombreProveedor.equals("") || txtNIT.getText().equals("") || txtTelefonoProveedor.getText().equals("")) {
+        encontradoProv = false;
+        if (txtDireccionProveedor.getText().equals("") || txtNombreProveedor.getText().equals("") || txtNIT.getText().equals("") || txtTelefonoProveedor.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Rellene todos los campos");
         }
         else{
+            if(txtNIT.getText().length() != 14){
+                JOptionPane.showMessageDialog(null, "El NIT debe tener 14 digitos");
+                txtNIT.requestFocus();
+                txtNIT.selectAll();
+            }
+            else{
             try {
                 idProv = ControladorProveedor.ObtenerIdProveedor();
                 agregado.setIdProveedor(idProv+1);
@@ -3140,18 +3157,19 @@ public void idVenta() throws ErrorTienda{
                   agregado.setDireccion(txtDireccionProveedor.getText());
               try {
               ControladorProveedor.Agregar(agregado);
-              JOptionPane.showMessageDialog(null, "El Proveedor fue agregado correctamente");
+              JOptionPane.showMessageDialog(rootPane, "El Proveedor fue agregado correctamente.");
               limpiandoTxtProveedor();
               tblProveedores.removeAll();
               actualizarTablaProveedor();
               
               } catch (ErrorTienda e) {      
            }
-        }else{JOptionPane.showMessageDialog(null, "El nombre de ese proveedor ya está registrado, cámbielo");}
+        }else{JOptionPane.showMessageDialog(null, "El nombre de ese proveedor ya está registrado, cámbielo.");}
               encontradoProv=false;
               txtNombreProveedor.requestFocus();
               txtNombreProveedor.selectAll();
                 
+        }
         }
         LlenarCompra();
     }//GEN-LAST:event_btnGuardarProveedorActionPerformed
@@ -3209,8 +3227,25 @@ public void idVenta() throws ErrorTienda{
     }//GEN-LAST:event_txtNuevoDireccionProveedorKeyTyped
 
     private void btnGuardarModificarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarModificarProveedorActionPerformed
-        if (!txtNuevoDireccionProveedor.equals("") && !txtNuevoNombreProveedor.equals("") && !txtNuevoNit.getText().equals("") && !txtNuevoTelefono.getText().equals("")) {
-            
+        encontradoProv = false;
+        if (!txtNuevoDireccionProveedor.getText().equals("") && !txtNuevoNombreProveedor.getText().equals("") && !txtNuevoNit.getText().equals("") && !txtNuevoTelefono.getText().equals("")) {
+            if(txtNuevoNit.getText().length() != 14){
+                JOptionPane.showMessageDialog(null, "El NIT debe tener 14 digitos");
+                txtNuevoNit.requestFocus();
+                txtNuevoNit.selectAll();
+            }
+            else{
+            if (tblProveedores.getRowCount()>0) {
+                  int i = 0;
+                  while (encontradoProv==false&&i<tblProveedores.getRowCount()) {
+                     encontradoProv = tblProveedores.getValueAt(i, 1).equals(txtNuevoNombreProveedor.getText());
+                     i++;
+                  }
+            }
+            if(txtNuevoNombreProveedor.getText().equals(tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 1).toString())){
+                encontradoProv = false;
+            }
+            if(encontradoProv == false){
             Proveedor proveedor = new Proveedor();
             proveedor.setIdProveedor(Integer.parseInt(txtIDProveedor1.getText()));
             proveedor.setNombre(txtNuevoNombreProveedor.getText());
@@ -3228,12 +3263,18 @@ public void idVenta() throws ErrorTienda{
             actualizarTablaProveedor();
             jpnProveedores.setVisible(true);
             jpnModificarProveedor.setVisible(false);
+            txtProveedoresBuscar.requestFocus();
+        }else{JOptionPane.showMessageDialog(null, "El nombre de ese proveedor ya está registrado, cámbielo.");}}
+                
         }else{
             JOptionPane.showMessageDialog(rootPane, "Debe de rellenar todos los campos");
-        }
+        }   
+        encontradoProv=false;
+        txtNombreProveedor.requestFocus();
+        txtNombreProveedor.selectAll();
     }//GEN-LAST:event_btnGuardarModificarProveedorActionPerformed
 
-    private void txtProductosBuscar1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProductosBuscar1KeyTyped
+    private void txtProveedoresBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProveedoresBuscarKeyTyped
          char mayu=evt.getKeyChar();        
          if (Character.isLowerCase(mayu)) {
                  String cadena=(""+mayu).toUpperCase();
@@ -3242,19 +3283,19 @@ public void idVenta() throws ErrorTienda{
         }
         else{
          }
-        txtProductosBuscar1.addKeyListener(new KeyAdapter(){
+        txtProveedoresBuscar.addKeyListener(new KeyAdapter(){
             
             @Override
             public void keyReleased(final KeyEvent e){
-                String cadena = (txtProductosBuscar1.getText());
-                txtProductosBuscar1.setText(cadena);
+                String cadena = (txtProveedoresBuscar.getText());
+                txtProveedoresBuscar.setText(cadena);
                 repaint();
-                trsFiltro.setRowFilter(RowFilter.regexFilter(txtProductosBuscar1.getText(), 1));
+                trsFiltro.setRowFilter(RowFilter.regexFilter(txtProveedoresBuscar.getText(), 1));
             }
         });
         trsFiltro = new TableRowSorter(tblProveedores.getModel());
         tblProveedores.setRowSorter(trsFiltro);
-    }//GEN-LAST:event_txtProductosBuscar1KeyTyped
+    }//GEN-LAST:event_txtProveedoresBuscarKeyTyped
 
     private void btnEliminarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProveedorActionPerformed
 //        if(tblProveedores.getSelectedRow()!=-1){
@@ -3290,7 +3331,7 @@ public void idVenta() throws ErrorTienda{
                     JOptionPane.showMessageDialog(null, "No puede eliminar este producto porque tiene registros vigentes");
                 }else{
                     modeloProveedores.removeRow(fila);
-                    txtProductosBuscar1.setText("");
+                    txtProveedoresBuscar.setText("");
                     JOptionPane.showMessageDialog(null, "El registro fue eliminado con exito");
                 }
                 
@@ -3980,6 +4021,48 @@ public void AgregarProductoTablaCompras(){
         
     }//GEN-LAST:event_btnProductosActionPerformed
 
+    private void txtNITKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNITKeyTyped
+              char c = evt.getKeyChar();
+    if(txtNIT.getText().length()>=14){
+               evt.consume();
+        }else{
+        if (c < '0' || c > '9') {
+            
+                if (c != (char) KeyEvent.VK_BEGIN) {
+                    if (c != (char) KeyEvent.VK_BACK_SPACE) {
+                        if (c != (char) KeyEvent.VK_DELETE) {
+                            if (c != (char) KeyEvent.VK_ENTER) {
+                            evt.consume();
+                            JOptionPane.showMessageDialog(null, "Solo Numeros", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                }
+                }
+        }   
+    }
+    }//GEN-LAST:event_txtNITKeyTyped
+
+    private void txtNuevoNitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNuevoNitKeyTyped
+                      char c = evt.getKeyChar();
+    if(txtNIT.getText().length()>=14){
+               evt.consume();
+        }else{
+        if (c < '0' || c > '9') {
+            
+                if (c != (char) KeyEvent.VK_BEGIN) {
+                    if (c != (char) KeyEvent.VK_BACK_SPACE) {
+                        if (c != (char) KeyEvent.VK_DELETE) {
+                            if (c != (char) KeyEvent.VK_ENTER) {
+                            evt.consume();
+                            JOptionPane.showMessageDialog(null, "Solo Numeros", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                }
+                }
+        }   
+    }
+    }//GEN-LAST:event_txtNuevoNitKeyTyped
+
                                                                                                                                                                                                                               
     /**
      * @param args the command line arguments
@@ -4253,7 +4336,7 @@ public void AgregarProductoTablaCompras(){
     private javax.swing.JTextField txtIdCompra;
     private javax.swing.JTextField txtIdVenta;
     private javax.swing.JTextField txtInventarioProducto;
-    private javax.swing.JFormattedTextField txtNIT;
+    private javax.swing.JTextField txtNIT;
     private javax.swing.JTextField txtNomProd;
     private javax.swing.JTextField txtNombreProductoVender;
     private javax.swing.JTextField txtNombreProductos;
@@ -4263,13 +4346,13 @@ public void AgregarProductoTablaCompras(){
     private javax.swing.JTextField txtNuevoCostoProducto;
     private javax.swing.JTextField txtNuevoDireccionProveedor;
     private javax.swing.JTextField txtNuevoInventarioProducto;
-    private javax.swing.JFormattedTextField txtNuevoNit;
+    private javax.swing.JTextField txtNuevoNit;
     private javax.swing.JTextField txtNuevoNombreProducto;
     private javax.swing.JTextField txtNuevoNombreProveedor;
     private javax.swing.JFormattedTextField txtNuevoTelefono;
     private javax.swing.JTextField txtPrecioProductos2;
     private javax.swing.JTextField txtProductosBuscar;
-    private javax.swing.JTextField txtProductosBuscar1;
+    private javax.swing.JTextField txtProveedoresBuscar;
     private javax.swing.JFormattedTextField txtTelefonoProveedor;
     private javax.swing.JTextField txtTotal;
     private javax.swing.JTextField txtTotal2;
