@@ -362,7 +362,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
             iteraciones++;
         }
         double totalFinal=Double.parseDouble(decimal.format(total));
-        txtTotalventa.setText("$"+totalFinal);
+        txtTotalventa.setText("$ "+totalFinal);
     }
 
     public void limpiandoTxtProveedor(){
@@ -1509,11 +1509,11 @@ public void idVenta() throws ErrorTienda{
         btnBuscarProductoVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/buscar.png"))); // NOI18N
         btnBuscarProductoVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBuscarProductoVenta.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnBuscarProductoVentaMouseExited(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnBuscarProductoVentaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBuscarProductoVentaMouseExited(evt);
             }
         });
         btnBuscarProductoVenta.addActionListener(new java.awt.event.ActionListener() {
@@ -1524,6 +1524,8 @@ public void idVenta() throws ErrorTienda{
         jpnVentas.add(btnBuscarProductoVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 540, 110, 30));
 
         txtTotalventa.setEditable(false);
+        txtTotalventa.setBackground(new java.awt.Color(255, 255, 255));
+        txtTotalventa.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txtTotalventa.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jpnVentas.add(txtTotalventa, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 470, 120, 40));
 
@@ -1604,7 +1606,8 @@ public void idVenta() throws ErrorTienda{
         jpnVentas.add(jSeparator22, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 115, 60, -1));
         jpnVentas.add(jSeparator23, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 115, 60, 10));
 
-        jLabel35.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel35.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel35.setForeground(new java.awt.Color(204, 0, 0));
         jLabel35.setText("Total");
         jpnVentas.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 450, -1, -1));
         jpnVentas.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(617, 465, 40, 20));
@@ -3959,7 +3962,7 @@ public void AgregarProductoTablaCompras(){
 
     private void lblCerrarVentasBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarVentasBuscarMouseClicked
         frmBUscarVentas.dispose();
-        modeloTablaVender.setRowCount(0);
+        modeloProductos.setRowCount(0);
         txtBuscarProductoVender.setText("");
     }//GEN-LAST:event_lblCerrarVentasBuscarMouseClicked
 
