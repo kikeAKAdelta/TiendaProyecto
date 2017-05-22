@@ -250,6 +250,9 @@ public final class JFRPrincipal extends javax.swing.JFrame {
                     modeloProductos.addRow(fila);
                     tblProductos.setModel(modeloProductos);
                 }
+                if (tblProductos.getRowCount()==0) {
+                    JOptionPane.showMessageDialog(null, "El producto buscado no existe");
+                }
             } catch (ErrorTienda ex) {
                 JOptionPane.showMessageDialog(rootPane, ex.getMessage());
             }
@@ -930,6 +933,11 @@ public void idVenta() throws ErrorTienda{
                 btnComprasMouseExited(evt);
             }
         });
+        btnCompras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnComprasActionPerformed(evt);
+            }
+        });
         jpnSubMenu.add(btnCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 20, 180, 40));
 
         btnProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/productos.png"))); // NOI18N
@@ -963,6 +971,11 @@ public void idVenta() throws ErrorTienda{
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnVentasMouseExited(evt);
+            }
+        });
+        btnVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVentasActionPerformed(evt);
             }
         });
         jpnSubMenu.add(btnVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(-126, 70, 180, 40));
@@ -2263,11 +2276,11 @@ public void idVenta() throws ErrorTienda{
         jpnProductos.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, -1));
 
         txtProductosBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtProductosBuscarKeyTyped(evt);
-            }
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtProductosBuscarKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtProductosBuscarKeyTyped(evt);
             }
         });
         jpnProductos.add(txtProductosBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 430, 30));
@@ -2627,6 +2640,7 @@ public void idVenta() throws ErrorTienda{
         Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnProductos);  
         apagado2();
         jpnProductos.setVisible(true);
+        txtProductosBuscar.requestFocus();
     }//GEN-LAST:event_btnProductosMouseClicked
 
     private void btnAgregarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCompraActionPerformed
@@ -3021,7 +3035,7 @@ public void idVenta() throws ErrorTienda{
         int limiteCaracteres=13;
         
          
-         if ((c >=48 && c<=57) || (c>=65 && c<=90) || (c>=97 && c<=122) || (c==32) || (c==8)) {
+         if ((c >=48 && c<=57) || (c>=65 && c<=90) || (c>=97 && c<=122) || (c==32) || (c==8) || (c== (char)KeyEvent.VK_ENTER)) {
              if (txtProductosBuscar.getText().length()==limiteCaracteres) {
                  getToolkit().beep();
                  evt.consume();
@@ -3574,12 +3588,25 @@ public void AgregarProductoTablaCompras(){
         // TODO add your handling code here:
         
         s = evt.getKeyChar();
+        int p=(int) evt.getKeyChar();
         encontrado = false;
         
       // double actualizarPrecio = ((((CantidadActual)*(PrecioActual))+((detalleCompra.get(i).getCantidad())*(detalleCompra.get(i).getCostoUnitario())))/((detalleCompra.get(i).getCantidad())+CantidadActual)); 
         if (!Character.isDigit(s) && s != KeyEvent.VK_PERIOD) {
             getToolkit().beep();
             evt.consume();
+        }else{
+            if (p==46) {
+                String cadena=txtCostoProd.getText();
+            int tamanio=cadena.length();
+            for (int i = 0; i <= tamanio; i++) {
+                if (cadena.contains(".")) {
+                    evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+                    getToolkit().beep();
+                    evt.consume();
+                }
+            }
+            }
         }
         //AGREGAR COMPRAS A LA TABLA
         char c = evt.getKeyChar();
@@ -4069,6 +4096,26 @@ public void AgregarProductoTablaCompras(){
         }   
     }
     }//GEN-LAST:event_txtNuevoNitKeyTyped
+
+    private void btnVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasActionPerformed
+        txtCodigoBarraVender.setText("");
+        txtNombreProductoVender.setText("");
+        txtCantidadVender.setText("1");
+        txtTotalventa.setText("");
+        DefaultTableModel modeloVentas=(DefaultTableModel) tblProductosVender.getModel();
+        modeloVentas.setRowCount(0);
+    }//GEN-LAST:event_btnVentasActionPerformed
+
+    private void btnComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprasActionPerformed
+        txtCodBarraProd.setText("");
+        txtNomProd.setText("");
+        txtCantidad.setText("1");
+        txtCostoProd.setText("");
+        txtTotal.setText("");
+        txtNomProd.setEditable(false);
+        DefaultTableModel modeloCompras=(DefaultTableModel) tblCompra.getModel();
+        modeloCompras.setRowCount(0);
+    }//GEN-LAST:event_btnComprasActionPerformed
 
                                                                                                                                                                                                                               
     /**
