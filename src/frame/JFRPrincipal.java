@@ -1341,8 +1341,9 @@ public void idVenta() throws ErrorTienda{
         jpnRegistroCompra.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 650, 200));
 
         txtTotal.setEditable(false);
-        txtTotal.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jpnRegistroCompra.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 500, 100, 40));
+        txtTotal.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        txtTotal.setForeground(new java.awt.Color(102, 0, 0));
+        jpnRegistroCompra.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 500, 100, 40));
 
         txtFecha.setEditable(false);
         jpnRegistroCompra.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 160, 30));
@@ -1377,8 +1378,8 @@ public void idVenta() throws ErrorTienda{
 
         lblTotal.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTotal.setText("TOTAL:");
-        jpnRegistroCompra.add(lblTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 500, 50, 40));
-        jpnRegistroCompra.add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 529, 40, 40));
+        jpnRegistroCompra.add(lblTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 500, 50, 40));
+        jpnRegistroCompra.add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 530, 40, 40));
 
         lblCodBarraProd.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblCodBarraProd.setText("Cod Barra:");
@@ -3480,6 +3481,7 @@ public void idVenta() throws ErrorTienda{
                             } else {
                                 txtNomProd.setText(producto);
                                 txtCantidad.requestFocus();
+                                txtCantidad.selectAll();
                                 exprod=true;
                             }
                         }
@@ -3529,7 +3531,7 @@ public void AgregarProductoTablaCompras(){
                     fila[2]=txtCantidad.getText();
                     //System.out.println(decimalProductos.format(txtCostoProd.getText().toString()));
                     fila[3]=decimalProductos.format(Double.parseDouble(txtCostoProd.getText()));
-                    fila[4]=String.valueOf(decimalProductos.format((Double.parseDouble(txtCantidad.getText()))*(Double.parseDouble(txtCostoProd.getText()))));
+                    fila[4]=String.valueOf(decimal.format((Double.parseDouble(txtCantidad.getText()))*(Double.parseDouble(txtCostoProd.getText()))));
                     tablaModel.addRow(fila);
                     tblCompra.setModel(tablaModel);
                 }else{
@@ -3546,7 +3548,7 @@ public void AgregarProductoTablaCompras(){
                     System.out.println(j);
                     tablaModel.setValueAt(nuevaCantidad, j-1, 2);
                     tablaModel.setValueAt(decimalProductos.format(nuevoCosto), j-1, 3);
-                    tablaModel.setValueAt(decimalProductos.format(nuevaCantidad*nuevoCosto), j-1, 4);
+                    tablaModel.setValueAt(decimal.format(nuevaCantidad*nuevoCosto), j-1, 4);
                     tblCompra.setModel(tablaModel);
                 }
                 encontrado = false;
@@ -3730,6 +3732,7 @@ public void AgregarProductoTablaCompras(){
 
         if (ch == (char) KeyEvent.VK_ENTER) {
         txtCantidad.requestFocus();
+        txtCantidad.selectAll();
         
         }
          int c=(int) evt.getKeyChar();
