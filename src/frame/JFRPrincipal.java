@@ -53,6 +53,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
     public String CodBarraVentas="";
     boolean exprod, encontrado, encontradoProv;
     Character s;
+    int contandoClicksNombre=0,contandoClicksIneventario=0,contandoClicksCosto=0;
         
         
     
@@ -199,6 +200,8 @@ public final class JFRPrincipal extends javax.swing.JFrame {
                  //COMPROBAR RESULTADOS DE LA CONSULTA
                  if(obtenerProducto.getCodBarra().isEmpty()){
                      JOptionPane.showMessageDialog(rootPane, "No se han encontrado resultados");
+                     txtCodigoBarraVender.requestFocus();
+                     txtCodigoBarraVender.selectAll();
                      
                  }else{
                      //ASIGNAR EL NOMBRE DEL PRODUCTO BUSCADO AL CAMPO ESPECIFICO
@@ -235,7 +238,9 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         ArrayList<Producto> productos = new ArrayList();
         Object[] fila = new Object[4];
         if (codBarra.equals("")) {
+            
             JOptionPane.showMessageDialog(null, "No ha introducido el codigo de barra o el nombre");
+            
         }else{
             String[] campos = new String[] {"CodBarra", "Nombre", "Inventario", "Costo"};
             try {
@@ -2061,6 +2066,11 @@ public void idVenta() throws ErrorTienda{
         jpnModificarProducto.add(btnAtrasModificarProveedor1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 500, 110, 30));
 
         txtNuevoInventarioProducto.setForeground(new java.awt.Color(102, 0, 0));
+        txtNuevoInventarioProducto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtNuevoInventarioProductoMouseClicked(evt);
+            }
+        });
         txtNuevoInventarioProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNuevoInventarioProductoActionPerformed(evt);
@@ -2118,6 +2128,11 @@ public void idVenta() throws ErrorTienda{
         jpnModificarProducto.add(jSeparator48, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, 70, 10));
 
         txtNuevoNombreProducto.setForeground(new java.awt.Color(102, 0, 0));
+        txtNuevoNombreProducto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtNuevoNombreProductoMouseClicked(evt);
+            }
+        });
         txtNuevoNombreProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNuevoNombreProductoActionPerformed(evt);
@@ -2131,6 +2146,11 @@ public void idVenta() throws ErrorTienda{
         jpnModificarProducto.add(txtNuevoNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, 410, 30));
 
         txtNuevoCostoProducto.setForeground(new java.awt.Color(102, 0, 0));
+        txtNuevoCostoProducto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtNuevoCostoProductoMouseClicked(evt);
+            }
+        });
         txtNuevoCostoProducto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNuevoCostoProductoKeyTyped(evt);
@@ -2170,10 +2190,10 @@ public void idVenta() throws ErrorTienda{
             }
         });
         tblProductos.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 tblProductosInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         tblProductos.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -2634,6 +2654,7 @@ public void idVenta() throws ErrorTienda{
             DefaultTableModel modeloProductos=(DefaultTableModel) tblProductos.getModel();
             modeloProductos.setRowCount(0);
             limpiandoTxtProducto();
+            txtProductosBuscar.requestFocus();
     }//GEN-LAST:event_btnSalirProductosActionPerformed
 
     private void btnProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductosMouseClicked
@@ -3078,6 +3099,7 @@ public void idVenta() throws ErrorTienda{
             jpnModificarProducto.setVisible(true);
             jpnProductos.setVisible(false);
             txtNuevoNombreProducto.requestFocus();
+            txtNuevoNombreProducto.selectAll();
         }else{
             JOptionPane.showMessageDialog(rootPane, "Seleccione un dato de la tabla");
         }
@@ -3291,8 +3313,8 @@ public void idVenta() throws ErrorTienda{
             JOptionPane.showMessageDialog(rootPane, "Debe de rellenar todos los campos");
         }   
         encontradoProv=false;
-        txtNombreProveedor.requestFocus();
-        txtNombreProveedor.selectAll();
+        txtNuevoNombreProveedor.requestFocus();
+        txtNuevoNombreProveedor.selectAll();
     }//GEN-LAST:event_btnGuardarModificarProveedorActionPerformed
 
     private void txtProveedoresBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProveedoresBuscarKeyTyped
@@ -3702,6 +3724,11 @@ public void AgregarProductoTablaCompras(){
     private void btnAtrasModificarProveedor1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasModificarProveedor1ActionPerformed
         jpnModificarProducto.setVisible(false);
         jpnProductos.setVisible(true);
+        DefaultTableModel modeloProductos=(DefaultTableModel) tblProductos.getModel();
+        modeloProductos.setRowCount(0);
+        limpiandoTxtProducto();
+        txtProductosBuscar.requestFocus();
+        
     }//GEN-LAST:event_btnAtrasModificarProveedor1ActionPerformed
 
     private void txtCantidadVenderKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadVenderKeyPressed
@@ -3823,10 +3850,20 @@ public void AgregarProductoTablaCompras(){
 
     private void txtNuevoNombreProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNuevoNombreProductoActionPerformed
         txtNuevoInventarioProducto.requestFocus();
+        if (txtNuevoInventarioProducto.isFocusable()) {
+            txtNuevoInventarioProducto.selectAll();
+        }
+{
+            
+        }
+
     }//GEN-LAST:event_txtNuevoNombreProductoActionPerformed
 
     private void txtNuevoInventarioProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNuevoInventarioProductoActionPerformed
         txtNuevoCostoProducto.requestFocus();
+        if (txtNuevoCostoProducto.isFocusable()) {
+            txtNuevoCostoProducto.selectAll();
+        }
     }//GEN-LAST:event_txtNuevoInventarioProductoActionPerformed
 
     private void btnCancelarVentaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarVentaMouseEntered
@@ -4119,6 +4156,38 @@ public void AgregarProductoTablaCompras(){
         DefaultTableModel modeloCompras=(DefaultTableModel) tblCompra.getModel();
         modeloCompras.setRowCount(0);
     }//GEN-LAST:event_btnComprasActionPerformed
+
+    private void txtNuevoNombreProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNuevoNombreProductoMouseClicked
+        contandoClicksIneventario=contandoClicksCosto=0;
+        contandoClicksNombre += evt.getClickCount();
+        if (txtNuevoNombreProducto.isFocusable()) {
+            
+            if (contandoClicksNombre==1) {
+                txtNuevoNombreProducto.selectAll();
+            }
+        }
+        
+    }//GEN-LAST:event_txtNuevoNombreProductoMouseClicked
+
+    private void txtNuevoInventarioProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNuevoInventarioProductoMouseClicked
+        contandoClicksNombre=contandoClicksCosto=0;
+        contandoClicksIneventario += evt.getClickCount();
+        if (txtNuevoInventarioProducto.isFocusable()) {
+            if (contandoClicksIneventario==1) {
+                txtNuevoInventarioProducto.selectAll();
+            }
+        }
+    }//GEN-LAST:event_txtNuevoInventarioProductoMouseClicked
+
+    private void txtNuevoCostoProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNuevoCostoProductoMouseClicked
+        contandoClicksNombre=contandoClicksIneventario=0;
+        contandoClicksCosto +=evt.getClickCount();
+        if (txtNuevoCostoProducto.isFocusable()) {
+            if (contandoClicksCosto==1) {
+                txtNuevoCostoProducto.selectAll();
+            }
+        }
+    }//GEN-LAST:event_txtNuevoCostoProductoMouseClicked
 
                                                                                                                                                                                                                               
     /**
