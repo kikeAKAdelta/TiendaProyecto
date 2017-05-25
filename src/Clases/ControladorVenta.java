@@ -5,6 +5,8 @@
  */
 package Clases;
 
+import frame.JFRPrincipal;
+import frame.frmNotificacion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,6 +23,12 @@ public class ControladorVenta {
     static Conexion cn;
     static ResultSet rs;
     public PreparedStatement ps=null;
+    JFRPrincipal form = new JFRPrincipal();
+    
+    public void mensajeNot(String mensaje) throws ErrorTienda{
+        form.mensajeNotificacion(mensaje);
+        form.limpiarVenta();
+    }
     
     public static void Agregar(Venta vn,Object[][] detalles) throws ErrorTienda, SQLException{
         try {
@@ -40,7 +48,11 @@ public class ControladorVenta {
                            +detalles[x][0]+"','"+detalles[x][1]+"','"+detalles[x][2]+"','"+detalles[x][3]+"')");
                    
                }
-                JOptionPane.showMessageDialog(null, "Venta realizada exitosamente");
+                //JOptionPane.showMessageDialog(null, "Venta realizada exitosamente");
+                  frmNotificacion not = new frmNotificacion();
+                  not.mensaje("Venta realizada exitosamente");
+                  
+                  
             } catch (Exception e) {
                 throw new ErrorTienda("ControladorVentas Agregar", e.getMessage());
             }

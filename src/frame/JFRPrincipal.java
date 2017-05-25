@@ -32,6 +32,9 @@ import Clases.Compra;
 import Clases.DetalleCompra;
 import Clases.Parametro;
 import java.math.RoundingMode;
+import net.sf.jcarrierpigeon.Notification;
+import net.sf.jcarrierpigeon.NotificationQueue;
+import net.sf.jcarrierpigeon.WindowPosition;
 /**
  *
  * @author Jose Lopez Garcia
@@ -119,6 +122,11 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         tHeadBuscarVender.setFont(fuente);
         
     }
+    public void mensajeNotificacion(String mensaje){
+        frmNotificacion not = new frmNotificacion();
+        not.setVisible(true);
+        not.mensaje(mensaje);
+    }
  
 /*  ---- Visualización de imágenes en Menú ----  */
     public void Principal(boolean estado){
@@ -188,6 +196,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
     public void buscarProductoVender(){
         //COMPROBAR SI EL ESPACIO DE CODIGO DE BARRA ESTA VACIO
              if(txtCodigoBarraVender.getText().isEmpty()){
+                 System.err.println("no hay codigooooooooooooooooooooo"+txtCodigoBarraVender.getText());
           JOptionPane.showMessageDialog(null, "Codigo de Barra no ingresado");
       }else{
                  Producto obtenerProducto=null;
@@ -199,9 +208,8 @@ public final class JFRPrincipal extends javax.swing.JFrame {
                  
                  //COMPROBAR RESULTADOS DE LA CONSULTA
                  if(obtenerProducto.getCodBarra().isEmpty()){
-                     JOptionPane.showMessageDialog(rootPane, "No se han encontrado resultados");
-                     txtCodigoBarraVender.requestFocus();
-                     txtCodigoBarraVender.selectAll();
+                     //JOptionPane.showMessageDialog(rootPane, "No se han encontrado resultados");
+                     mensajeNotificacion("No se encontraron resultados");
                      
                  }else{
                      //ASIGNAR EL NOMBRE DEL PRODUCTO BUSCADO AL CAMPO ESPECIFICO
@@ -276,7 +284,8 @@ public final class JFRPrincipal extends javax.swing.JFrame {
                      //COMPARAR LA CANTIDAD DISPONIBLE DEL PRODUCTO CONTRA LA CANTIDAD DEMANDADA
                      
                      if(cantidad>obtenerProducto.getInventario()){
-                         JOptionPane.showMessageDialog(rootPane, "La cantidad demandada supera la cantidad disponible "+obtenerProducto.getInventario());
+                         //JOptionPane.showMessageDialog(rootPane, "La cantidad demandada supera la cantidad disponible "+obtenerProducto.getInventario());
+                         mensajeNotificacion("Cantidad disponible: "+obtenerProducto.getInventario());
                          txtCantidadVender.requestFocus();
                          txtCantidadVender.selectAll();
                      }else{
@@ -284,7 +293,8 @@ public final class JFRPrincipal extends javax.swing.JFrame {
                          
                          if(!verificarTablaProductosVender()){
                              if(Integer.parseInt(txtCantidadVender.getText())<=0){
-                                JOptionPane.showMessageDialog(rootPane, "Ingrese una cantidad válida");
+                                //JOptionPane.showMessageDialog(rootPane, "Ingrese una cantidad válida");
+                                 mensajeNotificacion("Ingrese una cantidad válida");
                              }else{
                               modeloTablaVender.addRow(new Object[]{"","","","",""});
                          modeloTablaVender.setValueAt(obtenerProducto.getCodBarra(), fila,0);
@@ -308,7 +318,8 @@ public final class JFRPrincipal extends javax.swing.JFrame {
                      
                  }
         }else{
-            JOptionPane.showMessageDialog(rootPane, "Producto no especificado");
+            //JOptionPane.showMessageDialog(rootPane, "Producto no especificado");
+            mensajeNotificacion("Producto no especificado");
             txtCodigoBarraVender.requestFocus();
             txtCodigoBarraVender.selectAll();
         }
@@ -333,7 +344,8 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         
            if(encontrado!=-100){
             if(Integer.parseInt(txtCantidadVender.getText())<=0){
-              JOptionPane.showMessageDialog(rootPane, "Ingrese una cantidad válida");
+              //JOptionPane.showMessageDialog(rootPane, "Ingrese una cantidad válida");
+                mensajeNotificacion("Ingrese una cantidad válida");
             }else{
             int cantidadAntigua=Integer.parseInt(String.valueOf(modeloTablaVender.getValueAt(encontrado,2)));            
            int nuevaCantidad=(Integer.parseInt(txtCantidadVender.getText()));
@@ -342,7 +354,8 @@ public final class JFRPrincipal extends javax.swing.JFrame {
             int cantidadTotal = nuevaCantidad+cantidadAntigua;
             
             if(cantidadTotal>cantidadBase){
-            JOptionPane.showMessageDialog(null, "La cantidad demanda supera la cantidad disponible "+cantidadBase);
+            //JOptionPane.showMessageDialog(null, "La cantidad demanda supera la cantidad disponible "+cantidadBase);
+                mensajeNotificacion("Cantidad disponible: "+cantidadBase);
             }else{
             modeloTablaVender.setValueAt((cantidadAntigua+nuevaCantidad), encontrado, 2);
             modeloTablaVender.setValueAt(decimal.format(nuevoSubTotal), encontrado, 4);    
@@ -509,6 +522,7 @@ public void guardarVenta() throws ErrorTienda, SQLException{
             idVenta();
             modeloTablaVender.setNumRows(0);
             txtTotalventa.setText("$0");
+            txtCodigoBarraVender.requestFocus();
 }
 public void limpiarVenta() throws ErrorTienda{
         txtCodigoBarraVender.setText("");
@@ -3399,7 +3413,7 @@ public void idVenta() throws ErrorTienda{
                         if (c != (char) KeyEvent.VK_DELETE) {
                             if (c != (char) KeyEvent.VK_ENTER) {
                             evt.consume();
-                            JOptionPane.showMessageDialog(null, "Solo Numeros", "Error", JOptionPane.ERROR_MESSAGE);
+                                mensajeNotificacion("Ingrese solo numeros enteros");
                         }
                     }
                 }
@@ -3420,7 +3434,7 @@ public void idVenta() throws ErrorTienda{
                         if (c != (char) KeyEvent.VK_DELETE) {
                             if (c != (char) KeyEvent.VK_ENTER) {
                             evt.consume();
-                            JOptionPane.showMessageDialog(null, "Solo Numeros", "Error", JOptionPane.ERROR_MESSAGE);
+                                mensajeNotificacion("Solo se permiten números");
                         }
                     }
                 }
@@ -3737,7 +3751,7 @@ public void AgregarProductoTablaCompras(){
          
          if (c == (char) KeyEvent.VK_ENTER) {
              if(txtCantidadVender.getText().isEmpty()){
-                 JOptionPane.showMessageDialog(rootPane, "Ingrese una cantidad valida");
+                 mensajeNotificacion("Ingrese una cantidad válida");
                  txtCantidadVender.requestFocus();
           txtCantidadVender.selectAll();
              }else{
