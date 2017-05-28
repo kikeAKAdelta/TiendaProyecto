@@ -23,12 +23,7 @@ public class ControladorVenta {
     static Conexion cn;
     static ResultSet rs;
     public PreparedStatement ps=null;
-    JFRPrincipal form = new JFRPrincipal();
     
-    public void mensajeNot(String mensaje) throws ErrorTienda{
-        form.mensajeNotificacion(mensaje);
-        form.limpiarVenta();
-    }
     
     public static void Agregar(Venta vn,Object[][] detalles) throws ErrorTienda, SQLException{
         try {
